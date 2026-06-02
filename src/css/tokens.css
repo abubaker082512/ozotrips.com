@@ -1,0 +1,62 @@
+:root {
+  /* Colors */
+  --bg-primary: #0b0d19;
+  --bg-secondary: #12162b;
+  --bg-glass: rgba(18, 22, 43, 0.65);
+  --bg-glass-hover: rgba(26, 31, 61, 0.8);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-focus: rgba(0, 242, 195, 0.4);
+
+  --color-primary: #00f2c3; /* Neo Mint */
+  --color-primary-rgb: 0, 242, 195;
+  --color-secondary: #8b5cf6; /* Electric Violet */
+  --color-secondary-rgb: 139, 92, 246;
+  --color-accent: #ff4a5a; /* Coral Pink */
+  
+  --text-primary: #ffffff;
+  --text-secondary: #b4b9d4;
+  --text-muted: #6b729c;
+  --text-gradient: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  --brand-gradient: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --accent-gradient: linear-gradient(135deg, #ff4a5a 0%, #ff8a00 100%);
+  
+  /* Fonts */
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Layout & Spacing */
+  --container-max-width: 1280px;
+  --header-height: 80px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-xl: 32px;
+  
+  /* Shadows & Glows */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glow-primary: 0 0 20px rgba(0, 242, 195, 0.35);
+  --glow-secondary: 0 0 20px rgba(139, 92, 246, 0.35);
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Light Mode Override (if user toggles, but dark mode is main focus for premium look) */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-hover: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(15, 23, 42, 0.08);
+  --border-glass-focus: rgba(0, 242, 195, 0.6);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-gradient: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+  --shadow-glass: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
+}

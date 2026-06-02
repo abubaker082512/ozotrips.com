@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>OzoTrips | Premium Local & International Tour Bookings</title>
+  <meta name="description" content="Explore and book premium local tours in Pakistan and international destinations around the world. Secure booking, custom itineraries, and dedicated concierge support.">
+  <meta name="keywords" content="tours, local travel, international flights, Pakistan tourism, adventure holiday, booking">
+  <meta name="author" content="OzoTrips Inc.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OzoTrips | Premium Local & International Tours">
+  <meta property="og:description" content="Explore and book premium local tours in Pakistan and international destinations around the world.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&h=630&q=80">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="#tours" class="nav-link">Tours</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="#tours" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-subtitle">
+          🚀 Unveil the Wonders of the World
+        </span>
+        <h1 class="hero-title">Crafting Unforgettable Journeys</h1>
+        <p class="hero-description">Discover curated experiences, from the gold-gilded peaks of Northern Pakistan to the crystal-blue shores of Santorini. Book your next escape with dedicated concierge assistance.</p>
+      </div>
+
+      <!-- Search and Filter Bar -->
+      <div class="search-panel glass-panel">
+        <div class="search-input-group">
+          <label for="search-dest">Destination</label>
+          <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
+        </div>
+        <div class="search-input-group">
+          <label for="filter-type">Type</label>
+          <select id="filter-type">
+            <option value="">All Tours</option>
+            <option value="local">🇵🇰 Local Tours</option>
+            <option value="international">✈️ International</option>
+          </select>
+        </div>
+        <div class="search-input-group">
+          <label for="filter-budget">Max Budget</label>
+          <select id="filter-budget">
+            <option value="">No Limit</option>
+            <option value="300">Under $300</option>
+            <option value="1000">Under $1000</option>
+            <option value="2000">Under $2000</option>
+          </select>
+        </div>
+        <div class="search-input-group">
+          <label for="filter-duration">Duration</label>
+          <select id="filter-duration">
+            <option value="">Any Duration</option>
+            <option value="short">Short (1-4 Days)</option>
+            <option value="medium">Medium (5-7 Days)</option>
+            <option value="long">Long (8+ Days)</option>
+          </select>
+        </div>
+        <button id="search-btn" class="btn btn-accent" style="width: 100%; height: 50px;">
+          Find Tours 🔍
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <div id="category-list" class="category-list">
+        <!-- JS will populate category buttons here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Section -->
+  <section class="tours-section" id="tours">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-subtitle">Our Handpicked Adventures</span>
+          <h2>Explore Popular Destinations</h2>
+        </div>
+      </div>
+      
+      <!-- Grid of Tours -->
+      <div id="tours-grid" class="tours-grid">
+        <!-- JS will populate cards here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Details & Booking Modal -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <button id="modal-close" class="modal-close-btn" aria-label="Close modal">✕</button>
+      
+      <!-- Left Panel: Tour Details -->
+      <div id="modal-details" class="modal-details">
+        <!-- JS populated -->
+      </div>
+
+      <!-- Right Panel: Booking Form -->
+      <div id="booking-container" class="modal-booking">
+        <!-- JS populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="#" class="logo" style="margin-bottom: 10px;">
+            OzoTrips<span class="logo-dot"></span>
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+            <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+            <a href="#" class="social-btn" aria-label="Twitter">TW</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#tours">All Tours</a></li>
+            <li><a href="#tours">Local Deals</a></li>
+            <li><a href="#tours">International Getaways</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Contact Concierge</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Subscribe to receive exclusive deals and custom travel guides weekly.</p>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+            <button class="btn btn-primary" style="padding: 12px 20px;">Join</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved. Designed for excellence.</p>
+        <p>Support: support@ozotrips.com | Tel: +92 51 111 696 874</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
