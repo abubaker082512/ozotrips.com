@@ -204,20 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="tour-price-lbl">Starting from</span>
                 <span class="tour-price">${tour.currency}${tour.price}<span>/person</span></span>
               </div>
-              <button class="btn btn-secondary detail-trigger" data-id="${tour.id}">Details & Booking</button>
+              <a href="./tour-detail.html?id=${tour.id}" class="btn btn-secondary">Details & Booking</a>
             </div>
           </div>
         </div>
       `;
     }).join('');
-
-    // Attach click events to "Details & Booking" buttons
-    toursGrid.querySelectorAll('.detail-trigger').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = parseInt(e.currentTarget.getAttribute('data-id'));
-        openBookingModal(id);
-      });
-    });
 
     // Run fade-in scroll animation setup
     setupScrollAnimations();

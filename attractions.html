@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Must-Visit Tourist Attractions | OzoTrips</title>
+  <meta name="description" content="Discover stunning tourist attractions around the world and local spots in Pakistan. Explore details, best times to visit, and book linked travel tours.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    .attractions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    
+    .attraction-card {
+      height: 480px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .attraction-img-box {
+      height: 230px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .attraction-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .attraction-card:hover .attraction-img {
+      transform: scale(1.1);
+    }
+    
+    .attraction-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    
+    .attraction-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    
+    .attraction-title {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    
+    .attraction-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .attraction-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-glass);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link active">Attractions</a></li>
+          <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Attractions Banner -->
+  <section class="hero" style="min-height: 45vh; padding-top: 130px; padding-bottom: 40px; background: radial-gradient(circle at 20% 20%, rgba(0, 242, 195, 0.08) 0%, transparent 60%);">
+    <div class="container">
+      <span class="hero-subtitle">🏔️ Sightseeing Highlights</span>
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">Iconic Tourist Attractions</h1>
+      <p style="max-width: 600px; color: var(--text-secondary);">Discover the geographic and historical landmarks included in our travel itineraries. Uncover details, locations, and seasonal info.</p>
+
+      <!-- Category Filter Buttons -->
+      <div style="margin-top: 30px; display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px;">
+        <button class="category-btn active" data-cat="All">🗺️ All Attractions</button>
+        <button class="category-btn" data-cat="Mountain">🏔️ Mountain Peaks</button>
+        <button class="category-btn" data-cat="Scenic">🌅 Scenic Waterways</button>
+        <button class="category-btn" data-cat="Historical">🏛️ Historical Landmarks</button>
+        <button class="category-btn" data-cat="Beach">🏖️ Beaches & Islands</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attractions Section -->
+  <section style="padding: 40px 0 100px;">
+    <div class="container">
+      <div id="attractions-grid" class="attractions-grid">
+        <!-- JS Populated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            OzoTrips<span class="logo-dot"></span>
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./tours.html">All Tours</a></li>
+            <li><a href="./attractions.html">Attractions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact Concierge</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Email: support@ozotrips.com<br>Tel: +92 51 111 696 874</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/attractions.js"></script>
+</body>
+</html>

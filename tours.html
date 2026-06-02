@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Tours | OzoTrips</title>
+  <meta name="description" content="Browse our complete list of local tours in Pakistan and premium international holidays. Customize your travel package with our experts.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link active">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="hero" style="min-height: 45vh; padding-top: 130px; padding-bottom: 40px; background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);">
+    <div class="container">
+      <span class="hero-subtitle">✈️ Explore Our Packages</span>
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">Select Your Next Adventure</h1>
+      <p style="max-width: 600px; color: var(--text-secondary);">Browse from handpicked local travel packages across Northern Pakistan or stunning luxury destinations across Europe and Asia.</p>
+
+      <!-- Integrated Filter Bar -->
+      <div class="search-panel glass-panel" style="margin-top: 30px;">
+        <div class="search-input-group">
+          <label for="search-dest">Destination</label>
+          <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Kyoto...">
+        </div>
+        <div class="search-input-group">
+          <label for="filter-type">Type</label>
+          <select id="filter-type">
+            <option value="">All Tours</option>
+            <option value="local">🇵🇰 Local Tours</option>
+            <option value="international">✈️ International</option>
+          </select>
+        </div>
+        <div class="search-input-group">
+          <label for="filter-budget">Max Budget</label>
+          <select id="filter-budget">
+            <option value="">No Limit</option>
+            <option value="300">Under $300</option>
+            <option value="1000">Under $1000</option>
+            <option value="2000">Under $2000</option>
+          </select>
+        </div>
+        <div class="search-input-group">
+          <label for="filter-duration">Duration</label>
+          <select id="filter-duration">
+            <option value="">Any Duration</option>
+            <option value="short">Short (1-4 Days)</option>
+            <option value="medium">Medium (5-7 Days)</option>
+            <option value="long">Long (8+ Days)</option>
+          </select>
+        </div>
+        <button id="search-btn" class="btn btn-accent" style="width: 100%; height: 50px;">
+          Apply Filters 🔍
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Quick Slider -->
+  <section style="padding: 30px 0 10px;">
+    <div class="container">
+      <div id="category-list" class="category-list">
+        <!-- JS Populated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Grid Section -->
+  <section class="tours-section" style="padding-top: 10px;">
+    <div class="container">
+      <div id="tours-grid" class="tours-grid">
+        <!-- JS Populated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="margin-top: 80px;">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            OzoTrips<span class="logo-dot"></span>
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./tours.html">All Tours</a></li>
+            <li><a href="./attractions.html">Attractions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact Concierge</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Email: support@ozotrips.com<br>Tel: +92 51 111 696 874</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/tours-list.js"></script>
+</body>
+</html>

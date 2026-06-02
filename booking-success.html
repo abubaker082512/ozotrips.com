@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed | OzoTrips</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    .success-container {
+      max-width: 650px;
+      margin: 150px auto 100px;
+      padding: 50px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    
+    .animated-check {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(0, 242, 195, 0.1);
+      border: 2px dashed var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--color-primary);
+      box-shadow: var(--glow-primary);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    
+    .booking-summary-table {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--border-radius-md);
+      padding: 24px;
+      margin: 20px 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--border-glass);
+      padding-bottom: 8px;
+    }
+    
+    .summary-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .summary-lbl {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    
+    .summary-val {
+      font-weight: 600;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); box-shadow: 0 0 30px rgba(0, 242, 195, 0.5); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Success Block -->
+  <main class="container">
+    <div class="success-container glass-panel">
+      <div class="animated-check">✓</div>
+      <h1 style="font-size: 2.5rem; background: var(--text-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Reservation Requested!</h1>
+      <p style="color: var(--text-secondary); max-width: 500px;">Your travel booking request has been successfully registered. Our dedicated concierge agent will contact you shortly.</p>
+      
+      <!-- Summary Table -->
+      <div class="booking-summary-table">
+        <div class="summary-row">
+          <span class="summary-lbl">Tour Destination:</span>
+          <span id="sum-tour" class="summary-val">--</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-lbl">Lead Guest Name:</span>
+          <span id="sum-name" class="summary-val">--</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-lbl">Contact Email:</span>
+          <span id="sum-email" class="summary-val">--</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-lbl">Preferred Date:</span>
+          <span id="sum-date" class="summary-val">--</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-lbl">Total Guests:</span>
+          <span id="sum-guests" class="summary-val">--</span>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display: flex; gap: 16px; margin-top: 10px;">
+        <a href="./index.html" class="btn btn-primary">Return to Home 🏠</a>
+        <a href="./tours.html" class="btn btn-secondary">Explore More Tours</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+      <p>&copy; 2026 OzoTrips Inc. All rights reserved. Designed for Excellence.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Theme Setup
+      const themeToggle = document.getElementById('theme-toggle');
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('span');
+        if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        themeToggle.addEventListener('click', () => {
+          const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          if (themeIcon) themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+      }
+
+      // Parse Query Params
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('sum-tour').textContent = params.get('tour') || '--';
+      document.getElementById('sum-name').textContent = params.get('name') || '--';
+      document.getElementById('sum-email').textContent = params.get('email') || '--';
+      document.getElementById('sum-date').textContent = params.get('date') || '--';
+      document.getElementById('sum-guests').textContent = params.get('guests') || '--';
+    });
+  </script>
+</body>
+</html>

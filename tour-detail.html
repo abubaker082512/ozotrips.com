@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Itinerary & Details | OzoTrips</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    .detail-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 40px;
+      margin-top: 40px;
+      margin-bottom: 80px;
+    }
+    
+    .itinerary-timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 30px;
+      border-left: 2px solid var(--border-glass);
+    }
+    
+    .itinerary-day {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    
+    .itinerary-day::before {
+      content: '';
+      position: absolute;
+      left: -43px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 4px solid var(--color-primary);
+      box-shadow: var(--glow-primary);
+    }
+    
+    .itinerary-day-num {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    
+    .itinerary-day-title {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    
+    .inc-exc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 30px;
+    }
+    
+    .inc-box, .exc-box {
+      padding: 24px;
+      border-radius: var(--border-radius-md);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+    }
+    
+    .list-checkmark, .list-cross {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .list-checkmark li::before {
+      content: '✓ ';
+      color: var(--color-primary);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+    
+    .list-cross li::before {
+      content: '✕ ';
+      color: var(--color-accent);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+
+    .booking-sidebar {
+      position: sticky;
+      top: 110px;
+      padding: 32px;
+      border-radius: var(--border-radius-lg);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    @media (max-width: 992px) {
+      .detail-layout {
+        grid-template-columns: 1fr;
+      }
+      .booking-sidebar {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Big Hero Banner -->
+  <section id="detail-banner" class="hero" style="min-height: 60vh; display: flex; align-items: flex-end; padding-bottom: 60px; background-size: cover; background-position: center; position: relative;">
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(11, 13, 25, 0.95) 10%, rgba(11, 13, 25, 0.4) 100%); z-index: 1;"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <span id="detail-badge" class="tour-badge" style="position: relative; top: 0; left: 0;">Loading...</span>
+        <span id="detail-category" class="tour-badge" style="position: relative; top: 0; left: 0; color: var(--color-secondary);">Category</span>
+      </div>
+      <h1 id="detail-title" style="font-size: 3.5rem; text-shadow: 0 4px 10px rgba(0,0,0,0.4); margin-bottom: 15px;">Tour Title</h1>
+      <p id="detail-subtitle" style="font-size: 1.2rem; max-width: 800px; color: var(--text-secondary);">Tour detailed description placeholder...</p>
+    </div>
+  </section>
+
+  <!-- Core Content & Sidebar Layout -->
+  <main class="container">
+    <div class="detail-layout">
+      
+      <!-- Left Main Body -->
+      <div class="detail-info-main">
+        
+        <!-- Summary Stats -->
+        <div class="glass-panel" style="padding: 24px; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 16px; margin-bottom: 40px;">
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase;">Duration</div>
+            <div id="stat-duration" style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary); margin-top: 4px;">--</div>
+          </div>
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase;">Rating</div>
+            <div id="stat-rating" style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary); margin-top: 4px;">--</div>
+          </div>
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase;">Group Size</div>
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary); margin-top: 4px;">Max 18</div>
+          </div>
+          <div>
+            <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase;">Physical Rating</div>
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--color-primary); margin-top: 4px;">Moderate</div>
+          </div>
+        </div>
+
+        <!-- Detailed Itinerary -->
+        <h2 style="font-size: 2rem; margin-bottom: 10px;">Day-by-Day Itinerary</h2>
+        <p style="color: var(--text-secondary);">What to expect during your journey. We curate premium transfers and five-star accommodations.</p>
+        
+        <div id="detail-itinerary" class="itinerary-timeline">
+          <!-- JS Populated -->
+        </div>
+
+        <!-- Inclusions & Exclusions -->
+        <h2 style="font-size: 2rem; margin-top: 60px;">What's Included & Excluded</h2>
+        <div class="inc-exc-grid">
+          <div class="inc-box">
+            <h3 style="font-size: 1.2rem; color: var(--color-primary);">Inclusions</h3>
+            <ul class="list-checkmark">
+              <li>All transfers in clean private vehicles</li>
+              <li>Premium hotels and boutique resorts</li>
+              <li>Breakfast and specialized local dining</li>
+              <li>Expert licensed local tour guide</li>
+              <li>Entry tickets to all monuments/national parks</li>
+            </ul>
+          </div>
+          <div class="exc-box">
+            <h3 style="font-size: 1.2rem; color: var(--color-accent);">Exclusions</h3>
+            <ul class="list-cross">
+              <li>International flight tickets</li>
+              <li>Personal travel insurance coverage</li>
+              <li>Optional adventure sports activities</li>
+              <li>Tipping for support staff and drivers</li>
+              <li>Souvenirs and personal laundry items</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tour Map & FAQS Mock -->
+        <h2 style="font-size: 2rem; margin-top: 60px; margin-bottom: 20px;">Frequently Asked Questions</h2>
+        <div class="glass-panel" style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <h4 style="color: var(--color-primary); font-size: 1.1rem; margin-bottom: 8px;">What items should I pack?</h4>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">We recommend packing light, layered clothing, hiking boots for adventure trails, polarized sunglasses, sunscreen, and a high-quality camera to capture the memories.</p>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <div>
+            <h4 style="color: var(--color-primary); font-size: 1.1rem; margin-bottom: 8px;">Are meals fully covered?</h4>
+            <p style="font-size: 0.95rem; color: var(--text-secondary);">Daily buffet breakfasts are included in all packages. Lunches and dinners are covered selectively (e.g., local welcome dinners and high-altitude treks) to allow you culinary freedom.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Booking Sidebar -->
+      <div class="detail-sidebar">
+        <div class="booking-sidebar">
+          <h3 style="font-size: 1.6rem; margin-bottom: 10px;">Reserve This Tour</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Confirm details to reserve seats. Payment is processed upon concierge alignment.</p>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 16px; border-radius: var(--border-radius-md); border: 1px solid var(--border-glass); margin-bottom: 24px;">
+            <span>Price Per Person</span>
+            <span id="detail-price" style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary);">$--</span>
+          </div>
+
+          <form id="booking-detail-form" class="booking-form">
+            <div class="form-group">
+              <label for="book-name">Full Name</label>
+              <input type="text" id="book-name" required placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+              <label for="book-email">Email Address</label>
+              <input type="email" id="book-email" required placeholder="name@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="book-phone">Phone Number</label>
+              <input type="tel" id="book-phone" required placeholder="+92 300 1234567">
+            </div>
+
+            <div class="form-group">
+              <label for="book-date">Travel Date</label>
+              <input type="date" id="book-date" required>
+            </div>
+
+            <div class="form-group">
+              <label for="book-guests">Number of Guests</label>
+              <input type="number" id="book-guests" min="1" max="20" value="1" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+              Submit Reservation Request 🚀
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            OzoTrips<span class="logo-dot"></span>
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./tours.html">All Tours</a></li>
+            <li><a href="./attractions.html">Attractions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact Concierge</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Email: support@ozotrips.com<br>Tel: +92 51 111 696 874</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/tour-detail.js"></script>
+</body>
+</html>
