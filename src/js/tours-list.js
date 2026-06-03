@@ -1,5 +1,8 @@
 import { tours } from './tours-data.js';
 
+const customTours = JSON.parse(localStorage.getItem('ozotrips_custom_packages')) || [];
+const allTours = [...tours, ...customTours];
+
 document.addEventListener('DOMContentLoaded', () => {
   const toursGrid = document.getElementById('tours-grid');
   const searchInput = document.getElementById('search-dest');
@@ -28,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Categories Setup
-  const categories = ['All', 'Local', 'International', 'Adventure', 'Cultural', 'Beach', 'Mountain'];
+  const categories = ['All', 'Local', 'International', 'Adventure', 'Cultural', 'Beach', 'Mountain', 'Umrah'];
   if (categoryContainer) {
     categoryContainer.innerHTML = categories.map(cat => `
       <button class="category-btn ${cat === 'All' ? 'active' : ''}" data-category="${cat}">
@@ -37,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
           cat === 'International' ? '✈️' : 
           cat === 'Adventure' ? '🧗' : 
           cat === 'Cultural' ? '🏛️' : 
-          cat === 'Beach' ? '🏖️' : '🏔️'} ${cat}
+          cat === 'Beach' ? '🏖️' : 
+          cat === 'Mountain' ? '🏔️' : '🕋'} ${cat}
       </button>
     `).join('');
 
@@ -59,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeCategory = selectedCategory !== 'All' ? selectedCategory : 
       (categoryContainer?.querySelector('.category-btn.active')?.getAttribute('data-category') || 'All');
 
-    const filtered = tours.filter(tour => {
+    const filtered = allTours.filter(tour => {
       const matchesSearch = tour.title.toLowerCase().includes(query) || 
                             tour.description.toLowerCase().includes(query);
       
@@ -163,5 +167,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
   }
 
-  renderTours(tours);
+  renderTours(allTours);
 });

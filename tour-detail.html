@@ -183,12 +183,34 @@
           </div>
         </div>
 
-        <!-- Detailed Itinerary -->
-        <h2 style="font-size: 2rem; margin-bottom: 10px;">Day-by-Day Itinerary</h2>
-        <p style="color: var(--text-secondary);">What to expect during your journey. We curate premium transfers and five-star accommodations.</p>
-        
-        <div id="detail-itinerary" class="itinerary-timeline">
-          <!-- JS Populated -->
+        <!-- Detailed Itinerary (Hidden by default for now) -->
+        <div id="itinerary-section" style="display: none;">
+          <h2 style="font-size: 2rem; margin-bottom: 10px;">Day-by-Day Itinerary</h2>
+          <p style="color: var(--text-secondary);">What to expect during your journey. We curate premium transfers and five-star accommodations.</p>
+          <div id="detail-itinerary" class="itinerary-timeline">
+            <!-- JS Populated -->
+          </div>
+        </div>
+
+        <!-- Umrah Hotels Section (Makkah & Madinah) -->
+        <div id="hotel-section" style="display: none; margin-bottom: 40px; margin-top: 20px;">
+          <h2 style="font-size: 2.2rem; margin-bottom: 20px; color: var(--color-primary);">🏨 Accommodations & Haram Proximity</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="glass-panel" style="padding: 24px; border-left: 4px solid var(--color-primary); background: rgba(255,255,255,0.01);">
+              <h3 style="font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--text-primary);">🕋 Makkah Hotel</h3>
+              <div id="makkah-hotel-name" style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary);">--</div>
+              <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
+                🚶 Distance from Haram: <strong id="makkah-hotel-dist" style="color: var(--color-primary);">--</strong>
+              </div>
+            </div>
+            <div class="glass-panel" style="padding: 24px; border-left: 4px solid var(--color-primary); background: rgba(255,255,255,0.01);">
+              <h3 style="font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--text-primary);">🕌 Madinah Hotel</h3>
+              <div id="madinah-hotel-name" style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary);">--</div>
+              <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
+                🚶 Distance from Haram: <strong id="madinah-hotel-dist" style="color: var(--color-primary);">--</strong>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Inclusions & Exclusions -->
@@ -196,22 +218,14 @@
         <div class="inc-exc-grid">
           <div class="inc-box">
             <h3 style="font-size: 1.2rem; color: var(--color-primary);">Inclusions</h3>
-            <ul class="list-checkmark">
-              <li>All transfers in clean private vehicles</li>
-              <li>Premium hotels and boutique resorts</li>
-              <li>Breakfast and specialized local dining</li>
-              <li>Expert licensed local tour guide</li>
-              <li>Entry tickets to all monuments/national parks</li>
+            <ul id="detail-inclusions" class="list-checkmark">
+              <!-- JS Populated -->
             </ul>
           </div>
           <div class="exc-box">
             <h3 style="font-size: 1.2rem; color: var(--color-accent);">Exclusions</h3>
-            <ul class="list-cross">
-              <li>International flight tickets</li>
-              <li>Personal travel insurance coverage</li>
-              <li>Optional adventure sports activities</li>
-              <li>Tipping for support staff and drivers</li>
-              <li>Souvenirs and personal laundry items</li>
+            <ul id="detail-exclusions" class="list-cross">
+              <!-- JS Populated -->
             </ul>
           </div>
         </div>

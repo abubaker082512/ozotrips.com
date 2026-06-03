@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | OzoTrips</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 40px;
+      margin-top: 130px;
+      margin-bottom: 80px;
+    }
+    
+    .panel-form {
+      padding: 32px;
+      border-radius: var(--border-radius-lg);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    .manage-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-secondary);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+    }
+    
+    .manage-table th, .manage-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    
+    .manage-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+    
+    .manage-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .badge-admin {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .badge-umrah {
+      background: rgba(181, 153, 111, 0.1);
+      color: var(--color-primary);
+      border: 1px solid rgba(181, 153, 111, 0.2);
+    }
+    
+    .badge-general {
+      background: rgba(0, 242, 195, 0.1);
+      color: #00f2c3;
+      border: 1px solid rgba(0, 242, 195, 0.2);
+    }
+    
+    .hotel-inputs {
+      display: none;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px dashed var(--border-glass);
+      padding: 16px;
+      border-radius: var(--border-radius-md);
+      margin-bottom: 15px;
+    }
+    
+    .hotel-inputs.active {
+      display: block;
+    }
+    
+    @media (max-width: 992px) {
+      .admin-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./admin.html" class="nav-link active">Admin</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Panel Content -->
+  <main class="container">
+    <div class="admin-layout">
+      
+      <!-- Left Panel: Form to Add/Edit Package -->
+      <div>
+        <div class="panel-form">
+          <h2 style="font-size: 1.8rem; margin-bottom: 10px;">Package Manager</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Create or modify tour packages. Preset inclusions are auto-configured for Umrah packages.</p>
+          
+          <form id="admin-package-form" class="booking-form">
+            <input type="hidden" id="pkg-id">
+            
+            <div class="form-group">
+              <label for="pkg-title">Package Title</label>
+              <input type="text" id="pkg-title" required placeholder="e.g. Premium 15 Days Umrah Package">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pkg-category">Category</label>
+                <select id="pkg-category" required style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px; border-radius: var(--border-radius-md); color: var(--text-primary);">
+                  <option value="Mountain">Mountain</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Cultural">Cultural</option>
+                  <option value="Beach">Beach</option>
+                  <option value="Umrah">Umrah (Spiritual)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="pkg-type">Type</label>
+                <select id="pkg-type" required style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px; border-radius: var(--border-radius-md); color: var(--text-primary);">
+                  <option value="local">Local Tour</option>
+                  <option value="international">International</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Umrah Preset Select -->
+            <div id="umrah-preset-group" class="form-group" style="display: none;">
+              <label for="pkg-preset">Umrah Preset Category</label>
+              <select id="pkg-preset" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px; border-radius: var(--border-radius-md); color: var(--text-primary);">
+                <option value="economy">Economy Package</option>
+                <option value="classic_premium">Ground Classic & Premium Packages</option>
+                <option value="luxury">Ground Luxury Packages</option>
+              </select>
+            </div>
+
+            <!-- Dual Hotel & Haram Distance Inputs -->
+            <div id="umrah-hotel-inputs" class="hotel-inputs">
+              <h4 style="color: var(--color-primary); font-size: 0.95rem; margin-bottom: 12px;">Accommodations & Haram Proximity</h4>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="pkg-makkah-hotel">Makkah Hotel</label>
+                  <input type="text" id="pkg-makkah-hotel" placeholder="Hotel name Makkah">
+                </div>
+                <div class="form-group">
+                  <label for="pkg-makkah-dist">Makkah Haram Distance</label>
+                  <select id="pkg-makkah-dist" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px; border-radius: var(--border-radius-md); color: var(--text-primary);">
+                    <option value="0m (In Haram Court)">0m (In Haram Court)</option>
+                    <option value="50m">50 meters</option>
+                    <option value="100m">100 meters</option>
+                    <option value="200m">200 meters</option>
+                    <option value="350m">350 meters</option>
+                    <option value="500m">500 meters</option>
+                    <option value="750m">750 meters</option>
+                    <option value="900m">900 meters</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row" style="margin-top: 10px;">
+                <div class="form-group">
+                  <label for="pkg-madinah-hotel">Madinah Hotel</label>
+                  <input type="text" id="pkg-madinah-hotel" placeholder="Hotel name Madinah">
+                </div>
+                <div class="form-group">
+                  <label for="pkg-madinah-dist">Madinah Haram Distance</label>
+                  <select id="pkg-madinah-dist" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px; border-radius: var(--border-radius-md); color: var(--text-primary);">
+                    <option value="0m (Front Row)">0m (Front Row)</option>
+                    <option value="50m">50 meters</option>
+                    <option value="100m">100 meters</option>
+                    <option value="150m">150 meters</option>
+                    <option value="300m">300 meters</option>
+                    <option value="400m">400 meters</option>
+                    <option value="600m">600 meters</option>
+                    <option value="750m">750 meters</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pkg-price">Price ($)</label>
+                <input type="number" id="pkg-price" required min="1" placeholder="e.g. 850">
+              </div>
+              <div class="form-group">
+                <label for="pkg-duration">Duration (Days)</label>
+                <input type="text" id="pkg-duration" required placeholder="e.g. 15 Days">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="pkg-image">Image URL</label>
+              <input type="url" id="pkg-image" required placeholder="https://images.unsplash.com/... or similar">
+            </div>
+
+            <div class="form-group">
+              <label for="pkg-desc">Description</label>
+              <textarea id="pkg-desc" required style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px; border-radius: var(--border-radius-md); color: var(--text-primary); outline: none; font-family: var(--font-sans); height: 100px; resize: vertical;" placeholder="Provide brief summary of package inclusions and stay comfort..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+              Save Package 💾
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right Panel: List of Available Packages -->
+      <div>
+        <h2 style="font-size: 2rem; margin-bottom: 10px;">Managed Packages</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">View all active tour packages. You can add or delete packages dynamically.</p>
+        
+        <table class="manage-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Duration</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-packages-list">
+            <!-- JS populated -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+      <p>&copy; 2026 OzoTrips Inc. Admin Console.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/admin.js"></script>
+</body>
+</html>

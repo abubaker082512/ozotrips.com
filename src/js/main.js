@@ -1,5 +1,8 @@
 import { tours } from './tours-data.js';
 
+const customTours = JSON.parse(localStorage.getItem('ozotrips_custom_packages')) || [];
+const allTours = [...tours, ...customTours];
+
 document.addEventListener('DOMContentLoaded', () => {
   // Select DOM Elements
   const header = document.querySelector('header');
@@ -98,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeCategory = selectedCategory !== 'All' ? selectedCategory : 
       (categoryContainer?.querySelector('.category-btn.active')?.getAttribute('data-category') || 'All');
 
-    const filtered = tours.filter(tour => {
+    const filtered = allTours.filter(tour => {
       // 1. Search Query match
       const matchesSearch = tour.title.toLowerCase().includes(query) || 
                             tour.description.toLowerCase().includes(query);
@@ -217,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Open Details & Booking Modal
   function openBookingModal(tourId) {
-    const tour = tours.find(t => t.id === tourId);
+    const tour = allTours.find(t => t.id === tourId);
     if (!tour || !modalOverlay) return;
 
     // Render left panel details
@@ -366,5 +369,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Render initial tours
-  renderTours(tours);
+  renderTours(allTours);
 });
