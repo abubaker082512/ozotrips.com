@@ -365,6 +365,109 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeElements.forEach(el => observer.observe(el));
   }
 
+  // 6. Interactive Destination Recommendation Quiz Logic
+  const quizBox = document.getElementById('recommendation-quiz-box');
+  if (quizBox) {
+    let selectedMood = '';
+    let selectedBudget = '';
+    let selectedCompany = '';
+
+    quizBox.addEventListener('click', (e) => {
+      const btn = e.target.closest('.quiz-opt-btn');
+      if (!btn) return;
+
+      const step = parseInt(btn.getAttribute('data-step'));
+      const val = btn.getAttribute('data-val');
+
+      if (step === 1) {
+        selectedMood = val;
+        quizBox.innerHTML = `
+          <div id="quiz-question-container" style="animation: fadeIn var(--transition-fast) forwards;">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); letter-spacing: 1px;">Step 2 of 3</span>
+            <h3 style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 24px;">What is your budget tier?</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="2" data-val="low" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">💵 Budget-Friendly (Under $500)</button>
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="2" data-val="medium" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">💳 Moderate Spending ($500 - $1500)</button>
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="2" data-val="high" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">💎 Luxury / Premium ($1500+)</button>
+            </div>
+          </div>
+        `;
+      } else if (step === 2) {
+        selectedBudget = val;
+        quizBox.innerHTML = `
+          <div id="quiz-question-container" style="animation: fadeIn var(--transition-fast) forwards;">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); letter-spacing: 1px;">Step 3 of 3</span>
+            <h3 style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 24px;">Who are you traveling with?</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="3" data-val="solo" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🧘 Wandering Solo</button>
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="3" data-val="partner" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">👩‍❤️‍👨 Romantic Couple</button>
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="3" data-val="family" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">👨‍👩‍👧‍👦 Family / Group</button>
+            </div>
+          </div>
+        `;
+      } else if (step === 3) {
+        selectedCompany = val;
+        let matchedId = 1;
+        
+        if (selectedMood === 'mountain') {
+          if (selectedBudget === 'high') matchedId = 6;
+          else if (selectedCompany === 'family') matchedId = 1;
+          else matchedId = 2;
+        } else if (selectedMood === 'beach') {
+          if (selectedBudget === 'high') matchedId = 5;
+          else matchedId = 7;
+        } else if (selectedMood === 'culture') {
+          if (selectedBudget === 'high') matchedId = 4;
+          else if (selectedCompany === 'family') matchedId = 8;
+          else matchedId = 3;
+        }
+
+        const matchedTour = tours.find(t => t.id === matchedId) || tours[0];
+
+        quizBox.innerHTML = `
+          <div id="quiz-result-container" style="text-align: center; animation: fadeIn var(--transition-normal) forwards;">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); letter-spacing: 1px;">Your Match Found! 🎉</span>
+            <h3 style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 20px;">We recommend:</h3>
+            
+            <div style="border-radius: var(--border-radius-md); overflow: hidden; border: 1px solid var(--border-glass); margin-bottom: 20px; background: rgba(255,255,255,0.01);">
+              <img src="${matchedTour.image}" alt="${matchedTour.title}" style="width: 100%; height: 160px; object-fit: cover;">
+              <div style="padding: 16px; text-align: left;">
+                <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase;">${matchedTour.duration} • ${matchedTour.category}</span>
+                <h4 style="font-size: 1.1rem; margin-top: 4px; margin-bottom: 8px; font-weight: 700;">${matchedTour.title}</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                  <span style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary);">${matchedTour.currency}${matchedTour.price}</span>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">★ ${matchedTour.rating}</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+              <a href="./tour-detail.html?id=${matchedTour.id}" class="btn btn-primary" style="flex-grow: 1;">View Details ➜</a>
+              <button type="button" id="reset-quiz-btn" class="btn btn-secondary">Retry ↺</button>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    // Reset Quiz
+    quizBox.addEventListener('click', (e) => {
+      if (e.target.id === 'reset-quiz-btn') {
+        quizBox.innerHTML = `
+          <div id="quiz-question-container" style="animation: fadeIn var(--transition-fast) forwards;">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); letter-spacing: 1px;">Step 1 of 3</span>
+            <h3 id="quiz-question-title" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 24px;">What is your current travel mood?</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px;" id="quiz-options">
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="1" data-val="mountain" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🏔️ Majestic Mountain Summits</button>
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="1" data-val="beach" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🏖️ Relaxing Tropical Beaches</button>
+              <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="1" data-val="culture" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🏛️ Rich Cultural Heritage & Cities</button>
+            </div>
+          </div>
+        `;
+      }
+    });
+  }
+
   // Render initial tours
   renderTours(tours);
 });

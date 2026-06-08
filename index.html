@@ -127,6 +127,133 @@
     </div>
   </section>
 
+  <!-- Trust & Stats Counter -->
+  <section style="padding: 60px 0; background: rgba(255, 255, 255, 0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; text-align: center;">
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">50K+</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Happy Travelers</p>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">120+</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Destinations</p>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">12+</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Years Experience</p>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">4.9/5</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Average Rating</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section style="padding: 100px 0;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Why Travel With Us</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Uncompromised Travel Standards</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+        <div class="glass-panel fade-in" style="padding: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 2.5rem;">🎒</div>
+          <h3 style="font-size: 1.3rem;">Curated Premium Packages</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Every destination is handpicked by our staff. We secure boutique stays, verified local transfers, and expert guide access.</p>
+        </div>
+        <div class="glass-panel fade-in" style="padding: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 2.5rem;">👑</div>
+          <h3 style="font-size: 1.3rem;">24/7 Dedicated Concierge</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Travel with peace of mind. Our support lines are live 24 hours a day to handle itinerary edits, delays, or custom requests.</p>
+        </div>
+        <div class="glass-panel fade-in" style="padding: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 2.5rem;">🛂</div>
+          <h3 style="font-size: 1.3rem;">Fast-Track Visa Support</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Our in-house visa processing department simplifies your documentation, booking details, and queues for high approval rates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Destination Recommendation Quiz -->
+  <section style="padding: 100px 0; background: radial-gradient(circle at 10% 20%, rgba(0, 242, 195, 0.05) 0%, transparent 50%); border-top: 1px solid var(--border-glass);">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; align-items: center;">
+      <div class="fade-in">
+        <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Interactive Planner</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px; margin-bottom: 20px;">Find Your Next Perfect Getaway</h2>
+        <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;">Can't decide between snow-capped Karakoram peaks, a romantic Grecian caldera cruise, or tropical Balinese rice terraces? Use our instant recommendations engine to match with the ideal tour.</p>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <span style="font-size: 2.5rem; color: var(--color-primary);">🎯</span>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Takes less than 10 seconds. Select your travel mood and receive a matching itinerary package link immediately.</p>
+        </div>
+      </div>
+
+      <!-- Quiz Box Card -->
+      <div class="glass-panel fade-in" style="padding: 40px; border-radius: var(--border-radius-lg);" id="recommendation-quiz-box">
+        <div id="quiz-question-container">
+          <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-primary); letter-spacing: 1px;">Step 1 of 3</span>
+          <h3 id="quiz-question-title" style="font-size: 1.4rem; margin-top: 8px; margin-bottom: 24px;">What is your current travel mood?</h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 12px;" id="quiz-options">
+            <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="1" data-val="mountain" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🏔️ Majestic Mountain Summits</button>
+            <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="1" data-val="beach" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🏖️ Relaxing Tropical Beaches</button>
+            <button type="button" class="btn btn-secondary quiz-opt-btn" data-step="1" data-val="culture" style="width: 100%; text-align: left; justify-content: flex-start; padding: 16px 20px;">🏛️ Rich Cultural Heritage & Cities</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section style="padding: 100px 0; border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Client Stories</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">What Our Travelers Say</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        <div class="glass-panel fade-in" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="color: #ffb800; font-size: 1.2rem;">★★★★★</div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic;">"Our Hunza Autumn tour was magical. The Passu Cones, the Attabad lake boating, and Duiker sunrise were spectacular. OzoTrips managed everything flawlessly!"</p>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: #2a354d; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem;">AH</div>
+            <div>
+              <h4 style="font-size: 0.95rem;">Ali Hamza</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Hunza Valley</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel fade-in" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="color: #ffb800; font-size: 1.2rem;">★★★★★</div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic;">"Booking Bali with OzoTrips was the best decision. The custom villa stay in Ubud and speedboats to Nusa Penida were pre-arranged. Incredibly smooth service!"</p>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: #2d2645; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem;">FN</div>
+            <div>
+              <h4 style="font-size: 0.95rem;">Fatima Noor</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Bali, Indonesia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel fade-in" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="color: #ffb800; font-size: 1.2rem;">★★★★★</div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic;">"Kyoto was spectacular. The Zen temples, Gion walking tours, and traditional dining arrangements were extremely authentic. Highly recommend OzoTrips!"</p>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: #1c323f; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem;">ZS</div>
+            <div>
+              <h4 style="font-size: 0.95rem;">Zainab Sajid</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Kyoto, Japan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Details & Booking Modal -->
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal-container">
