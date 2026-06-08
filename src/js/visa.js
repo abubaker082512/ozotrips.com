@@ -1,3 +1,5 @@
+import './auth.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = themeToggle?.querySelector('span');
@@ -127,15 +129,48 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render initial table contents
   renderTable(visaPrices);
 
+  // Pre-fill visa form if user is logged in
+  const session = window.OzoAuth?.getSession();
+  if (session) {
+    const nameInput = document.getElementById('visa-name');
+    const emailInput = document.getElementById('visa-email');
+    if (nameInput) nameInput.value = session.name;
+    if (emailInput) emailInput.value = session.email;
+  }
+
   // Inquiry Form Handler
   if (visaForm && visaFormBox) {
     visaForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
+      if (!window.OzoAuth?.isLoggedIn()) {
+        window.OzoAuth?.openLoginModal(() => {
+          const s = window.OzoAuth.getSession();
+          if (s) {
+            const nameInput = document.getElementById('visa-name');
+            const emailInput = document.getElementById('visa-email');
+            if (nameInput) nameInput.value = s.name;
+            if (emailInput) emailInput.value = s.email;
+          }
+          visaForm.requestSubmit();
+        });
+        return;
+      }
+      
       const name = document.getElementById('visa-name').value;
       const email = document.getElementById('visa-email').value;
       const country = document.getElementById('visa-country').value;
       const category = document.getElementById('visa-type').options[document.getElementById('visa-type').selectedIndex].text;
+
+      // Log the visa booking
+      window.OzoAuth.addBooking({
+        type: 'visa',
+        title: `Visa Consultation: ${country}`,
+        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+        guests: '1 Applicant',
+        price: 0,
+        status: 'Inquiry Pending'
+      });
 
       visaFormBox.innerHTML = `
         <div class="booking-success-card" style="text-align: center; padding: 20px; animation: fadeIn var(--transition-normal) forwards;">

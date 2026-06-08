@@ -1,4 +1,5 @@
 import { tours } from './tours-data.js';
+import './auth.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Select DOM Elements

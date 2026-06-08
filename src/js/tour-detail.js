@@ -1,4 +1,5 @@
 import { tours } from './tours-data.js';
+import './auth.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
@@ -330,14 +331,59 @@ document.addEventListener('DOMContentLoaded', () => {
   // Run initial price calculation
   calculatePrice();
 
+  // Pre-fill booking form if user is logged in
+  const session = window.OzoAuth?.getSession();
+  if (session) {
+    const nameInput = document.getElementById('book-name');
+    const emailInput = document.getElementById('book-email');
+    if (nameInput) nameInput.value = session.name;
+    if (emailInput) emailInput.value = session.email;
+  }
+
   // Booking Form Submission Handler
   const bookingForm = document.getElementById('booking-detail-form');
   bookingForm?.addEventListener('submit', (e) => {
     e.preventDefault();
+    
+    if (!window.OzoAuth?.isLoggedIn()) {
+      window.OzoAuth?.openLoginModal(() => {
+        const s = window.OzoAuth.getSession();
+        if (s) {
+          const nameInput = document.getElementById('book-name');
+          const emailInput = document.getElementById('book-email');
+          if (nameInput) nameInput.value = s.name;
+          if (emailInput) emailInput.value = s.email;
+        }
+        bookingForm.requestSubmit();
+      });
+      return;
+    }
+
     const name = document.getElementById('book-name').value;
     const email = document.getElementById('book-email').value;
     const date = document.getElementById('book-date').value;
     const guests = document.getElementById('book-guests').value;
+
+    // Calculate upgrades to add to history log
+    const addons = [];
+    if (document.getElementById('addon-insurance')?.checked) addons.push('Travel Insurance');
+    if (document.getElementById('addon-transport')?.checked) addons.push('Premium Transport');
+    if (document.getElementById('addon-room')?.checked) addons.push('Luxury Room Upgrade');
+
+    // Get price breakdown total
+    const bdTotalText = document.getElementById('bd-total')?.textContent || '';
+    const finalPrice = parseInt(bdTotalText.replace(/[^0-9]/g, '')) || tour.price;
+
+    // Log the tour booking in user's history
+    window.OzoAuth.addBooking({
+      type: 'tour',
+      title: tour.title,
+      date: date,
+      guests: guests,
+      price: finalPrice,
+      addons: addons,
+      status: 'Pending Concierge'
+    });
 
     // Send values to success page via URL params
     const successUrl = `./booking-success.html?tour=${encodeURIComponent(tour.title)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&guests=${guests}`;

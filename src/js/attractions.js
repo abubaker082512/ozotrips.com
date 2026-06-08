@@ -1,4 +1,5 @@
 import { attractions } from './attractions-data.js';
+import './auth.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('attractions-grid');
