@@ -88,6 +88,7 @@ function handleLoginSubmit(e) {
   const email = document.getElementById('login-email').value.trim().toLowerCase();
   const password = document.getElementById('login-password').value;
   const errorMsg = document.getElementById('login-error-msg');
+  const submitBtn = e.target.querySelector('button[type="submit"]');
 
   const users = JSON.parse(localStorage.getItem('ozotrips_users')) || [];
   const user = users.find(u => u.email === email);
@@ -97,21 +98,27 @@ function handleLoginSubmit(e) {
     return;
   }
 
-  // Success
-  localStorage.setItem('ozotrips_session', JSON.stringify({
-    name: user.name,
-    email: user.email
-  }));
+  // Show loading spinner micro-animation
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="auth-spinner"></span> Signing In...';
 
-  errorMsg.textContent = '';
-  closeLoginModal();
-  updateHeader();
-  
-  if (currentOnSuccessCallback) {
-    currentOnSuccessCallback();
-  } else {
-    window.location.reload();
-  }
+  setTimeout(() => {
+    // Success
+    localStorage.setItem('ozotrips_session', JSON.stringify({
+      name: user.name,
+      email: user.email
+    }));
+
+    errorMsg.textContent = '';
+    closeLoginModal();
+    updateHeader();
+    
+    if (currentOnSuccessCallback) {
+      currentOnSuccessCallback();
+    } else {
+      window.location.reload();
+    }
+  }, 850);
 }
 
 function handleRegisterSubmit(e) {
@@ -120,6 +127,7 @@ function handleRegisterSubmit(e) {
   const email = document.getElementById('register-email').value.trim().toLowerCase();
   const password = document.getElementById('register-password').value;
   const errorMsg = document.getElementById('register-error-msg');
+  const submitBtn = e.target.querySelector('button[type="submit"]');
 
   if (password.length < 6) {
     errorMsg.textContent = 'Password must be at least 6 characters.';
@@ -132,22 +140,28 @@ function handleRegisterSubmit(e) {
     return;
   }
 
-  // Create new user
-  users.push({ name, email, password });
-  localStorage.setItem('ozotrips_users', JSON.stringify(users));
+  // Show loading spinner micro-animation
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="auth-spinner"></span> Registering...';
 
-  // Auto sign in
-  localStorage.setItem('ozotrips_session', JSON.stringify({ name, email }));
+  setTimeout(() => {
+    // Create new user
+    users.push({ name, email, password });
+    localStorage.setItem('ozotrips_users', JSON.stringify(users));
 
-  errorMsg.textContent = '';
-  closeLoginModal();
-  updateHeader();
+    // Auto sign in
+    localStorage.setItem('ozotrips_session', JSON.stringify({ name, email }));
 
-  if (currentOnSuccessCallback) {
-    currentOnSuccessCallback();
-  } else {
-    window.location.reload();
-  }
+    errorMsg.textContent = '';
+    closeLoginModal();
+    updateHeader();
+
+    if (currentOnSuccessCallback) {
+      currentOnSuccessCallback();
+    } else {
+      window.location.reload();
+    }
+  }, 850);
 }
 
 export function renderBookingsList() {
@@ -200,7 +214,18 @@ export function renderBookingsList() {
     btn.addEventListener('click', (e) => {
       const id = e.currentTarget.getAttribute('data-booking-id');
       if (confirm('Are you sure you want to cancel this reservation?')) {
-        cancelBooking(id);
+        const item = e.currentTarget.closest('.booking-item');
+        if (item) {
+          // Slide-left and fade-out animation before state update
+          item.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+          item.style.transform = 'translateX(-30px)';
+          item.style.opacity = '0';
+          setTimeout(() => {
+            cancelBooking(id);
+          }, 400);
+        } else {
+          cancelBooking(id);
+        }
       }
     });
   });
@@ -386,6 +411,29 @@ function injectModals() {
   registerForm.addEventListener('submit', handleRegisterSubmit);
 }
 
+// Intersection observer scroll animation
+export function setupScrollAnimations() {
+  const fadeElements = document.querySelectorAll('.fade-in');
+  if (fadeElements.length === 0) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Staggered delay for card rendering effect
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -45px 0px'
+  });
+
+  fadeElements.forEach(el => observer.observe(el));
+}
+
 // Global hook configuration
 window.OzoAuth = {
   isLoggedIn,
@@ -397,13 +445,15 @@ window.OzoAuth = {
   addBooking,
   getBookings,
   cancelBooking,
-  logout: handleLogout
+  logout: handleLogout,
+  setupScrollAnimations
 };
 
 // Initialize module
 function initAuth() {
   injectModals();
   updateHeader();
+  setupScrollAnimations();
 }
 
 if (document.readyState === 'loading') {

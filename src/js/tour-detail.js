@@ -374,19 +374,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const bdTotalText = document.getElementById('bd-total')?.textContent || '';
     const finalPrice = parseInt(bdTotalText.replace(/[^0-9]/g, '')) || tour.price;
 
-    // Log the tour booking in user's history
-    window.OzoAuth.addBooking({
-      type: 'tour',
-      title: tour.title,
-      date: date,
-      guests: guests,
-      price: finalPrice,
-      addons: addons,
-      status: 'Pending Concierge'
-    });
+    // Show spinner loading state
+    const submitBtn = bookingForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="auth-spinner"></span> Processing...';
 
-    // Send values to success page via URL params
-    const successUrl = `./booking-success.html?tour=${encodeURIComponent(tour.title)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&guests=${guests}`;
-    window.location.href = successUrl;
+    setTimeout(() => {
+      // Log the tour booking in user's history
+      window.OzoAuth.addBooking({
+        type: 'tour',
+        title: tour.title,
+        date: date,
+        guests: guests,
+        price: finalPrice,
+        addons: addons,
+        status: 'Pending Concierge'
+      });
+
+      // Send values to success page via URL params
+      const successUrl = `./booking-success.html?tour=${encodeURIComponent(tour.title)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&guests=${guests}`;
+      window.location.href = successUrl;
+    }, 1000);
   });
 });

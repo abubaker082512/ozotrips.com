@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toursGrid.innerHTML = toursList.map(tour => {
       const isFav = favorites.includes(tour.id);
       return `
-        <div class="tour-card glass-panel fade-in visible">
+        <div class="tour-card glass-panel fade-in">
           <div class="tour-image-container">
             <img class="tour-image" src="${tour.image}" alt="${tour.title}" loading="lazy">
             <div class="tour-badge ${tour.type === 'international' ? 'international' : ''}">
@@ -162,6 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
     }).join('');
+
+    // Trigger the staggered scroll reveal observer
+    window.OzoAuth?.setupScrollAnimations();
   }
 
   renderTours(tours);

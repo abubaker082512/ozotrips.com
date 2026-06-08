@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     grid.innerHTML = list.map(item => `
-      <div class="attraction-card glass-panel fade-in visible">
+      <div class="attraction-card glass-panel fade-in">
         <div class="attraction-img-box">
           <img class="attraction-img" src="${item.image}" alt="${item.name}">
         </div>
@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `).join('');
+
+    // Trigger the staggered scroll reveal observer
+    window.OzoAuth?.setupScrollAnimations();
   }
 
   // Filter Buttons Click

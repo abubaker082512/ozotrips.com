@@ -162,28 +162,35 @@ document.addEventListener('DOMContentLoaded', () => {
       const country = document.getElementById('visa-country').value;
       const category = document.getElementById('visa-type').options[document.getElementById('visa-type').selectedIndex].text;
 
-      // Log the visa booking
-      window.OzoAuth.addBooking({
-        type: 'visa',
-        title: `Visa Consultation: ${country}`,
-        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-        guests: '1 Applicant',
-        price: 0,
-        status: 'Inquiry Pending'
-      });
+      // Show spinner loading state
+      const submitBtn = visaForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="auth-spinner"></span> Processing...';
 
-      visaFormBox.innerHTML = `
-        <div class="booking-success-card" style="text-align: center; padding: 20px; animation: fadeIn var(--transition-normal) forwards;">
-          <div class="success-icon" style="width: 70px; height: 70px; border-radius: 50%; background: rgba(181, 153, 111, 0.1); color: var(--color-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: var(--glow-primary); margin-bottom: 20px;">✓</div>
-          <h3 style="font-size: 1.4rem; margin-bottom: 12px; color: var(--text-primary);">Consultation Booked!</h3>
-          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
-            Thank you <strong>${name}</strong>. We have registered your inquiry for a <strong>${category}</strong> to <strong>${country}</strong>.
-          </p>
-          <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
-            A senior immigration counselor will email you at <strong>${email}</strong> or call you within the next 24 business hours to analyze your documents.
-          </p>
-        </div>
-      `;
+      setTimeout(() => {
+        // Log the visa booking
+        window.OzoAuth.addBooking({
+          type: 'visa',
+          title: `Visa Consultation: ${country}`,
+          date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          guests: '1 Applicant',
+          price: 0,
+          status: 'Inquiry Pending'
+        });
+
+        visaFormBox.innerHTML = `
+          <div class="booking-success-card" style="text-align: center; padding: 20px; animation: fadeIn var(--transition-normal) forwards;">
+            <div class="success-icon" style="width: 70px; height: 70px; border-radius: 50%; background: rgba(181, 153, 111, 0.1); color: var(--color-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: var(--glow-primary); margin-bottom: 20px;">✓</div>
+            <h3 style="font-size: 1.4rem; margin-bottom: 12px; color: var(--text-primary);">Consultation Booked!</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+              Thank you <strong>${name}</strong>. We have registered your inquiry for a <strong>${category}</strong> to <strong>${country}</strong>.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+              A senior immigration counselor will email you at <strong>${email}</strong> or call you within the next 24 business hours to analyze your documents.
+            </p>
+          </div>
+        `;
+      }, 1000);
     });
   }
 });
