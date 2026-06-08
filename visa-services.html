@@ -176,6 +176,40 @@
     </div>
   </section>
 
+  <!-- Visa Pricing Search Table Section -->
+  <section class="container" style="margin-top: 80px;">
+    <h2 style="font-size: 2rem; margin-bottom: 10px;">Visa Fees & Pricing List</h2>
+    <p style="color: var(--text-secondary); max-width: 600px; margin-bottom: 30px;">Search our updated price list for various sticker and e-visas (prices include all consultancy, verification, and government fees, with +2000 PKR increment applied).</p>
+    
+    <!-- Table Controls -->
+    <div style="display: flex; gap: 16px; margin-bottom: 24px; align-items: center; flex-wrap: wrap;">
+      <input type="text" id="visa-search-input" placeholder="Search country, e.g. UAE, Bahrain..." style="flex-grow: 1; max-width: 400px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px 16px; border-radius: var(--border-radius-md); color: var(--text-primary); outline: none; font-family: var(--font-sans);">
+      
+      <div id="table-filter-tabs" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;">
+        <button class="category-btn active" data-filter="all">Show All</button>
+        <button class="category-btn" data-filter="no-statement">No Bank Statement</button>
+        <button class="category-btn" data-filter="sticker">Easy Sticker Visas</button>
+        <button class="category-btn" data-filter="other">Other Popular Visas</button>
+      </div>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="glass-panel" style="overflow-x: auto; border-radius: var(--border-radius-md); padding: 0;">
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-glass); background: rgba(255, 255, 255, 0.02);">
+            <th style="padding: 16px 24px; font-weight: 700; color: var(--color-primary);">Country</th>
+            <th style="padding: 16px 24px; font-weight: 700; color: var(--color-primary);">Visa Category / Duration</th>
+            <th style="padding: 16px 24px; font-weight: 700; color: var(--color-primary); text-align: right;">Updated Price (PKR)</th>
+          </tr>
+        </thead>
+        <tbody id="visa-pricing-table-body">
+          <!-- JS Populated Rows -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- Interactive Consultation Form Section -->
   <section class="container consultation-section">
     <div>
