@@ -10,6 +10,7 @@ export default defineConfig({
         tourDetail: resolve(__dirname, 'tour-detail.html'),
         attractions: resolve(__dirname, 'attractions.html'),
         bookingSuccess: resolve(__dirname, 'booking-success.html'),
+        visaServices: resolve(__dirname, 'visa-services.html'),
       },
     },
   },

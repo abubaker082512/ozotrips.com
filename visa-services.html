@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa Consultation & Processing Services | OzoTrips</title>
+  <meta name="description" content="Get expert visa consultancy and application assistance for tourist, student, work, and business visas worldwide. Secure, hassle-free process.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    .visa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    
+    .visa-card {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-radius: var(--border-radius-lg);
+    }
+    
+    .visa-card h3 {
+      font-size: 1.4rem;
+      color: var(--color-primary);
+    }
+    
+    .visa-icon-box {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+    
+    .dest-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .dest-item {
+      padding: 16px;
+      border-radius: var(--border-radius-md);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+    
+    .consultation-section {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      margin-top: 80px;
+      margin-bottom: 80px;
+      align-items: center;
+    }
+    
+    @media (max-width: 992px) {
+      .consultation-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./visa-services.html" class="nav-link active">Visa Services</a></li>
+          <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Visa Banner -->
+  <section class="hero" style="min-height: 50vh; padding-top: 130px; padding-bottom: 40px; background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);">
+    <div class="container">
+      <span class="hero-subtitle">🌐 Global Immigration & Visas</span>
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">Expert Visa Consultancy</h1>
+      <p style="max-width: 650px; color: var(--text-secondary);">We provide smooth, hassle-free visa processing for individuals, families, and businesses. Our experts guide you from document preparation to submission and mock interviews.</p>
+    </div>
+  </section>
+
+  <!-- Visa Categories Section -->
+  <section class="container" style="padding-top: 20px;">
+    <h2 style="font-size: 2rem; text-align: center; margin-bottom: 10px;">Our Visa Services Include</h2>
+    <p style="color: var(--text-secondary); text-align: center; max-width: 600px; margin: 0 auto 40px;">Choose the appropriate visa category for your travel or relocation needs.</p>
+    
+    <div class="visa-grid">
+      
+      <!-- Tourist Visas -->
+      <div class="visa-card glass-panel">
+        <div class="visa-icon-box">🏖️</div>
+        <h3>Tourist & Visit Visas</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Assisting vacationers, families, and business travelers with short-term travel visas.</p>
+        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <li>Document verification & submission</li>
+          <li>Appointment scheduling support</li>
+          <li>Comprehensive hotel & flight bookings</li>
+          <li>Travel insurance support</li>
+        </ul>
+      </div>
+
+      <!-- Student Visas -->
+      <div class="visa-card glass-panel">
+        <div class="visa-icon-box">🎓</div>
+        <h3>Student Visas</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Full support in obtaining study permits and visas for top worldwide colleges.</p>
+        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <li>University admission support</li>
+          <li>Visa interview preparation workshops</li>
+          <li>Sponsorship document audit</li>
+          <li>Post-study work permit advice</li>
+        </ul>
+      </div>
+
+      <!-- Work Visas -->
+      <div class="visa-card glass-panel">
+        <div class="visa-icon-box">💼</div>
+        <h3>Work & Business Visas</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Processing business investment and skilled worker employment permits.</p>
+        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <li>Employer verification support</li>
+          <li>Visa sponsorship document audits</li>
+          <li>Immigration route guidance</li>
+          <li>Business travel authorizations</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Popular Countries -->
+  <section class="container" style="margin-top: 80px;">
+    <h2 style="font-size: 2rem; margin-bottom: 10px;">Popular Visa Destinations</h2>
+    <p style="color: var(--text-secondary); max-width: 600px; margin-bottom: 30px;">We process visa applications for a wide array of destinations with high success rates.</p>
+    
+    <div class="dest-list">
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇦🇪</span> UAE (Dubai, Abu Dhabi)</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇸🇦</span> Saudi Arabia (Family/Umrah)</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇹🇷</span> Turkey (Sticker/e-Visa)</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇲🇾</span> Malaysia & Singapore</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇪🇺</span> Schengen (France, Germany, Italy)</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇬🇧</span> United Kingdom (UK)</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇺🇸</span> United States (USA)</div>
+      <div class="dest-item"><span style="font-size: 1.5rem;">🇨🇦</span> Canada (Express Entry/Visitor)</div>
+    </div>
+  </section>
+
+  <!-- Interactive Consultation Form Section -->
+  <section class="container consultation-section">
+    <div>
+      <span class="hero-subtitle" style="font-size: 0.85rem; color: var(--color-primary);">📩 Quick Inquiry</span>
+      <h2 style="font-size: 2.2rem; margin-top: 10px; margin-bottom: 15px;">Book a Free Visa Consultation</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7;">Speak directly to our senior visa counselors. We analyze your passport strength, financial declarations, and travel plans to devise the highest probability visa strategy.</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.3rem; color: var(--color-primary);">📞</span>
+          <span>Sales & Support: <strong>042 37897894</strong></span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.3rem; color: var(--color-primary);">💬</span>
+          <span>WhatsApp Line: <strong>+92 310 4444594</strong></span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.3rem; color: var(--color-primary);">📍</span>
+          <span style="font-size: 0.95rem; color: var(--text-secondary);">Gulberg III, Lahore, Pakistan</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inquiry Card Form -->
+    <div class="glass-panel" style="padding: 40px; border-radius: var(--border-radius-lg);" id="visa-form-box">
+      <form id="visa-inquiry-form" class="booking-form">
+        <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Inquiry Form</h3>
+        
+        <div class="form-group">
+          <label for="visa-name">Full Name</label>
+          <input type="text" id="visa-name" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="visa-email">Email Address</label>
+          <input type="email" id="visa-email" required placeholder="john@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="visa-phone">Phone Number</label>
+          <input type="tel" id="visa-phone" required placeholder="+92 300 1234567">
+        </div>
+
+        <div class="form-group">
+          <label for="visa-country">Target Destination</label>
+          <input type="text" id="visa-country" required placeholder="e.g. United Kingdom, UAE">
+        </div>
+
+        <div class="form-group">
+          <label for="visa-type">Visa Category</label>
+          <select id="visa-type" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-glass); padding: 12px 16px; border-radius: var(--border-radius-md); color: var(--text-primary); outline: none; font-family: var(--font-sans);">
+            <option value="tourist" style="background: var(--bg-secondary);">Tourist / Visit Visa</option>
+            <option value="student" style="background: var(--bg-secondary);">Student Visa</option>
+            <option value="work" style="background: var(--bg-secondary);">Work / Employment Visa</option>
+            <option value="business" style="background: var(--bg-secondary);">Business Visa</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="visa-msg">Details / Message (Optional)</label>
+          <input type="text" id="visa-msg" placeholder="Describe your travel profile or queries">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+          Send Inquiry 🚀
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            OzoTrips<span class="logo-dot"></span>
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./tours.html">All Tours</a></li>
+            <li><a href="./attractions.html">Attractions</a></li>
+            <li><a href="./visa-services.html">Visa Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact Concierge</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Email: support@ozotrips.com<br>Tel: +92 51 111 696 874</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/visa.js"></script>
+</body>
+</html>

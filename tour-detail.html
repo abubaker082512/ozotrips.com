@@ -131,6 +131,7 @@
           <li><a href="./index.html" class="nav-link">Home</a></li>
           <li><a href="./tours.html" class="nav-link">Tours</a></li>
           <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./visa-services.html" class="nav-link">Visa Services</a></li>
           <li><a href="./index.html#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
@@ -183,6 +184,21 @@
           </div>
         </div>
 
+        <!-- Weather Forecast Widget -->
+        <div id="weather-widget" class="glass-panel" style="padding: 20px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+          <div>
+            <h4 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 4px;">Destination Outlook</h4>
+            <span id="weather-location" style="font-size: 0.9rem; color: var(--text-secondary);">Loading destination weather...</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span id="weather-icon" style="font-size: 2.2rem;">⛅</span>
+            <div style="text-align: right;">
+              <span id="weather-temp" style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary);">--°C</span>
+              <div id="weather-desc" style="font-size: 0.8rem; color: var(--text-muted);">Scattered Clouds</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Detailed Itinerary -->
         <h2 style="font-size: 2rem; margin-bottom: 10px;">Day-by-Day Itinerary</h2>
         <p style="color: var(--text-secondary);">What to expect during your journey. We curate premium transfers and five-star accommodations.</p>
@@ -216,17 +232,44 @@
           </div>
         </div>
 
-        <!-- Tour Map & FAQS Mock -->
+        <!-- Interactive Packing Checklist -->
+        <h2 style="font-size: 2rem; margin-top: 60px; margin-bottom: 15px;">Packing Checklist</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">Use our interactive packing checklist to prepare. Checkboxes are saved locally.</p>
+        <div id="packing-checklist" class="glass-panel" style="padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px;">
+          <!-- JS Populated Checkboxes -->
+        </div>
+
+        <!-- Tour Map & FAQS Accordion -->
         <h2 style="font-size: 2rem; margin-top: 60px; margin-bottom: 20px;">Frequently Asked Questions</h2>
-        <div class="glass-panel" style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
-          <div>
-            <h4 style="color: var(--color-primary); font-size: 1.1rem; margin-bottom: 8px;">What items should I pack?</h4>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">We recommend packing light, layered clothing, hiking boots for adventure trails, polarized sunglasses, sunscreen, and a high-quality camera to capture the memories.</p>
+        <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="faq-item glass-panel" style="border-radius: var(--border-radius-md); overflow: hidden;">
+            <button type="button" class="faq-trigger" style="width: 100%; text-align: left; padding: 20px 24px; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span>What items should I pack?</span>
+              <span class="faq-arrow" style="transition: transform var(--transition-fast);">▼</span>
+            </button>
+            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height var(--transition-normal) ease; padding: 0 24px;">
+              <p style="padding-bottom: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">We recommend packing light, layered clothing, hiking boots for adventure trails, polarized sunglasses, sunscreen, and a high-quality camera to capture the memories.</p>
+            </div>
           </div>
-          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
-          <div>
-            <h4 style="color: var(--color-primary); font-size: 1.1rem; margin-bottom: 8px;">Are meals fully covered?</h4>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">Daily buffet breakfasts are included in all packages. Lunches and dinners are covered selectively (e.g., local welcome dinners and high-altitude treks) to allow you culinary freedom.</p>
+          
+          <div class="faq-item glass-panel" style="border-radius: var(--border-radius-md); overflow: hidden;">
+            <button type="button" class="faq-trigger" style="width: 100%; text-align: left; padding: 20px 24px; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span>Are meals fully covered?</span>
+              <span class="faq-arrow" style="transition: transform var(--transition-fast);">▼</span>
+            </button>
+            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height var(--transition-normal) ease; padding: 0 24px;">
+              <p style="padding-bottom: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Daily buffet breakfasts are included in all packages. Lunches and dinners are covered selectively (e.g., local welcome dinners and high-altitude treks) to allow you culinary freedom.</p>
+            </div>
+          </div>
+
+          <div class="faq-item glass-panel" style="border-radius: var(--border-radius-md); overflow: hidden;">
+            <button type="button" class="faq-trigger" style="width: 100%; text-align: left; padding: 20px 24px; background: none; border: none; font-size: 1.1rem; font-weight: 600; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span>What is the cancellation policy?</span>
+              <span class="faq-arrow" style="transition: transform var(--transition-fast);">▼</span>
+            </button>
+            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: max-height var(--transition-normal) ease; padding: 0 24px;">
+              <p style="padding-bottom: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Full refund is available up to 14 days prior to departure. Cancelations made between 7 and 13 days prior are eligible for a 50% refund, while cancellations within 7 days are non-refundable.</p>
+            </div>
           </div>
         </div>
 
@@ -269,7 +312,62 @@
               <input type="number" id="book-guests" min="1" max="20" value="1" required>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+            <!-- Optional Add-ons -->
+            <div class="form-group" style="margin-top: 10px;">
+              <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">Optional Upgrades</label>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; font-weight: normal; width: 100%;">
+                  <input type="checkbox" id="addon-insurance" style="width: auto;"> Travel Insurance (+$25/person)
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; font-weight: normal; width: 100%;">
+                  <input type="checkbox" id="addon-transport" style="width: auto;"> Private Luxury Transport (+$150 total)
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer; font-weight: normal; width: 100%;">
+                  <input type="checkbox" id="addon-room" style="width: auto;"> Single Room Supplement (+$90/person)
+                </label>
+              </div>
+            </div>
+
+            <!-- Discount Code -->
+            <div class="form-group" style="margin-top: 10px;">
+              <label for="book-discount">Promo / Discount Code</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="book-discount" placeholder="e.g. OZO2026" style="flex-grow: 1;">
+                <button type="button" id="apply-promo-btn" class="btn btn-secondary" style="padding: 10px 16px; font-size: 0.85rem; border-radius: var(--border-radius-md);">Apply</button>
+              </div>
+              <span id="promo-status" style="font-size: 0.8rem; display: none; margin-top: 4px;"></span>
+            </div>
+
+            <!-- Price Breakdown Table -->
+            <div id="price-breakdown-box" style="margin-top: 20px; padding: 16px; border-radius: var(--border-radius-md); background: rgba(255,255,255,0.02); border: 1px dashed var(--border-glass); display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-muted);">Base Tour Price:</span>
+                <span id="bd-base">$0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; display: none;" id="bd-insurance-row">
+                <span style="color: var(--text-muted);">Travel Insurance:</span>
+                <span id="bd-insurance">$0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; display: none;" id="bd-transport-row">
+                <span style="color: var(--text-muted);">Private Transport:</span>
+                <span id="bd-transport">$0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; display: none;" id="bd-room-row">
+                <span style="color: var(--text-muted);">Single Room Supp.:</span>
+                <span id="bd-room">$0</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; display: none; color: var(--color-accent);" id="bd-discount-row">
+                <span>Discount Applied:</span>
+                <span id="bd-discount">-$0</span>
+              </div>
+              <hr style="border: 0; border-top: 1px dashed var(--border-glass); margin: 4px 0;">
+              <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem;">
+                <span>Total Package Price:</span>
+                <span id="bd-total" style="color: var(--color-primary);">$0</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
               Submit Reservation Request 🚀
             </button>
           </form>
@@ -295,6 +393,7 @@
             <li><a href="./index.html">Home</a></li>
             <li><a href="./tours.html">All Tours</a></li>
             <li><a href="./attractions.html">Attractions</a></li>
+            <li><a href="./visa-services.html">Visa Services</a></li>
           </ul>
         </div>
         <div class="footer-col">
