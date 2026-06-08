@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Help & Support Center | OzoTrips</title>
+  <meta name="description" content="Search OzoTrips FAQs and help documentations. Find answers on tour cancellations, visa documents, guide bookings, and payment questions.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./visa-services.html" class="nav-link">Visa Services</a></li>
+          <li><a href="./custom-planner.html" class="nav-link">Custom Planner</a></li>
+          <li><a href="./help-center.html" class="nav-link active">Help Center</a></li>
+          <li><a href="./about.html" class="nav-link">About Us</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="hero" style="min-height: 40vh; padding-top: 130px; padding-bottom: 40px; background: radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);">
+    <div class="container">
+      <span class="hero-subtitle">🙋 Customer Care desk</span>
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">Support & FAQ Center</h1>
+      <p style="max-width: 600px; color: var(--text-secondary);">Have questions about trip modifications, fast-track visa fees, or local guide services? Search our knowledge base.</p>
+      
+      <!-- Search Panel -->
+      <div class="search-panel glass-panel" style="margin-top: 30px; max-width: 600px;">
+        <div class="search-input-group" style="width: 100%;">
+          <label for="faq-search-input">Search Support Topics</label>
+          <input type="text" id="faq-search-input" placeholder="Type keywords e.g. cancel, visa, refund...">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="container" style="padding-bottom: 100px; padding-top: 40px;">
+    
+    <!-- Category Tabs Filter -->
+    <div id="faq-filter-tabs" style="display: flex; gap: 12px; margin-bottom: 30px; flex-wrap: wrap;">
+      <button class="category-btn active" data-category="all">🌐 All Topics</button>
+      <button class="category-btn" data-category="bookings">🎒 Bookings & Refunds</button>
+      <button class="category-btn" data-category="visas">🛂 Visas & Documents</button>
+      <button class="category-btn" data-category="guides">🥾 Guides & Weather</button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;" class="modal-container">
+      
+      <!-- Left Panel: FAQ Accordion List -->
+      <div style="display: flex; flex-direction: column; gap: 16px;" id="faq-accordion-container">
+        <!-- Accordion items loaded dynamically -->
+      </div>
+
+      <!-- Right Panel: Still Need Help Card -->
+      <div class="glass-panel" style="padding: 40px; border-radius: var(--border-radius-lg); position: sticky; top: 110px;">
+        <h3 style="font-size: 1.4rem; margin-bottom: 12px;">Still Need Support?</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+          Our concierge support desk is live 24/7 to resolve travel discrepancies. Submit a quick query ticket and our team will trace back.
+        </p>
+
+        <form id="support-ticket-form">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="ticket-msg" style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Message / Query</label>
+            <textarea id="ticket-msg" required placeholder="Describe your query in detail..." style="width: 100%; height: 100px; padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans); resize: none;"></textarea>
+          </div>
+          <div id="ticket-status-msg" style="font-size: 0.85rem; margin-bottom: 12px; display: none;"></div>
+          <button type="submit" class="btn btn-primary btn-full-width pulse-btn">Submit Support Ticket</button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <a href="./index.html" class="logo" style="margin-bottom: 20px;">
+          OzoTrips<span class="logo-dot"></span>
+        </a>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 300px;">
+          Crafting high-end bespoke holiday experiences across Northern Pakistan and premium global destinations.
+        </p>
+      </div>
+      <div>
+        <h4>Sitemap</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+          <li><a href="./index.html" style="color: var(--text-secondary);">Home</a></li>
+          <li><a href="./tours.html" style="color: var(--text-secondary);">Tour Packages</a></li>
+          <li><a href="./attractions.html" style="color: var(--text-secondary);">Attractions</a></li>
+          <li><a href="./visa-services.html" style="color: var(--text-secondary);">Visa Services</a></li>
+          <li><a href="./custom-planner.html" style="color: var(--text-secondary);">Custom Planner</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help & Support</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+          <li><a href="./help-center.html" style="color: var(--text-secondary);">FAQs Help Center</a></li>
+          <li><a href="./about.html" style="color: var(--text-secondary);">About Our Company</a></li>
+          <li><a href="./index.html#contact" style="color: var(--text-secondary);">Contact Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Email: support@ozotrips.com<br>Tel: +92 51 111 696 874</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/help-center.js"></script>
+</body>
+</html>

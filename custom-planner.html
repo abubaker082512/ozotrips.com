@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Custom Trip Planner | OzoTrips</title>
+  <meta name="description" content="Design your own custom itinerary with OzoTrips. Select destinations, accommodations, transport, and guide packages to receive an instant travel quote.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        OzoTrips<span class="logo-dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./visa-services.html" class="nav-link">Visa Services</a></li>
+          <li><a href="./custom-planner.html" class="nav-link active">Custom Planner</a></li>
+          <li><a href="./help-center.html" class="nav-link">Help Center</a></li>
+          <li><a href="./about.html" class="nav-link">About Us</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="hero" style="min-height: 40vh; padding-top: 130px; padding-bottom: 40px; background: radial-gradient(circle at 10% 20%, rgba(0, 242, 195, 0.1) 0%, transparent 60%);">
+    <div class="container">
+      <span class="hero-subtitle">🎨 Tailor-Made Journeys</span>
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">Build Your Custom Itinerary</h1>
+      <p style="max-width: 600px; color: var(--text-secondary);">Combine local Pakistan mountain valleys, luxury international stops, private guides, and premium hotels. Plan instantly and register quote logs.</p>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="container" style="padding-bottom: 100px; padding-top: 40px;">
+    <div style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 40px; align-items: start;" class="modal-container">
+      
+      <!-- Left Panel: Interactive Wizard Form -->
+      <div class="glass-panel" style="padding: 40px; border-radius: var(--border-radius-lg); position: relative;">
+        <!-- Step Indicators -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px;">
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <div class="step-badge active" id="badge-step-1" style="width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: var(--brand-gradient); color: var(--bg-primary); font-size: 0.9rem;">1</div>
+            <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary);">Destination</span>
+          </div>
+          <div style="flex: 1; height: 1px; background: var(--border-glass); margin: 0 16px;"></div>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <div class="step-badge" id="badge-step-2" style="width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: var(--bg-secondary); border: 1px solid var(--border-glass); color: var(--text-muted); font-size: 0.9rem;">2</div>
+            <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);" id="label-step-2">Duration</span>
+          </div>
+          <div style="flex: 1; height: 1px; background: var(--border-glass); margin: 0 16px;"></div>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <div class="step-badge" id="badge-step-3" style="width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: var(--bg-secondary); border: 1px solid var(--border-glass); color: var(--text-muted); font-size: 0.9rem;">3</div>
+            <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);" id="label-step-3">Upgrades</span>
+          </div>
+        </div>
+
+        <form id="custom-planner-form">
+          <!-- Step 1 Container -->
+          <div class="planner-step active" id="step-1-content">
+            <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Select Destination & Lodging</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Where would you like to travel and how would you like to stay?</p>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="plan-dest">Select Region</label>
+              <select id="plan-dest" required style="width: 100%; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+                <option value="hunza">🏔️ Hunza Valley & Passu (Northern Pakistan)</option>
+                <option value="skardu">🌌 Skardu & Deosai Plains (Baltistan)</option>
+                <option value="swat">🌲 Swat Valley & Kalam (KP Province)</option>
+                <option value="kyoto">🌸 Kyoto & Nara Heritage (Japan)</option>
+                <option value="bali">🌴 Bali & Nusa Penida (Indonesia)</option>
+                <option value="swiss">❄️ Zermatt & Swiss Alps (Switzerland)</option>
+                <option value="santorini">🏖️ Santorini Beach (Greece)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="plan-stars">Hotel Accommodation Tier</label>
+              <select id="plan-stars" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+                <option value="3">⭐⭐⭐ Standard Lodges (Clean & Comfort) - 15,000 PKR/night</option>
+                <option value="4" selected>⭐⭐⭐⭐ Deluxe Hotels (Excellent Views & Breakfast) - 25,000 PKR/night</option>
+                <option value="5">⭐⭐⭐⭐⭐ Signature Luxury Resorts (Shangrila / Serena / Cave Resorts) - 45,000 PKR/night</option>
+              </select>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 40px;">
+              <button type="button" class="btn btn-primary" id="btn-next-1" style="padding: 12px 24px;">Continue to Step 2 ➜</button>
+            </div>
+          </div>
+
+          <!-- Step 2 Container -->
+          <div class="planner-step" id="step-2-content" style="display: none;">
+            <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Duration, Dates & Guests</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Configure dates and traveler headcounts.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" class="modal-container">
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label for="plan-date">Target Departure Date</label>
+                <input type="date" id="plan-date" required style="width: 100%; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+              </div>
+              <div class="form-group" style="margin-bottom: 20px;">
+                <label for="plan-days">Trip Duration (Days)</label>
+                <input type="number" id="plan-days" min="2" max="30" value="5" required style="width: 100%; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="plan-guests">Number of Travelers</label>
+              <input type="number" id="plan-guests" min="1" max="20" value="2" required style="width: 100%; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+              <button type="button" class="btn btn-outline" id="btn-back-2" style="padding: 12px 24px;">← Back</button>
+              <button type="button" class="btn btn-primary" id="btn-next-2" style="padding: 12px 24px;">Continue to Step 3 ➜</button>
+            </div>
+          </div>
+
+          <!-- Step 3 Container -->
+          <div class="planner-step" id="step-3-content" style="display: none;">
+            <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Choose Private Transport & Guides</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Select transit preference and optional guide activities.</p>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="plan-transport">Private Vehicle Preference</label>
+              <select id="plan-transport" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+                <option value="none">❌ Self-drive / Booking Not Needed</option>
+                <option value="sedan" selected>🚗 Private Sedan/Corolla (Up to 3 pax) - 5,000 PKR/day</option>
+                <option value="prado">🚜 Premium 4x4 Prado/Jeep (Mountain Roads, 4 pax) - 18,000 PKR/day</option>
+                <option value="coaster">🚐 Hiace/Coaster Van (Groups, 12 pax) - 12,000 PKR/day</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 10px;">
+              <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">Optional Experiences & Add-ons</label>
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 100%;">
+                  <input type="checkbox" id="addon-plan-guide" style="width: auto;"> 🧑‍🏫 Personal Local Tour Guide (3,000 PKR/day)
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 100%;">
+                  <input type="checkbox" id="addon-plan-adv" style="width: auto;"> 🧗 Adventure Sports Package (Paragliding/Rafting) (+8,000 PKR/person)
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 100%;">
+                  <input type="checkbox" id="addon-plan-cultural" style="width: auto;"> 🏛️ Traditional Feast & Cultural Show (+4,000 PKR/person)
+                </label>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+              <button type="button" class="btn btn-outline" id="btn-back-3" style="padding: 12px 24px;">← Back</button>
+              <button type="submit" class="btn btn-primary pulse-btn" id="btn-submit" style="padding: 12px 28px;">Submit Itinerary Design ✈️</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right Panel: Dynamic Cost Estimation Sidebar -->
+      <div class="booking-sidebar">
+        <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Estimated Quote</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Live pricing calculator for your itinerary components.</p>
+
+        <!-- Pricing Breakdown Details -->
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
+            <span style="color: var(--text-secondary);">Lodging & Hotels</span>
+            <span id="calc-lodging" style="font-weight: 600; color: var(--text-primary);">0 PKR</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem;" id="row-calc-transport">
+            <span style="color: var(--text-secondary);">Vehicle Rental</span>
+            <span id="calc-transport" style="font-weight: 600; color: var(--text-primary);">0 PKR</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem;" id="row-calc-guide">
+            <span style="color: var(--text-secondary);">Tour Guide</span>
+            <span id="calc-guide" style="font-weight: 600; color: var(--text-primary);">0 PKR</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem;" id="row-calc-extras">
+            <span style="color: var(--text-secondary);">Activities & Feasts</span>
+            <span id="calc-extras" style="font-weight: 600; color: var(--text-primary);">0 PKR</span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 20px; border-radius: var(--border-radius-md); border: 1px solid var(--border-glass); margin-bottom: 20px;">
+          <span style="font-weight: 600;">Total Estimate</span>
+          <span id="calc-total" style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary);">0 PKR</span>
+        </div>
+
+        <div style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.15); padding: 16px; border-radius: var(--border-radius-md); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+          ℹ️ <strong>Concierge Alignment:</strong> Once submitted, a senior travel curator reviews your choices, verifies guide slots, and aligns transport logistics to draft your final day-by-day map.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <a href="./index.html" class="logo" style="margin-bottom: 20px;">
+          OzoTrips<span class="logo-dot"></span>
+        </a>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 300px;">
+          Crafting high-end bespoke holiday experiences across Northern Pakistan and premium global destinations.
+        </p>
+      </div>
+      <div>
+        <h4>Sitemap</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+          <li><a href="./index.html" style="color: var(--text-secondary);">Home</a></li>
+          <li><a href="./tours.html" style="color: var(--text-secondary);">Tour Packages</a></li>
+          <li><a href="./attractions.html" style="color: var(--text-secondary);">Attractions</a></li>
+          <li><a href="./visa-services.html" style="color: var(--text-secondary);">Visa Services</a></li>
+          <li><a href="./custom-planner.html" style="color: var(--text-secondary);">Custom Planner</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help & Support</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem;">
+          <li><a href="./help-center.html" style="color: var(--text-secondary);">FAQs Help Center</a></li>
+          <li><a href="./about.html" style="color: var(--text-secondary);">About Our Company</a></li>
+          <li><a href="./index.html#contact" style="color: var(--text-secondary);">Contact Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Us</h4>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Email: support@ozotrips.com<br>Tel: +92 51 111 696 874</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/custom-planner.js"></script>
+</body>
+</html>
