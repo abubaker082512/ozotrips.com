@@ -214,7 +214,7 @@ header.scrolled {
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 32px;
+  gap: 20px;
 }
 
 .nav-link {
@@ -1411,5 +1411,37 @@ footer {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(0, 242, 195, 0);
+  }
+}
+
+/* Reusable Global Column Layouts & Sidebars */
+.page-layout-2col {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  width: 100%;
+}
+
+.booking-sidebar {
+  position: sticky;
+  top: 110px;
+  padding: 32px;
+  border-radius: var(--border-radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 992px) {
+  .page-layout-2col {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .booking-sidebar {
+    position: relative;
+    top: 0;
   }
 }
