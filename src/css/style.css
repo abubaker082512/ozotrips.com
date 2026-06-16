@@ -179,36 +179,41 @@ header.scrolled {
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  background: var(--brand-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   display: flex;
   align-items: center;
-  gap: 8px;
+  text-decoration: none;
 }
 
-.logo-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: var(--glow-primary);
-  animation: logoDotPulse 2s infinite alternate;
+.logo-img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  transition: all var(--transition-fast);
 }
 
-@keyframes logoDotPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 4px var(--color-primary);
-  }
-  100% {
-    transform: scale(1.35);
-    box-shadow: 0 0 12px var(--color-primary), 0 0 20px var(--color-primary);
-  }
+.logo-light {
+  display: none;
+}
+
+.logo-dark {
+  display: block;
+}
+
+[data-theme="light"] .logo-light {
+  display: block;
+}
+
+[data-theme="light"] .logo-dark {
+  display: none;
+}
+
+/* Footer is always dark so it always displays the dark logo variation */
+footer .logo-light {
+  display: none !important;
+}
+
+footer .logo-dark {
+  display: block !important;
 }
 
 .nav-links {
