@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Special Travel Offers & Promo Wheel | OzoTrips</title>
+  <meta name="description" content="Win travel discount codes, hotel vouchers, and free tour upgrades. Use our interactive Spin-to-Win wheel for limited time voucher keys.">
+  <meta name="keywords" content="travel deals, tour discounts, flight coupons, spin to win, promo codes">
+  <meta name="author" content="OzoTrips Inc.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        <img src="./src/assets/logo-light.png" alt="OzoTrips" class="logo-img logo-light">
+        <img src="./src/assets/logo-dark.png" alt="OzoTrips" class="logo-img logo-dark">
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li><a href="./attractions.html" class="nav-link">Attractions</a></li>
+          <li><a href="./visa-services.html" class="nav-link">Visa Services</a></li>
+          <li><a href="./virtual-tours.html" class="nav-link">Virtual Tours</a></li>
+          <li><a href="./custom-planner.html" class="nav-link">Custom Planner</a></li>
+          <li><a href="./offers.html" class="nav-link active">Offers</a></li>
+          <li><a href="./blog.html" class="nav-link">Blog</a></li>
+          <li><a href="./help-center.html" class="nav-link">Help Center</a></li>
+          <li><a href="./about.html" class="nav-link">About Us</a></li>
+        </ul>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <button id="auth-btn" class="btn btn-secondary">Sign In</button>
+        <a href="./custom-planner.html" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Promo Block -->
+  <section class="glass-panel" style="margin-top: 100px; padding: 50px 24px; text-align: center; border-radius: 0;">
+    <div class="container">
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">Exclusive Travel Promotions</h1>
+      <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; color: var(--text-secondary);">
+        Claim limited-time travel discounts, hotel voucher packages, and tour upgrades. Try your luck with our interactive promo wheel!
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="container" style="margin-top: 45px; margin-bottom: 80px;">
+    
+    <!-- Deal Expiry Timer -->
+    <div class="glass-panel" style="padding: 30px; text-align: center; margin-bottom: 40px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 20px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 2px;">
+        ⚡ Flash Deal Expiring In
+      </h2>
+      <div class="countdown-timer-container">
+        <div class="timer-segment">
+          <span id="timer-days" class="timer-num">00</span>
+          <span class="timer-label">Days</span>
+        </div>
+        <span class="timer-colon">:</span>
+        <div class="timer-segment">
+          <span id="timer-hours" class="timer-num">00</span>
+          <span class="timer-label">Hours</span>
+        </div>
+        <span class="timer-colon">:</span>
+        <div class="timer-segment">
+          <span id="timer-minutes" class="timer-num">00</span>
+          <span class="timer-label">Mins</span>
+        </div>
+        <span class="timer-colon">:</span>
+        <div class="timer-segment">
+          <span id="timer-seconds" class="timer-num">00</span>
+          <span class="timer-label">Secs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spin to Win Grid -->
+    <div class="page-layout-2col">
+      
+      <!-- Interactive Wheel Box -->
+      <div class="glass-panel" style="padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-height: 480px;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 30px; background: var(--text-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Spin to Win Travel Rewards!
+        </h2>
+        
+        <!-- Wheel Spinner Frame -->
+        <div class="wheel-game-frame">
+          <!-- Outer circular bezel -->
+          <div class="wheel-outer-bezel"></div>
+          <!-- Indicator needle -->
+          <div class="wheel-indicator">▼</div>
+          
+          <!-- Spinner canvas -->
+          <div id="wheel-spinner" class="wheel-spinner-canvas">
+            <div class="wheel-slice" style="transform: rotate(0deg); --slice-bg: #8b5cf6;">
+              <span class="wheel-slice-text">Transfer</span>
+            </div>
+            <div class="wheel-slice" style="transform: rotate(60deg); --slice-bg: #ff4a5a;">
+              <span class="wheel-slice-text">15% Visa</span>
+            </div>
+            <div class="wheel-slice" style="transform: rotate(120deg); --slice-bg: #00f2c3;">
+              <span class="wheel-slice-text">Upgrade</span>
+            </div>
+            <div class="wheel-slice" style="transform: rotate(180deg); --slice-bg: #f59e0b;">
+              <span class="wheel-slice-text">5% Hotel</span>
+            </div>
+            <div class="wheel-slice" style="transform: rotate(240deg); --slice-bg: #10b981;">
+              <span class="wheel-slice-text">Guide</span>
+            </div>
+            <div class="wheel-slice" style="transform: rotate(300deg); --slice-bg: #3b82f6;">
+              <span class="wheel-slice-text">10% Tour</span>
+            </div>
+          </div>
+          
+          <!-- Center hub pin -->
+          <button id="spin-btn" class="wheel-center-pin">SPIN</button>
+        </div>
+        
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 35px; text-align: center;">
+          🔒 Limit: One spin per customer account. Prizes are saved in booking logs.
+        </p>
+      </div>
+
+      <!-- Result Reveal & Promo List -->
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+        
+        <!-- Won Reward Info Panel (Hidden initially) -->
+        <div id="wheel-result-panel" class="glass-panel" style="padding: 32px; border-color: var(--color-primary); display: none; animation: slideUp 0.4s ease-out;">
+          <span style="font-size: 2.5rem; display: block; text-align: center; margin-bottom: 10px;">🎉</span>
+          <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 5px;">Congratulations!</h3>
+          <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">You have won the following reward:</p>
+          
+          <!-- Prize card -->
+          <div style="background: var(--bg-secondary); border: 1px dashed var(--border-glass-focus); padding: 15px; border-radius: var(--border-radius-md); text-align: center; margin-bottom: 20px;">
+            <h4 id="reward-name" style="font-size: 1.3rem; color: var(--color-primary); margin-bottom: 10px;">10% Off Tours</h4>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <span style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Promo Code:</span>
+              <strong id="promo-code" style="font-family: monospace; font-size: 1.2rem; color: white; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px;">TOUR10</strong>
+            </div>
+          </div>
+          
+          <button id="copy-code-btn" class="btn btn-primary" style="width: 100%;">Copy Coupon Code</button>
+        </div>
+
+        <!-- Static Promotion Packages -->
+        <div class="glass-panel" style="padding: 32px;">
+          <h3 style="font-size: 1.4rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <span>🏷️</span> Active Deal Coupons
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- Deal item 1 -->
+            <div style="display: flex; gap: 15px; align-items: start;">
+              <div style="background: rgba(0, 242, 195, 0.1); color: var(--color-primary); font-weight: bold; padding: 12px; border-radius: var(--border-radius-sm); font-size: 1.1rem; min-width: 80px; text-align: center;">
+                15% OFF
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 4px;">Early Bird Valley Flights</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px;">
+                  Book flight reservations to Gilgit, Skardu, or Chitral 30 days in advance to apply code.
+                </p>
+                <code style="font-size: 0.85rem; background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; color: var(--color-secondary);">Code: FLIGHT15</code>
+              </div>
+            </div>
+
+            <hr style="border:0; border-top: 1px solid var(--border-glass);">
+
+            <!-- Deal item 2 -->
+            <div style="display: flex; gap: 15px; align-items: start;">
+              <div style="background: rgba(255, 74, 90, 0.1); color: var(--color-accent); font-weight: bold; padding: 12px; border-radius: var(--border-radius-sm); font-size: 1.1rem; min-width: 80px; text-align: center;">
+                20% OFF
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 4px;">Mubarak Ramadan Special</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px;">
+                  Save on Turkish and Saudi tourist e-visa consulting and registration packages.
+                </p>
+                <code style="font-size: 0.85rem; background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; color: var(--color-secondary);">Code: RAMADAN20</code>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Global Authentication Overlays (Shared across pages) -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="auth-modal glass-panel">
+      <button id="modal-close" class="modal-close-btn">&times;</button>
+      <div id="modal-details"></div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer style="background-color: #06070c; padding: 60px 0 30px 0; margin-top: 80px; border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            <img src="./src/assets/logo-light.png" alt="OzoTrips" class="logo-img logo-light">
+            <img src="./src/assets/logo-dark.png" alt="OzoTrips" class="logo-img logo-dark">
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./tours.html">Browse Tours</a></li>
+            <li><a href="./attractions.html">Attractions Map</a></li>
+            <li><a href="./visa-services.html">Visa Advisory</a></li>
+            <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
+            <li><a href="./custom-planner.html">Custom Planner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="./help-center.html">FAQs Help Center</a></li>
+            <li><a href="./about.html">About Our Company</a></li>
+            <li><a href="./offers.html">Special Promos</a></li>
+            <li><a href="./blog.html">Travel Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Subscribe to receive exclusive deals and custom travel guides weekly.</p>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+            <button class="btn btn-primary" style="padding: 12px 20px;">Join</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved. Designed for excellence.</p>
+        <p>Support: support@ozotrips.com | Tel: +92 51 111 696 874</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/offers.js"></script>
+</body>
+</html>
