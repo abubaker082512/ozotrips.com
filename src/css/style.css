@@ -226,8 +226,10 @@ footer .logo-img {
 
 .nav-links {
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: 20px;
+  gap: 24px;
+  flex-wrap: nowrap;
 }
 
 .nav-link {
@@ -235,6 +237,10 @@ footer .logo-img {
   color: var(--text-secondary);
   position: relative;
   padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -2122,5 +2128,5 @@ footer {
 }
 
 .nav-links {
-  gap: 28px !important;
+  gap: 24px !important;
 }
