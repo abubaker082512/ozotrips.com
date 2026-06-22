@@ -2130,3 +2130,10 @@ footer {
 .nav-links {
   gap: 24px !important;
 }
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border-glass);
+  margin: 8px 0;
+  width: 100%;
+}
