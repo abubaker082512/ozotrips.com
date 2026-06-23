@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let favorites = JSON.parse(localStorage.getItem('ozotrips_favs')) || [];
 
   // Theme Setup
-  const currentTheme = localStorage.getItem('theme') || 'dark';
+  const currentTheme = 'light';
   document.documentElement.setAttribute('data-theme', currentTheme);
   if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 

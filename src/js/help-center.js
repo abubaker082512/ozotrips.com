@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeIcon = themeToggle?.querySelector('span');
 
   // Theme Sync
-  const currentTheme = localStorage.getItem('theme') || 'dark';
+  const currentTheme = 'light';
   document.documentElement.setAttribute('data-theme', currentTheme);
   if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 

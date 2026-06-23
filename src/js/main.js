@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let favorites = JSON.parse(localStorage.getItem('ozotrips_favs')) || [];
 
   // Theme Initial Setup
-  const currentTheme = localStorage.getItem('theme') || 'dark';
+  const currentTheme = 'light';
   document.documentElement.setAttribute('data-theme', currentTheme);
   updateThemeIcon(currentTheme);
 

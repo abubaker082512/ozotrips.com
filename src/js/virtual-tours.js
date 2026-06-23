@@ -2,7 +2,7 @@ import './auth.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Initial Setup (from main.js)
-  const currentTheme = localStorage.getItem('theme') || 'dark';
+  const currentTheme = 'light';
   document.documentElement.setAttribute('data-theme', currentTheme);
   
   const themeToggle = document.getElementById('theme-toggle');

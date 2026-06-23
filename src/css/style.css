@@ -164,7 +164,7 @@ header {
 }
 
 header.scrolled {
-  background: rgba(11, 13, 25, 0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border-bottom: 1px solid var(--border-glass);
@@ -196,28 +196,11 @@ header.scrolled .logo-img {
 }
 
 .logo-light {
-  display: none;
+  display: block !important;
 }
 
 .logo-dark {
-  display: block;
-}
-
-[data-theme="light"] .logo-light {
-  display: block;
-}
-
-[data-theme="light"] .logo-dark {
-  display: none;
-}
-
-/* Footer is always dark so it always displays the dark logo variation */
-footer .logo-light {
   display: none !important;
-}
-
-footer .logo-dark {
-  display: block !important;
 }
 
 footer .logo-img {
@@ -270,34 +253,8 @@ footer .logo-img {
 }
 
 /* Theme Toggle */
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-primary);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--border-glass);
-  background: var(--bg-glass);
-  transition: all var(--transition-fast);
-}
-
-.theme-toggle:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-.theme-toggle span {
-  display: inline-block;
-  transition: transform var(--transition-fast);
-}
-
-.theme-toggle:hover span {
-  transform: rotate(30deg) scale(1.15);
+.theme-toggle, .theme-toggle-btn {
+  display: none !important;
 }
 
 /* Hero Section */
@@ -869,7 +826,7 @@ footer .logo-img {
 
 /* Footer Section */
 footer {
-  background: #06070c;
+  background: var(--bg-secondary);
   padding: 80px 0 30px;
   border-top: 1px solid var(--border-glass);
 }

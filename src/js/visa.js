@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterTabs = document.querySelectorAll('#table-filter-tabs button');
 
   // Theme Setup
-  const currentTheme = localStorage.getItem('theme') || 'dark';
+  const currentTheme = 'light';
   document.documentElement.setAttribute('data-theme', currentTheme);
   if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 
