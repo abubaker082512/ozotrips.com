@@ -40,7 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
     banner.style.backgroundImage = `url('${tour.image}')`;
   }
 
-  document.getElementById('detail-badge').textContent = tour.type === 'local' ? '🇵🇰 Local Pakistan' : '✈️ International';
+  const detailBadge = document.getElementById('detail-badge');
+  if (detailBadge) {
+    detailBadge.textContent = tour.type === 'local-group' ? '🇵🇰 Local Group' : 
+                             tour.type === 'local-private' ? '🏡 Local Private' : 
+                             tour.type === 'international-group' ? '✈️ International Group' : '💎 International Private';
+    if (tour.type.startsWith('international')) {
+      detailBadge.classList.add('international');
+    } else {
+      detailBadge.classList.remove('international');
+    }
+  }
   document.getElementById('detail-category').textContent = `${tour.category} Tour`;
   document.getElementById('detail-title').textContent = tour.title;
   document.getElementById('detail-subtitle').textContent = tour.description;

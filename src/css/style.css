@@ -2094,3 +2094,15 @@ footer {
   margin: 8px 0;
   width: 100%;
 }
+
+.dropdown-header {
+  padding: 6px 24px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  pointer-events: none;
+  user-select: none;
+  display: block;
+}

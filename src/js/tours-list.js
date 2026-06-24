@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeVal) {
         matchesType = tour.type === typeVal;
       } else if (activeCategory === 'Local') {
-        matchesType = tour.type === 'local';
+        matchesType = tour.type.startsWith('local');
       } else if (activeCategory === 'International') {
-        matchesType = tour.type === 'international';
+        matchesType = tour.type.startsWith('international');
       }
 
       let matchesCategory = true;
@@ -137,8 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="tour-card glass-panel fade-in">
           <div class="tour-image-container">
             <img class="tour-image" src="${tour.image}" alt="${tour.title}" loading="lazy">
-            <div class="tour-badge ${tour.type === 'international' ? 'international' : ''}">
-              ${tour.type === 'local' ? '🇵🇰 Local' : '✈️ International'}
+            <div class="tour-badge ${tour.type.startsWith('international') ? 'international' : ''}">
+              ${tour.type === 'local-group' ? '🇵🇰 Local Group' : 
+                tour.type === 'local-private' ? '🏡 Local Private' : 
+                tour.type === 'international-group' ? '✈️ International Group' : '💎 International Private'}
             </div>
             <button class="tour-fav-btn" aria-label="Add to favorites" onclick="toggleFavorite(${tour.id})">
               ${isFav ? '❤️' : '🤍'}
@@ -167,5 +169,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.OzoAuth?.setupScrollAnimations();
   }
 
-  renderTours(tours);
+  // Check URL parameters for pre-selected type or category on load
+  const urlParams = new URLSearchParams(window.location.search);
+  const typeParam = urlParams.get('type');
+  const catParam = urlParams.get('category');
+  if (typeParam && filterType) {
+    filterType.value = typeParam;
+  }
+  if (catParam && categoryContainer) {
+    const catBtn = categoryContainer.querySelector(`.category-btn[data-category="${catParam}"]`);
+    if (catBtn) {
+      categoryContainer.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      catBtn.classList.add('active');
+    }
+  }
+
+  applyFilters();
 });

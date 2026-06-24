@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // When clicking a quick category, synchronize search filters if possible
         const categoryVal = e.currentTarget.getAttribute('data-category');
         if (categoryVal === 'Local') {
-          filterType.value = 'local';
+          filterType.value = '';
         } else if (categoryVal === 'International') {
-          filterType.value = 'international';
+          filterType.value = '';
         } else {
           filterType.value = '';
         }
@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const matchesSearch = tour.title.toLowerCase().includes(query) || 
                             tour.description.toLowerCase().includes(query);
       
-      // 2. Type Match (Local/International)
+      // 2. Type Match (Local/International/Group/Private)
       let matchesType = true;
       if (typeVal) {
         matchesType = tour.type === typeVal;
       } else if (activeCategory === 'Local') {
-        matchesType = tour.type === 'local';
+        matchesType = tour.type.startsWith('local');
       } else if (activeCategory === 'International') {
-        matchesType = tour.type === 'international';
+        matchesType = tour.type.startsWith('international');
       }
 
       // 3. Category Match
@@ -182,8 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="tour-card glass-panel fade-in">
           <div class="tour-image-container">
             <img class="tour-image" src="${tour.image}" alt="${tour.title}" loading="lazy">
-            <div class="tour-badge ${tour.type === 'international' ? 'international' : ''}">
-              ${tour.type === 'local' ? '🇵🇰 Local' : '✈️ International'}
+            <div class="tour-badge ${tour.type.startsWith('international') ? 'international' : ''}">
+              ${tour.type === 'local-group' ? '🇵🇰 Local Group' : 
+                tour.type === 'local-private' ? '🏡 Local Private' : 
+                tour.type === 'international-group' ? '✈️ International Group' : '💎 International Private'}
             </div>
             <button class="tour-fav-btn" aria-label="Add to favorites" onclick="toggleFavorite(${tour.id})">
               ${isFav ? '❤️' : '🤍'}
@@ -241,11 +243,15 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="modal-meta-item">
           <span class="modal-meta-lbl">Tour Type</span>
-          <span class="modal-meta-val">${tour.type === 'local' ? '🇵🇰 Local Pakistan' : '✈️ International'}</span>
+          <span class="modal-meta-val">
+            ${tour.type === 'local-group' ? '🇵🇰 Local Group' : 
+              tour.type === 'local-private' ? '🏡 Local Private' : 
+              tour.type === 'international-group' ? '✈️ International Group' : '💎 International Private'}
+          </span>
         </div>
         <div class="modal-meta-item">
           <span class="modal-meta-lbl">Price Per Person</span>
-          <span class="modal-meta-val" style="color: var(--color-primary); font-weight: 800;">${tour.currency}${tour.price}</span>
+          <span class="modal-meta-val" style="color: var(--color-primary); font-weight: 800;">${tour.currency} ${tour.price.toLocaleString()}</span>
         </div>
       </div>
       <div>
