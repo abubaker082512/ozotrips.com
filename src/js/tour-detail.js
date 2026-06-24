@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   document.getElementById('stat-duration').textContent = tour.duration;
   document.getElementById('stat-rating').textContent = `${tour.rating} (${tour.reviews} reviews)`;
-  document.getElementById('detail-price').textContent = `${tour.currency}${tour.price}`;
+  document.getElementById('detail-price').textContent = `${tour.currency} ${tour.price.toLocaleString()}`;
 
   // 1. Detailed Daily Itinerary data for all 8 tours
   const itineraries = {
@@ -261,27 +261,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let insuranceCost = 0;
     if (addonInsurance && addonInsurance.checked) {
-      insuranceCost = 25 * guests;
+      insuranceCost = 4000 * guests;
       bdInsuranceRow.style.display = 'flex';
-      bdInsurance.textContent = `${tour.currency}${insuranceCost}`;
+      bdInsurance.textContent = `${tour.currency} ${insuranceCost.toLocaleString()}`;
     } else if (bdInsuranceRow) {
       bdInsuranceRow.style.display = 'none';
     }
 
     let transportCost = 0;
     if (addonTransport && addonTransport.checked) {
-      transportCost = 150;
+      transportCost = 15000;
       bdTransportRow.style.display = 'flex';
-      bdTransport.textContent = `${tour.currency}${transportCost}`;
+      bdTransport.textContent = `${tour.currency} ${transportCost.toLocaleString()}`;
     } else if (bdTransportRow) {
       bdTransportRow.style.display = 'none';
     }
 
     let roomCost = 0;
     if (addonRoom && addonRoom.checked) {
-      roomCost = 90 * guests;
+      roomCost = 12000 * guests;
       bdRoomRow.style.display = 'flex';
-      bdRoom.textContent = `${tour.currency}${roomCost}`;
+      bdRoom.textContent = `${tour.currency} ${roomCost.toLocaleString()}`;
     } else if (bdRoomRow) {
       bdRoomRow.style.display = 'none';
     }
@@ -291,16 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalTotal = subtotal - discountAmount;
 
     // Render Breakdown
-    if (bdBase) bdBase.textContent = `${tour.currency}${baseTotal}`;
+    if (bdBase) bdBase.textContent = `${tour.currency} ${baseTotal.toLocaleString()}`;
     
     if (discountAmount > 0 && bdDiscountRow) {
       bdDiscountRow.style.display = 'flex';
-      bdDiscount.textContent = `-${tour.currency}${discountAmount}`;
+      bdDiscount.textContent = `-${tour.currency} ${discountAmount.toLocaleString()}`;
     } else if (bdDiscountRow) {
       bdDiscountRow.style.display = 'none';
     }
 
-    if (bdTotal) bdTotal.textContent = `${tour.currency}${finalTotal}`;
+    if (bdTotal) bdTotal.textContent = `${tour.currency} ${finalTotal.toLocaleString()}`;
   }
 
   // Attach Event Listeners for Pricing

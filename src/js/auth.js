@@ -184,19 +184,22 @@ export function renderBookingsList() {
 
   container.innerHTML = bookings.map(booking => {
     const isVisa = booking.type === 'visa';
+    const isFlight = booking.type === 'flight';
     const statusClass = booking.status.toLowerCase().replace(/\s+/g, '-');
-    const priceText = isVisa ? 'N/A' : `${booking.price.toLocaleString()} PKR`;
+    const priceText = isVisa ? 'N/A' : (booking.price ? `${booking.price.toLocaleString()} PKR` : 'TBD (Pending Quote)');
+    const categoryText = isFlight ? '✈️ Flight Ticket' : (isVisa ? '🛂 Visa Service' : '🏔️ Tour Package');
+    const guestLabel = isVisa ? 'Applicant' : (isFlight ? 'Passengers' : 'Guests');
     
     return `
       <div class="booking-item">
         <div class="booking-item-header">
-          <span class="booking-item-category">${isVisa ? '🛂 Visa Service' : '🏔️ Tour Package'}</span>
+          <span class="booking-item-category">${categoryText}</span>
           <span class="booking-status status-${statusClass}">${booking.status}</span>
         </div>
         <h4 class="booking-item-title">${booking.title}</h4>
         <div class="booking-item-details">
           <div><strong>Date:</strong> ${booking.date}</div>
-          <div><strong>${isVisa ? 'Applicant' : 'Guests'}:</strong> ${booking.guests}</div>
+          <div><strong>${guestLabel}:</strong> ${booking.guests}</div>
           <div><strong>Pricing:</strong> ${priceText}</div>
           ${booking.addons && booking.addons.length > 0 ? `
             <div style="grid-column: span 2; margin-top: 4px;"><strong>Upgrades:</strong> ${booking.addons.join(', ')}</div>

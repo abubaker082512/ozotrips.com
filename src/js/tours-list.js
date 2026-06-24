@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="tour-footer">
               <div class="tour-price-box">
                 <span class="tour-price-lbl">Starting from</span>
-                <span class="tour-price">${tour.currency}${tour.price}<span>/person</span></span>
+                <span class="tour-price">${tour.currency} ${tour.price.toLocaleString()}<span>/person</span></span>
               </div>
               <a href="./tour-detail.html?id=${tour.id}" class="btn btn-secondary">View Details ➜</a>
             </div>

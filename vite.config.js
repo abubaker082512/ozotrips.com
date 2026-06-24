@@ -17,6 +17,7 @@ export default defineConfig({
         virtualTours: resolve(__dirname, 'virtual-tours.html'),
         offers: resolve(__dirname, 'offers.html'),
         blog: resolve(__dirname, 'blog.html'),
+        flights: resolve(__dirname, 'flights.html'),
       },
     },
   },

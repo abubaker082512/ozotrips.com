@@ -25,41 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Visa Pricing Data List (PKR prices with +2,000 PKR increment applied)
+  // Visa Pricing Data List (PKR prices with ±200-500 PKR difference from Yugo.pk applied)
   const visaPrices = [
-    { country: "Azerbaijan", type: "Tourist e-Visa", price: 20000, category: "no-statement" },
-    { country: "Bahrain", type: "14 Days Tourist", price: 42000, category: "no-statement" },
-    { country: "Bahrain", type: "30 Days Tourist", price: 57000, category: "no-statement" },
-    { country: "Benin", type: "30 Days Tourist / Transit", price: 36500, category: "no-statement" },
-    { country: "Benin", type: "90 Days Tourist", price: 52000, category: "no-statement" },
-    { country: "Benin", type: "Multiple Entry", price: 56500, category: "no-statement" },
-    { country: "Cambodia", type: "Tourist Sticker Visa", price: 26500, category: "sticker" },
-    { country: "Ethiopia", type: "30 Days e-Visa", price: 37000, category: "no-statement" },
-    { country: "Indonesia", type: "Sticker Visa", price: 49000, category: "sticker" },
-    { country: "Iran", type: "Tourist Visa", price: 72000, category: "no-statement" },
-    { country: "Kenya", type: "Tourist e-Visa", price: 31500, category: "no-statement" },
-    { country: "Malaysia", type: "1 Year Multiple Entry", price: 87000, category: "sticker" },
-    { country: "Nepal", type: "Tourist Sticker Visa", price: 24500, category: "sticker" },
-    { country: "Oman", type: "Tourist Visa Support", price: 197000, category: "no-statement" },
-    { country: "Pakistan", type: "E-Visa Invitation Support", price: 42000, category: "no-statement" },
-    { country: "Rwanda", type: "Tourist e-Visa", price: 32000, category: "no-statement" },
-    { country: "South Africa", type: "Tourist Sticker Visa", price: 32000, category: "sticker" },
-    { country: "Tajikistan", type: "Tourist Visa", price: 22000, category: "other" },
-    { country: "Tanzania", type: "Tourist e-Visa", price: 72000, category: "other" },
-    { country: "Thailand", type: "Tourist Sticker Visa", price: 26900, category: "other" },
-    { country: "Turkey", type: "Tourist Sticker / e-Visa Support", price: 13500, category: "other" },
-    { country: "UAE", type: "30 Days Tourist e-Visa", price: 37400, category: "other" },
-    { country: "UAE (Sharjah)", type: "30 Days Tourist e-Visa", price: 56500, category: "other" },
-    { country: "UAE", type: "60 Days Tourist e-Visa", price: 53500, category: "other" },
-    { country: "UAE (Sharjah)", type: "60 Days Tourist e-Visa", price: 71500, category: "other" },
-    { country: "Uganda", type: "Tourist e-Visa", price: 32000, category: "other" },
-    { country: "United Kingdom (UK)", type: "Tourist / Visitor Consultancy", price: 92000, category: "other" },
-    { country: "United States (USA)", type: "B1/B2 Visa Prep & Appointment", price: 57000, category: "other" },
-    { country: "Uzbekistan", type: "7 Days Tourist e-Visa", price: 69500, category: "other" },
-    { country: "Uzbekistan", type: "15 Days Tourist e-Visa", price: 76900, category: "other" },
-    { country: "Uzbekistan", type: "30 Days Tourist e-Visa", price: 83500, category: "other" },
-    { country: "Uzbekistan", type: "Business Visa", price: 262000, category: "other" },
-    { country: "Vietnam", type: "Tourist e-Visa Approval Letter", price: 31500, category: "sticker" }
+    { country: "Azerbaijan", type: "Tourist e-Visa", price: 13300, category: "no-statement" },
+    { country: "Australia", type: "Visitor Visa Subclass 600", price: 94700, category: "other" },
+    { country: "Canada", type: "Temporary Resident Visa", price: 95350, category: "other" },
+    { country: "Egypt", type: "Tourist Sticker Visa", price: 74800, category: "sticker" },
+    { country: "Greece", type: "Schengen Tourist Visa", price: 75300, category: "other" },
+    { country: "Hong Kong", type: "Tourist Visa Support", price: 48700, category: "no-statement" },
+    { country: "Malaysia", type: "Tourist e-Visa", price: 16350, category: "no-statement" },
+    { country: "Singapore", type: "Tourist e-Visa", price: 24700, category: "no-statement" },
+    { country: "Thailand", type: "Tourist Sticker Visa", price: 20200, category: "sticker" },
+    { country: "Turkey", type: "Tourist Sticker Visa Support", price: 38300, category: "sticker" },
+    { country: "UAE (Dubai)", type: "30 Days Tourist e-Visa (Dubai ID)", price: 32300, category: "no-statement" },
+    { country: "United Kingdom (UK)", type: "Standard Visitor Visa Support", price: 94800, category: "other" },
+    { country: "United States (USA)", type: "B1/B2 Visa Prep & Advisory", price: 95250, category: "other" },
+    { country: "Saudi Arabia (Umrah)", type: "Umrah Visit Visa (With Insurance)", price: 44700, category: "no-statement" },
+    { country: "Schengen Support", type: "Visa File Preparation & Consultancy", price: 45300, category: "other" }
   ];
 
   // Function to Render Table Rows
