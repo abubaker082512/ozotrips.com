@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hunza: {
       name: "Hunza Valley Virtual Tour",
       desc: "Explore the ancient forts, crystal clear lakes, and towering peaks of Hunza Valley, Pakistan.",
-      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2000&q=80",
+      image: "https://images.unsplash.com/photo-1622218413697-3f9b8df790eb?auto=format&fit=crop&w=2000&q=80",
       audioSrc: "Simulated Hunza Guide Narration...",
       hotspots: [
         { id: "h1", name: "Baltit Fort", desc: "Baltit Fort is a 700-year-old medieval fort overlooking Karimabad, showing ancient Tibetan-Balti architectural influences.", top: "42%", left: "35%" },
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lahore: {
       name: "Lahore Mughal Heritage Walk",
       desc: "Walk through the historic walled city and grand monuments of the Mughal Empire.",
-      image: "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=2000&q=80",
+      image: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=2000&q=80",
       audioSrc: "Simulated Lahore Heritage Guide Narration...",
       hotspots: [
         { id: "l1", name: "Sheesh Mahal", desc: "The Palace of Mirrors was built by Mughal Emperor Shah Jahan, decorated with intricate glass mosaics that glitter like diamonds.", top: "36%", left: "46%" },
