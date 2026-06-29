@@ -45,6 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Hero Background Carousel Rotation
+  const slides = document.querySelectorAll('.carousel-slide');
+  if (slides.length > 0) {
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+  }
+
   // Header Scroll style
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -202,12 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <h3 class="tour-title">${tour.title}</h3>
             <p class="tour-desc">${tour.description}</p>
-            <div class="tour-footer">
-              <div class="tour-price-box">
+            <div class="tour-footer" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+              <div class="tour-price-box" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                 <span class="tour-price-lbl">Starting from</span>
-                <span class="tour-price">${tour.currency} ${tour.price.toLocaleString()}<span>/person</span></span>
+                <span class="tour-price" style="font-size: 1.15rem; font-weight: 700; color: var(--color-primary);">${tour.currency} ${tour.price.toLocaleString()}</span>
               </div>
-              <a href="./tour-detail.html?id=${tour.id}" class="btn btn-secondary">Details & Booking</a>
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <a href="./tour-detail.html?id=${tour.id}" class="btn btn-secondary" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 10px 0; justify-content: center;">Details</a>
+                <button class="btn btn-primary" onclick="openBookingModal(${tour.id})" style="flex: 1; font-size: 0.85rem; padding: 10px 0; justify-content: center;">Book Now</button>
+              </div>
             </div>
           </div>
         </div>
@@ -334,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden'; // Stop scroll leak
   }
+  window.openBookingModal = openBookingModal;
 
   // Close modal logic
   if (modalClose) {

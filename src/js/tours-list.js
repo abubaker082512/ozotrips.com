@@ -153,12 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <h3 class="tour-title">${tour.title}</h3>
             <p class="tour-desc">${tour.description}</p>
-            <div class="tour-footer">
-              <div class="tour-price-box">
+            <div class="tour-footer" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+              <div class="tour-price-box" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                 <span class="tour-price-lbl">Starting from</span>
-                <span class="tour-price">${tour.currency} ${tour.price.toLocaleString()}<span>/person</span></span>
+                <span class="tour-price" style="font-size: 1.15rem; font-weight: 700; color: var(--color-primary);">${tour.currency} ${tour.price.toLocaleString()}</span>
               </div>
-              <a href="./tour-detail.html?id=${tour.id}" class="btn btn-secondary">View Details ➜</a>
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <a href="./tour-detail.html?id=${tour.id}" class="btn btn-secondary" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 10px 0; justify-content: center;">Details</a>
+                <a href="./tour-detail.html?id=${tour.id}#booking-detail-form" class="btn btn-primary" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 10px 0; justify-content: center;">Book Now</a>
+              </div>
             </div>
           </div>
         </div>

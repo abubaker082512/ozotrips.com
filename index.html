@@ -86,7 +86,15 @@
 
   <!-- Hero Section -->
   <section class="hero" id="home">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="hero-carousel">
+      <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1555992336-03a23c7b20eb?auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1920&q=80');"></div>
+    </div>
+    <div class="hero-overlay"></div>
     <div class="container">
       <div class="hero-content">
         <span class="hero-subtitle">
@@ -95,9 +103,14 @@
         <h1 class="hero-title">Crafting Unforgettable Journeys</h1>
         <p class="hero-description">Discover curated experiences, from the gold-gilded peaks of Northern Pakistan to the crystal-blue shores of Santorini. Book your next escape with dedicated concierge assistance.</p>
       </div>
+    </div>
+  </section>
 
+  <!-- Categories Section -->
+  <section class="categories-section" style="padding-top: 50px;">
+    <div class="container">
       <!-- Search and Filter Bar -->
-      <div class="search-panel glass-panel">
+      <div class="search-panel glass-panel" style="margin-top: -80px; margin-bottom: 40px; position: relative; z-index: 10; box-shadow: var(--shadow-lg);">
         <div class="search-input-group">
           <label for="search-dest">Destination</label>
           <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
@@ -135,12 +148,7 @@
           Find Tours 🔍
         </button>
       </div>
-    </div>
-  </section>
 
-  <!-- Categories Section -->
-  <section class="categories-section">
-    <div class="container">
       <div id="category-list" class="category-list">
         <!-- JS will populate category buttons here -->
       </div>
