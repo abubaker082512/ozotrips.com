@@ -492,4 +492,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render initial tours
   renderTours(tours);
+
+  // Counter Count Up Animation
+  const stats = document.querySelectorAll('.stat-num');
+  if (stats.length > 0) {
+    const countUp = (el) => {
+      const target = parseFloat(el.getAttribute('data-target'));
+      const isFloat = target % 1 !== 0;
+      let count = 0;
+      const speed = isFloat ? 0.1 : Math.ceil(target / 100);
+      const interval = setInterval(() => {
+        count += speed;
+        if (count >= target) {
+          el.textContent = isFloat ? target.toFixed(1) : target + '+';
+          clearInterval(interval);
+        } else {
+          el.textContent = isFloat ? count.toFixed(1) : Math.floor(count) + '+';
+        }
+      }, 20);
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp(entry.target);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    stats.forEach(stat => statsObserver.observe(stat));
+  }
 });

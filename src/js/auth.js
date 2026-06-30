@@ -457,6 +457,27 @@ function initAuth() {
   injectModals();
   updateHeader();
   setupScrollAnimations();
+  setupScrollTop();
+}
+
+function setupScrollTop() {
+  const scrollTopBtn = document.getElementById('scroll-to-top');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
 }
 
 if (document.readyState === 'loading') {
