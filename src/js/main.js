@@ -47,13 +47,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Hero Background Carousel Rotation
   const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.getElementById('prev-slide');
+  const nextBtn = document.getElementById('next-slide');
+  const indicators = document.querySelectorAll('.indicator');
+
   if (slides.length > 0) {
     let currentSlide = 0;
-    setInterval(() => {
+    let autoplayTimer;
+
+    const showSlide = (index) => {
+      // Deactivate current slide
       slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
+      if (indicators[currentSlide]) {
+        indicators[currentSlide].classList.remove('active');
+      }
+
+      // Activate target slide
+      currentSlide = index;
       slides[currentSlide].classList.add('active');
-    }, 5000);
+      if (indicators[currentSlide]) {
+        indicators[currentSlide].classList.add('active');
+      }
+    };
+
+    const nextSlide = () => {
+      const nextIdx = (currentSlide + 1) % slides.length;
+      showSlide(nextIdx);
+    };
+
+    const prevSlide = () => {
+      const prevIdx = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prevIdx);
+    };
+
+    const startAutoplay = () => {
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(nextSlide, 6000);
+    };
+
+    const resetAutoplay = () => {
+      startAutoplay();
+    };
+
+    // Auto switch slides
+    startAutoplay();
+
+    // Event listeners for arrows
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoplay();
+      });
+    }
+
+    // Event listeners for indicators
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        showSlide(index);
+        resetAutoplay();
+      });
+    });
   }
 
   // Header Scroll style
