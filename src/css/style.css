@@ -278,8 +278,8 @@ footer .logo-img {
   align-items: center;
   padding-top: var(--header-height);
   overflow: hidden;
-  background: radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(0, 242, 195, 0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 70% 30%, rgba(26, 115, 232, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(0, 198, 255, 0.1) 0%, transparent 50%);
 }
 
 .hero-bg {
@@ -425,7 +425,7 @@ footer .logo-img {
 .search-input-group select:focus,
 .search-input-group input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 10px rgba(0, 242, 195, 0.15);
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.15);
 }
 
 /* Category Filters */
@@ -832,7 +832,7 @@ footer .logo-img {
 
 .form-group input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 10px rgba(0, 242, 195, 0.15);
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.15);
 }
 
 /* Success Card Inside Modal */
@@ -851,7 +851,7 @@ footer .logo-img {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: rgba(0, 242, 195, 0.1);
+  background: rgba(0, 198, 255, 0.1);
   color: var(--color-primary);
   display: flex;
   align-items: center;
@@ -1063,7 +1063,7 @@ footer {
   border-radius: var(--border-radius-lg);
   padding: 40px;
   position: relative;
-  box-shadow: var(--shadow-glass), 0 0 40px rgba(139, 92, 246, 0.1);
+  box-shadow: var(--shadow-glass), 0 0 40px rgba(26, 115, 232, 0.1);
   transform: translateY(30px) scale(0.95);
   transition: transform var(--transition-normal);
 }
@@ -1267,7 +1267,7 @@ footer {
 
 .booking-item:hover {
   transform: translateY(-2px);
-  border-color: rgba(139, 92, 246, 0.2);
+  border-color: rgba(26, 115, 232, 0.2);
 }
 
 .booking-item-header {
@@ -1294,23 +1294,23 @@ footer {
 }
 
 .status-pending-concierge {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(26, 115, 232, 0.1);
   color: var(--color-secondary);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(26, 115, 232, 0.2);
+  box-shadow: 0 0 10px rgba(26, 115, 232, 0.05);
 }
 
 .status-inquiry-pending {
-  background: rgba(0, 242, 195, 0.1);
+  background: rgba(0, 198, 255, 0.1);
   color: var(--color-primary);
-  border: 1px solid rgba(0, 242, 195, 0.2);
-  box-shadow: 0 0 10px rgba(0, 242, 195, 0.05);
+  border: 1px solid rgba(0, 198, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.05);
 }
 
 .status-confirmed {
-  background: rgba(0, 242, 195, 0.15);
+  background: rgba(0, 198, 255, 0.15);
   color: var(--color-primary);
-  border: 1px solid rgba(0, 242, 195, 0.3);
+  border: 1px solid rgba(0, 198, 255, 0.3);
 }
 
 .status-cancelled {
@@ -1378,8 +1378,8 @@ footer {
 
 .tour-card:hover, .attraction-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 242, 195, 0.12) !important;
-  border-color: rgba(0, 242, 195, 0.25) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 198, 255, 0.12) !important;
+  border-color: rgba(0, 198, 255, 0.25) !important;
 }
 
 /* Why Choose Us Feature Emojis Hover Floating */
@@ -1390,7 +1390,7 @@ footer {
 
 .glass-panel:hover div[style*="font-size: 2.5rem"] {
   transform: translateY(-6px) scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(0, 242, 195, 0.45));
+  filter: drop-shadow(0 0 10px rgba(0, 198, 255, 0.45));
 }
 
 /* Tab Switching Fade-In-Scale Spring Animations */
@@ -1439,13 +1439,13 @@ footer {
 
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 242, 195, 0.45);
+    box-shadow: 0 0 0 0 rgba(0, 198, 255, 0.45);
   }
   70% {
-    box-shadow: 0 0 0 12px rgba(0, 242, 195, 0);
+    box-shadow: 0 0 0 12px rgba(0, 198, 255, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 242, 195, 0);
+    box-shadow: 0 0 0 0 rgba(0, 198, 255, 0);
   }
 }
 
@@ -1539,7 +1539,7 @@ footer {
   justify-content: center;
   transition: all var(--transition-fast);
   z-index: 10;
-  box-shadow: 0 0 10px rgba(0, 242, 195, 0.4);
+  box-shadow: 0 0 10px rgba(0, 198, 255, 0.4);
 }
 
 .hotspot-btn:hover {
@@ -1770,7 +1770,7 @@ footer {
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  box-shadow: 0 0 35px rgba(0, 242, 195, 0.2);
+  box-shadow: 0 0 35px rgba(0, 198, 255, 0.2);
 }
 
 .wheel-outer-bezel {
@@ -2249,7 +2249,7 @@ footer {
   background: var(--color-primary);
   color: #fff;
   border-color: var(--color-primary);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.4);
 }
 
 .arrow-up {
@@ -2293,7 +2293,7 @@ footer {
   background: var(--color-primary);
   color: #fff;
   border-color: var(--color-primary);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.4);
 }
 
 .carousel-control.prev {
@@ -2327,7 +2327,7 @@ footer {
   background: var(--color-primary);
   width: 28px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
 }
 
 .hero-experiences {
@@ -2359,7 +2359,7 @@ footer {
   color: #fff;
   border-color: var(--color-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
 }
 
 .tag-icon {
