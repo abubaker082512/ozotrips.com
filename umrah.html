@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Hajj & Umrah Pilgrimage Packages | OzoTrips</title>
+  <meta name="description" content="Embark on a spiritual journey of a lifetime. Fully guided Hajj & Umrah packages with premium accommodations near the Holy Mosques in Makkah & Madinah, visa processing, and transfers.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    .umrah-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    
+    .umrah-card {
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--border-glass);
+      background: var(--bg-glass);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .umrah-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--accent-gradient);
+    }
+    
+    .umrah-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), var(--glow-secondary);
+    }
+    
+    .umrah-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin: 12px 0;
+    }
+    
+    .umrah-price span {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+    
+    .inclusion-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+      padding: 0;
+    }
+    
+    .inclusion-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    
+    .inclusion-list li::before {
+      content: '✓';
+      color: var(--color-secondary);
+      font-weight: 700;
+    }
+    
+    .ziyarat-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .ziyarat-card {
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      position: relative;
+      height: 240px;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .ziyarat-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .ziyarat-card:hover img {
+      transform: scale(1.08);
+    }
+    
+    .ziyarat-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 65%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        <img src="./src/assets/logo-light.png" alt="OzoTrips" class="logo-img logo-light">
+        <img src="./src/assets/logo-dark.png" alt="OzoTrips" class="logo-img logo-dark">
+      </a>
+      <nav>
+          <ul class="nav-links">
+          <li class="nav-dropdown">
+            <a href="./index.html" class="nav-link dropdown-toggle">Home <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./index.html">Classic Slider Home</a></li>
+              <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
+              <li><a href="./index-split.html">Interactive Split Screen</a></li>
+              <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
+              <li><a href="./index-explorer.html">Region Map Explorer</a></li>
+              <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
+              <li><a href="./index-search.html">Search-First Dashboard</a></li>
+            </ul>
+          </li>
+          <li><a href="./flights.html" class="nav-link">Flights</a></li>
+          <li class="nav-dropdown">
+            <a href="./tours.html" class="nav-link dropdown-toggle">Tours <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./tours.html">All Tours Catalog</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-header">Tour Categories</li>
+              <li><a href="./tours.html?type=international-group">✈️ International Group</a></li>
+              <li><a href="./tours.html?type=international-private">💎 International Private</a></li>
+              <li><a href="./tours.html?type=local-group">🇵🇰 Local Group Tours</a></li>
+              <li><a href="./tours.html?type=local-private">🏡 Local Private Tours</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-header">Featured Packages</li>
+              <li><a href="./tour-detail.html?id=1">Baku Group Tour</a></li>
+              <li><a href="./tour-detail.html?id=2">Thailand Honeymoon</a></li>
+              <li><a href="./tour-detail.html?id=3">Kalam Swat Adventure</a></li>
+              <li><a href="./tour-detail.html?id=4">Himmel Skardu Private</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Destinations <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./attractions.html">Attractions Map</a></li>
+              <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
+            </ul>
+          </li>
+          <li><a href="./visa-services.html" class="nav-link">Visa</a></li>
+          <li><a href="./umrah.html" class="nav-link active">Hajj & Umrah</a></li>
+          <li><a href="./custom-planner.html" class="nav-link">Custom Planner</a></li>
+          <li><a href="./offers.html" class="nav-link">Offers</a></li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Company <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./blog.html">Travel Blog</a></li>
+              <li><a href="./help-center.html">Help Center</a></li>
+              <li><a href="./about.html">About Us</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
+        <a href="#inquiry" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="help-hero" style="background-image: linear-gradient(to bottom, rgba(20, 24, 33, 0.7), rgba(20, 24, 33, 0.85)), url('https://images.unsplash.com/photo-1564769662531-4916885616d8?auto=format&fit=crop&w=1920&q=80'); height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; background-size: cover; background-position: center;">
+    <div class="container">
+      <span style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 8px;">🕋 Sacred Journeys</span>
+      <h1 style="font-size: 3rem; font-weight: 800;">Hajj & Umrah Pilgrimage Services</h1>
+      <p style="max-width: 600px; margin: 16px auto 0; color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.6;">
+        Guided spiritual experiences crafted with premium hotels near Al-Haram, visa facilitation, private transfers, and dedicated concierge support.
+      </p>
+    </div>
+  </section>
+
+  <!-- Packages Section -->
+  <section style="padding: 80px 0;">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+        <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Specially Curated Packages</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Find the Perfect Package for Your Spiritual Journey</h2>
+      </div>
+
+      <div class="umrah-grid">
+        <!-- Economy Package -->
+        <div class="umrah-card">
+          <span style="background: rgba(0, 82, 204, 0.1); color: var(--color-primary); padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">15 Days Economy</span>
+          <h3>Standard Umrah Package</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Affordable pricing without compromising on visa assistance and guided group tours.</p>
+          <div class="umrah-price">
+            Rs. 260,000 <span>/ traveler</span>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <ul class="inclusion-list">
+            <li>Umrah Visa Processing</li>
+            <li>Direct Flights from Islamabad/Karachi</li>
+            <li>3-Star Makkah Hotel (800m distance)</li>
+            <li>3-Star Madinah Hotel (600m distance)</li>
+            <li>Guided group Ziyarats</li>
+            <li>Group Transport in Luxury Bus</li>
+          </ul>
+          <a href="#inquiry" class="btn btn-secondary" style="margin-top: auto; text-align: center; display: block;" onclick="setPackageField('Economy Umrah')">Inquire Now ➔</a>
+        </div>
+
+        <!-- Premium Package -->
+        <div class="umrah-card" style="border-color: var(--color-secondary);">
+          <span style="background: rgba(255, 153, 0, 0.15); color: var(--color-secondary); padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">10 Days Premium</span>
+          <h3>Comfort Umrah Package</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Excellent compromise of hotel proximity to the Holy Mosques and convenient private transport.</p>
+          <div class="umrah-price">
+            Rs. 380,000 <span>/ traveler</span>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <ul class="inclusion-list">
+            <li>Umrah Visa Processing & Insurance</li>
+            <li>Direct Flights (Saudi Arabian / PIA)</li>
+            <li>4-Star Makkah Hotel (300m distance)</li>
+            <li>4-Star Madinah Hotel (250m distance)</li>
+            <li>Private Makkah & Madinah Ziyarat</li>
+            <li>Haramain High-Speed Train Tickets</li>
+            <li>Private SUV Transport</li>
+          </ul>
+          <a href="#inquiry" class="btn btn-primary" style="margin-top: auto; text-align: center; display: block;" onclick="setPackageField('Premium Umrah')">Inquire Now ➔</a>
+        </div>
+
+        <!-- Luxury VIP Package -->
+        <div class="umrah-card">
+          <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">7 Days VIP Luxury</span>
+          <h3>Elite Luxury VIP Package</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Stay in front-row 5-Star luxury hotels directly overlooking the holy courtyards.</p>
+          <div class="umrah-price">
+            Rs. 550,000 <span>/ traveler</span>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <ul class="inclusion-list">
+            <li>VIP Umrah Visa & Express Processing</li>
+            <li>Business Class Flight Tickets</li>
+            <li>5-Star Pullman Zamzam Makkah (Courtyard Front)</li>
+            <li>5-Star Madinah Hilton (Front Row)</li>
+            <li>VIP GMC SUV Transfers (Door-to-Door)</li>
+            <li>24/7 Dedicated Muallim/Guide Support</li>
+            <li>Daily Luxury Buffet Breakfast</li>
+          </ul>
+          <a href="#inquiry" class="btn btn-secondary" style="margin-top: auto; text-align: center; display: block;" onclick="setPackageField('Luxury VIP Umrah')">Inquire Now ➔</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ziyarat Destinations Section -->
+  <section style="padding: 80px 0; background: rgba(0, 82, 204, 0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: center; flex-wrap: wrap;">
+        <div>
+          <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 8px;">🕌 Pilgrimage Ziyarat Sites</span>
+          <h2 style="font-size: 2.4rem; line-height: 1.25;">Historical Ziyarat Excursions Included</h2>
+          <p style="color: var(--text-secondary); margin-top: 16px; line-height: 1.7; font-size: 1rem;">
+            All our packages include fully guided historical tours of sacred sites in Makkah Mukarramah and Madinah Munawwarah, with explanations from certified guides.
+          </p>
+          <ul style="margin-top: 24px; padding-left: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; color: var(--text-secondary); font-size: 0.95rem;">
+            <li style="margin-bottom: 8px;">⛰️ Jabal al-Nour (Hira Cave)</li>
+            <li style="margin-bottom: 8px;">⛺ Jabal Thawr (Thawr Cave)</li>
+            <li style="margin-bottom: 8px;">🕌 Masjid al-Quba (Madinah)</li>
+            <li style="margin-bottom: 8px;">🏔️ Mount Uhud & Cemetery</li>
+            <li style="margin-bottom: 8px;">🌾 Mina & Muzdalifah</li>
+            <li style="margin-bottom: 8px;">🕌 Masjid al-Qiblatayn</li>
+          </ul>
+        </div>
+        <div class="ziyarat-gallery">
+          <div class="ziyarat-card">
+            <img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?auto=format&fit=crop&w=600&q=80" alt="Makkah Holy Kaaba">
+            <div class="ziyarat-overlay">
+              <h4 style="font-size: 1.15rem; font-weight: 700;">Masjid al-Haram, Makkah</h4>
+            </div>
+          </div>
+          <div class="ziyarat-card">
+            <img src="https://images.unsplash.com/photo-1564769662531-4916885616d8?auto=format&fit=crop&w=600&q=80" alt="Masjid Al-Nabawi Madinah">
+            <div class="ziyarat-overlay">
+              <h4 style="font-size: 1.15rem; font-weight: 700;">Masjid an-Nabawi, Madinah</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inquiry Form & Advisor Contact -->
+  <section id="inquiry" style="padding: 100px 0;">
+    <div class="container" style="max-width: 900px;">
+      <div class="glass-panel" style="padding: 50px; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-lg);">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <span style="font-size: 2.5rem;">🕋</span>
+          <h2 style="font-size: 2.2rem; margin-top: 10px;">Pilgrimage Booking Inquiry</h2>
+          <p style="color: var(--text-secondary); margin-top: 8px; font-size: 0.95rem;">Fill out this quick form, and our specialized Hajj & Umrah department will contact you within 2 hours with customized itineraries.</p>
+        </div>
+
+        <form id="umrah-inquiry-form" style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="umrah-name" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Full Name</label>
+              <input type="text" id="umrah-name" placeholder="Enter your full name" required style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="umrah-phone" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">WhatsApp / Phone Number</label>
+              <input type="tel" id="umrah-phone" placeholder="e.g. +92 300 1234567" required style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="umrah-package" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Umrah Package Option</label>
+              <select id="umrah-package" style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+                <option value="economy">15 Days Economy Umrah (Rs. 260K)</option>
+                <option value="premium" selected>10 Days Premium Umrah (Rs. 380K)</option>
+                <option value="luxury">7 Days Luxury VIP Umrah (Rs. 550K)</option>
+                <option value="hajj">Hajj 2026 Package Inquiry</option>
+                <option value="custom">Custom Tailored Umrah (Private Groups)</option>
+              </select>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="umrah-travelers" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Number of Pilgrims</label>
+              <select id="umrah-travelers" style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+                <option value="1">1 Person</option>
+                <option value="2">2 Persons (Double sharing)</option>
+                <option value="3">3 Persons (Triple sharing)</option>
+                <option value="4">4 Persons (Quad sharing)</option>
+                <option value="5+">Family (5+ Pilgrims)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="umrah-date" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Tentative Departure Date</label>
+              <input type="date" id="umrah-date" required style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label for="umrah-city" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Departure City</label>
+              <select id="umrah-city" style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+                <option value="ISB">Islamabad (ISB)</option>
+                <option value="LHE">Lahore (LHE)</option>
+                <option value="KHI">Karachi (KHI)</option>
+                <option value="PEW">Peshawar (PEW)</option>
+                <option value="MUX">Multan (MUX)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="umrah-requests" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Special Requirements & Custom Requests</label>
+            <textarea id="umrah-requests" rows="4" placeholder="Enter special meal requirements, wheelchair accessibility needs, specific flight requests, or child/infant details..." style="border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 16px; font-family: var(--font-sans); outline: none; transition: border-color var(--transition-fast); resize: vertical;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="height: 55px; font-size: 1.1rem; font-weight: 700; margin-top: 10px; box-shadow: var(--shadow-md);">
+            Submit Inquiry Request 🕌
+          </button>
+        </form>
+
+        <div id="umrah-success-msg" style="display: none; text-align: center; padding: 20px; border: 1px solid var(--color-primary); border-radius: var(--border-radius-md); background: rgba(0, 82, 204, 0.05); margin-top: 24px; color: var(--color-primary); font-weight: 600;">
+          🕋 JazakAllah! Your inquiry was successfully submitted. Our Umrah experts will call you shortly.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Islamic Pilgrim FAQ Section -->
+  <section style="padding: 80px 0; border-top: 1px solid var(--border-glass);">
+    <div class="container" style="max-width: 800px;">
+      <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div class="glass-panel" style="padding: 24px;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--color-primary);">What documents are required to process an Umrah visa?</h4>
+          <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">You need a Pakistani passport valid for at least 6 months, a computerized CNIC/NICOP, passport-sized photographs with white backgrounds, and vaccination certificates (Meningitis/Polio).</p>
+        </div>
+        <div class="glass-panel" style="padding: 24px;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--color-primary);">Can packages be customized for family groups?</h4>
+          <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Yes! We specialize in custom tours. We can arrange triple/quad sharing rooms, private GMC Yukon vehicles, and wheelchair-accessible services for elderly parents.</p>
+        </div>
+        <div class="glass-panel" style="padding: 24px;">
+          <h4 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--color-primary);">Are flights direct or connecting?</h4>
+          <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">Premium and VIP packages secure direct flights via Saudi Arabian Airlines or PIA. Economy packages may utilize connections via Gulf airlines (e.g. FlyNas, Emirates, Gulf Air) to optimize budget.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <!-- Footer structure synced globally -->
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/main.js"></script>
+
+  <!-- Inquiry submission controller -->
+  <script>
+    function setPackageField(packageName) {
+      const packageSelect = document.getElementById("umrah-package");
+      if (packageSelect) {
+        if (packageName === 'Economy Umrah') packageSelect.value = 'economy';
+        else if (packageName === 'Premium Umrah') packageSelect.value = 'premium';
+        else if (packageName === 'Luxury VIP Umrah') packageSelect.value = 'luxury';
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("umrah-inquiry-form");
+      const successMsg = document.getElementById("umrah-success-msg");
+
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          
+          // Construct inquiry object
+          const inquiry = {
+            name: document.getElementById("umrah-name").value,
+            phone: document.getElementById("umrah-phone").value,
+            package: document.getElementById("umrah-package").value,
+            travelers: document.getElementById("umrah-travelers").value,
+            date: document.getElementById("umrah-date").value,
+            city: document.getElementById("umrah-city").value,
+            requests: document.getElementById("umrah-requests").value,
+            timestamp: new Date().toISOString()
+          };
+
+          // Save to LocalStorage under user profile inquiries
+          let profile = JSON.parse(localStorage.getItem("ozo_user_profile") || "{}");
+          if (!profile.umrah_inquiries) {
+            profile.umrah_inquiries = [];
+          }
+          profile.umrah_inquiries.push(inquiry);
+          localStorage.setItem("ozo_user_profile", JSON.stringify(profile));
+
+          // Reset and show success
+          form.reset();
+          form.style.display = "none";
+          if (successMsg) {
+            successMsg.style.display = "block";
+            successMsg.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      }
+    });
+  </script>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-icon">💬</span>
+    <span class="whatsapp-text">Chat with Us</span>
+  </a>
+  <!-- Scroll to Top Button -->
+  <button id="scroll-to-top" class="scroll-to-top-btn" aria-label="Scroll to Top">
+    <span class="arrow-up">▲</span>
+  </button>
+</body>
+</html>

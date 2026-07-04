@@ -24,6 +24,7 @@ export default defineConfig({
         offers: resolve(__dirname, 'offers.html'),
         blog: resolve(__dirname, 'blog.html'),
         flights: resolve(__dirname, 'flights.html'),
+        umrah: resolve(__dirname, 'umrah.html'),
       },
     },
   },
