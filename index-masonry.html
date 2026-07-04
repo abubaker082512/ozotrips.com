@@ -38,10 +38,10 @@
           <li class="nav-dropdown">
             <a href="./index.html" class="nav-link dropdown-toggle active">Home <span class="arrow">▼</span></a>
             <ul class="dropdown-menu">
-              <li><a href="./index.html" class="active">Classic Slider Home</a></li>
+              <li><a href="./index.html">Classic Slider Home</a></li>
               <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
               <li><a href="./index-split.html">Interactive Split Screen</a></li>
-              <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
+              <li><a href="./index-masonry.html" class="active">Masonry Grid Collage</a></li>
               <li><a href="./index-explorer.html">Region Map Explorer</a></li>
             </ul>
           </li>
@@ -93,66 +93,56 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="hero-carousel">
-      <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=1920&q=80');"></div>
-      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1920&q=80');"></div>
-      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80');"></div>
-      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1522083165195-342750297f95?auto=format&fit=crop&w=1920&q=80');"></div>
-      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1920&q=80');"></div>
-      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1920&q=80');"></div>
-    </div>
-    
-    <!-- Slide Nav Controls -->
-    <button class="carousel-control prev" id="prev-slide" aria-label="Previous Slide">❮</button>
-    <button class="carousel-control next" id="next-slide" aria-label="Next Slide">❯</button>
-
-    <!-- Slide Indicators -->
-    <div class="carousel-indicators" id="carousel-indicators">
-      <span class="indicator active" data-slide="0"></span>
-      <span class="indicator" data-slide="1"></span>
-      <span class="indicator" data-slide="2"></span>
-      <span class="indicator" data-slide="3"></span>
-      <span class="indicator" data-slide="4"></span>
-      <span class="indicator" data-slide="5"></span>
-    </div>
-
+  <!-- Masonry Collage Hero Section -->
+  <section class="hero-masonry" id="home">
     <div class="container">
-      <div class="hero-content">
-        <span class="hero-subtitle">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">
+        <span class="hero-subtitle" style="color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
           ✨ Curators of Bespoke Experiences
         </span>
-        <h1 class="hero-title">Your Journey, Crafted to Perfection</h1>
-        <p class="hero-description">Explore the world’s most spectacular destinations with seamless planning. From private luxury escapes to authentic group adventures, we design journeys tailored entirely to your desires.</p>
-        <!-- Action Buttons -->
-        <div style="display: flex; gap: 16px; margin-top: 24px; margin-bottom: 28px; flex-wrap: wrap;">
-          <a href="./tours.html" class="btn btn-primary" style="padding: 14px 28px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">Explore All Tours ➔</a>
-          <a href="./virtual-tours.html" class="btn btn-secondary" style="padding: 14px 28px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.25);">✨ 360° Virtual Experience</a>
-        </div>
+        <h1 class="hero-title" style="font-size: 3.5rem; margin-top: 16px; margin-bottom: 20px;">Your Journey, Crafted to Perfection</h1>
+        <p class="hero-description" style="color: var(--text-secondary); line-height: 1.7;">
+          Explore and book premium handpicked local and international tour packages with concierge support.
+        </p>
+      </div>
 
-        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; display: block; margin-bottom: 12px;">Explore by Experience:</span>
-        
-        <!-- Experience Quick Selector Tags -->
-        <div class="hero-experiences" style="margin-top: 0;">
-          <a href="./tours.html?category=local-group" class="experience-tag"><span class="tag-icon">🏔️</span> Adventure Tours</a>
-          <a href="./tours.html?category=international-private" class="experience-tag"><span class="tag-icon">👩‍❤️‍👨</span> Honeymoon Specials</a>
-          <a href="./tours.html?category=local-private" class="experience-tag"><span class="tag-icon">⛩️</span> Heritage Walks</a>
-          <a href="./tours.html?category=international-group" class="experience-tag"><span class="tag-icon">🏖️</span> Beach Escapes</a>
-          <a href="./tours.html?category=local-private" class="experience-tag"><span class="tag-icon">🦁</span> Wildlife Safaris</a>
-          <a href="./tours.html?category=international-group" class="experience-tag"><span class="tag-icon">👨‍👩‍👧‍👦</span> Family Holidays</a>
-          <a href="./tours.html?category=local-group" class="experience-tag"><span class="tag-icon">🚗</span> Road Trips</a>
-          <a href="./tours.html?category=local-group" class="experience-tag"><span class="tag-icon">🕌</span> Spiritual Journeys</a>
+      <!-- Masonry Grid Collage -->
+      <div class="masonry-grid">
+        <div class="masonry-item row-2 col-2" onclick="window.location.href='./tours.html'">
+          <img src="https://images.unsplash.com/photo-1506698880000-5b6c80204740?auto=format&fit=crop&w=800&q=80" alt="Pakistan">
+          <div class="masonry-overlay">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 1px; font-weight: 700; display: block; margin-bottom: 8px;">Featured Valley Escape</span>
+            <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 4px;">Karakoram & Hunza Peak Tour</h3>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">PKR 145,000 / traveler</p>
+          </div>
+        </div>
+        <div class="masonry-item" onclick="window.location.href='./tours.html'">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=500&q=80" alt="Japan">
+          <div class="masonry-overlay">
+            <h3 style="font-size: 1.2rem; font-weight: 700;">Kyoto Autumns</h3>
+          </div>
+        </div>
+        <div class="masonry-item" onclick="window.location.href='./tours.html'">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=500&q=80" alt="Italy">
+          <div class="masonry-overlay">
+            <h3 style="font-size: 1.2rem; font-weight: 700;">Venice Caldaras</h3>
+          </div>
+        </div>
+        <div class="masonry-item col-2" onclick="window.location.href='./tours.html'">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80" alt="Dubai">
+          <div class="masonry-overlay">
+            <h3 style="font-size: 1.3rem; font-weight: 700;">Luxury Desert Oasis, Dubai</h3>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Categories Section -->
-  <section class="categories-section" style="padding-top: 50px;">
+  <section class="categories-section" style="padding-top: 80px; border-top: 1px solid var(--border-glass);">
     <div class="container">
       <!-- Search and Filter Bar -->
-      <div class="search-panel glass-panel" style="margin-top: -80px; margin-bottom: 40px; position: relative; z-index: 10; box-shadow: var(--shadow-lg);">
+      <div class="search-panel glass-panel" style="margin-bottom: 40px; box-shadow: var(--shadow-lg);">
         <div class="search-input-group">
           <label for="search-dest">Destination</label>
           <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
@@ -263,8 +253,6 @@
       </div>
     </div>
   </section>
-
-
 
   <!-- Stats Section -->
   <section class="stats-section" style="padding: 80px 0; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass);">

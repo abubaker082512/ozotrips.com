@@ -6,6 +6,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        indexMinimalist: resolve(__dirname, 'index-minimalist.html'),
+        indexSplit: resolve(__dirname, 'index-split.html'),
+        indexMasonry: resolve(__dirname, 'index-masonry.html'),
+        indexExplorer: resolve(__dirname, 'index-explorer.html'),
         tours: resolve(__dirname, 'tours.html'),
         tourDetail: resolve(__dirname, 'tour-detail.html'),
         attractions: resolve(__dirname, 'attractions.html'),
