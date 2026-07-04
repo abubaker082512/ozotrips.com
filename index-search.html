@@ -41,10 +41,10 @@
               <li><a href="./index.html">Classic Slider Home</a></li>
               <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
               <li><a href="./index-split.html">Interactive Split Screen</a></li>
-              <li><a href="./index-masonry.html" class="active">Masonry Grid Collage</a></li>
+              <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
               <li><a href="./index-explorer.html">Region Map Explorer</a></li>
               <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
-              <li><a href="./index-search.html">Search-First Dashboard</a></li>
+              <li><a href="./index-search.html" class="active">Search-First Dashboard</a></li>
             </ul>
           </li>
           <li><a href="./flights.html" class="nav-link">Flights</a></li>
@@ -95,45 +95,62 @@
     </div>
   </header>
 
-  <!-- Masonry Collage Hero Section -->
-  <section class="hero-masonry" id="home">
-    <div class="container">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">
+  <!-- Search Portal Hero Section -->
+  <section class="hero-search-portal" id="home">
+    <div class="container" style="max-width: 1000px;">
+      <div style="text-align: center; margin-bottom: 30px;">
         <span class="hero-subtitle" style="color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
-          ✨ Curators of Bespoke Experiences
+          ✈️ AI Travel Finder
         </span>
-        <h1 class="hero-title" style="font-size: 3.5rem; margin-top: 16px; margin-bottom: 20px;">Your Journey, Crafted to Perfection</h1>
-        <p class="hero-description" style="color: var(--text-secondary); line-height: 1.7;">
-          Explore and book premium handpicked local and international tour packages with concierge support.
+        <h1 class="hero-title" style="font-size: 3rem; margin-top: 8px; margin-bottom: 12px;">Search Flights, Tours & Visas</h1>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+          Compare pricing across local Pakistani and international holiday itineraries with real-time advisor support.
         </p>
       </div>
 
-      <!-- Masonry Grid Collage -->
-      <div class="masonry-grid">
-        <div class="masonry-item row-2 col-2" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1506698880000-5b6c80204740?auto=format&fit=crop&w=800&q=80" alt="Pakistan">
-          <div class="masonry-overlay">
-            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 1px; font-weight: 700; display: block; margin-bottom: 8px;">Featured Valley Escape</span>
-            <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 4px;">Karakoram & Hunza Peak Tour</h3>
-            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">PKR 145,000 / traveler</p>
+      <!-- Dashboard Search Card -->
+      <div class="search-portal-card">
+        <div class="search-portal-grid">
+          <div class="search-portal-field">
+            <label for="portal-dest">Where to?</label>
+            <input type="text" id="portal-dest" placeholder="City or country...">
+          </div>
+          <div class="search-portal-field">
+            <label for="portal-date">Departure</label>
+            <input type="date" id="portal-date">
+          </div>
+          <div class="search-portal-field">
+            <label for="portal-budget">Budget Limit</label>
+            <select id="portal-budget">
+              <option value="">No Limit</option>
+              <option value="50000">Under PKR 50,000</option>
+              <option value="250000">Under PKR 250,000</option>
+              <option value="500000">Under PKR 500,000</option>
+            </select>
+          </div>
+          <div class="search-portal-field">
+            <label for="portal-theme">Holiday Theme</label>
+            <select id="portal-theme">
+              <option value="">Any Theme</option>
+              <option value="local-group">🇵🇰 Local Group</option>
+              <option value="local-private">🏡 Local Private</option>
+              <option value="international-group">✈️ International Group</option>
+              <option value="international-private">💎 International Private</option>
+            </select>
           </div>
         </div>
-        <div class="masonry-item" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=500&q=80" alt="Japan">
-          <div class="masonry-overlay">
-            <h3 style="font-size: 1.2rem; font-weight: 700;">Kyoto Autumns</h3>
+
+        <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 20px; align-items: center; margin-top: 10px;">
+          <div class="trending-routes">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Trending:</span>
+            <a href="./tour-detail.html?id=1" class="trending-route-tag">Baku ✈️</a>
+            <a href="./tour-detail.html?id=2" class="trending-route-tag">Thailand 🏝️</a>
+            <a href="./tour-detail.html?id=3" class="trending-route-tag">Swat 🏔️</a>
           </div>
-        </div>
-        <div class="masonry-item" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=500&q=80" alt="Italy">
-          <div class="masonry-overlay">
-            <h3 style="font-size: 1.2rem; font-weight: 700;">Venice Caldaras</h3>
-          </div>
-        </div>
-        <div class="masonry-item col-2" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80" alt="Dubai">
-          <div class="masonry-overlay">
-            <h3 style="font-size: 1.3rem; font-weight: 700;">Luxury Desert Oasis, Dubai</h3>
+          <div style="text-align: right;">
+            <button id="portal-search-btn" class="btn btn-primary" style="padding: 16px 36px; font-weight: 700; font-size: 1.05rem; box-shadow: var(--shadow-md); width: 100%;">
+              Search Packages ➔
+            </button>
           </div>
         </div>
       </div>
@@ -141,48 +158,8 @@
   </section>
 
   <!-- Categories Section -->
-  <section class="categories-section" style="padding-top: 80px; border-top: 1px solid var(--border-glass);">
+  <section class="categories-section" style="padding-top: 50px; border-top: 1px solid var(--border-glass);">
     <div class="container">
-      <!-- Search and Filter Bar -->
-      <div class="search-panel glass-panel" style="margin-bottom: 40px; box-shadow: var(--shadow-lg);">
-        <div class="search-input-group">
-          <label for="search-dest">Destination</label>
-          <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
-        </div>
-        <div class="search-input-group">
-          <label for="filter-type">Type</label>
-          <select id="filter-type">
-            <option value="">All Types</option>
-            <option value="international-group">✈️ International Group Tours</option>
-            <option value="international-private">💎 International Private Tours</option>
-            <option value="local-group">🇵🇰 Local Group Tours</option>
-            <option value="local-private">🏡 Local Private Tours</option>
-          </select>
-        </div>
-        <div class="search-input-group">
-          <label for="filter-budget">Max Budget</label>
-          <select id="filter-budget">
-            <option value="">No Limit</option>
-            <option value="50000">Under PKR 50,000</option>
-            <option value="250000">Under PKR 250,000</option>
-            <option value="500000">Under PKR 500,000</option>
-            <option value="1000000">Under PKR 1,000,000</option>
-          </select>
-        </div>
-        <div class="search-input-group">
-          <label for="filter-duration">Duration</label>
-          <select id="filter-duration">
-            <option value="">Any Duration</option>
-            <option value="short">Short (1-4 Days)</option>
-            <option value="medium">Medium (5-7 Days)</option>
-            <option value="long">Long (8+ Days)</option>
-          </select>
-        </div>
-        <button id="search-btn" class="btn btn-accent" style="width: 100%; height: 50px;">
-          Find Tours 🔍
-        </button>
-      </div>
-
       <div id="category-list" class="category-list">
         <!-- JS will populate category buttons here -->
       </div>
@@ -399,6 +376,32 @@
 
   <!-- Scripts -->
   <script type="module" src="./src/js/main.js"></script>
+
+  <!-- Interactive Explorer Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchBtn = document.getElementById("portal-search-btn");
+      const destInput = document.getElementById("portal-dest");
+      const budgetSelect = document.getElementById("portal-budget");
+      const themeSelect = document.getElementById("portal-theme");
+
+      if (searchBtn) {
+        searchBtn.addEventListener("click", () => {
+          let url = "./tours.html?";
+          if (destInput && destInput.value) {
+            url += "search=" + encodeURIComponent(destInput.value) + "&";
+          }
+          if (budgetSelect && budgetSelect.value) {
+            url += "budget=" + budgetSelect.value + "&";
+          }
+          if (themeSelect && themeSelect.value) {
+            url += "category=" + themeSelect.value + "&";
+          }
+          window.location.href = url;
+        });
+      }
+    });
+  </script>
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <span class="whatsapp-icon">💬</span>

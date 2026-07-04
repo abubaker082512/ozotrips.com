@@ -41,9 +41,9 @@
               <li><a href="./index.html">Classic Slider Home</a></li>
               <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
               <li><a href="./index-split.html">Interactive Split Screen</a></li>
-              <li><a href="./index-masonry.html" class="active">Masonry Grid Collage</a></li>
+              <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
               <li><a href="./index-explorer.html">Region Map Explorer</a></li>
-              <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
+              <li><a href="./index-grid-carousel.html" class="active">Multi-Card Grid Slider</a></li>
               <li><a href="./index-search.html">Search-First Dashboard</a></li>
             </ul>
           </li>
@@ -95,45 +95,60 @@
     </div>
   </header>
 
-  <!-- Masonry Collage Hero Section -->
-  <section class="hero-masonry" id="home">
+  <!-- Multi-Card Grid Carousel Hero Section -->
+  <section class="hero-grid-carousel" id="home">
     <div class="container">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 40px auto;">
-        <span class="hero-subtitle" style="color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
-          ✨ Curators of Bespoke Experiences
-        </span>
-        <h1 class="hero-title" style="font-size: 3.5rem; margin-top: 16px; margin-bottom: 20px;">Your Journey, Crafted to Perfection</h1>
-        <p class="hero-description" style="color: var(--text-secondary); line-height: 1.7;">
-          Explore and book premium handpicked local and international tour packages with concierge support.
-        </p>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 20px;">
+        <div>
+          <span class="hero-subtitle" style="color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">
+            ✨ Curated Collections
+          </span>
+          <h1 class="hero-title" style="font-size: 3rem; margin-top: 8px;">Explore Our Top Holiday Packages</h1>
+        </div>
+        <div class="grid-carousel-nav">
+          <button class="grid-carousel-btn" id="carousel-prev" aria-label="Slide Left">❮</button>
+          <button class="grid-carousel-btn" id="carousel-next" aria-label="Slide Right">❯</button>
+        </div>
       </div>
 
-      <!-- Masonry Grid Collage -->
-      <div class="masonry-grid">
-        <div class="masonry-item row-2 col-2" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1506698880000-5b6c80204740?auto=format&fit=crop&w=800&q=80" alt="Pakistan">
-          <div class="masonry-overlay">
-            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 1px; font-weight: 700; display: block; margin-bottom: 8px;">Featured Valley Escape</span>
-            <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 4px;">Karakoram & Hunza Peak Tour</h3>
-            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">PKR 145,000 / traveler</p>
+      <!-- Carousel Track Container -->
+      <div class="grid-carousel-container">
+        <div class="grid-carousel-track" id="carousel-track">
+          <div class="grid-carousel-card" onclick="window.location.href='./tour-detail.html?id=1'">
+            <img src="https://images.unsplash.com/photo-1506698880000-5b6c80204740?auto=format&fit=crop&w=600&q=80" alt="Baku">
+            <div class="grid-carousel-card-overlay">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-secondary); font-weight: 700; margin-bottom: 4px; display: block;">Featured</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Baku Group Tour</h3>
+              <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem;">PKR 145,000 / traveler</p>
+            </div>
           </div>
-        </div>
-        <div class="masonry-item" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=500&q=80" alt="Japan">
-          <div class="masonry-overlay">
-            <h3 style="font-size: 1.2rem; font-weight: 700;">Kyoto Autumns</h3>
+          <div class="grid-carousel-card" onclick="window.location.href='./tour-detail.html?id=2'">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Thailand">
+            <div class="grid-carousel-card-overlay">
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Thailand Honeymoon</h3>
+              <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem;">PKR 290,000 / traveler</p>
+            </div>
           </div>
-        </div>
-        <div class="masonry-item" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=500&q=80" alt="Italy">
-          <div class="masonry-overlay">
-            <h3 style="font-size: 1.2rem; font-weight: 700;">Venice Caldaras</h3>
+          <div class="grid-carousel-card" onclick="window.location.href='./tour-detail.html?id=3'">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80" alt="Swat">
+            <div class="grid-carousel-card-overlay">
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Kalam Swat Adventure</h3>
+              <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem;">PKR 45,000 / traveler</p>
+            </div>
           </div>
-        </div>
-        <div class="masonry-item col-2" onclick="window.location.href='./tours.html'">
-          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80" alt="Dubai">
-          <div class="masonry-overlay">
-            <h3 style="font-size: 1.3rem; font-weight: 700;">Luxury Desert Oasis, Dubai</h3>
+          <div class="grid-carousel-card" onclick="window.location.href='./tour-detail.html?id=4'">
+            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Skardu">
+            <div class="grid-carousel-card-overlay">
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Himmel Skardu Private</h3>
+              <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem;">PKR 185,000 / traveler</p>
+            </div>
+          </div>
+          <div class="grid-carousel-card" onclick="window.location.href='./tours.html'">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80" alt="Dubai">
+            <div class="grid-carousel-card-overlay">
+              <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Dubai Luxury Shopping</h3>
+              <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem;">PKR 220,000 / traveler</p>
+            </div>
           </div>
         </div>
       </div>
@@ -141,10 +156,10 @@
   </section>
 
   <!-- Categories Section -->
-  <section class="categories-section" style="padding-top: 80px; border-top: 1px solid var(--border-glass);">
+  <section class="categories-section" style="padding-top: 50px; border-top: 1px solid var(--border-glass);">
     <div class="container">
       <!-- Search and Filter Bar -->
-      <div class="search-panel glass-panel" style="margin-bottom: 40px; box-shadow: var(--shadow-lg);">
+      <div class="search-panel glass-panel" style="margin-top: -80px; margin-bottom: 40px; position: relative; z-index: 10; box-shadow: var(--shadow-lg);">
         <div class="search-input-group">
           <label for="search-dest">Destination</label>
           <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
@@ -399,6 +414,24 @@
 
   <!-- Scripts -->
   <script type="module" src="./src/js/main.js"></script>
+
+  <!-- Interactive slide logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const track = document.getElementById("carousel-track");
+      const nextBtn = document.getElementById("carousel-next");
+      const prevBtn = document.getElementById("carousel-prev");
+
+      if (track && nextBtn && prevBtn) {
+        nextBtn.addEventListener("click", () => {
+          track.scrollBy({ left: 340, behavior: "smooth" });
+        });
+        prevBtn.addEventListener("click", () => {
+          track.scrollBy({ left: -340, behavior: "smooth" });
+        });
+      }
+    });
+  </script>
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <span class="whatsapp-icon">💬</span>

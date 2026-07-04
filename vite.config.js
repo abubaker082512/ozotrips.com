@@ -10,6 +10,8 @@ export default defineConfig({
         indexSplit: resolve(__dirname, 'index-split.html'),
         indexMasonry: resolve(__dirname, 'index-masonry.html'),
         indexExplorer: resolve(__dirname, 'index-explorer.html'),
+        indexGridCarousel: resolve(__dirname, 'index-grid-carousel.html'),
+        indexSearch: resolve(__dirname, 'index-search.html'),
         tours: resolve(__dirname, 'tours.html'),
         tourDetail: resolve(__dirname, 'tour-detail.html'),
         attractions: resolve(__dirname, 'attractions.html'),
