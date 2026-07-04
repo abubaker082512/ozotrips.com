@@ -458,6 +458,46 @@ function initAuth() {
   updateHeader();
   setupScrollAnimations();
   setupScrollTop();
+  setupCustomCursor();
+}
+
+function setupCustomCursor() {
+  if (!('ontouchstart' in window) && window.innerWidth > 768) {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    
+    document.addEventListener('mousemove', (e) => {
+      requestAnimationFrame(() => {
+        dot.style.left = `${e.clientX}px`;
+        dot.style.top = `${e.clientY}px`;
+        ring.style.left = `${e.clientX}px`;
+        ring.style.top = `${e.clientY}px`;
+      });
+    });
+
+    document.addEventListener('mousedown', () => {
+      ring.style.transform = 'translate(-50%, -50%) scale(0.7)';
+    });
+    document.addEventListener('mouseup', () => {
+      ring.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+
+    // Delegate hover states
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest('a, button, select, input, .region-btn, .grid-carousel-card, .split-card, .masonry-item, .trending-route-tag')) {
+        ring.classList.add('cursor-hover');
+      }
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest('a, button, select, input, .region-btn, .grid-carousel-card, .split-card, .masonry-item, .trending-route-tag')) {
+        ring.classList.remove('cursor-hover');
+      }
+    });
+  }
 }
 
 function setupScrollTop() {

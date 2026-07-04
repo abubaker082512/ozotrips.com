@@ -2405,8 +2405,7 @@ footer {
   height: 100%;
   background-size: cover;
   background-position: center;
-  opacity: 0.08;
-  filter: grayscale(1);
+  opacity: 0.18;
   z-index: 1;
 }
 
@@ -2455,6 +2454,10 @@ footer {
   flex-direction: column;
   justify-content: center;
   z-index: 5;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(to right, var(--bg-primary) 50%, rgba(244, 247, 250, 0.9) 100%),
+                    url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80'); /* Travel map watermark */
 }
 
 .hero-split-right {
@@ -2531,7 +2534,10 @@ footer {
 .hero-masonry {
   padding-top: calc(var(--header-height) + 40px);
   padding-bottom: 80px;
-  background: var(--bg-primary);
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(to bottom, rgba(244, 247, 250, 0.88), rgba(244, 247, 250, 0.97)),
+                    url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1920&q=80'); /* Topography pattern background */
 }
 
 .masonry-grid {
@@ -2782,16 +2788,16 @@ footer {
   transform: scale(1.05);
 }
 
-/* 6. AI Search Portal Dashboard Home Styles */
 .hero-search-portal {
   padding-top: calc(var(--header-height) + 50px);
   padding-bottom: 80px;
   min-height: 80vh;
   display: flex;
   align-items: center;
-  background: radial-gradient(circle at 80% 20%, rgba(0, 82, 204, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 20% 80%, rgba(255, 153, 0, 0.05) 0%, transparent 50%),
-              var(--bg-primary);
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(to bottom, rgba(244, 247, 250, 0.75), rgba(244, 247, 250, 0.95)), 
+                    url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1920&q=80'); /* Beautiful tropical forest backdrop */
 }
 
 .search-portal-card {
@@ -2869,4 +2875,43 @@ footer {
   border-color: var(--color-primary);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================
+   Custom Cursor Follower Styles
+   ========================================== */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--color-secondary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s, transform 0.1s ease-out;
+}
+
+.cursor-ring.cursor-hover {
+  width: 48px;
+  height: 48px;
+  border-color: var(--color-primary);
+  background-color: rgba(0, 82, 204, 0.05);
+}
+
+@media (max-width: 768px) {
+  .cursor-dot, .cursor-ring {
+    display: none !important;
+  }
 }
