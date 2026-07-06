@@ -225,13 +225,16 @@
     .popup-book:hover {
       opacity: 0.88;
     }
-
-    /* Custom markers */
+    /* Custom markers pointer event fixes */
     .cmarker {
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
+    }
+
+    .cmarker * {
+      pointer-events: none; /* Let clicks pass through labels/dots to the Leaflet container */
     }
 
     .cmarker-dot {
@@ -266,7 +269,6 @@
       animation: aPulse 2.2s infinite;
       cursor: pointer;
     }
-
     @keyframes cPulse {
       0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.8); }
       70% { box-shadow: 0 0 0 14px rgba(255, 153, 0, 0); }
@@ -389,6 +391,12 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Mobile Navigation Toggle -->
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-actions">
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
           <span>☀️</span>
@@ -405,7 +413,7 @@
     <div id="world-map" style="width: 100%; height: 100%; z-index: 1;"></div>
 
     <!-- Floating intro text -->
-    <div id="map-intro" style="position: absolute; top: 30px; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center; pointer-events: none; transition: opacity 0.5s; width: 90%; max-width: 600px;">
+    <div id="map-intro" style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center; pointer-events: none; transition: opacity 0.5s; width: 90%; max-width: 600px;">
       <h1 style="font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.9); margin-bottom: 6px;">Explore the World,<br>One Click at a Time</h1>
       <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; text-shadow: 0 1px 8px rgba(0,0,0,0.7); margin-bottom: 12px;">Powered by OzoTrips – click any glowing pin or choose a destination below</p>
       <span class="map-hint-badge" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,153,0,0.2); border: 1px solid rgba(255,153,0,0.5); color: #ffb700; padding: 5px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;">🌍 Click a country pin to begin exploring</span>
