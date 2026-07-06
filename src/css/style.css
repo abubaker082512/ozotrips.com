@@ -529,7 +529,8 @@ body.no-scroll {
 .tour-card {
   position: relative;
   overflow: hidden;
-  height: 520px;
+  min-height: 520px;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -1123,11 +1124,15 @@ footer {
   .search-panel {
     grid-template-columns: 1fr;
   }
-  
-  .tours-grid {
+    .tours-grid {
     grid-template-columns: 1fr;
   }
   
+  .hero-content {
+    padding: 24px !important;
+    margin: 16px !important;
+    max-width: calc(100% - 32px) !important;
+  }
   .footer-grid {
     grid-template-columns: 1fr;
   }
