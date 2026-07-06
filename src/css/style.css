@@ -3107,3 +3107,35 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   Responsive Navigation Header Spacing Fixes (tablet landscape & laptops)
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 1366px) {
+  .nav-links {
+    gap: 8px !important;
+  }
+  .nav-link {
+    font-size: 0.8rem !important;
+    gap: 3px !important;
+  }
+  .logo-img {
+    height: 52px !important;
+  }
+  header.scrolled .logo-img {
+    height: 44px !important;
+  }
+  .nav-container {
+    gap: 12px;
+  }
+  .nav-actions {
+    gap: 8px !important;
+  }
+  .btn-primary {
+    padding: 10px 18px !important;
+    font-size: 0.82rem !important;
+  }
+  header {
+    height: 68px !important;
+  }
+}

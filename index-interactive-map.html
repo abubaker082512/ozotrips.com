@@ -333,14 +333,14 @@
           <li class="nav-dropdown">
             <a href="./index.html" class="nav-link dropdown-toggle active">Home <span class="arrow">▼</span></a>
             <ul class="dropdown-menu">
-              <li><a href="./index.html">Classic Slider Home</a></li>
+              <li><a href="./index.html" class="active">Classic Slider Home</a></li>
               <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
               <li><a href="./index-split.html">Interactive Split Screen</a></li>
               <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
               <li><a href="./index-explorer.html">Region Map Explorer</a></li>
               <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
               <li><a href="./index-search.html">Search-First Dashboard</a></li>
-              <li><a href="./index-interactive-map.html" class="active">🗺️ Interactive World Map</a></li>
+              <li><a href="./index-interactive-map.html">🗺️ Interactive World Map</a></li>
             </ul>
           </li>
           <li><a href="./flights.html" class="nav-link">Flights</a></li>
@@ -954,7 +954,289 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Leaflet Map Engine script -->
+  <script>
+  const COUNTRIES = {
+    pakistan: {
+      name: "Pakistan", flag: "🇵🇰", tag: "South Asia",
+      lat: 30.3753, lng: 69.3451, zoom: 6, color: "#00a651",
+      desc: "Home to some of the world's highest peaks, lush valleys, and ancient Silk Road cities. From the towering Karakoram to Lahore's Mughal heritage, Pakistan is a traveler's paradise.",
+      attractions: [
+        { name: "Hunza Valley", lat: 36.3167, lng: 74.6508, img: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=640&q=75", desc: "Breathtaking valley with ancient forts, glaciers, and cherry blossoms. Best in spring and autumn.", tag: "Local Group", link: "./tours.html?type=local-group" },
+        { name: "K2 Base Camp Trek", lat: 35.8818, lng: 76.5131, img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=640&q=75", desc: "Trek through stunning Karakoram scenery to the foot of the world's second-highest peak.", tag: "Adventure", link: "./tours.html?type=local-private" },
+        { name: "Badshahi Mosque, Lahore", lat: 31.5885, lng: 74.3106, img: "https://images.unsplash.com/photo-1566467021595-e06e416cc427?auto=format&fit=crop&w=640&q=75", desc: "One of the world's largest mosques featuring iconic Mughal architecture built in 1673.", tag: "Heritage", link: "./tours.html?type=local-group" },
+        { name: "Swat Valley", lat: 35.2227, lng: 72.4258, img: "https://images.unsplash.com/photo-1624132903712-f81b3abb7d17?auto=format&fit=crop&w=640&q=75", desc: "Known as the Switzerland of Pakistan – green meadows, rivers, and ancient Buddhist ruins.", tag: "Scenic", link: "./tours.html?type=local-private" }
+      ]
+    },
+    japan: {
+      name: "Japan", flag: "🇯🇵", tag: "East Asia",
+      lat: 36.2048, lng: 138.2529, zoom: 6, color: "#bc002d",
+      desc: "A mesmerizing blend of ancient temples, futuristic cities, cherry blossoms, and world-class cuisine. Japan is an unmatched cultural experience for every traveler.",
+      attractions: [
+        { name: "Fushimi Inari, Kyoto", lat: 34.9671, lng: 135.7727, img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=75", desc: "Thousands of vermilion torii gates winding through misty forests on Mount Inari.", tag: "Cultural", link: "./tours.html?type=international-group" },
+        { name: "Mount Fuji", lat: 35.3606, lng: 138.7274, img: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=640&q=75", desc: "Japan's iconic volcanic peak perfectly reflected in the lakes at its base.", tag: "Nature", link: "./tours.html?type=international-private" },
+        { name: "Shibuya Crossing, Tokyo", lat: 35.6595, lng: 139.7004, img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=640&q=75", desc: "The world's busiest pedestrian crossing – the electric heartbeat of Tokyo.", tag: "City", link: "./tours.html?type=international-group" },
+        { name: "Nara Deer Park", lat: 34.6851, lng: 135.8050, img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=640&q=75", desc: "Roam with 1,000 sacred deer in this UNESCO World Heritage site.", tag: "Wildlife", link: "./tours.html?type=international-private" }
+      ]
+    },
+    italy: {
+      name: "Italy", flag: "🇮🇹", tag: "Europe",
+      lat: 41.8719, lng: 12.5674, zoom: 6, color: "#009246",
+      desc: "The cradle of civilization, home to the Colosseum, Vatican, Amalfi Coast, and world-class cuisine. Italy is pure romance and living history at every corner.",
+      attractions: [
+        { name: "Colosseum, Rome", lat: 41.8902, lng: 12.4922, img: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=640&q=75", desc: "Step inside the 2,000-year-old amphitheater where gladiatorial contests captivated thousands.", tag: "Historic", link: "./tours.html?type=international-group" },
+        { name: "Grand Canal, Venice", lat: 45.4408, lng: 12.3155, img: "https://images.unsplash.com/photo-1534113414509-0eec2bfb493f?auto=format&fit=crop&w=640&q=75", desc: "Glide past ornate palaces on a classic gondola through Venice's famous canals.", tag: "Romantic", link: "./tours.html?type=international-private" },
+        { name: "Amalfi Coast", lat: 40.6341, lng: 14.6027, img: "https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=640&q=75", desc: "Dramatic sea cliffs dotted with pastel villages, terraced vineyards, and azure water.", tag: "Scenic", link: "./tours.html?type=international-private" },
+        { name: "Vatican Museums", lat: 41.9065, lng: 12.4534, img: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=640&q=75", desc: "Home to Michelangelo's Sistine Chapel and centuries of priceless art collections.", tag: "Art", link: "./tours.html?type=international-group" }
+      ]
+    },
+    uae: {
+      name: "UAE / Dubai", flag: "🇦🇪", tag: "Middle East",
+      lat: 25.2048, lng: 55.2708, zoom: 10, color: "#00732f",
+      desc: "Desert dunes meet futuristic skyscrapers. Dubai offers record-breaking architecture, luxury shopping, desert safaris, and world-class hospitality.",
+      attractions: [
+        { name: "Burj Khalifa", lat: 25.1972, lng: 55.2744, img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=640&q=75", desc: "The world's tallest building at 828m with breathtaking observation deck panoramas.", tag: "Iconic", link: "./tours.html?type=international-group" },
+        { name: "Desert Safari", lat: 24.9876, lng: 55.5047, img: "https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?auto=format&fit=crop&w=640&q=75", desc: "Dune bashing, camel rides, and traditional Bedouin dinner under the stars.", tag: "Adventure", link: "./tours.html?type=international-private" },
+        { name: "Palm Jumeirah", lat: 25.1124, lng: 55.1390, img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=640&q=75", desc: "The iconic palm-shaped artificial island with ultra-luxury resorts and private beaches.", tag: "Luxury", link: "./tours.html?type=international-private" },
+        { name: "Dubai Marina", lat: 25.0805, lng: 55.1403, img: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?auto=format&fit=crop&w=640&q=75", desc: "A stunning waterfront promenade lined with yachts, fine dining, and glittering towers.", tag: "City", link: "./tours.html?type=international-group" }
+      ]
+    },
+    azerbaijan: {
+      name: "Azerbaijan", flag: "🇦🇿", tag: "Caucasus",
+      lat: 40.4093, lng: 49.8671, zoom: 7, color: "#0092bc",
+      desc: "The Land of Fire – modern Baku meets medieval walled cities, mud volcanoes, and eternal flames. A hidden gem becoming one of the world's top emerging destinations.",
+      attractions: [
+        { name: "Flame Towers, Baku", lat: 40.3614, lng: 49.8376, img: "https://images.unsplash.com/photo-1605106905227-0b37b11d28d3?auto=format&fit=crop&w=640&q=75", desc: "Three iconic flame-shaped skyscrapers that glow with LED fire animations every night.", tag: "Architecture", link: "./tours.html?type=international-group" },
+        { name: "Old City (Icherisheher)", lat: 40.3663, lng: 49.8349, img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=640&q=75", desc: "A UNESCO-listed medieval walled city with caravanserais, bathhouses, and the Maiden Tower.", tag: "Heritage", link: "./tours.html?type=international-private" },
+        { name: "Gobustan National Park", lat: 40.1072, lng: 49.3737, img: "https://images.unsplash.com/photo-1576834447-8e4e6f25d3a4?auto=format&fit=crop&w=640&q=75", desc: "Ancient rock carvings, bubbling mud volcanoes, and dramatic steppe landscapes near Baku.", tag: "Nature", link: "./tours.html?type=international-group" },
+        { name: "Sheki Khan Palace", lat: 41.1975, lng: 47.1706, img: "https://images.unsplash.com/photo-1571306048070-c1e6d50f8d58?auto=format&fit=crop&w=640&q=75", desc: "An 18th-century Silk Road palace adorned with stunning shebeke stained-glass mosaics.", tag: "Art", link: "./tours.html?type=international-private" }
+      ]
+    },
+    thailand: {
+      name: "Thailand", flag: "🇹🇭", tag: "Southeast Asia",
+      lat: 15.8700, lng: 100.9925, zoom: 6, color: "#a51931",
+      desc: "The Land of Smiles – tropical beaches, golden temples, lush national parks, incredible street food, and vibrant nightlife. Thailand is magical for every traveler.",
+      attractions: [
+        { name: "Phi Phi Islands", lat: 7.7407, lng: 98.7784, img: "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=640&q=75", desc: "Turquoise lagoons, dramatic limestone cliffs, and world-class diving sites.", tag: "Beach", link: "./tours.html?type=international-private" },
+        { name: "Wat Phra Kaew, Bangkok", lat: 13.7516, lng: 100.4920, img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=640&q=75", desc: "Thailand's most sacred Buddhist temple inside the Grand Palace complex.", tag: "Cultural", link: "./tours.html?type=international-group" },
+        { name: "Elephant Nature Park", lat: 18.8065, lng: 98.9385, img: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=640&q=75", desc: "Ethical elephant sanctuary near Chiang Mai – bathe and walk with rescued elephants.", tag: "Wildlife", link: "./tours.html?type=international-private" },
+        { name: "Damnoen Saduak Markets", lat: 13.5219, lng: 100.0983, img: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=640&q=75", desc: "Iconic floating markets on Bangkok's ancient canals – fresh produce and street food.", tag: "Authentic", link: "./tours.html?type=international-group" }
+      ]
+    },
+    turkey: {
+      name: "Turkey", flag: "🇹🇷", tag: "Eurasia",
+      lat: 38.9637, lng: 35.2433, zoom: 6, color: "#e30a17",
+      desc: "Bridging Europe and Asia, Turkey offers Cappadocia's fairy chimneys and hot air balloons, Istanbul's magnificent mosques, and a stunning turquoise Aegean coastline.",
+      attractions: [
+        { name: "Cappadocia Hot Air Balloons", lat: 38.6431, lng: 34.8289, img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=640&q=75", desc: "Drift over surreal fairy chimneys and cave villages in a sunrise balloon ride.", tag: "Adventure", link: "./tours.html?type=international-private" },
+        { name: "Hagia Sophia, Istanbul", lat: 41.0086, lng: 28.9802, img: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=640&q=75", desc: "A 1,500-year-old architectural marvel – once a cathedral, mosque, and museum.", tag: "Historic", link: "./tours.html?type=international-group" },
+        { name: "Pamukkale Terraces", lat: 37.9137, lng: 29.1218, img: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=640&q=75", desc: "Natural white calcium terraces with warm thermal pools cascading down a hillside.", tag: "Nature", link: "./tours.html?type=international-group" },
+        { name: "Grand Bazaar, Istanbul", lat: 41.0108, lng: 28.9684, img: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=640&q=75", desc: "One of the world's oldest covered markets with over 4,000 shops.", tag: "Shopping", link: "./tours.html?type=international-group" }
+      ]
+    },
+    malaysia: {
+      name: "Malaysia", flag: "🇲🇾", tag: "Southeast Asia",
+      lat: 4.2105, lng: 101.9758, zoom: 6, color: "#cc0001",
+      desc: "A multi-cultural melting pot with towering twin towers, ancient rainforests, stunning islands, and some of the best street food in all of Southeast Asia.",
+      attractions: [
+        { name: "Petronas Twin Towers", lat: 3.1579, lng: 101.7117, img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=640&q=75", desc: "The world's tallest twin skyscrapers – the iconic symbol of modern Kuala Lumpur.", tag: "Iconic", link: "./tours.html?type=international-group" },
+        { name: "Langkawi Island", lat: 6.3500, lng: 99.8000, img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=640&q=75", desc: "Duty-free tropical island with pristine beaches, mangroves, and stunning cable car views.", tag: "Beach", link: "./tours.html?type=international-private" },
+        { name: "Batu Caves", lat: 3.2379, lng: 101.6840, img: "https://images.unsplash.com/photo-1598970605070-a38a6ccd3a2d?auto=format&fit=crop&w=640&q=75", desc: "A Hindu temple complex inside massive limestone caves below a giant golden statue.", tag: "Cultural", link: "./tours.html?type=international-group" },
+        { name: "Cameron Highlands", lat: 4.4714, lng: 101.3800, img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=640&q=75", desc: "Misty rolling tea plantations, strawberry farms, and cool mountain retreats.", tag: "Nature", link: "./tours.html?type=international-private" }
+      ]
+    }
+  };
+
+  let map, currentCountry = null;
+  const countryMarkers = [];
+  const attractionMarkers = [];
+
+  /* ---- Bootstrap map ---- */
+  window.addEventListener("load", initMap);
+
+  function initMap() {
+    map = L.map("world-map", {
+      center: [20, 20],
+      zoom: 2,
+      minZoom: 2,
+      zoomControl: false,
+      attributionControl: true,
+      scrollWheelZoom: false // prevents page scroll hijacking
+    });
+
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      maxZoom: 18,
+      subdomains: "abcd",
+      attribution: '&copy; <a href="https://openstreetmap.org">OSM</a> | OzoTrips'
+    }).addTo(map);
+
+    L.control.zoom({ position: "topleft" }).addTo(map);
+
+    // Place all country markers
+    Object.entries(COUNTRIES).forEach(([key, c]) => {
+      addCountryMarker(key, c);
+    });
+  }
+
+  /* ---- Country marker ---- */
+  function addCountryMarker(key, c) {
+    const icon = L.divIcon({
+      className: "",
+      html: `<div class="cmarker">
+               <div class="cmarker-dot" style="background:${c.color};"></div>
+               <div class="cmarker-label">${c.flag} ${c.name}</div>
+             </div>`,
+      iconSize: [80, 40],
+      iconAnchor: [40, 10]
+    });
+
+    const marker = L.marker([c.lat, c.lng], { icon, interactive: true })
+      .addTo(map)
+      .on("click", () => flyToCountry(key));
+
+    countryMarkers.push(marker);
+  }
+
+  /* ---- Fly to country ---- */
+  function flyToCountry(key) {
+    const c = COUNTRIES[key];
+    if (!c) return;
+    currentCountry = key;
+
+    // Fade out intro banner
+    const intro = document.getElementById("map-intro");
+    if (intro) intro.style.opacity = "0";
+
+    // Show loading state in panel
+    showPanel(`<div class="panel-loading"><div class="spinner"></div>Flying to ${c.flag} ${c.name}…</div>`);
+
+    // Fly
+    map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.8, easeLinearity: 0.3 });
+
+    // Render full panel + attraction markers after flight
+    setTimeout(() => {
+      renderCountryPanel(c);
+      clearAttractionMarkers();
+      addAttractionMarkers(c);
+      document.getElementById("back-btn").style.display = "none";
+    }, 2000);
+  }
+
+  /* ---- Render country detail panel ---- */
+  function renderCountryPanel(c) {
+    let html = `
+      <span class="panel-flag">${c.flag}</span>
+      <div class="panel-name">${c.name}</div>
+      <span class="panel-tag">${c.tag}</span>
+      <p class="panel-desc">${c.desc}</p>
+      <p class="panel-attractions-label">📍 Click a pin on map or card below</p>
+    `;
+
+    c.attractions.forEach((a, i) => {
+      html += `
+        <div class="attr-card" onclick="zoomToAttraction(${i})">
+          <img src="${a.img}" alt="${a.name}" loading="lazy">
+          <div class="attr-card-body">
+            <h4>${a.name}</h4>
+            <p>${a.desc.slice(0, 80)}…</p>
+            <span class="attr-badge">${a.tag}</span>
+          </div>
+        </div>`;
+    });
+
+    html += `<a href="./tours.html?dest=${encodeURIComponent(c.name)}" class="panel-cta">View All ${c.name} Packages ✈️</a>`;
+    showPanel(html);
+  }
+
+  /* ---- Attraction markers ---- */
+  function addAttractionMarkers(c) {
+    c.attractions.forEach((a, i) => {
+      const icon = L.divIcon({
+        className: "",
+        html: `<div class="amarker-dot" title="${a.name}"></div>`,
+        iconSize: [12, 12],
+        iconAnchor: [6, 6]
+      });
+
+      const m = L.marker([a.lat, a.lng], { icon, interactive: true })
+        .addTo(map)
+        .on("click", () => openAttractionPopup(a, m));
+
+      attractionMarkers.push(m);
+    });
+  }
+
+  /* ---- Open attraction popup ---- */
+  function openAttractionPopup(a, marker) {
+    const html = `
+      <img src="${a.img}" alt="${a.name}" class="popup-img">
+      <div class="popup-body">
+        <h3>${a.name}</h3>
+        <p>${a.desc}</p>
+        <a href="${a.link}" class="popup-book">Book This Trip →</a>
+      </div>`;
+    L.popup({ maxWidth: 300, closeButton: true, autoPan: true })
+      .setLatLng(marker.getLatLng())
+      .setContent(html)
+      .openOn(map);
+    map.panTo(marker.getLatLng(), { animate: true });
+  }
+
+  /* ---- Zoom to attraction from panel card ---- */
+  window.zoomToAttraction = function(index) {
+    if (!currentCountry) return;
+    const c = COUNTRIES[currentCountry];
+    const a = c.attractions[index];
+    map.flyTo([a.lat, a.lng], Math.max(c.zoom + 4, 13), { duration: 1.3 });
+    document.getElementById("back-btn").style.display = "inline-flex";
+    setTimeout(() => openAttractionPopup(a, attractionMarkers[index]), 1400);
+  }
+
+  /* ---- Back to country ---- */
+  window.backToCountry = function() {
+    if (!currentCountry) return;
+    const c = COUNTRIES[currentCountry];
+    map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.2 });
+    map.closePopup();
+    document.getElementById("back-btn").style.display = "none";
+  }
+
+  /* ---- Reset to world view ---- */
+  window.resetMapView = function() {
+    map.flyTo([20, 20], 2, { duration: 1.8 });
+    closePanel();
+    clearAttractionMarkers();
+    currentCountry = null;
+    map.closePopup();
+    const intro = document.getElementById("map-intro");
+    if (intro) intro.style.opacity = "1";
+    document.getElementById("back-btn").style.display = "none";
+  }
+
+  /* ---- Helpers ---- */
+  window.flyToCountry = function(key) {
+    flyToCountry(key);
+  }
+
+  function showPanel(html) {
+    document.getElementById("panel-content").innerHTML = html;
+    document.getElementById("map-side-panel").classList.add("open");
+  }
+
+  window.closePanel = function() {
+    document.getElementById("map-side-panel").classList.remove("open");
+  }
+
+  function clearAttractionMarkers() {
+    attractionMarkers.forEach(m => map.removeLayer(m));
+    attractionMarkers.length = 0;
+  }
+  </script>
+\n  <!-- Scripts -->
   <script type="module" src="./src/js/main.js"></script>
   
   <!-- Gallery Tabs script -->
