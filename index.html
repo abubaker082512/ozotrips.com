@@ -152,10 +152,44 @@
   </section>
 
   <!-- Categories Section -->
-  <section class="categories-section" style="padding-top: 50px;">
+  <section class="categories-section" style="padding: 60px 0 40px; border-bottom: 1px solid var(--border-glass);">
     <div class="container">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Categories</span>
+        <h2 style="font-size: 2.2rem; margin-top: 8px;">Filter by Travel Style</h2>
+      </div>
+      <div id="category-list" class="category-list">
+        <!-- JS will populate category buttons here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Section -->
+  <section class="tours-section" id="tours">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-subtitle">Our Handpicked Adventures</span>
+          <h2>Explore Popular Destinations</h2>
+        </div>
+      </div>
+      
+      <!-- Grid of Tours -->
+      <div id="tours-grid" class="tours-grid">
+        <!-- JS will populate cards here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section (Relocated below Destinations) -->
+  <section class="search-section" style="padding: 60px 0; background: var(--bg-secondary); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Find Your Next Adventure</span>
+        <h2 style="font-size: 2.2rem; margin-top: 8px; margin-bottom: 10px;">Search Tours & Packages</h2>
+      </div>
       <!-- Search and Filter Bar -->
-      <div class="search-panel glass-panel" style="margin-top: -80px; margin-bottom: 40px; position: relative; z-index: 10; box-shadow: var(--shadow-lg);">
+      <div class="search-panel glass-panel" style="margin-top: 0; margin-bottom: 0; box-shadow: var(--shadow-lg);">
         <div class="search-input-group">
           <label for="search-dest">Destination</label>
           <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
@@ -192,27 +226,6 @@
         <button id="search-btn" class="btn btn-accent" style="width: 100%; height: 50px;">
           Find Tours 🔍
         </button>
-      </div>
-
-      <div id="category-list" class="category-list">
-        <!-- JS will populate category buttons here -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Tours Section -->
-  <section class="tours-section" id="tours">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <span class="section-subtitle">Our Handpicked Adventures</span>
-          <h2>Explore Popular Destinations</h2>
-        </div>
-      </div>
-      
-      <!-- Grid of Tours -->
-      <div id="tours-grid" class="tours-grid">
-        <!-- JS will populate cards here -->
       </div>
     </div>
   </section>
@@ -262,6 +275,39 @@
           <div style="font-size: 2.5rem;">🛂</div>
           <h3 style="font-size: 1.3rem;">Fast-Track Visa Support</h3>
           <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Our in-house visa processing department simplifies your documentation, booking details, and queues for high approval rates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CEO Section -->
+  <section class="ceo-section">
+    <div class="container">
+      <div class="ceo-grid">
+        <div class="ceo-image-wrapper fade-in">
+          <img src="./src/assets/ceo.jpg" alt="Abubaker - CEO of OzoTrips">
+          <div class="ceo-badge">
+            <h4 style="font-size: 1.05rem; font-weight: 700;">Abubaker</h4>
+            <span style="font-size: 0.8rem; color: var(--color-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Founder & CEO</span>
+          </div>
+        </div>
+        <div class="ceo-content fade-in">
+          <span style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">Personal Commitment</span>
+          <h2 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2;">Message From Our CEO</h2>
+          <div class="ceo-quote">
+            "At OzoTrips, we believe travel is not merely about visiting new locations; it is about building deep, lasting connections, experiencing cultures in their most authentic form, and returning home transformed."
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">
+            Welcome to OzoTrips. Since our founding, our mission has been simple: to curate travel experiences that blend premium comfort with local depth. Whether you are embarking on a sacred Hajj & Umrah pilgrimage, exploring the majestic peaks of Northern Pakistan, or taking your family to the tropical beaches of Bali, we are dedicated to making every detail perfect.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">
+            We personally inspect our hotel partners, verify our local guides, and offer round-the-clock concierge support so you can travel with complete peace of mind. Thank you for choosing us to craft your journey.
+          </p>
+          <div class="ceo-signature">
+            <p style="font-size: 1.1rem; margin-bottom: 4px;">With gratitude,</p>
+            <h4 style="font-size: 1.3rem; color: var(--color-primary); font-family: var(--font-sans);">Abubaker</h4>
+            <span style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Founder, OzoTrips</span>
+          </div>
         </div>
       </div>
     </div>
@@ -366,6 +412,113 @@
               <h4 style="font-size: 0.95rem;">Zainab Sajid</h4>
               <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Kyoto, Japan</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Travel Gallery Section -->
+  <section class="gallery-section">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Visual Showcase</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Explore Our Travel Moments</h2>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="gallery-tabs">
+        <button class="gallery-tab-btn active" data-filter="customers">Our Trips & Happy Customers</button>
+        <button class="gallery-tab-btn" data-filter="ceo">CEO Travels & Partner Relations</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+        <!-- Tab 1 Items: Happy Customers -->
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?auto=format&fit=crop&w=600&q=80" alt="Umrah Group 2025">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Pilgrimage</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Umrah Group 2025 in Makkah</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80" alt="Hunza Retreat">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Local Group</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Family Retreat at Hunza Valley</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80" alt="Bali Honeymoon">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">International</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Honeymoon Escape in Ubud, Bali</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80" alt="Kyoto Cultural">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">International</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Cultural Exploration in Kyoto, Japan</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Skardu Meadows">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Local Private</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Corporate Tour at Skardu Meadows</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Rome Colosseum">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">International</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Group Excursion at Rome Colosseum</h4>
+          </div>
+        </div>
+
+        <!-- Tab 2 Items: CEO & Partner Relations -->
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Madinah Hilton Inspection">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Partner Check-in</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Hotel Inspection at Madinah Hilton</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=600&q=80" alt="Makkah Partnership">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Relations</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Partnership Signing at Movenpick Makkah</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80" alt="Dubai Palm Suite">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Quality Check</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Inspecting VIP Suite in Dubai Palm</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Aviation Partners">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Alliances</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Business Relation Meeting with Aviation Partners</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80" alt="Luxury Resort Hunza">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Site Visit</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Site Visit to Luxury Resort in Hunza</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=600&q=80" alt="Pullman Zamzam Makkah">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Partner Check-in</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Relations Check-in at Pullman Zamzam Makkah</h4>
           </div>
         </div>
       </div>
@@ -525,6 +678,41 @@
 
   <!-- Scripts -->
   <script type="module" src="./src/js/main.js"></script>
+  
+  <!-- Gallery Tabs script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabBtns = document.querySelectorAll(".gallery-tab-btn");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+
+      if (tabBtns.length > 0 && galleryItems.length > 0) {
+        tabBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            // Remove active class from all buttons
+            tabBtns.forEach(b => b.classList.remove("active"));
+            // Add active class to clicked button
+            btn.classList.add("active");
+
+            const filterValue = btn.getAttribute("data-filter");
+
+            galleryItems.forEach(item => {
+              if (item.getAttribute("data-category") === filterValue) {
+                item.classList.add("show");
+              } else {
+                item.classList.remove("show");
+              }
+            });
+          });
+        });
+
+        // Initialize active tab elements
+        const activeBtn = document.querySelector(".gallery-tab-btn.active");
+        if (activeBtn) {
+          activeBtn.click();
+        }
+      }
+    });
+  </script>
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <span class="whatsapp-icon">💬</span>
