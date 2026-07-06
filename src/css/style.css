@@ -3269,3 +3269,31 @@ footer {
     height: 68px !important;
   }
 }
+
+/* Hajj & Umrah Homepage Section Layout */
+.hajj-umrah-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hajj-umrah-packages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .hajj-umrah-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hajj-umrah-packages {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
