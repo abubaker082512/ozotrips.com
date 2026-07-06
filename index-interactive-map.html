@@ -397,6 +397,12 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Mobile Navigation Toggle -->
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-actions">
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
           <span>☀️</span>
@@ -408,12 +414,12 @@
 
   <!-- Hero Section -->
   <!-- Map Hero Section -->
-  <section class="hero-map-section" id="home" style="position: relative; height: 75vh; min-height: 600px; overflow: hidden; background: #0d1626; border-bottom: 1px solid var(--border-glass);">
+  <section class="hero-map-section" id="home" style="position: relative; height: 75vh; min-height: 600px; overflow: hidden; background: #0d1626; border-bottom: 1px solid var(--border-glass); margin-top: 80px;">
     <!-- Leaflet map canvas -->
     <div id="world-map" style="width: 100%; height: 100%; z-index: 1;"></div>
 
     <!-- Floating intro text -->
-    <div id="map-intro" style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center; pointer-events: none; transition: opacity 0.5s; width: 90%; max-width: 600px;">
+    <div id="map-intro" style="position: absolute; top: 30px; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center; pointer-events: none; transition: opacity 0.5s; width: 90%; max-width: 600px;">
       <h1 style="font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.9); margin-bottom: 6px;">Explore the World,<br>One Click at a Time</h1>
       <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; text-shadow: 0 1px 8px rgba(0,0,0,0.7); margin-bottom: 12px;">Powered by OzoTrips – click any glowing pin or choose a destination below</p>
       <span class="map-hint-badge" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,153,0,0.2); border: 1px solid rgba(255,153,0,0.5); color: #ffb700; padding: 5px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;">🌍 Click a country pin to begin exploring</span>
@@ -421,26 +427,26 @@
 
     <!-- Country quick-select chips -->
     <div id="country-chips" style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 90%; max-width: 760px; pointer-events: all;">
-      <div class="country-chip" onclick="flyToCountry('pakistan')">🇵🇰 Pakistan</div>
-      <div class="country-chip" onclick="flyToCountry('japan')">🇯🇵 Japan</div>
-      <div class="country-chip" onclick="flyToCountry('italy')">🇮🇹 Italy</div>
-      <div class="country-chip" onclick="flyToCountry('uae')">🇦🇪 Dubai / UAE</div>
-      <div class="country-chip" onclick="flyToCountry('azerbaijan')">🇦🇿 Azerbaijan</div>
-      <div class="country-chip" onclick="flyToCountry('thailand')">🇹🇭 Thailand</div>
-      <div class="country-chip" onclick="flyToCountry('turkey')">🇹🇷 Turkey</div>
-      <div class="country-chip" onclick="flyToCountry('malaysia')">🇲🇾 Malaysia</div>
+      <div class="country-chip" data-country="pakistan">🇵🇰 Pakistan</div>
+      <div class="country-chip" data-country="japan">🇯🇵 Japan</div>
+      <div class="country-chip" data-country="italy">🇮🇹 Italy</div>
+      <div class="country-chip" data-country="uae">🇦🇪 Dubai / UAE</div>
+      <div class="country-chip" data-country="azerbaijan">🇦🇿 Azerbaijan</div>
+      <div class="country-chip" data-country="thailand">🇹🇭 Thailand</div>
+      <div class="country-chip" data-country="turkey">🇹🇷 Turkey</div>
+      <div class="country-chip" data-country="malaysia">🇲🇾 Malaysia</div>
     </div>
 
     <!-- Glassmorphic side panel -->
     <div id="map-side-panel" style="position: absolute; top: 16px; right: -410px; width: 380px; height: calc(100% - 32px); overflow-y: auto; background: rgba(9, 15, 30, 0.97); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.1); border-right: none; border-radius: 16px 0 0 16px; padding: 28px 24px 28px 28px; z-index: 999; transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: -10px 0 50px rgba(0,0,0,0.6);">
-      <button class="panel-close-btn" onclick="closePanel()" style="position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; line-height: 1;">✕</button>
+      <button class="panel-close-btn" id="panel-close-btn" style="position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; line-height: 1;">✕</button>
       <div id="panel-content"></div>
     </div>
 
     <!-- Map controls -->
     <div id="map-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; gap: 10px;">
-      <button class="ctrl-btn" id="back-btn" style="display:none" onclick="backToCountry()">← Back</button>
-      <button class="ctrl-btn accent" onclick="resetMapView()">🌍 World View</button>
+      <button class="ctrl-btn" id="back-btn" style="display:none">← Back</button>
+      <button class="ctrl-btn accent" id="world-view-btn">🌍 World View</button>
     </div>
   </section>
 <!-- Categories Section -->
@@ -1209,9 +1215,8 @@
     document.getElementById("back-btn").style.display = "inline-flex";
     setTimeout(() => openAttractionPopup(a, attractionMarkers[index]), 1400);
   }
-
   /* ---- Back to country ---- */
-  window.backToCountry = function() {
+  function backToCountry() {
     if (!currentCountry) return;
     const c = COUNTRIES[currentCountry];
     map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.2 });
@@ -1220,7 +1225,7 @@
   }
 
   /* ---- Reset to world view ---- */
-  window.resetMapView = function() {
+  function resetMapView() {
     map.flyTo([20, 20], 2, { duration: 1.8 });
     closePanel();
     clearAttractionMarkers();
@@ -1232,19 +1237,26 @@
   }
 
   /* ---- Helpers ---- */
-  window.flyToCountry = function(key) {
-    flyToCountry(key);
-  }
-
   function showPanel(html) {
     document.getElementById("panel-content").innerHTML = html;
     document.getElementById("map-side-panel").classList.add("open");
   }
 
-  window.closePanel = function() {
+  function closePanel() {
     document.getElementById("map-side-panel").classList.remove("open");
   }
 
+  // Bind Native JS Event listeners
+  document.getElementById("back-btn").addEventListener("click", backToCountry);
+  document.getElementById("world-view-btn").addEventListener("click", resetMapView);
+  document.getElementById("panel-close-btn").addEventListener("click", closePanel);
+
+  document.querySelectorAll(".country-chip").forEach(chip => {
+    chip.addEventListener("click", (e) => {
+      const countryKey = e.currentTarget.getAttribute("data-country");
+      flyToCountry(countryKey);
+    });
+  });
   function clearAttractionMarkers() {
     attractionMarkers.forEach(m => map.removeLayer(m));
     attractionMarkers.length = 0;
