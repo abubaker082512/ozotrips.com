@@ -3,227 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive World Map Explorer | OzoTrips</title>
-  <meta name="description" content="Explore the world interactively with OzoTrips. Click any country to zoom in, discover famous tourist attractions, view photos, and book your dream trip.">
+  
+  <!-- SEO Meta Tags -->
+  <title>OzoTrips | Premium Local & International Tour Bookings</title>
+  <meta name="description" content="Explore and book premium local tours in Pakistan and international destinations around the world. Secure booking, custom itineraries, and dedicated concierge support.">
+  <meta name="keywords" content="tours, local travel, international flights, Pakistan tourism, adventure holiday, booking">
+  <meta name="author" content="OzoTrips Inc.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OzoTrips | Premium Local & International Tours">
+  <meta property="og:description" content="Explore and book premium local tours in Pakistan and international destinations around the world.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&h=630&q=80">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="./src/css/style.css">
+
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
   <style>
-    /* ============================================
-       Layout – keep header, fill rest with map
-       ============================================ */
-    html, body {
-      height: 100%;
-      overflow: hidden;
+    /* Interactive Map Styles */
+    .hero-map-section {
+      margin-top: 0;
     }
-
-    #site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 3000;
-    }
-
-    #map-wrapper {
-      position: fixed;
-      top: 72px;          /* height of site header */
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
-    }
-
-    #world-map {
-      width: 100%;
-      height: 100%;
-      background: #0d1626;
-    }
-
-    /* ============================================
-       Floating intro overlay
-       ============================================ */
-    #map-intro {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 800;
-      text-align: center;
-      pointer-events: none;
-      transition: opacity 0.5s;
-      width: 90%;
-      max-width: 720px;
-    }
-
-    #map-intro h1 {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.15;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.9);
-      margin-bottom: 6px;
-    }
-
-    #map-intro p {
-      color: rgba(255,255,255,0.7);
-      font-size: 0.9rem;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.7);
-      margin-bottom: 12px;
-    }
-
+    
     .map-hint-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,153,0,0.2);
-      border: 1px solid rgba(255,153,0,0.5);
-      color: #ffb700;
-      padding: 5px 16px;
-      border-radius: 50px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      animation: pulseBadge 2s infinite;
     }
-
-    /* Quick chips row */
-    #country-chips {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 800;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      width: 90%;
-      max-width: 760px;
-      pointer-events: all;
+    
+    @keyframes pulseBadge {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.4);
+      }
+      70% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(255, 153, 0, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+      }
     }
 
     .country-chip {
       padding: 8px 16px;
       background: rgba(13, 22, 38, 0.88);
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid var(--border-glass);
       border-radius: 50px;
-      color: rgba(255,255,255,0.85);
+      color: var(--text-secondary);
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all var(--transition-fast);
       backdrop-filter: blur(10px);
       white-space: nowrap;
     }
 
     .country-chip:hover {
-      background: rgba(255,153,0,0.25);
-      border-color: rgba(255,153,0,0.6);
-      color: #ffb700;
+      background: rgba(255, 153, 0, 0.25);
+      border-color: var(--color-secondary);
+      color: var(--color-secondary);
       transform: translateY(-2px);
     }
 
-    /* ============================================
-       Glassmorphic Side Panel
-       ============================================ */
-    #map-side-panel {
-      position: absolute;
-      top: 16px;
-      right: -430px;
-      width: 390px;
-      max-height: calc(100% - 32px);
-      overflow-y: auto;
-      background: rgba(9, 15, 30, 0.97);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-right: none;
-      border-radius: 16px 0 0 16px;
-      padding: 28px 24px 28px 28px;
-      z-index: 900;
-      transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: -10px 0 50px rgba(0,0,0,0.6);
+    .panel-close-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
 
-    #map-side-panel.open { right: 0; }
-
-    #map-side-panel::-webkit-scrollbar { width: 3px; }
-    #map-side-panel::-webkit-scrollbar-thumb { background: rgba(255,153,0,0.3); border-radius: 3px; }
-
-    .panel-close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7);
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      line-height: 1;
-    }
-    .panel-close-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
-
-    .panel-flag { font-size: 2.6rem; display: block; margin-bottom: 6px; }
-    .panel-name { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-
-    .panel-tag {
-      display: inline-block;
-      background: rgba(255,153,0,0.15);
-      border: 1px solid rgba(255,153,0,0.4);
-      color: #ffb700;
-      padding: 3px 12px;
-      border-radius: 50px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-
-    .panel-desc {
-      color: rgba(255,255,255,0.6);
-      font-size: 0.88rem;
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-
-    .panel-attractions-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 12px;
-    }
-
-    /* Attraction cards in panel */
     .attr-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-glass);
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 12px;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all var(--transition-fast);
     }
+
     .attr-card:hover {
-      border-color: rgba(255,153,0,0.4);
-      background: rgba(255,153,0,0.05);
+      border-color: var(--color-secondary);
+      background: rgba(255, 153, 0, 0.05);
       transform: translateX(-3px);
     }
-    .attr-card img { width: 100%; height: 130px; object-fit: cover; display: block; }
-    .attr-card-body { padding: 12px 14px; }
-    .attr-card-body h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
-    .attr-card-body p { font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.45; margin-bottom: 8px; }
+
     .attr-badge {
       font-size: 0.68rem;
-      background: rgba(0,82,204,0.18);
-      border: 1px solid rgba(0,82,204,0.35);
+      background: rgba(0, 82, 204, 0.18);
+      border: 1px solid rgba(0, 82, 204, 0.35);
       color: #5ba3ff;
       padding: 2px 9px;
       border-radius: 50px;
@@ -236,90 +110,74 @@
       width: 100%;
       margin-top: 18px;
       padding: 13px;
-      background: linear-gradient(135deg, #0052cc, #0a7aff);
+      background: linear-gradient(135deg, var(--color-primary), #0a7aff);
       color: #fff;
       border-radius: 10px;
       text-align: center;
       font-weight: 700;
       font-size: 0.9rem;
       text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: all var(--transition-fast);
     }
-    .panel-cta:hover { opacity: 0.9; transform: translateY(-2px); }
 
-    /* Loading state */
-    .panel-loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 12px;
-      padding: 50px 0;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.88rem;
-    }
-    .spinner {
-      width: 22px; height: 22px;
-      border: 2px solid rgba(255,153,0,0.25);
-      border-top-color: #ff9900;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ============================================
-       Control bar at bottom-centre
-       ============================================ */
-    #map-controls {
-      position: absolute;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 800;
-      display: flex;
-      gap: 10px;
+    .panel-cta:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
 
     .ctrl-btn {
       padding: 10px 20px;
       border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(9,15,30,0.92);
+      border: 1px solid var(--border-glass);
+      background: rgba(9, 15, 30, 0.92);
       backdrop-filter: blur(12px);
       color: #fff;
       font-weight: 600;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-md);
       white-space: nowrap;
     }
-    .ctrl-btn:hover { background: rgba(0,82,204,0.6); border-color: rgba(0,82,204,0.5); }
-    .ctrl-btn.accent { background: linear-gradient(135deg,#ff9900,#ff7700); border-color: transparent; }
-    .ctrl-btn.accent:hover { opacity: 0.88; }
 
-    /* ============================================
-       Leaflet popup dark theme overrides
-       ============================================ */
+    .ctrl-btn:hover {
+      background: rgba(0, 82, 204, 0.6);
+      border-color: rgba(0, 82, 204, 0.5);
+    }
+
+    .ctrl-btn.accent {
+      background: linear-gradient(135deg, var(--color-secondary), #ff7700);
+      border-color: transparent;
+    }
+
+    .ctrl-btn.accent:hover {
+      opacity: 0.88;
+    }
+
+    /* Leaflet popup styling overrides */
     .leaflet-popup-content-wrapper {
-      background: rgba(9,15,30,0.97) !important;
-      border: 1px solid rgba(255,255,255,0.1) !important;
+      background: rgba(9, 15, 30, 0.97) !important;
+      border: 1px solid var(--border-glass) !important;
       border-radius: 14px !important;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.8) !important;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8) !important;
       color: #fff !important;
       backdrop-filter: blur(16px) !important;
       padding: 0 !important;
       overflow: hidden;
       min-width: 260px;
     }
-    .leaflet-popup-tip-container { display: none !important; }
+
+    .leaflet-popup-tip-container {
+      display: none !important;
+    }
+
     .leaflet-popup-close-button {
-      color: rgba(255,255,255,0.6) !important;
+      color: rgba(255, 255, 255, 0.6) !important;
       font-size: 18px !important;
       top: 8px !important;
       right: 10px !important;
       z-index: 10;
-      background: rgba(0,0,0,0.3) !important;
+      background: rgba(0, 0, 0, 0.3) !important;
       border-radius: 50% !important;
       width: 22px !important;
       height: 22px !important;
@@ -328,43 +186,67 @@
       padding: 0 !important;
     }
 
-    .popup-img { width: 100%; height: 170px; object-fit: cover; display: block; }
-    .popup-body { padding: 14px 16px 16px; }
-    .popup-body h3 { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: 5px; }
-    .popup-body p { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 12px; }
+    .popup-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .popup-body {
+      padding: 14px 16px 16px;
+    }
+
+    .popup-body h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .popup-body p {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
     .popup-book {
       display: inline-block;
       padding: 7px 14px;
-      background: linear-gradient(135deg,#ff9900,#ff7700);
+      background: linear-gradient(135deg, var(--color-secondary), #ff7700);
       color: #fff;
       border-radius: 7px;
       font-size: 0.8rem;
       font-weight: 700;
       text-decoration: none;
     }
-    .popup-book:hover { opacity: 0.88; }
 
-    /* ============================================
-       Custom map marker styles
-       ============================================ */
+    .popup-book:hover {
+      opacity: 0.88;
+    }
+
+    /* Custom markers */
     .cmarker {
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
     }
+
     .cmarker-dot {
       width: 16px;
       height: 16px;
       border-radius: 50%;
       border: 2.5px solid #fff;
       animation: cPulse 2s infinite;
-      box-shadow: 0 0 0 0 rgba(255,153,0,0.7);
+      box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
     }
+
     .cmarker-label {
       margin-top: 4px;
-      background: rgba(9,15,30,0.9);
-      border: 1px solid rgba(255,153,0,0.5);
+      background: rgba(9, 15, 30, 0.9);
+      border: 1px solid rgba(255, 153, 0, 0.5);
       color: #ffb700;
       padding: 2px 8px;
       border-radius: 5px;
@@ -380,53 +262,74 @@
       background: #0a7aff;
       border-radius: 50%;
       border: 2px solid #fff;
-      box-shadow: 0 0 0 0 rgba(10,122,255,0.7);
+      box-shadow: 0 0 0 0 rgba(10, 122, 255, 0.7);
       animation: aPulse 2.2s infinite;
       cursor: pointer;
     }
 
     @keyframes cPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(255,153,0,0.8); }
-      70%  { box-shadow: 0 0 0 14px rgba(255,153,0,0); }
-      100% { box-shadow: 0 0 0 0 rgba(255,153,0,0); }
-    }
-    @keyframes aPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(10,122,255,0.8); }
-      70%  { box-shadow: 0 0 0 10px rgba(10,122,255,0); }
-      100% { box-shadow: 0 0 0 0 rgba(10,122,255,0); }
+      0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.8); }
+      70% { box-shadow: 0 0 0 14px rgba(255, 153, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
     }
 
-    /* ============================================
-       Responsive
-       ============================================ */
+    @keyframes aPulse {
+      0% { box-shadow: 0 0 0 0 rgba(10, 122, 255, 0.8); }
+      70% { box-shadow: 0 0 0 10px rgba(10, 122, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(10, 122, 255, 0); }
+    }
+
+    /* Scrollbar for panel */
+    #map-side-panel::-webkit-scrollbar {
+      width: 4px;
+    }
+    #map-side-panel::-webkit-scrollbar-thumb {
+      background: rgba(255, 153, 0, 0.3);
+      border-radius: 4px;
+    }
+
     @media (max-width: 768px) {
-      #map-wrapper { top: 60px; }
-      #map-intro h1 { font-size: 1.4rem; }
-      #map-side-panel {
-        top: auto;
-        bottom: -100%;
-        right: 0;
-        width: 100%;
-        border-radius: 18px 18px 0 0;
-        border-right: 1px solid rgba(255,255,255,0.1);
-        max-height: 65%;
-        transition: bottom 0.4s cubic-bezier(0.22,1,0.36,1);
+      .hero-map-section {
+        height: 60vh !important;
+        min-height: 450px !important;
       }
-      #map-side-panel.open { bottom: 0; right: 0; }
-      #country-chips { bottom: 80px; }
+      #map-side-panel {
+        top: auto !important;
+        bottom: -100% !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 60% !important;
+        border-radius: 18px 18px 0 0 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+      }
+      #map-side-panel.open {
+        bottom: 0 !important;
+        right: 0 !important;
+      }
+      #country-chips {
+        bottom: 70px !important;
+      }
+      #map-controls {
+        bottom: 15px !important;
+      }
+      #map-intro h1 {
+        font-size: 1.6rem !important;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header (injected by nav script) -->
-  <header id="site-header">
-    <div class="container header-inner">
-      <a href="./index.html" class="logo" aria-label="OzoTrips Home">
-        <img src="./src/assets/logo-light.png" alt="OzoTrips Logo" class="logo-img logo-light-img">
-        <img src="./src/assets/logo-dark.png" alt="OzoTrips Logo" class="logo-img logo-dark-img">
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        <img src="./src/assets/logo-light.png" alt="OzoTrips" class="logo-img logo-light">
+        <img src="./src/assets/logo-dark.png" alt="OzoTrips" class="logo-img logo-dark">
       </a>
       <nav>
-        <ul class="nav-links">
+          <ul class="nav-links">
           <li class="nav-dropdown">
             <a href="./index.html" class="nav-link dropdown-toggle active">Home <span class="arrow">▼</span></a>
             <ul class="dropdown-menu">
@@ -441,36 +344,69 @@
             </ul>
           </li>
           <li><a href="./flights.html" class="nav-link">Flights</a></li>
-          <li><a href="./tours.html" class="nav-link">Tours</a></li>
+          <li class="nav-dropdown">
+            <a href="./tours.html" class="nav-link dropdown-toggle">Tours <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./tours.html">All Tours Catalog</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-header">Tour Categories</li>
+              <li><a href="./tours.html?type=international-group">✈️ International Group</a></li>
+              <li><a href="./tours.html?type=international-private">💎 International Private</a></li>
+              <li><a href="./tours.html?type=local-group">🇵🇰 Local Group Tours</a></li>
+              <li><a href="./tours.html?type=local-private">🏡 Local Private Tours</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-header">Featured Packages</li>
+              <li><a href="./tour-detail.html?id=1">Baku Group Tour</a></li>
+              <li><a href="./tour-detail.html?id=2">Thailand Honeymoon</a></li>
+              <li><a href="./tour-detail.html?id=3">Kalam Swat Adventure</a></li>
+              <li><a href="./tour-detail.html?id=4">Himmel Skardu Private</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Destinations <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./attractions.html">Attractions Map</a></li>
+              <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
+            </ul>
+          </li>
           <li><a href="./visa-services.html" class="nav-link">Visa</a></li>
-          <li><a href="./umrah.html" class="nav-link">Hajj &amp; Umrah</a></li>
+          <li><a href="./umrah.html" class="nav-link">Hajj & Umrah</a></li>
+          <li><a href="./custom-planner.html" class="nav-link">Custom Planner</a></li>
           <li><a href="./offers.html" class="nav-link">Offers</a></li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Company <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./blog.html">Travel Blog</a></li>
+              <li><a href="./help-center.html">Help Center</a></li>
+              <li><a href="./about.html">About Us</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
-      <div class="header-actions">
-        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light mode">🌙</button>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+          <span>☀️</span>
+        </button>
         <a href="./tours.html" class="btn btn-primary">Book Now</a>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open mobile menu">☰</button>
       </div>
     </div>
   </header>
-  <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
 
-  <!-- Full-screen map wrapper (below header) -->
-  <div id="map-wrapper">
-
+  <!-- Hero Section -->
+  <!-- Map Hero Section -->
+  <section class="hero-map-section" id="home" style="position: relative; height: 75vh; min-height: 600px; overflow: hidden; background: #0d1626; border-bottom: 1px solid var(--border-glass);">
     <!-- Leaflet map canvas -->
-    <div id="world-map"></div>
+    <div id="world-map" style="width: 100%; height: 100%; z-index: 1;"></div>
 
     <!-- Floating intro text -->
-    <div id="map-intro">
-      <h1>Explore the World,<br>One Click at a Time</h1>
-      <p>Powered by OzoTrips – click any glowing pin or choose a destination below</p>
-      <span class="map-hint-badge">🌍 Click a country pin to begin exploring</span>
+    <div id="map-intro" style="position: absolute; top: 30px; left: 50%; transform: translateX(-50%); z-index: 999; text-align: center; pointer-events: none; transition: opacity 0.5s; width: 90%; max-width: 600px;">
+      <h1 style="font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.9); margin-bottom: 6px;">Explore the World,<br>One Click at a Time</h1>
+      <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; text-shadow: 0 1px 8px rgba(0,0,0,0.7); margin-bottom: 12px;">Powered by OzoTrips – click any glowing pin or choose a destination below</p>
+      <span class="map-hint-badge" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255,153,0,0.2); border: 1px solid rgba(255,153,0,0.5); color: #ffb700; padding: 5px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;">🌍 Click a country pin to begin exploring</span>
     </div>
 
     <!-- Country quick-select chips -->
-    <div id="country-chips">
+    <div id="country-chips" style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 90%; max-width: 760px; pointer-events: all;">
       <div class="country-chip" onclick="flyToCountry('pakistan')">🇵🇰 Pakistan</div>
       <div class="country-chip" onclick="flyToCountry('japan')">🇯🇵 Japan</div>
       <div class="country-chip" onclick="flyToCountry('italy')">🇮🇹 Italy</div>
@@ -482,299 +418,579 @@
     </div>
 
     <!-- Glassmorphic side panel -->
-    <div id="map-side-panel">
-      <button class="panel-close-btn" onclick="closePanel()">✕</button>
+    <div id="map-side-panel" style="position: absolute; top: 16px; right: -410px; width: 380px; height: calc(100% - 32px); overflow-y: auto; background: rgba(9, 15, 30, 0.97); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.1); border-right: none; border-radius: 16px 0 0 16px; padding: 28px 24px 28px 28px; z-index: 999; transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: -10px 0 50px rgba(0,0,0,0.6);">
+      <button class="panel-close-btn" onclick="closePanel()" style="position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; line-height: 1;">✕</button>
       <div id="panel-content"></div>
     </div>
 
     <!-- Map controls -->
-    <div id="map-controls">
+    <div id="map-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 999; display: flex; gap: 10px;">
       <button class="ctrl-btn" id="back-btn" style="display:none" onclick="backToCountry()">← Back</button>
       <button class="ctrl-btn accent" onclick="resetMapView()">🌍 World View</button>
     </div>
+  </section>
+<!-- Categories Section -->
+  <section class="categories-section" style="padding: 60px 0 40px; border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Categories</span>
+        <h2 style="font-size: 2.2rem; margin-top: 8px;">Filter by Travel Style</h2>
+      </div>
+      <div id="category-list" class="category-list">
+        <!-- JS will populate category buttons here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Section -->
+  <section class="tours-section" id="tours">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-subtitle">Our Handpicked Adventures</span>
+          <h2>Explore Popular Destinations</h2>
+        </div>
+      </div>
+      
+      <!-- Grid of Tours -->
+      <div id="tours-grid" class="tours-grid">
+        <!-- JS will populate cards here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section (Relocated below Destinations) -->
+  <section class="search-section" style="padding: 60px 0; background: var(--bg-secondary); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Find Your Next Adventure</span>
+        <h2 style="font-size: 2.2rem; margin-top: 8px; margin-bottom: 10px;">Search Tours & Packages</h2>
+      </div>
+      <!-- Search and Filter Bar -->
+      <div class="search-panel glass-panel" style="margin-top: 0; margin-bottom: 0; box-shadow: var(--shadow-lg);">
+        <div class="search-input-group">
+          <label for="search-dest">Destination</label>
+          <input type="text" id="search-dest" placeholder="Search e.g. Hunza, Bali...">
+        </div>
+        <div class="search-input-group">
+          <label for="filter-type">Type</label>
+          <select id="filter-type">
+            <option value="">All Types</option>
+            <option value="international-group">✈️ International Group Tours</option>
+            <option value="international-private">💎 International Private Tours</option>
+            <option value="local-group">🇵🇰 Local Group Tours</option>
+            <option value="local-private">🏡 Local Private Tours</option>
+          </select>
+        </div>
+        <div class="search-input-group">
+          <label for="filter-budget">Max Budget</label>
+          <select id="filter-budget">
+            <option value="">No Limit</option>
+            <option value="50000">Under PKR 50,000</option>
+            <option value="250000">Under PKR 250,000</option>
+            <option value="500000">Under PKR 500,000</option>
+            <option value="1000000">Under PKR 1,000,000</option>
+          </select>
+        </div>
+        <div class="search-input-group">
+          <label for="filter-duration">Duration</label>
+          <select id="filter-duration">
+            <option value="">Any Duration</option>
+            <option value="short">Short (1-4 Days)</option>
+            <option value="medium">Medium (5-7 Days)</option>
+            <option value="long">Long (8+ Days)</option>
+          </select>
+        </div>
+        <button id="search-btn" class="btn btn-accent" style="width: 100%; height: 50px;">
+          Find Tours 🔍
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Stats Counter -->
+  <section style="padding: 60px 0; background: rgba(255, 255, 255, 0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; text-align: center;">
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">50K+</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Happy Travelers</p>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">120+</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Destinations</p>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">12+</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Years Experience</p>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-size: 2.8rem; color: var(--color-primary); font-weight: 800;">4.9/5</h3>
+        <p style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-top: 8px;">Average Rating</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section style="padding: 100px 0;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Why Travel With Us</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Uncompromised Travel Standards</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+        <div class="glass-panel fade-in" style="padding: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 2.5rem;">🎒</div>
+          <h3 style="font-size: 1.3rem;">Curated Premium Packages</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Every destination is handpicked by our staff. We secure boutique stays, verified local transfers, and expert guide access.</p>
+        </div>
+        <div class="glass-panel fade-in" style="padding: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 2.5rem;">👑</div>
+          <h3 style="font-size: 1.3rem;">24/7 Dedicated Concierge</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Travel with peace of mind. Our support lines are live 24 hours a day to handle itinerary edits, delays, or custom requests.</p>
+        </div>
+        <div class="glass-panel fade-in" style="padding: 40px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-size: 2.5rem;">🛂</div>
+          <h3 style="font-size: 1.3rem;">Fast-Track Visa Support</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Our in-house visa processing department simplifies your documentation, booking details, and queues for high approval rates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CEO Section -->
+  <section class="ceo-section">
+    <div class="container">
+      <div class="ceo-grid">
+        <div class="ceo-image-wrapper fade-in">
+          <img src="./src/assets/ceo.png" alt="Habib Ullah - CEO of OzoTrips">
+          <div class="ceo-badge">
+            <h4 style="font-size: 1.05rem; font-weight: 700;">Habib Ullah</h4>
+            <span style="font-size: 0.8rem; color: var(--color-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Founder & CEO</span>
+          </div>
+        </div>
+        <div class="ceo-content fade-in">
+          <span style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">Personal Commitment</span>
+          <h2 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2;">Message From Our CEO</h2>
+          <div class="ceo-quote">
+            "At OzoTrips, we believe travel is not merely about visiting new locations; it is about building deep, lasting connections, experiencing cultures in their most authentic form, and returning home transformed."
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">
+            Welcome to OzoTrips. Since our founding, our mission has been simple: to curate travel experiences that blend premium comfort with local depth. Whether you are embarking on a sacred Hajj & Umrah pilgrimage, exploring the majestic peaks of Northern Pakistan, or taking your family to the tropical beaches of Bali, we are dedicated to making every detail perfect.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">
+            We personally inspect our hotel partners, verify our local guides, and offer round-the-clock concierge support so you can travel with complete peace of mind. Thank you for choosing us to craft your journey.
+          </p>
+          <div class="ceo-signature">
+            <p style="font-size: 1.1rem; margin-bottom: 4px;">With gratitude,</p>
+            <h4 style="font-size: 1.3rem; color: var(--color-primary); font-family: var(--font-sans);">Habib Ullah</h4>
+            <span style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Founder, OzoTrips</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hajj & Umrah Section -->
+  <section style="padding: 100px 0; background: rgba(0, 82, 204, 0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; flex-wrap: wrap;">
+        <div class="fade-in">
+          <span style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 8px;">🕋 Sacred Journeys</span>
+          <h2 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2;">Hajj & Umrah Pilgrimage Packages</h2>
+          <p style="color: var(--text-secondary); margin-top: 16px; line-height: 1.7; font-size: 1rem;">
+            Embark on a spiritual journey of a lifetime with our guided pilgrimage services. We specialize in providing comfort, proximity, and trust with premium accommodations close to the Holy Mosques in Makkah and Madinah, direct flights, express visa processing, and dedicated guides.
+          </p>
+          <div style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="./umrah.html" class="btn btn-primary">View Packages 🕋</a>
+            <a href="./umrah.html#inquiry" class="btn btn-secondary">Inquire Now ➔</a>
+          </div>
+        </div>
+        <div class="fade-in" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <!-- Economy Card -->
+          <div class="glass-panel" style="padding: 24px; border-radius: var(--border-radius-md); border-top: 3px solid var(--color-primary);">
+            <h4 style="font-size: 1.15rem; margin-bottom: 6px;">Economy 15-Days</h4>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; margin-bottom: 12px;">3-Star hotels quad sharing, visa processing & group Ziyarat.</p>
+            <span style="font-size: 1.15rem; font-weight: 800; color: var(--color-primary);">PKR 260,000</span>
+          </div>
+          <!-- Premium Card -->
+          <div class="glass-panel" style="padding: 24px; border-radius: var(--border-radius-md); border-top: 3px solid var(--color-secondary);">
+            <h4 style="font-size: 1.15rem; margin-bottom: 6px;">Comfort 10-Days</h4>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; margin-bottom: 12px;">4-Star hotels (300m), visa, private GMC transport & Ziyarat.</p>
+            <span style="font-size: 1.15rem; font-weight: 800; color: var(--color-secondary);">PKR 380,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section" style="padding: 80px 0; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;">
+        <div class="stat-card glass-panel fade-in" style="padding: 28px; border-radius: var(--border-radius-md);">
+          <span class="stat-num" style="font-size: 2.8rem; font-weight: 800; color: var(--color-primary); display: block;" data-target="15000">0</span>
+          <span class="stat-lbl" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; display: block; font-weight: 600;">Happy Travelers</span>
+        </div>
+        <div class="stat-card glass-panel fade-in" style="padding: 28px; border-radius: var(--border-radius-md);">
+          <span class="stat-num" style="font-size: 2.8rem; font-weight: 800; color: var(--color-secondary); display: block;" data-target="4.9">0.0</span>
+          <span class="stat-lbl" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; display: block; font-weight: 600;">Customer Rating</span>
+        </div>
+        <div class="stat-card glass-panel fade-in" style="padding: 28px; border-radius: var(--border-radius-md);">
+          <span class="stat-num" style="font-size: 2.8rem; font-weight: 800; color: var(--color-accent); display: block;" data-target="150">0</span>
+          <span class="stat-lbl" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; display: block; font-weight: 600;">Destinations</span>
+        </div>
+        <div class="stat-card glass-panel fade-in" style="padding: 28px; border-radius: var(--border-radius-md);">
+          <span class="stat-num" style="font-size: 2.8rem; font-weight: 800; color: var(--color-primary); display: block;" data-target="24">0</span>
+          <span class="stat-lbl" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; display: block; font-weight: 600;">Hours Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section style="padding: 100px 0; border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Client Stories</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">What Our Travelers Say</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        <div class="glass-panel fade-in" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="color: #ffb800; font-size: 1.2rem;">★★★★★</div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic;">"Our Hunza Autumn tour was magical. The Passu Cones, the Attabad lake boating, and Duiker sunrise were spectacular. OzoTrips managed everything flawlessly!"</p>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: #2a354d; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem;">AH</div>
+            <div>
+              <h4 style="font-size: 0.95rem;">Ali Hamza</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Hunza Valley</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel fade-in" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="color: #ffb800; font-size: 1.2rem;">★★★★★</div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic;">"Booking Bali with OzoTrips was the best decision. The custom villa stay in Ubud and speedboats to Nusa Penida were pre-arranged. Incredibly smooth service!"</p>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: #2d2645; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem;">FN</div>
+            <div>
+              <h4 style="font-size: 0.95rem;">Fatima Noor</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Bali, Indonesia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel fade-in" style="padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="color: #ffb800; font-size: 1.2rem;">★★★★★</div>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; font-style: italic;">"Kyoto was spectacular. The Zen temples, Gion walking tours, and traditional dining arrangements were extremely authentic. Highly recommend OzoTrips!"</p>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: #1c323f; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem;">ZS</div>
+            <div>
+              <h4 style="font-size: 0.95rem;">Zainab Sajid</h4>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Visited Kyoto, Japan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Travel Gallery Section -->
+  <section class="gallery-section">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Visual Showcase</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Explore Our Travel Moments</h2>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="gallery-tabs">
+        <button class="gallery-tab-btn active" data-filter="customers">Our Trips & Happy Customers</button>
+        <button class="gallery-tab-btn" data-filter="ceo">CEO Travels & Partner Relations</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+        <!-- Tab 1 Items: Happy Customers -->
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?auto=format&fit=crop&w=600&q=80" alt="Umrah Group 2025">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Pilgrimage</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Umrah Group 2025 in Makkah</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80" alt="Hunza Retreat">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Local Group</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Family Retreat at Hunza Valley</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80" alt="Bali Honeymoon">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">International</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Honeymoon Escape in Ubud, Bali</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80" alt="Kyoto Cultural">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">International</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Cultural Exploration in Kyoto, Japan</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Skardu Meadows">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Local Private</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Corporate Tour at Skardu Meadows</h4>
+          </div>
+        </div>
+        <div class="gallery-item show" data-category="customers">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Rome Colosseum">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">International</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Group Excursion at Rome Colosseum</h4>
+          </div>
+        </div>
+
+        <!-- Tab 2 Items: CEO & Partner Relations -->
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Madinah Hilton Inspection">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Partner Check-in</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Hotel Inspection at Madinah Hilton</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=600&q=80" alt="Makkah Partnership">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Relations</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Partnership Signing at Movenpick Makkah</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80" alt="Dubai Palm Suite">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Quality Check</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Inspecting VIP Suite in Dubai Palm</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Aviation Partners">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Alliances</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">Business Relation Meeting with Aviation Partners</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80" alt="Luxury Resort Hunza">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Site Visit</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Site Visit to Luxury Resort in Hunza</h4>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="ceo">
+          <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=600&q=80" alt="Pullman Zamzam Makkah">
+          <div class="gallery-overlay">
+            <span class="gallery-tag">Partner Check-in</span>
+            <h4 style="font-size: 1.1rem; font-weight: 700;">CEO Relations Check-in at Pullman Zamzam Makkah</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Travel Stories & Insights -->
+  <section style="padding: 100px 0; border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 50px;">
+        <div>
+          <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">From Our Journal</span>
+          <h2 style="font-size: 2.5rem; margin-top: 8px;">Latest Travel Stories & Guides</h2>
+        </div>
+        <a href="./blog.html" class="btn btn-secondary">Read All Stories ➔</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+        <!-- Blog Card 1 -->
+        <div class="glass-panel fade-in" style="border-radius: var(--border-radius-lg); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 200px; overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Travel Bali" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow);">
+          </div>
+          <div style="padding: 30px; display: flex; flex-direction: column; gap: 12px; flex: 1;">
+            <span style="color: var(--color-secondary); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Guides & Tips</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; line-height: 1.4;">Bali Uncovered: 5 Places to Escape the Crowds</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">From secluded volcanic black-sand beaches to hidden rainforest temples in northern Ubud...</p>
+            <a href="./blog.html" style="font-weight: 700; color: var(--color-primary); margin-top: auto; font-size: 0.9rem;">Read Story ➔</a>
+          </div>
+        </div>
+
+        <!-- Blog Card 2 -->
+        <div class="glass-panel fade-in" style="border-radius: var(--border-radius-lg); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 200px; overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80" alt="Travel Swat" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow);">
+          </div>
+          <div style="padding: 30px; display: flex; flex-direction: column; gap: 12px; flex: 1;">
+            <span style="color: var(--color-secondary); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Local Adventure</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; line-height: 1.4;">Why Hunza and Swat Valleys are Perfect for Family Roadtrips</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">A complete guide to road quality, boutique hotel stays, and custom local transport for family safety...</p>
+            <a href="./blog.html" style="font-weight: 700; color: var(--color-primary); margin-top: auto; font-size: 0.9rem;">Read Story ➔</a>
+          </div>
+        </div>
+
+        <!-- Blog Card 3 -->
+        <div class="glass-panel fade-in" style="border-radius: var(--border-radius-lg); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 200px; overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80" alt="Kyoto Cherry" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow);">
+          </div>
+          <div style="padding: 30px; display: flex; flex-direction: column; gap: 12px; flex: 1;">
+            <span style="color: var(--color-secondary); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Heritage Travels</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; line-height: 1.4;">Kyoto Walking Guide: Shrines, Teas, and Gion Alleyways</h3>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Discover how to request private Geisha dining experiences and walking tea ceremonies in Kyoto...</p>
+            <a href="./blog.html" style="font-weight: 700; color: var(--color-primary); margin-top: auto; font-size: 0.9rem;">Read Story ➔</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram / Social Media Grid -->
+  <section style="padding: 80px 0; border-top: 1px solid var(--border-glass); background: rgba(0, 82, 204, 0.005);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.85rem;">Follow Our Adventures</span>
+        <h2 style="font-size: 2.2rem; margin-top: 8px;">Explore with @OzoTrips</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+        <div class="glass-panel" style="height: 180px; overflow: hidden; border-radius: var(--border-radius-md); padding: 0; cursor: pointer; position: relative;">
+          <img src="https://images.unsplash.com/photo-1506698880000-5b6c80204740?auto=format&fit=crop&w=300&q=80" alt="Insta Baku" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="glass-panel" style="height: 180px; overflow: hidden; border-radius: var(--border-radius-md); padding: 0; cursor: pointer; position: relative;">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80" alt="Insta Beach" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="glass-panel" style="height: 180px; overflow: hidden; border-radius: var(--border-radius-md); padding: 0; cursor: pointer; position: relative;">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=300&q=80" alt="Insta Peak" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="glass-panel" style="height: 180px; overflow: hidden; border-radius: var(--border-radius-md); padding: 0; cursor: pointer; position: relative;">
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80" alt="Insta Japan" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="glass-panel" style="height: 180px; overflow: hidden; border-radius: var(--border-radius-md); padding: 0; cursor: pointer; position: relative;">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=300&q=80" alt="Insta Dubai" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details & Booking Modal -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <button id="modal-close" class="modal-close-btn" aria-label="Close modal">✕</button>
+      
+      <!-- Left Panel: Tour Details -->
+      <div id="modal-details" class="modal-details">
+        <!-- JS populated -->
+      </div>
+
+      <!-- Right Panel: Booking Form -->
+      <div id="booking-container" class="modal-booking">
+        <!-- JS populated -->
+      </div>
+    </div>
   </div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="./src/js/main.js"></script>
-
-  <script>
-  /* ======================================================
-     OzoTrips Interactive World Map – Fixed Engine
-     ====================================================== */
-
-  const COUNTRIES = {
-    pakistan: {
-      name: "Pakistan", flag: "🇵🇰", tag: "South Asia",
-      lat: 30.3753, lng: 69.3451, zoom: 6, color: "#00a651",
-      desc: "Home to some of the world's highest peaks, lush valleys, and ancient Silk Road cities. From the towering Karakoram to Lahore's Mughal heritage, Pakistan is a traveler's paradise.",
-      attractions: [
-        { name: "Hunza Valley", lat: 36.3167, lng: 74.6508, img: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=640&q=75", desc: "Breathtaking valley with ancient forts, glaciers, and cherry blossoms. Best in spring and autumn.", tag: "Local Group", link: "./tours.html?type=local-group" },
-        { name: "K2 Base Camp Trek", lat: 35.8818, lng: 76.5131, img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=640&q=75", desc: "Trek through stunning Karakoram scenery to the foot of the world's second-highest peak.", tag: "Adventure", link: "./tours.html?type=local-private" },
-        { name: "Badshahi Mosque, Lahore", lat: 31.5885, lng: 74.3106, img: "https://images.unsplash.com/photo-1566467021595-e06e416cc427?auto=format&fit=crop&w=640&q=75", desc: "One of the world's largest mosques featuring iconic Mughal architecture built in 1673.", tag: "Heritage", link: "./tours.html?type=local-group" },
-        { name: "Swat Valley", lat: 35.2227, lng: 72.4258, img: "https://images.unsplash.com/photo-1624132903712-f81b3abb7d17?auto=format&fit=crop&w=640&q=75", desc: "Known as the Switzerland of Pakistan – green meadows, rivers, and ancient Buddhist ruins.", tag: "Scenic", link: "./tours.html?type=local-private" }
-      ]
-    },
-    japan: {
-      name: "Japan", flag: "🇯🇵", tag: "East Asia",
-      lat: 36.2048, lng: 138.2529, zoom: 6, color: "#bc002d",
-      desc: "A mesmerizing blend of ancient temples, futuristic cities, cherry blossoms, and world-class cuisine. Japan is an unmatched cultural experience for every traveler.",
-      attractions: [
-        { name: "Fushimi Inari, Kyoto", lat: 34.9671, lng: 135.7727, img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=640&q=75", desc: "Thousands of vermilion torii gates winding through misty forests on Mount Inari.", tag: "Cultural", link: "./tours.html?type=international-group" },
-        { name: "Mount Fuji", lat: 35.3606, lng: 138.7274, img: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=640&q=75", desc: "Japan's iconic volcanic peak perfectly reflected in the lakes at its base.", tag: "Nature", link: "./tours.html?type=international-private" },
-        { name: "Shibuya Crossing, Tokyo", lat: 35.6595, lng: 139.7004, img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=640&q=75", desc: "The world's busiest pedestrian crossing – the electric heartbeat of Tokyo.", tag: "City", link: "./tours.html?type=international-group" },
-        { name: "Nara Deer Park", lat: 34.6851, lng: 135.8050, img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=640&q=75", desc: "Roam with 1,000 sacred deer in this UNESCO World Heritage site.", tag: "Wildlife", link: "./tours.html?type=international-private" }
-      ]
-    },
-    italy: {
-      name: "Italy", flag: "🇮🇹", tag: "Europe",
-      lat: 41.8719, lng: 12.5674, zoom: 6, color: "#009246",
-      desc: "The cradle of civilization, home to the Colosseum, Vatican, Amalfi Coast, and world-class cuisine. Italy is pure romance and living history at every corner.",
-      attractions: [
-        { name: "Colosseum, Rome", lat: 41.8902, lng: 12.4922, img: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=640&q=75", desc: "Step inside the 2,000-year-old amphitheater where gladiatorial contests captivated thousands.", tag: "Historic", link: "./tours.html?type=international-group" },
-        { name: "Grand Canal, Venice", lat: 45.4408, lng: 12.3155, img: "https://images.unsplash.com/photo-1534113414509-0eec2bfb493f?auto=format&fit=crop&w=640&q=75", desc: "Glide past ornate palaces on a classic gondola through Venice's famous canals.", tag: "Romantic", link: "./tours.html?type=international-private" },
-        { name: "Amalfi Coast", lat: 40.6341, lng: 14.6027, img: "https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=640&q=75", desc: "Dramatic sea cliffs dotted with pastel villages, terraced vineyards, and azure water.", tag: "Scenic", link: "./tours.html?type=international-private" },
-        { name: "Vatican Museums", lat: 41.9065, lng: 12.4534, img: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=640&q=75", desc: "Home to Michelangelo's Sistine Chapel and centuries of priceless art collections.", tag: "Art", link: "./tours.html?type=international-group" }
-      ]
-    },
-    uae: {
-      name: "UAE / Dubai", flag: "🇦🇪", tag: "Middle East",
-      lat: 25.2048, lng: 55.2708, zoom: 10, color: "#00732f",
-      desc: "Desert dunes meet futuristic skyscrapers. Dubai offers record-breaking architecture, luxury shopping, desert safaris, and world-class hospitality.",
-      attractions: [
-        { name: "Burj Khalifa", lat: 25.1972, lng: 55.2744, img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=640&q=75", desc: "The world's tallest building at 828m with breathtaking observation deck panoramas.", tag: "Iconic", link: "./tours.html?type=international-group" },
-        { name: "Desert Safari", lat: 24.9876, lng: 55.5047, img: "https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?auto=format&fit=crop&w=640&q=75", desc: "Dune bashing, camel rides, and traditional Bedouin dinner under the stars.", tag: "Adventure", link: "./tours.html?type=international-private" },
-        { name: "Palm Jumeirah", lat: 25.1124, lng: 55.1390, img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=640&q=75", desc: "The iconic palm-shaped artificial island with ultra-luxury resorts and private beaches.", tag: "Luxury", link: "./tours.html?type=international-private" },
-        { name: "Dubai Marina", lat: 25.0805, lng: 55.1403, img: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?auto=format&fit=crop&w=640&q=75", desc: "A stunning waterfront promenade lined with yachts, fine dining, and glittering towers.", tag: "City", link: "./tours.html?type=international-group" }
-      ]
-    },
-    azerbaijan: {
-      name: "Azerbaijan", flag: "🇦🇿", tag: "Caucasus",
-      lat: 40.4093, lng: 49.8671, zoom: 7, color: "#0092bc",
-      desc: "The Land of Fire – modern Baku meets medieval walled cities, mud volcanoes, and eternal flames. A hidden gem becoming one of the world's top emerging destinations.",
-      attractions: [
-        { name: "Flame Towers, Baku", lat: 40.3614, lng: 49.8376, img: "https://images.unsplash.com/photo-1605106905227-0b37b11d28d3?auto=format&fit=crop&w=640&q=75", desc: "Three iconic flame-shaped skyscrapers that glow with LED fire animations every night.", tag: "Architecture", link: "./tours.html?type=international-group" },
-        { name: "Old City (Icherisheher)", lat: 40.3663, lng: 49.8349, img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=640&q=75", desc: "A UNESCO-listed medieval walled city with caravanserais, bathhouses, and the Maiden Tower.", tag: "Heritage", link: "./tours.html?type=international-private" },
-        { name: "Gobustan National Park", lat: 40.1072, lng: 49.3737, img: "https://images.unsplash.com/photo-1576834447-8e4e6f25d3a4?auto=format&fit=crop&w=640&q=75", desc: "Ancient rock carvings, bubbling mud volcanoes, and dramatic steppe landscapes near Baku.", tag: "Nature", link: "./tours.html?type=international-group" },
-        { name: "Sheki Khan Palace", lat: 41.1975, lng: 47.1706, img: "https://images.unsplash.com/photo-1571306048070-c1e6d50f8d58?auto=format&fit=crop&w=640&q=75", desc: "An 18th-century Silk Road palace adorned with stunning shebeke stained-glass mosaics.", tag: "Art", link: "./tours.html?type=international-private" }
-      ]
-    },
-    thailand: {
-      name: "Thailand", flag: "🇹🇭", tag: "Southeast Asia",
-      lat: 15.8700, lng: 100.9925, zoom: 6, color: "#a51931",
-      desc: "The Land of Smiles – tropical beaches, golden temples, lush national parks, incredible street food, and vibrant nightlife. Thailand is magical for every traveler.",
-      attractions: [
-        { name: "Phi Phi Islands", lat: 7.7407, lng: 98.7784, img: "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=640&q=75", desc: "Turquoise lagoons, dramatic limestone cliffs, and world-class diving sites.", tag: "Beach", link: "./tours.html?type=international-private" },
-        { name: "Wat Phra Kaew, Bangkok", lat: 13.7516, lng: 100.4920, img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=640&q=75", desc: "Thailand's most sacred Buddhist temple inside the Grand Palace complex.", tag: "Cultural", link: "./tours.html?type=international-group" },
-        { name: "Elephant Nature Park", lat: 18.8065, lng: 98.9385, img: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=640&q=75", desc: "Ethical elephant sanctuary near Chiang Mai – bathe and walk with rescued elephants.", tag: "Wildlife", link: "./tours.html?type=international-private" },
-        { name: "Damnoen Saduak Markets", lat: 13.5219, lng: 100.0983, img: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=640&q=75", desc: "Iconic floating markets on Bangkok's ancient canals – fresh produce and street food.", tag: "Authentic", link: "./tours.html?type=international-group" }
-      ]
-    },
-    turkey: {
-      name: "Turkey", flag: "🇹🇷", tag: "Eurasia",
-      lat: 38.9637, lng: 35.2433, zoom: 6, color: "#e30a17",
-      desc: "Bridging Europe and Asia, Turkey offers Cappadocia's fairy chimneys and hot air balloons, Istanbul's magnificent mosques, and a stunning turquoise Aegean coastline.",
-      attractions: [
-        { name: "Cappadocia Hot Air Balloons", lat: 38.6431, lng: 34.8289, img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=640&q=75", desc: "Drift over surreal fairy chimneys and cave villages in a sunrise balloon ride.", tag: "Adventure", link: "./tours.html?type=international-private" },
-        { name: "Hagia Sophia, Istanbul", lat: 41.0086, lng: 28.9802, img: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=640&q=75", desc: "A 1,500-year-old architectural marvel – once a cathedral, mosque, and museum.", tag: "Historic", link: "./tours.html?type=international-group" },
-        { name: "Pamukkale Terraces", lat: 37.9137, lng: 29.1218, img: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=640&q=75", desc: "Natural white calcium terraces with warm thermal pools cascading down a hillside.", tag: "Nature", link: "./tours.html?type=international-group" },
-        { name: "Grand Bazaar, Istanbul", lat: 41.0108, lng: 28.9684, img: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=640&q=75", desc: "One of the world's oldest covered markets with over 4,000 shops.", tag: "Shopping", link: "./tours.html?type=international-group" }
-      ]
-    },
-    malaysia: {
-      name: "Malaysia", flag: "🇲🇾", tag: "Southeast Asia",
-      lat: 4.2105, lng: 101.9758, zoom: 6, color: "#cc0001",
-      desc: "A multi-cultural melting pot with towering twin towers, ancient rainforests, stunning islands, and some of the best street food in all of Southeast Asia.",
-      attractions: [
-        { name: "Petronas Twin Towers", lat: 3.1579, lng: 101.7117, img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=640&q=75", desc: "The world's tallest twin skyscrapers – the iconic symbol of modern Kuala Lumpur.", tag: "Iconic", link: "./tours.html?type=international-group" },
-        { name: "Langkawi Island", lat: 6.3500, lng: 99.8000, img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=640&q=75", desc: "Duty-free tropical island with pristine beaches, mangroves, and stunning cable car views.", tag: "Beach", link: "./tours.html?type=international-private" },
-        { name: "Batu Caves", lat: 3.2379, lng: 101.6840, img: "https://images.unsplash.com/photo-1598970605070-a38a6ccd3a2d?auto=format&fit=crop&w=640&q=75", desc: "A Hindu temple complex inside massive limestone caves below a giant golden statue.", tag: "Cultural", link: "./tours.html?type=international-group" },
-        { name: "Cameron Highlands", lat: 4.4714, lng: 101.3800, img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=640&q=75", desc: "Misty rolling tea plantations, strawberry farms, and cool mountain retreats.", tag: "Nature", link: "./tours.html?type=international-private" }
-      ]
-    }
-  };
-
-  let map, currentCountry = null;
-  const countryMarkers = [];
-  const attractionMarkers = [];
-
-  /* ---- Bootstrap map ---- */
-  window.addEventListener("load", initMap);
-
-  function initMap() {
-    map = L.map("world-map", {
-      center: [20, 20],
-      zoom: 2,
-      minZoom: 2,
-      zoomControl: false,
-      attributionControl: true
-    });
-
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      maxZoom: 18,
-      subdomains: "abcd",
-      attribution: '&copy; <a href="https://openstreetmap.org">OSM</a> | OzoTrips'
-    }).addTo(map);
-
-    L.control.zoom({ position: "topleft" }).addTo(map);
-
-    // Place all country markers
-    Object.entries(COUNTRIES).forEach(([key, c]) => {
-      addCountryMarker(key, c);
-    });
-  }
-
-  /* ---- Country marker (Leaflet event-based click) ---- */
-  function addCountryMarker(key, c) {
-    const icon = L.divIcon({
-      className: "",
-      html: `<div class="cmarker">
-               <div class="cmarker-dot" style="background:${c.color};"></div>
-               <div class="cmarker-label">${c.flag} ${c.name}</div>
-             </div>`,
-      iconSize: [80, 40],
-      iconAnchor: [40, 10]
-    });
-
-    const marker = L.marker([c.lat, c.lng], { icon, interactive: true })
-      .addTo(map)
-      .on("click", () => flyToCountry(key));
-
-    countryMarkers.push(marker);
-  }
-
-  /* ---- Fly to country ---- */
-  function flyToCountry(key) {
-    const c = COUNTRIES[key];
-    if (!c) return;
-    currentCountry = key;
-
-    // Fade out intro banner
-    const intro = document.getElementById("map-intro");
-    if (intro) intro.style.opacity = "0";
-
-    // Show loading state in panel
-    showPanel(`<div class="panel-loading"><div class="spinner"></div>Flying to ${c.flag} ${c.name}…</div>`);
-
-    // Fly
-    map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.8, easeLinearity: 0.3 });
-
-    // Render full panel + attraction markers after flight
-    setTimeout(() => {
-      renderCountryPanel(c);
-      clearAttractionMarkers();
-      addAttractionMarkers(c);
-      document.getElementById("back-btn").style.display = "none";
-    }, 2000);
-  }
-
-  /* ---- Render country detail panel ---- */
-  function renderCountryPanel(c) {
-    let html = `
-      <span class="panel-flag">${c.flag}</span>
-      <div class="panel-name">${c.name}</div>
-      <span class="panel-tag">${c.tag}</span>
-      <p class="panel-desc">${c.desc}</p>
-      <p class="panel-attractions-label">📍 Click a pin on map or card below</p>
-    `;
-
-    c.attractions.forEach((a, i) => {
-      html += `
-        <div class="attr-card" onclick="zoomToAttraction(${i})">
-          <img src="${a.img}" alt="${a.name}" loading="lazy">
-          <div class="attr-card-body">
-            <h4>${a.name}</h4>
-            <p>${a.desc.slice(0, 80)}…</p>
-            <span class="attr-badge">${a.tag}</span>
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            <img src="./src/assets/logo-light.png" alt="OzoTrips" class="logo-img logo-light">
+            <img src="./src/assets/logo-dark.png" alt="OzoTrips" class="logo-img logo-dark">
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+            <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+            <a href="#" class="social-btn" aria-label="Twitter">TW</a>
           </div>
-        </div>`;
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./tours.html">Browse Tours</a></li>
+            <li><a href="./flights.html">Book Flights</a></li>
+            <li><a href="./attractions.html">Attractions Map</a></li>
+            <li><a href="./visa-services.html">Visa Advisory</a></li>
+            <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
+            <li><a href="./custom-planner.html">Custom Planner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="./help-center.html">FAQs Help Center</a></li>
+            <li><a href="./about.html">About Our Company</a></li>
+            <li><a href="./offers.html">Special Promos</a></li>
+            <li><a href="./blog.html">Travel Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Subscribe to receive exclusive deals and custom travel guides weekly.</p>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+            <button class="btn btn-primary" style="padding: 12px 20px;">Join</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved. Designed for excellence.</p>
+        <p>Support: support@ozotrips.com | Tel: +92 51 111 696 874</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="./src/js/main.js"></script>
+  
+  <!-- Gallery Tabs script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabBtns = document.querySelectorAll(".gallery-tab-btn");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+
+      if (tabBtns.length > 0 && galleryItems.length > 0) {
+        tabBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            // Remove active class from all buttons
+            tabBtns.forEach(b => b.classList.remove("active"));
+            // Add active class to clicked button
+            btn.classList.add("active");
+
+            const filterValue = btn.getAttribute("data-filter");
+
+            galleryItems.forEach(item => {
+              if (item.getAttribute("data-category") === filterValue) {
+                item.classList.add("show");
+              } else {
+                item.classList.remove("show");
+              }
+            });
+          });
+        });
+
+        // Initialize active tab elements
+        const activeBtn = document.querySelector(".gallery-tab-btn.active");
+        if (activeBtn) {
+          activeBtn.click();
+        }
+      }
     });
-
-    html += `<a href="./tours.html?dest=${encodeURIComponent(c.name)}" class="panel-cta">View All ${c.name} Packages ✈️</a>`;
-    showPanel(html);
-  }
-
-  /* ---- Attraction markers ---- */
-  function addAttractionMarkers(c) {
-    c.attractions.forEach((a, i) => {
-      const icon = L.divIcon({
-        className: "",
-        html: `<div class="amarker-dot" title="${a.name}"></div>`,
-        iconSize: [12, 12],
-        iconAnchor: [6, 6]
-      });
-
-      const m = L.marker([a.lat, a.lng], { icon, interactive: true })
-        .addTo(map)
-        .on("click", () => openAttractionPopup(a, m));
-
-      attractionMarkers.push(m);
-    });
-  }
-
-  /* ---- Open attraction popup ---- */
-  function openAttractionPopup(a, marker) {
-    const html = `
-      <img src="${a.img}" alt="${a.name}" class="popup-img">
-      <div class="popup-body">
-        <h3>${a.name}</h3>
-        <p>${a.desc}</p>
-        <a href="${a.link}" class="popup-book">Book This Trip →</a>
-      </div>`;
-    L.popup({ maxWidth: 300, closeButton: true, autoPan: true })
-      .setLatLng(marker.getLatLng())
-      .setContent(html)
-      .openOn(map);
-    map.panTo(marker.getLatLng(), { animate: true });
-  }
-
-  /* ---- Zoom to attraction from panel card ---- */
-  function zoomToAttraction(index) {
-    if (!currentCountry) return;
-    const c = COUNTRIES[currentCountry];
-    const a = c.attractions[index];
-    map.flyTo([a.lat, a.lng], Math.max(c.zoom + 4, 13), { duration: 1.3 });
-    document.getElementById("back-btn").style.display = "inline-flex";
-    setTimeout(() => openAttractionPopup(a, attractionMarkers[index]), 1400);
-  }
-
-  /* ---- Back to country ---- */
-  function backToCountry() {
-    if (!currentCountry) return;
-    const c = COUNTRIES[currentCountry];
-    map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.2 });
-    map.closePopup();
-    document.getElementById("back-btn").style.display = "none";
-  }
-
-  /* ---- Reset to world view ---- */
-  function resetMapView() {
-    map.flyTo([20, 20], 2, { duration: 1.8 });
-    closePanel();
-    clearAttractionMarkers();
-    currentCountry = null;
-    map.closePopup();
-    const intro = document.getElementById("map-intro");
-    if (intro) intro.style.opacity = "1";
-    document.getElementById("back-btn").style.display = "none";
-  }
-
-  /* ---- Helpers ---- */
-  function showPanel(html) {
-    document.getElementById("panel-content").innerHTML = html;
-    document.getElementById("map-side-panel").classList.add("open");
-  }
-
-  function closePanel() {
-    document.getElementById("map-side-panel").classList.remove("open");
-  }
-
-  function clearAttractionMarkers() {
-    attractionMarkers.forEach(m => map.removeLayer(m));
-    attractionMarkers.length = 0;
-  }
   </script>
-
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <span class="whatsapp-icon">💬</span>
