@@ -12,6 +12,7 @@ export default defineConfig({
         indexExplorer: resolve(__dirname, 'index-explorer.html'),
         indexGridCarousel: resolve(__dirname, 'index-grid-carousel.html'),
         indexSearch: resolve(__dirname, 'index-search.html'),
+        indexInteractiveMap: resolve(__dirname, 'index-interactive-map.html'),
         tours: resolve(__dirname, 'tours.html'),
         tourDetail: resolve(__dirname, 'tour-detail.html'),
         attractions: resolve(__dirname, 'attractions.html'),

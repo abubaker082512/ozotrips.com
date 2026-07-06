@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive World Map Explorer | OzoTrips</title>
+  <meta name="description" content="Explore the world interactively with OzoTrips. Click any country to zoom in, discover famous tourist attractions, view photos, and book your dream trip.">
+  <link rel="stylesheet" href="./src/css/style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    /* =====================================================
+       Interactive Map Homepage – Page-Level Styles
+       ===================================================== */
+    body {
+      overflow-x: hidden;
+    }
+
+    .map-page-hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: #0a0f1a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ----- Floating intro banner above the map ----- */
+    .map-intro-banner {
+      position: absolute;
+      top: 85px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .map-intro-banner h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+      margin-bottom: 8px;
+    }
+
+    .map-intro-banner p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      font-weight: 400;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    }
+
+    .map-intro-banner .map-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,153,0,0.15);
+      border: 1px solid rgba(255,153,0,0.4);
+      color: #ff9900;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 10px;
+      pointer-events: none;
+    }
+
+    /* ----- Map Container ----- */
+    #world-map {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    .map-page-hero {
+      height: 100vh;
+    }
+
+    /* ----- Floating Side Panel ----- */
+    #map-side-panel {
+      position: fixed;
+      top: 80px;
+      right: -440px;
+      width: 400px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: rgba(13, 20, 40, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-right: none;
+      border-radius: 16px 0 0 16px;
+      padding: 28px;
+      z-index: 2000;
+      transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+    }
+
+    #map-side-panel.open {
+      right: 0;
+    }
+
+    #map-side-panel::-webkit-scrollbar { width: 4px; }
+    #map-side-panel::-webkit-scrollbar-track { background: transparent; }
+    #map-side-panel::-webkit-scrollbar-thumb { background: rgba(255,153,0,0.4); border-radius: 4px; }
+
+    .panel-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .panel-close-btn:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
+    .panel-country-flag {
+      font-size: 3rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .panel-country-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .panel-country-tag {
+      display: inline-block;
+      background: rgba(255,153,0,0.18);
+      border: 1px solid rgba(255,153,0,0.4);
+      color: #ff9900;
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .panel-country-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .panel-attractions-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 14px;
+    }
+
+    /* Attraction card inside panel */
+    .attraction-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .attraction-card:hover {
+      border-color: rgba(255,153,0,0.5);
+      background: rgba(255,153,0,0.06);
+      transform: translateX(-4px);
+    }
+
+    .attraction-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .attraction-card-body {
+      padding: 14px;
+    }
+
+    .attraction-card-body h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .attraction-card-body p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .attraction-card-body .attr-badge {
+      font-size: 0.7rem;
+      background: rgba(0,82,204,0.2);
+      border: 1px solid rgba(0,82,204,0.4);
+      color: #4d94ff;
+      padding: 2px 10px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Panel CTA button */
+    .panel-cta {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: linear-gradient(135deg, #0052cc, #0a7aff);
+      color: #fff;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .panel-cta:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    /* ----- Reset & Back Buttons ----- */
+    .map-control-bar {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1500;
+      display: flex;
+      gap: 12px;
+    }
+
+    .map-ctrl-btn {
+      padding: 11px 22px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(13, 20, 40, 0.92);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .map-ctrl-btn:hover {
+      background: rgba(0,82,204,0.7);
+      border-color: rgba(0,82,204,0.6);
+    }
+
+    .map-ctrl-btn.primary-btn {
+      background: linear-gradient(135deg, #0052cc, #0a7aff);
+      border-color: transparent;
+    }
+
+    .map-ctrl-btn.primary-btn:hover {
+      opacity: 0.88;
+    }
+
+    /* ----- Custom Pulsing Country Markers ----- */
+    .country-marker-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .pulse-dot {
+      width: 18px;
+      height: 18px;
+      background: #ff9900;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(255,153,0,0.6);
+      animation: countryPulse 2s infinite;
+      border: 2px solid #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .attraction-marker-dot {
+      width: 14px;
+      height: 14px;
+      background: #0052cc;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 0 rgba(0,82,204,0.6);
+      animation: attrPulse 2.5s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes countryPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,153,0,0.7); }
+      70%  { box-shadow: 0 0 0 16px rgba(255,153,0,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,153,0,0); }
+    }
+
+    @keyframes attrPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(0,82,204,0.7); }
+      70%  { box-shadow: 0 0 0 12px rgba(0,82,204,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,82,204,0); }
+    }
+
+    .country-label {
+      background: rgba(13, 20, 40, 0.88);
+      border: 1px solid rgba(255,153,0,0.4);
+      color: #ff9900;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-top: 5px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ----- Attraction Photo Popup (Leaflet override) ----- */
+    .leaflet-popup-content-wrapper {
+      background: rgba(13, 20, 40, 0.96) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      border-radius: 14px !important;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.7) !important;
+      color: #fff !important;
+      backdrop-filter: blur(16px) !important;
+      padding: 0 !important;
+      overflow: hidden;
+    }
+
+    .leaflet-popup-tip-container { display: none; }
+
+    .attr-popup-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .attr-popup-body {
+      padding: 16px 18px 18px;
+    }
+
+    .attr-popup-body h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .attr-popup-body p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .attr-popup-book {
+      display: inline-block;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #ff9900, #ff7700);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .attr-popup-book:hover { opacity: 0.88; }
+
+    .leaflet-popup-close-button {
+      color: rgba(255,255,255,0.7) !important;
+      font-size: 1.2rem !important;
+      top: 10px !important;
+      right: 12px !important;
+      background: rgba(255,255,255,0.1) !important;
+      border-radius: 50% !important;
+      width: 24px !important;
+      height: 24px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 10;
+    }
+
+    /* ----- Country chip row ----- */
+    .country-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .country-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .country-chip:hover {
+      background: rgba(255,153,0,0.2);
+      border-color: rgba(255,153,0,0.5);
+      color: #ff9900;
+    }
+
+    /* ----- Loading Spinner for panel ----- */
+    .panel-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      gap: 10px;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,153,0,0.3);
+      border-top-color: #ff9900;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      #map-side-panel {
+        width: calc(100vw - 20px);
+        border-radius: 16px 16px 0 0;
+        top: auto;
+        bottom: -100vh;
+        right: 10px;
+        max-height: 65vh;
+        transition: bottom 0.4s cubic-bezier(0.22,1,0.36,1), right 0s;
+      }
+      #map-side-panel.open {
+        bottom: 0;
+        right: 10px;
+      }
+      .map-intro-banner h1 { font-size: 1.7rem; }
+      .map-ctrl-btn { padding: 9px 16px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="logo" aria-label="OzoTrips Home">
+        <img src="./src/assets/logo-light.png" alt="OzoTrips Logo" class="logo-img logo-light-img">
+        <img src="./src/assets/logo-dark.png" alt="OzoTrips Logo" class="logo-img logo-dark-img">
+      </a>
+      <nav>
+          <ul class="nav-links">
+          <li class="nav-dropdown">
+            <a href="./index.html" class="nav-link dropdown-toggle active">Home <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./index.html">Classic Slider Home</a></li>
+              <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
+              <li><a href="./index-split.html">Interactive Split Screen</a></li>
+              <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
+              <li><a href="./index-explorer.html">Region Map Explorer</a></li>
+              <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
+              <li><a href="./index-search.html">Search-First Dashboard</a></li>
+              <li><a href="./index-interactive-map.html" class="active">🗺️ Interactive World Map</a></li>
+            </ul>
+          </li>
+          <li><a href="./flights.html" class="nav-link">Flights</a></li>
+          <li class="nav-dropdown">
+            <a href="./tours.html" class="nav-link dropdown-toggle">Tours <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./tours.html">All Tours Catalog</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-header">Tour Categories</li>
+              <li><a href="./tours.html?type=international-group">✈️ International Group</a></li>
+              <li><a href="./tours.html?type=international-private">💎 International Private</a></li>
+              <li><a href="./tours.html?type=local-group">🇵🇰 Local Group Tours</a></li>
+              <li><a href="./tours.html?type=local-private">🏡 Local Private Tours</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-header">Featured Packages</li>
+              <li><a href="./tour-detail.html?id=1">Baku Group Tour</a></li>
+              <li><a href="./tour-detail.html?id=2">Thailand Honeymoon</a></li>
+              <li><a href="./tour-detail.html?id=3">Kalam Swat Adventure</a></li>
+              <li><a href="./tour-detail.html?id=4">Himmel Skardu Private</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Destinations <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./attractions.html">Attractions Map</a></li>
+              <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
+            </ul>
+          </li>
+          <li><a href="./visa-services.html" class="nav-link">Visa</a></li>
+          <li><a href="./umrah.html" class="nav-link">Hajj & Umrah</a></li>
+          <li><a href="./custom-planner.html" class="nav-link">Custom Planner</a></li>
+          <li><a href="./offers.html" class="nav-link">Offers</a></li>
+          <li class="nav-dropdown">
+            <a href="#" class="nav-link dropdown-toggle">Company <span class="arrow">▼</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="./blog.html">Travel Blog</a></li>
+              <li><a href="./help-center.html">Help Center</a></li>
+              <li><a href="./about.html">About Us</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light mode">🌙</button>
+        <a href="./tours.html" class="btn btn-primary">Book Now</a>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+  <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
+
+  <!-- Map Hero Section -->
+  <section class="map-page-hero" id="map-hero">
+
+    <!-- Floating Intro (fades away after user clicks) -->
+    <div class="map-intro-banner" id="map-intro-banner">
+      <h1>Explore the World,<br>One Click at a Time</h1>
+      <p>Powered by OzoTrips – click any destination to discover top attractions</p>
+      <div class="country-chips" id="country-chips">
+        <div class="country-chip" onclick="flyToCountry('pakistan')">🇵🇰 Pakistan</div>
+        <div class="country-chip" onclick="flyToCountry('japan')">🇯🇵 Japan</div>
+        <div class="country-chip" onclick="flyToCountry('italy')">🇮🇹 Italy</div>
+        <div class="country-chip" onclick="flyToCountry('uae')">🇦🇪 UAE / Dubai</div>
+        <div class="country-chip" onclick="flyToCountry('azerbaijan')">🇦🇿 Azerbaijan</div>
+        <div class="country-chip" onclick="flyToCountry('thailand')">🇹🇭 Thailand</div>
+        <div class="country-chip" onclick="flyToCountry('turkey')">🇹🇷 Turkey</div>
+        <div class="country-chip" onclick="flyToCountry('malaysia')">🇲🇾 Malaysia</div>
+      </div>
+      <div class="map-hint">🌍 Click any country pin or chip above to begin exploring</div>
+    </div>
+
+    <!-- Leaflet Map -->
+    <div id="world-map"></div>
+
+    <!-- Side Info Panel -->
+    <div id="map-side-panel">
+      <button class="panel-close-btn" id="panel-close-btn" title="Close Panel">✕</button>
+      <div id="panel-content">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Control bar -->
+    <div class="map-control-bar" id="map-control-bar">
+      <button class="map-ctrl-btn" id="back-to-country-btn" style="display:none;" onclick="backToCountry()">← Back to Country</button>
+      <button class="map-ctrl-btn primary-btn" id="map-reset-btn" onclick="resetMapView()">🌍 Reset World View</button>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="./src/js/main.js"></script>
+
+  <script>
+  // =====================================================
+  // OzoTrips Interactive World Map – Engine
+  // =====================================================
+
+  const COUNTRIES = {
+    pakistan: {
+      name: "Pakistan",
+      flag: "🇵🇰",
+      tag: "South Asia",
+      lat: 30.3753, lng: 69.3451,
+      zoom: 6,
+      desc: "Home to some of the world's highest peaks, lush valleys, and ancient history. From the Karakoram to Lahore's Mughal heritage, Pakistan is a traveler's paradise waiting to be discovered.",
+      color: "#00a651",
+      attractions: [
+        { name: "Hunza Valley", lat: 36.3167, lng: 74.6508, img: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=700&q=80", desc: "Breathtaking valley with ancient forts, glaciers, and cherry blossoms. Best visited in spring and autumn.", tag: "Local Group", link: "./tours.html?type=local-group" },
+        { name: "K2 Base Camp", lat: 35.8818, lng: 76.5131, img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=700&q=80", desc: "Trek to the base of the world's second-highest mountain through stunning Karakoram scenery.", tag: "Adventure", link: "./tours.html?type=local-private" },
+        { name: "Badshahi Mosque, Lahore", lat: 31.5885, lng: 74.3106, img: "https://images.unsplash.com/photo-1566467021595-e06e416cc427?auto=format&fit=crop&w=700&q=80", desc: "One of the world's largest mosques with iconic Mughal architecture dating back to 1673.", tag: "Heritage", link: "./tours.html?type=local-group" },
+        { name: "Swat Valley", lat: 35.2227, lng: 72.4258, img: "https://images.unsplash.com/photo-1624132903712-f81b3abb7d17?auto=format&fit=crop&w=700&q=80", desc: "Known as the Switzerland of Pakistan – green meadows, rivers, and Buddhist ruins.", tag: "Scenic", link: "./tours.html?type=local-private" }
+      ]
+    },
+    japan: {
+      name: "Japan",
+      flag: "🇯🇵",
+      tag: "East Asia",
+      lat: 36.2048, lng: 138.2529,
+      zoom: 6,
+      desc: "A mesmerizing blend of ancient temples, futuristic cities, cherry blossoms, and world-class cuisine. Japan offers an unmatched cultural experience for every traveler.",
+      color: "#bc002d",
+      attractions: [
+        { name: "Kyoto – Fushimi Inari", lat: 34.9671, lng: 135.7727, img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=700&q=80", desc: "Thousands of vermilion torii gates winding through misty Mount Inari forests.", tag: "Cultural", link: "./tours.html?type=international-group" },
+        { name: "Mount Fuji", lat: 35.3606, lng: 138.7274, img: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=700&q=80", desc: "Japan's iconic symbol – a perfectly conical volcanic peak visible from Tokyo on clear days.", tag: "Nature", link: "./tours.html?type=international-private" },
+        { name: "Tokyo Shibuya Crossing", lat: 35.6595, lng: 139.7004, img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=700&q=80", desc: "The world's busiest pedestrian crossing – a symbol of Tokyo's electric energy.", tag: "City", link: "./tours.html?type=international-group" },
+        { name: "Nara Deer Park", lat: 34.6851, lng: 135.8050, img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=700&q=80", desc: "Roam freely with over 1,000 sacred deer in this UNESCO World Heritage site.", tag: "Wildlife", link: "./tours.html?type=international-private" }
+      ]
+    },
+    italy: {
+      name: "Italy",
+      flag: "🇮🇹",
+      tag: "Europe",
+      lat: 41.8719, lng: 12.5674,
+      zoom: 6,
+      desc: "The cradle of Western civilization, home to the Colosseum, Vatican, Amalfi Coast, and the world's finest cuisine. Italy is pure romance and history at every corner.",
+      color: "#009246",
+      attractions: [
+        { name: "Colosseum, Rome", lat: 41.8902, lng: 12.4922, img: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=700&q=80", desc: "Step inside the 2,000-year-old amphitheater where gladiatorial contests once captivated thousands.", tag: "Historic", link: "./tours.html?type=international-group" },
+        { name: "Canal Grande, Venice", lat: 45.4408, lng: 12.3155, img: "https://images.unsplash.com/photo-1534113414509-0eec2bfb493f?auto=format&fit=crop&w=700&q=80", desc: "Glide through Venice's famous Grand Canal past ornate palaces on a classic gondola.", tag: "Romantic", link: "./tours.html?type=international-private" },
+        { name: "Amalfi Coast", lat: 40.6341, lng: 14.6027, img: "https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=700&q=80", desc: "Dramatic sea cliffs dotted with pastel villages, terraced vineyards, and azure waters.", tag: "Scenic", link: "./tours.html?type=international-private" },
+        { name: "Vatican Museums", lat: 41.9065, lng: 12.4534, img: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=700&q=80", desc: "Home to Michelangelo's Sistine Chapel ceiling and centuries of priceless art collections.", tag: "Art", link: "./tours.html?type=international-group" }
+      ]
+    },
+    uae: {
+      name: "UAE / Dubai",
+      flag: "🇦🇪",
+      tag: "Middle East",
+      lat: 25.2048, lng: 55.2708,
+      zoom: 9,
+      desc: "A dazzling city where desert dunes meet futuristic skyscrapers. Dubai offers luxury shopping, record-breaking architecture, desert safaris, and world-class hospitality.",
+      color: "#00732f",
+      attractions: [
+        { name: "Burj Khalifa", lat: 25.1972, lng: 55.2744, img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=80", desc: "The world's tallest building at 828m. Ride to the observation deck for panoramic city views.", tag: "Iconic", link: "./tours.html?type=international-group" },
+        { name: "Dubai Desert Safari", lat: 24.9876, lng: 55.5047, img: "https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?auto=format&fit=crop&w=700&q=80", desc: "Dune bashing, camel rides, belly dancing, and a traditional Bedouin dinner under the stars.", tag: "Adventure", link: "./tours.html?type=international-private" },
+        { name: "Palm Jumeirah", lat: 25.1124, lng: 55.1390, img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=700&q=80", desc: "The iconic palm-shaped artificial island with luxury hotels and private beach resorts.", tag: "Luxury", link: "./tours.html?type=international-private" },
+        { name: "Dubai Marina", lat: 25.0805, lng: 55.1403, img: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?auto=format&fit=crop&w=700&q=80", desc: "A stunning waterfront promenade lined with yachts, fine dining, and glittering towers.", tag: "City", link: "./tours.html?type=international-group" }
+      ]
+    },
+    azerbaijan: {
+      name: "Azerbaijan",
+      flag: "🇦🇿",
+      tag: "Caucasus",
+      lat: 40.4093, lng: 49.8671,
+      zoom: 7,
+      desc: "The Land of Fire – where modern Baku rises alongside medieval walled cities, mud volcanoes, and the eternal flames of Yanar Dag. A hidden gem emerging as a top travel destination.",
+      color: "#0092bc",
+      attractions: [
+        { name: "Flame Towers, Baku", lat: 40.3614, lng: 49.8376, img: "https://images.unsplash.com/photo-1605106905227-0b37b11d28d3?auto=format&fit=crop&w=700&q=80", desc: "Three iconic flame-shaped skyscrapers that glow in LED fire animations every evening.", tag: "Architecture", link: "./tours.html?type=international-group" },
+        { name: "Old City (Icherisheher)", lat: 40.3663, lng: 49.8349, img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=700&q=80", desc: "A UNESCO-listed medieval walled city with caravanserais, bathhouses, and the Maiden Tower.", tag: "Heritage", link: "./tours.html?type=international-private" },
+        { name: "Gobustan National Park", lat: 40.1072, lng: 49.3737, img: "https://images.unsplash.com/photo-1576834447-8e4e6f25d3a4?auto=format&fit=crop&w=700&q=80", desc: "Ancient rock carvings, mud volcanoes, and dramatic steppe landscapes outside Baku.", tag: "Nature", link: "./tours.html?type=international-group" },
+        { name: "Sheki – Khan Palace", lat: 41.1975, lng: 47.1706, img: "https://images.unsplash.com/photo-1571306048070-c1e6d50f8d58?auto=format&fit=crop&w=700&q=80", desc: "A 18th century silk road palace adorned with stunning stained glass shebeke window mosaics.", tag: "Art", link: "./tours.html?type=international-private" }
+      ]
+    },
+    thailand: {
+      name: "Thailand",
+      flag: "🇹🇭",
+      tag: "Southeast Asia",
+      lat: 15.8700, lng: 100.9925,
+      zoom: 6,
+      desc: "The Land of Smiles – tropical beaches, golden temples, lush national parks, street food paradise, and vibrant nightlife. Thailand has something magical for every kind of traveler.",
+      color: "#a51931",
+      attractions: [
+        { name: "Phi Phi Islands", lat: 7.7407, lng: 98.7784, img: "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=700&q=80", desc: "Turquoise lagoons, limestone cliffs, and some of the world's most stunning diving spots.", tag: "Beach", link: "./tours.html?type=international-private" },
+        { name: "Wat Phra Kaew, Bangkok", lat: 13.7516, lng: 100.4920, img: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=700&q=80", desc: "The Temple of the Emerald Buddha – Thailand's most sacred Buddhist temple in the Grand Palace complex.", tag: "Cultural", link: "./tours.html?type=international-group" },
+        { name: "Elephant Nature Park", lat: 18.8065, lng: 98.9385, img: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=700&q=80", desc: "Ethical elephant sanctuary near Chiang Mai – bathe, feed, and walk with rescued elephants.", tag: "Wildlife", link: "./tours.html?type=international-private" },
+        { name: "Floating Markets", lat: 13.5219, lng: 100.0983, img: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=700&q=80", desc: "Iconic wooden boats laden with fresh produce and street food along Bangkok's ancient canals.", tag: "Authentic", link: "./tours.html?type=international-group" }
+      ]
+    },
+    turkey: {
+      name: "Turkey",
+      flag: "🇹🇷",
+      tag: "Eurasia",
+      lat: 38.9637, lng: 35.2433,
+      zoom: 6,
+      desc: "A transcontinental gem bridging Europe and Asia. From Cappadocia's fairy chimneys and hot air balloons to Istanbul's magnificent mosques and the turquoise Aegean coast.",
+      color: "#e30a17",
+      attractions: [
+        { name: "Cappadocia Balloons", lat: 38.6431, lng: 34.8289, img: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=700&q=80", desc: "Drift over surreal fairy chimneys and cave villages in a magical sunrise hot air balloon ride.", tag: "Adventure", link: "./tours.html?type=international-private" },
+        { name: "Hagia Sophia, Istanbul", lat: 41.0086, lng: 28.9802, img: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=700&q=80", desc: "A 1,500-year-old architectural wonder that served as cathedral, mosque, and museum.", tag: "Historic", link: "./tours.html?type=international-group" },
+        { name: "Pamukkale Terraces", lat: 37.9137, lng: 29.1218, img: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=700&q=80", desc: "Natural white calcium terraces cascading down a hillside with warm thermal pools.", tag: "Nature", link: "./tours.html?type=international-group" },
+        { name: "Grand Bazaar, Istanbul", lat: 41.0108, lng: 28.9684, img: "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=700&q=80", desc: "One of the world's oldest and largest covered markets with over 4,000 shops.", tag: "Shopping", link: "./tours.html?type=international-group" }
+      ]
+    },
+    malaysia: {
+      name: "Malaysia",
+      flag: "🇲🇾",
+      tag: "Southeast Asia",
+      lat: 4.2105, lng: 101.9758,
+      zoom: 6,
+      desc: "A multi-cultural melting pot with towering twin towers, ancient rainforests, stunning island beaches, and some of the best street food in Southeast Asia.",
+      color: "#cc0001",
+      attractions: [
+        { name: "Petronas Twin Towers", lat: 3.1579, lng: 101.7117, img: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=700&q=80", desc: "The world's tallest twin skyscrapers – iconic symbols of modern Malaysia's ambition.", tag: "Iconic", link: "./tours.html?type=international-group" },
+        { name: "Langkawi Island", lat: 6.3500, lng: 99.8000, img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=80", desc: "Duty-free tropical island with pristine beaches, mangrove forests, and stunning cable car views.", tag: "Beach", link: "./tours.html?type=international-private" },
+        { name: "Batu Caves", lat: 3.2379, lng: 101.6840, img: "https://images.unsplash.com/photo-1598970605070-a38a6ccd3a2d?auto=format&fit=crop&w=700&q=80", desc: "A Hindu temple complex inside massive limestone caves watched over by a giant golden statue.", tag: "Cultural", link: "./tours.html?type=international-group" },
+        { name: "Cameron Highlands", lat: 4.4714, lng: 101.3800, img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80", desc: "Misty rolling tea plantations, strawberry farms, and cool mountain retreats above the clouds.", tag: "Nature", link: "./tours.html?type=international-private" }
+      ]
+    }
+  };
+
+  // Track state
+  let map, currentCountry = null, countryMarkers = [], attractionMarkers = [];
+
+  // ---- Initialize Map ----
+  document.addEventListener("DOMContentLoaded", () => {
+    map = L.map("world-map", {
+      center: [25, 30],
+      zoom: 3,
+      zoomControl: false,
+      attributionControl: false,
+    });
+
+    // Dark tile layer (Carto Dark Matter)
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      maxZoom: 18,
+      subdomains: "abcd"
+    }).addTo(map);
+
+    L.control.zoom({ position: "topleft" }).addTo(map);
+
+    // Add attribution discreetly
+    L.control.attribution({ position: "bottomleft", prefix: false })
+      .addAttribution('© <a href="https://openstreetmap.org">OpenStreetMap</a> | OzoTrips')
+      .addTo(map);
+
+    // Render country markers
+    Object.keys(COUNTRIES).forEach(key => placeCountryMarker(key));
+
+    // Close panel button
+    document.getElementById("panel-close-btn").addEventListener("click", closePanel);
+  });
+
+  // ---- Place a pulsing country marker ----
+  function placeCountryMarker(key) {
+    const c = COUNTRIES[key];
+    const icon = L.divIcon({
+      className: "",
+      html: `<div class="country-marker-wrapper" onclick="flyToCountry('${key}')">
+               <div class="pulse-dot" style="background:${c.color};"></div>
+               <div class="country-label">${c.flag} ${c.name}</div>
+             </div>`,
+      iconAnchor: [0, 0]
+    });
+    const marker = L.marker([c.lat, c.lng], { icon, interactive: false }).addTo(map);
+    countryMarkers.push(marker);
+  }
+
+  // ---- Fly to Country ----
+  function flyToCountry(key) {
+    const c = COUNTRIES[key];
+    if (!c) return;
+    currentCountry = key;
+
+    // Hide intro banner
+    const banner = document.getElementById("map-intro-banner");
+    if (banner) banner.style.opacity = "0";
+
+    // Fly map
+    map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.8, easeLinearity: 0.35 });
+
+    // Show loading panel
+    openPanel(`
+      <div class="panel-loading">
+        <div class="spinner"></div>
+        Flying to ${c.flag} ${c.name}...
+      </div>
+    `);
+
+    // After fly completes, render full country info + attraction markers
+    setTimeout(() => {
+      renderCountryPanel(c);
+      clearAttractionMarkers();
+      placeAttractionMarkers(c);
+      document.getElementById("back-to-country-btn").style.display = "none";
+    }, 1900);
+  }
+
+  // ---- Render country info in panel ----
+  function renderCountryPanel(c) {
+    let html = `
+      <span class="panel-country-flag">${c.flag}</span>
+      <div class="panel-country-name">${c.name}</div>
+      <span class="panel-country-tag">${c.tag}</span>
+      <p class="panel-country-desc">${c.desc}</p>
+      <div class="panel-attractions-title">📍 Top Attractions (click any pin on the map or card below)</div>
+    `;
+    c.attractions.forEach((attr, i) => {
+      html += `
+        <div class="attraction-card" onclick="focusAttraction(${i})">
+          <img src="${attr.img}" alt="${attr.name}" loading="lazy">
+          <div class="attraction-card-body">
+            <h4>${attr.name}</h4>
+            <p>${attr.desc.substring(0, 90)}...</p>
+            <span class="attr-badge">${attr.tag}</span>
+          </div>
+        </div>
+      `;
+    });
+    html += `<a href="./tours.html?dest=${encodeURIComponent(c.name)}" class="panel-cta">View All ${c.name} Packages ✈️</a>`;
+    openPanel(html);
+  }
+
+  // ---- Place attraction markers ----
+  function placeAttractionMarkers(c) {
+    c.attractions.forEach((attr, i) => {
+      const icon = L.divIcon({
+        className: "",
+        html: `<div class="attraction-marker-dot" title="${attr.name}"></div>`,
+        iconAnchor: [7, 7]
+      });
+      const marker = L.marker([attr.lat, attr.lng], { icon }).addTo(map);
+      marker.on("click", () => showAttractionPopup(attr, marker));
+      attractionMarkers.push(marker);
+    });
+  }
+
+  // ---- Show attraction popup ----
+  function showAttractionPopup(attr, marker) {
+    const popupContent = `
+      <img src="${attr.img}" alt="${attr.name}" class="attr-popup-img">
+      <div class="attr-popup-body">
+        <h3>${attr.name}</h3>
+        <p>${attr.desc}</p>
+        <a href="${attr.link}" class="attr-popup-book">Book This Trip →</a>
+      </div>
+    `;
+    marker.bindPopup(popupContent, {
+      maxWidth: 300,
+      closeButton: true,
+      className: ""
+    }).openPopup();
+    map.panTo(marker.getLatLng(), { animate: true, duration: 0.5 });
+  }
+
+  // ---- Focus a specific attraction from panel card click ----
+  function focusAttraction(index) {
+    const c = COUNTRIES[currentCountry];
+    if (!c) return;
+    const attr = c.attractions[index];
+    if (!attr) return;
+    map.flyTo([attr.lat, attr.lng], Math.max(c.zoom + 3, 12), { duration: 1.2 });
+    document.getElementById("back-to-country-btn").style.display = "flex";
+    setTimeout(() => showAttractionPopup(attr, attractionMarkers[index]), 1300);
+  }
+
+  // ---- Back to country view ----
+  function backToCountry() {
+    if (!currentCountry) return;
+    const c = COUNTRIES[currentCountry];
+    map.flyTo([c.lat, c.lng], c.zoom, { duration: 1.2 });
+    document.getElementById("back-to-country-btn").style.display = "none";
+    // Close any open popups
+    map.closePopup();
+  }
+
+  // ---- Reset to world view ----
+  function resetMapView() {
+    map.flyTo([25, 30], 3, { duration: 1.8 });
+    closePanel();
+    clearAttractionMarkers();
+    currentCountry = null;
+    const banner = document.getElementById("map-intro-banner");
+    if (banner) banner.style.opacity = "1";
+    document.getElementById("back-to-country-btn").style.display = "none";
+    // Re-add country markers if cleared
+    if (countryMarkers.length === 0) {
+      Object.keys(COUNTRIES).forEach(key => placeCountryMarker(key));
+    }
+  }
+
+  // ---- Helpers ----
+  function openPanel(html) {
+    document.getElementById("panel-content").innerHTML = html;
+    document.getElementById("map-side-panel").classList.add("open");
+  }
+
+  function closePanel() {
+    document.getElementById("map-side-panel").classList.remove("open");
+  }
+
+  function clearAttractionMarkers() {
+    attractionMarkers.forEach(m => map.removeLayer(m));
+    attractionMarkers = [];
+    map.closePopup();
+  }
+  </script>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-icon">💬</span>
+    <span class="whatsapp-text">Chat with Us</span>
+  </a>
+  <!-- Scroll to Top Button -->
+  <button id="scroll-to-top" class="scroll-to-top-btn" aria-label="Scroll to Top">
+    <span class="arrow-up">▲</span>
+  </button>
+</body>
+</html>
