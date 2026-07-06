@@ -166,5 +166,61 @@ export const tours = [
     currency: "PKR",
     description: "An exclusive, high-end private safari across the Karakoram. Stay in premium luxury resorts, cross the Hussaini bridge, and tour Karimabad forts.",
     highlights: ["Premium resort stays in Hunza & Skardu", "Private land cruiser Prado transportation", "Attabad Lake private boating tour", "Rakaposhi & Nanga Parbat viewpoints"]
+  },
+  {
+    id: 13,
+    title: "Saudi Arabia Sacred Journey & Desert Al-Ula",
+    type: "international-private",
+    category: "Cultural",
+    image: "https://images.unsplash.com/photo-1580418826893-67e1f7209375?auto=format&fit=crop&w=800&q=80",
+    duration: "8 Days",
+    rating: 4.9,
+    reviews: 88,
+    price: 345000,
+    currency: "PKR",
+    description: "Embark on a premium journey through Makkah, Madinah, and the historic ruins of Al-Ula. Experience authentic Arabian hospitality and explore historic heritage sites.",
+    highlights: ["Guided Ziyarat in Makkah & Madinah", "High-speed Haramain Train tickets", "Al-Ula (Hegra UNESCO ruins) tour", "Elephant Rock stargazing dinner"]
+  },
+  {
+    id: 14,
+    title: "London & Scottish Highlands Explorer Tour",
+    type: "international-group",
+    category: "Cultural",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ca1ad?auto=format&fit=crop&w=800&q=80",
+    duration: "7 Days",
+    rating: 4.8,
+    reviews: 104,
+    price: 425000,
+    currency: "PKR",
+    description: "Explore the best of Great Britain. Wander the royal landmarks of London, see prehistoric Stonehenge, and traverse the stunning peaks of the Scottish Highlands.",
+    highlights: ["London Eye & Westminster Abbey tour", "Stonehenge & Bath historic day excursion", "Edinburgh Castle guided tour", "Scottish Highlands & Loch Ness cruise"]
+  },
+  {
+    id: 15,
+    title: "Swiss Alps & Lucerne Scenic Luxury Tour",
+    type: "international-private",
+    category: "Mountain",
+    image: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=800&q=80",
+    duration: "6 Days",
+    rating: 4.9,
+    reviews: 142,
+    price: 512000,
+    currency: "PKR",
+    description: "An exquisite Swiss mountain escape. Ride the scenic trains, explore the lakeside beauty of Lucerne, and gaze at the majestic Matterhorn in Zermatt.",
+    highlights: ["Lucerne Chapel Bridge walking tour", "Mount Pilatus cogwheel railway ride", "Scenic Glacier Express train pass", "Matterhorn panoramic view in Zermatt"]
+  },
+  {
+    id: 16,
+    title: "Maldives Luxury Overwater Villa Resort Escape",
+    type: "international-private",
+    category: "Beach",
+    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80",
+    duration: "5 Days",
+    rating: 4.9,
+    reviews: 186,
+    price: 395000,
+    currency: "PKR",
+    description: "Stay in a premium overwater villa with direct lagoon access. Enjoy sunset dolphin cruises, private dining on sandbanks, and world-class snorkeling.",
+    highlights: ["Luxury overwater villa accommodation", "All-inclusive premium dining & drinks", "Private sandbank sunset dinner", "Guided snorkeling tour of banana reef"]
   }
 ];
