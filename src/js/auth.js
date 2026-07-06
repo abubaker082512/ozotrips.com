@@ -236,55 +236,112 @@ export function renderBookingsList() {
 
 export function updateHeader() {
   const navActions = document.querySelector('.nav-actions');
-  if (!navActions) return;
-
-  // Remove existing auth elements
-  navActions.querySelectorAll('.auth-element').forEach(el => el.remove());
-
   const session = getSession();
-  const bookNowBtn = navActions.querySelector('a[href*="tours.html"]');
 
-  if (session) {
-    if (bookNowBtn) bookNowBtn.style.display = 'none';
+  if (navActions) {
+    // Remove existing auth elements
+    navActions.querySelectorAll('.auth-element').forEach(el => el.remove());
+    const bookNowBtn = navActions.querySelector('a[href*="tours.html"]');
 
-    // Create dynamic components
-    const greeting = document.createElement('span');
-    greeting.className = 'user-greeting auth-element';
-    greeting.style.cssText = 'color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin-right: 4px;';
-    greeting.textContent = `Hi, ${session.name}`;
+    if (session) {
+      if (bookNowBtn) bookNowBtn.style.display = 'none';
 
-    const bookingsBtn = document.createElement('button');
-    bookingsBtn.className = 'btn btn-secondary auth-element';
-    bookingsBtn.id = 'auth-bookings-btn';
-    bookingsBtn.style.cssText = 'padding: 8px 16px; font-size: 0.9rem; cursor: pointer;';
-    bookingsBtn.textContent = 'My Bookings';
-    bookingsBtn.addEventListener('click', openBookingsModal);
+      // Create dynamic components
+      const greeting = document.createElement('span');
+      greeting.className = 'user-greeting auth-element';
+      greeting.style.cssText = 'color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin-right: 4px;';
+      greeting.textContent = `Hi, ${session.name}`;
 
-    const logoutBtn = document.createElement('button');
-    logoutBtn.className = 'btn btn-outline auth-element';
-    logoutBtn.id = 'auth-logout-btn';
-    logoutBtn.style.cssText = 'padding: 8px 16px; font-size: 0.9rem; cursor: pointer;';
-    logoutBtn.textContent = 'Logout';
-    logoutBtn.addEventListener('click', handleLogout);
+      const bookingsBtn = document.createElement('button');
+      bookingsBtn.className = 'btn btn-secondary auth-element';
+      bookingsBtn.id = 'auth-bookings-btn';
+      bookingsBtn.style.cssText = 'padding: 8px 16px; font-size: 0.9rem; cursor: pointer;';
+      bookingsBtn.textContent = 'My Bookings';
+      bookingsBtn.addEventListener('click', openBookingsModal);
 
-    navActions.appendChild(greeting);
-    navActions.appendChild(bookingsBtn);
-    navActions.appendChild(logoutBtn);
-  } else {
-    if (bookNowBtn) bookNowBtn.style.display = 'inline-flex';
+      const logoutBtn = document.createElement('button');
+      logoutBtn.className = 'btn btn-outline auth-element';
+      logoutBtn.id = 'auth-logout-btn';
+      logoutBtn.style.cssText = 'padding: 8px 16px; font-size: 0.9rem; cursor: pointer;';
+      logoutBtn.textContent = 'Logout';
+      logoutBtn.addEventListener('click', handleLogout);
 
-    const loginBtn = document.createElement('button');
-    loginBtn.className = 'btn btn-outline auth-element';
-    loginBtn.id = 'auth-login-btn';
-    loginBtn.style.cssText = 'padding: 8px 16px; font-size: 0.9rem; cursor: pointer;';
-    loginBtn.textContent = 'Sign In';
-    loginBtn.addEventListener('click', () => openLoginModal());
-
-    // Prepend before Book Now if Book Now exists, or just append
-    if (bookNowBtn) {
-      navActions.insertBefore(loginBtn, bookNowBtn);
+      navActions.appendChild(greeting);
+      navActions.appendChild(bookingsBtn);
+      navActions.appendChild(logoutBtn);
     } else {
-      navActions.appendChild(loginBtn);
+      if (bookNowBtn) bookNowBtn.style.display = 'inline-flex';
+
+      const loginBtn = document.createElement('button');
+      loginBtn.className = 'btn btn-outline auth-element';
+      loginBtn.id = 'auth-login-btn';
+      loginBtn.style.cssText = 'padding: 8px 16px; font-size: 0.9rem; cursor: pointer;';
+      loginBtn.textContent = 'Sign In';
+      loginBtn.addEventListener('click', () => openLoginModal());
+
+      // Prepend before Book Now if Book Now exists, or just append
+      if (bookNowBtn) {
+        navActions.insertBefore(loginBtn, bookNowBtn);
+      } else {
+        navActions.appendChild(loginBtn);
+      }
+    }
+  }
+
+  // Update mobile slide drawer auth section
+  const mobileAuth = document.querySelector('.mobile-auth-section');
+  if (mobileAuth) {
+    mobileAuth.innerHTML = ''; // clear old contents
+    
+    if (session) {
+      const greeting = document.createElement('span');
+      greeting.style.cssText = 'color: #fff; font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; text-align: center;';
+      greeting.textContent = `Welcome, ${session.name} ✨`;
+      
+      const bookingsBtn = document.createElement('button');
+      bookingsBtn.className = 'btn btn-secondary';
+      bookingsBtn.style.cssText = 'width: 100%; justify-content: center; padding: 10px 0; font-size: 0.88rem;';
+      bookingsBtn.textContent = 'My Bookings';
+      bookingsBtn.addEventListener('click', () => {
+        // close mobile menu drawer first
+        document.getElementById('mobile-nav-toggle')?.classList.remove('active');
+        document.querySelector('.nav-links')?.classList.remove('active');
+        document.getElementById('mobile-nav-overlay')?.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        openBookingsModal();
+      });
+      
+      const logoutBtn = document.createElement('button');
+      logoutBtn.className = 'btn btn-outline';
+      logoutBtn.style.cssText = 'width: 100%; justify-content: center; padding: 10px 0; font-size: 0.88rem; border-color: rgba(255,255,255,0.2); color: #fff;';
+      logoutBtn.textContent = 'Logout';
+      logoutBtn.addEventListener('click', handleLogout);
+      
+      mobileAuth.appendChild(greeting);
+      mobileAuth.appendChild(bookingsBtn);
+      mobileAuth.appendChild(logoutBtn);
+    } else {
+      const loginBtn = document.createElement('button');
+      loginBtn.className = 'btn btn-secondary';
+      loginBtn.style.cssText = 'width: 100%; justify-content: center; padding: 10px 0; font-size: 0.88rem;';
+      loginBtn.textContent = 'Sign In';
+      loginBtn.addEventListener('click', () => {
+        // close mobile menu drawer first
+        document.getElementById('mobile-nav-toggle')?.classList.remove('active');
+        document.querySelector('.nav-links')?.classList.remove('active');
+        document.getElementById('mobile-nav-overlay')?.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        openLoginModal();
+      });
+      
+      const bookNowBtn = document.createElement('a');
+      bookNowBtn.href = './tours.html';
+      bookNowBtn.className = 'btn btn-primary';
+      bookNowBtn.style.cssText = 'width: 100%; justify-content: center; padding: 10px 0; font-size: 0.88rem; text-align: center;';
+      bookNowBtn.textContent = 'Book Now';
+      
+      mobileAuth.appendChild(loginBtn);
+      mobileAuth.appendChild(bookNowBtn);
     }
   }
 }
