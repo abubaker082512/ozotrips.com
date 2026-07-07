@@ -54,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (slides.length > 0) {
     let currentSlide = 0;
     let autoplayTimer;
+    const slideTitle = document.querySelector('.slide-tour-title');
+    const slideDesc = document.querySelector('.slide-tour-desc');
+    const tourInfoCard = document.getElementById('hero-tour-info');
 
     const showSlide = (index) => {
       // Deactivate current slide
@@ -67,6 +70,26 @@ document.addEventListener('DOMContentLoaded', () => {
       slides[currentSlide].classList.add('active');
       if (indicators[currentSlide]) {
         indicators[currentSlide].classList.add('active');
+      }
+
+      // Update dynamic tour info card on the right
+      if (tourInfoCard && slideTitle && slideDesc) {
+        // Fade out
+        tourInfoCard.style.opacity = '0';
+        tourInfoCard.style.transform = 'translateY(10px)';
+
+        setTimeout(() => {
+          const activeSlide = slides[currentSlide];
+          const title = activeSlide.getAttribute('data-title') || '';
+          const desc = activeSlide.getAttribute('data-desc') || '';
+
+          slideTitle.textContent = title;
+          slideDesc.textContent = desc;
+
+          // Fade back in
+          tourInfoCard.style.opacity = '1';
+          tourInfoCard.style.transform = 'translateY(0)';
+        }, 300);
       }
     };
 
