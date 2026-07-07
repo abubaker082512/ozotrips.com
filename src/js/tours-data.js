@@ -3,6 +3,9 @@ import naranImg from '../assets/naran.jpg';
 import montenegroImg from '../assets/montenegro.jpg';
 import bangkokImg from '../assets/bangkok.jpg';
 import hunzaImg from '../assets/hunza.jpg';
+import nathiagaliImg from '../assets/nathiagali.jpg';
+import saudiarabiaImg from '../assets/saudiarabia.jpg';
+import scotlandImg from '../assets/scotland.jpg';
 
 export const tours = [
   {
@@ -150,7 +153,7 @@ export const tours = [
     title: "Murree & Nathia Gali Private Escape",
     type: "local-private",
     category: "Adventure",
-    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=800&q=80",
+    image: nathiagaliImg,
     duration: "5 Days",
     rating: 4.7,
     reviews: 58,
@@ -178,7 +181,7 @@ export const tours = [
     title: "Saudi Arabia Sacred Journey & Desert Al-Ula",
     type: "international-private",
     category: "Cultural",
-    image: "https://images.unsplash.com/photo-1580418826893-67e1f7209375?auto=format&fit=crop&w=800&q=80",
+    image: saudiarabiaImg,
     duration: "8 Days",
     rating: 4.9,
     reviews: 88,
@@ -192,7 +195,7 @@ export const tours = [
     title: "London & Scottish Highlands Explorer Tour",
     type: "international-group",
     category: "Cultural",
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ca1ad?auto=format&fit=crop&w=800&q=80",
+    image: scotlandImg,
     duration: "7 Days",
     rating: 4.8,
     reviews: 104,
