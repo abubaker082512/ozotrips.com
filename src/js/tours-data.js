@@ -1,3 +1,9 @@
+import swatImg from '../assets/swat.jpg';
+import naranImg from '../assets/naran.jpg';
+import montenegroImg from '../assets/montenegro.jpg';
+import bangkokImg from '../assets/bangkok.jpg';
+import hunzaImg from '../assets/hunza.jpg';
+
 export const tours = [
   {
     id: 1,
@@ -32,7 +38,7 @@ export const tours = [
     title: "Kalam & Swat Valley Group Adventure",
     type: "local-group",
     category: "Adventure",
-    image: "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=800&q=80",
+    image: swatImg,
     duration: "4 Days",
     rating: 4.7,
     reviews: 86,
@@ -60,7 +66,7 @@ export const tours = [
     title: "Naran, Hunza & Skardu Grand Group Tour",
     type: "local-group",
     category: "Mountain",
-    image: "https://images.unsplash.com/photo-1622218413697-3f9b8df790eb?auto=format&fit=crop&w=800&q=80",
+    image: naranImg,
     duration: "11 Days",
     rating: 4.9,
     reviews: 198,
@@ -116,7 +122,7 @@ export const tours = [
     title: "Montenegro Private Coast & Alps Tour",
     type: "international-private",
     category: "Beach",
-    image: "https://images.unsplash.com/photo-1555992336-03a23c7b20eb?auto=format&fit=crop&w=800&q=80",
+    image: montenegroImg,
     duration: "8 Days",
     rating: 4.8,
     reviews: 73,
@@ -130,7 +136,7 @@ export const tours = [
     title: "Bangkok & Pattaya Group Tour",
     type: "international-group",
     category: "Beach",
-    image: "https://images.unsplash.com/photo-1563492065561-36d319e8fc15?auto=format&fit=crop&w=800&q=80",
+    image: bangkokImg,
     duration: "7 Days",
     rating: 4.7,
     reviews: 132,
@@ -158,7 +164,7 @@ export const tours = [
     title: "Hunza, Skardu & Chillas Private Safari",
     type: "local-private",
     category: "Mountain",
-    image: "https://images.unsplash.com/photo-1622218413697-3f9b8df790eb?auto=format&fit=crop&w=800&q=80",
+    image: hunzaImg,
     duration: "10 Days",
     rating: 4.9,
     reviews: 112,
