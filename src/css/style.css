@@ -254,9 +254,7 @@ footer .logo-img {
 .mobile-nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 2998;
   opacity: 0;
   pointer-events: none;
@@ -1082,20 +1080,18 @@ footer {
     right: -300px; /* Hidden */
     width: 290px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.85); /* Premium light-glass background */
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: #ffffff; /* Solid light background */
     border-left: 1px solid rgba(0, 0, 0, 0.08);
     padding: 80px 24px 40px;
     gap: 18px;
     z-index: 2999;
     transition: right 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     overflow-y: auto;
-    box-shadow: -10px 0 35px rgba(0, 82, 204, 0.08);
+    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.06);
   }
   
   [data-theme="dark"] .nav-links {
-    background: rgba(15, 23, 42, 0.95);
+    background: #0f172a; /* Solid dark background */
     border-left-color: rgba(255, 255, 255, 0.08);
     box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4);
   }
