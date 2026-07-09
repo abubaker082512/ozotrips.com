@@ -157,77 +157,96 @@
   </header>
 
   <!-- Visa Banner -->
-  <section class="hero" style="min-height: 50vh; padding-top: 130px; padding-bottom: 40px; background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);">
-    <div class="container">
-      <span class="hero-subtitle">🌐 Global Immigration & Visas</span>
-      <h1 style="font-size: 3rem; margin-bottom: 10px;">Expert Visa Consultancy</h1>
-      <p style="max-width: 650px; color: var(--text-secondary);">We provide smooth, hassle-free visa processing for individuals, families, and businesses. Our experts guide you from document preparation to submission and mock interviews.</p>
+  <section class="hero visa-hero" id="visa-pricing" style="position: relative; min-height: 55vh; padding-top: 150px; padding-bottom: 60px; background-image: url('https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; display: flex; align-items: center;">
+    <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(10, 16, 28, 0.88) 35%, rgba(10, 16, 28, 0.45) 100%);"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="hero-content glass-panel" style="max-width: 650px; padding: 45px; border-radius: var(--border-radius-lg); background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: var(--shadow-lg);">
+        <span class="hero-subtitle" style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">✨ Seamless Worldwide Visa Processing</span>
+        <h1 style="font-size: 3rem; font-weight: 800; margin: 15px 0; color: #fff; line-height: 1.2;">Your Journey Begins Here</h1>
+        <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 24px; font-size: 1.05rem; line-height: 1.6;">We provide expert, hassle-free visa processing and document advisory for tourist, family, and business travel. Empowering your global mobility with a 98% approval rate.</p>
+        <a href="#visa-pricing-table" class="btn btn-primary" style="padding: 12px 28px;">Check Visa Fees ➔</a>
+      </div>
     </div>
   </section>
 
   <!-- Visa Categories Section -->
-  <section class="container" style="padding-top: 20px;">
-    <h2 style="font-size: 2rem; text-align: center; margin-bottom: 10px;">Our Visa Services Include</h2>
-    <p style="color: var(--text-secondary); text-align: center; max-width: 600px; margin: 0 auto 40px;">Choose the appropriate visa category for your travel or relocation needs.</p>
+  <section class="container" style="padding-top: 60px;">
+    <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 10px; font-weight: 800;">Our Visa Services Include</h2>
+    <p style="color: var(--text-secondary); text-align: center; max-width: 600px; margin: 0 auto 40px; font-size: 1.05rem;">Choose the appropriate visa category for your travel or relocation needs.</p>
     
     <div class="visa-grid">
       
       <!-- Tourist Visas -->
-      <div class="visa-card glass-panel">
-        <div class="visa-icon-box">🏖️</div>
-        <h3>Tourist & Visit Visas</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem;">Assisting vacationers, families, and business travelers with short-term travel visas.</p>
-        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-          <li>Document verification & submission</li>
-          <li>Appointment scheduling support</li>
-          <li>Comprehensive hotel & flight bookings</li>
-          <li>Travel insurance support</li>
-        </ul>
+      <div class="visa-card glass-panel" style="overflow: hidden; padding: 0; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column;">
+        <div style="height: 180px; background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center; position: relative;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);"></div>
+          <span style="position: absolute; bottom: 15px; left: 24px; font-size: 2.2rem;">🏖️</span>
+        </div>
+        <div style="padding: 28px; flex-grow: 1; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--color-primary);">Tourist & Visit Visas</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; margin-bottom: 8px;">Assisting vacationers, families, and business travelers with short-term travel visas.</p>
+          <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <li>Document verification & submission</li>
+            <li>Appointment scheduling support</li>
+            <li>Comprehensive hotel & flight bookings</li>
+            <li>Travel insurance support</li>
+          </ul>
+        </div>
       </div>
 
       <!-- Student Visas -->
-      <div class="visa-card glass-panel">
-        <div class="visa-icon-box">🎓</div>
-        <h3>Student Visas</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem;">Full support in obtaining study permits and visas for top worldwide colleges.</p>
-        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-          <li>University admission support</li>
-          <li>Visa interview preparation workshops</li>
-          <li>Sponsorship document audit</li>
-          <li>Post-study work permit advice</li>
-        </ul>
+      <div class="visa-card glass-panel" style="overflow: hidden; padding: 0; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column;">
+        <div style="height: 180px; background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center; position: relative;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);"></div>
+          <span style="position: absolute; bottom: 15px; left: 24px; font-size: 2.2rem;">🎓</span>
+        </div>
+        <div style="padding: 28px; flex-grow: 1; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--color-primary);">Student Visas</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; margin-bottom: 8px;">Full support in obtaining study permits and visas for top worldwide colleges.</p>
+          <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <li>University admission support</li>
+            <li>Visa interview preparation workshops</li>
+            <li>Sponsorship document audit</li>
+            <li>Post-study work permit advice</li>
+          </ul>
+        </div>
       </div>
 
       <!-- Work Visas -->
-      <div class="visa-card glass-panel">
-        <div class="visa-icon-box">💼</div>
-        <h3>Work & Business Visas</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem;">Processing business investment and skilled worker employment permits.</p>
-        <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-          <li>Employer verification support</li>
-          <li>Visa sponsorship document audits</li>
-          <li>Immigration route guidance</li>
-          <li>Business travel authorizations</li>
-        </ul>
+      <div class="visa-card glass-panel" style="overflow: hidden; padding: 0; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column;">
+        <div style="height: 180px; background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center; position: relative;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);"></div>
+          <span style="position: absolute; bottom: 15px; left: 24px; font-size: 2.2rem;">💼</span>
+        </div>
+        <div style="padding: 28px; flex-grow: 1; display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--color-primary);">Work & Business Visas</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; margin-bottom: 8px;">Processing business investment and skilled worker employment permits.</p>
+          <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <li>Employer verification support</li>
+            <li>Visa sponsorship document audits</li>
+            <li>Immigration route guidance</li>
+            <li>Business travel authorizations</li>
+          </ul>
+        </div>
       </div>
 
     </div>
   </section>
 
   <!-- Popular Countries -->
-  <section class="container" style="margin-top: 80px;">
-    <h2 style="font-size: 2rem; margin-bottom: 10px;">Popular Visa Destinations</h2>
-    <p style="color: var(--text-secondary); max-width: 600px; margin-bottom: 30px;">We process visa applications for a wide array of destinations with high success rates.</p>
+  <section class="container" style="margin-top: 80px;" id="visa-pricing-table">
+    <h2 style="font-size: 2.2rem; margin-bottom: 10px; font-weight: 800;">Popular Visa Destinations</h2>
+    <p style="color: var(--text-secondary); max-width: 600px; margin-bottom: 40px; font-size: 1.05rem;">We process visa applications for a wide array of destinations with high success rates.</p>
     
     <div class="dest-list">
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇦🇪</span> UAE (Dubai, Abu Dhabi)</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇸🇦</span> Saudi Arabia (Family/Umrah)</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇹🇷</span> Turkey (Sticker/e-Visa)</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇲🇾</span> Malaysia & Singapore</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇪🇺</span> Schengen (France, Germany, Italy)</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇬🇧</span> United Kingdom (UK)</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇺🇸</span> United States (USA)</div>
-      <div class="dest-item"><span style="font-size: 1.5rem;">🇨🇦</span> Canada (Express Entry/Visitor)</div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇦🇪</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">UAE</strong><span style="font-size: 0.78rem; color: var(--text-muted);">Dubai, Abu Dhabi</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇸🇦</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">Saudi Arabia</strong><span style="font-size: 0.78rem; color: var(--text-muted);">Family & Umrah Visas</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇹🇷</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">Turkey</strong><span style="font-size: 0.78rem; color: var(--text-muted);">Sticker & e-Visa</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇲🇾</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">Malaysia</strong><span style="font-size: 0.78rem; color: var(--text-muted);">Tourism & Business</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇪🇺</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">Schengen</strong><span style="font-size: 0.78rem; color: var(--text-muted);">France, Germany, Italy</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇬🇧</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">United Kingdom</strong><span style="font-size: 0.78rem; color: var(--text-muted);">Standard Visitor Visa</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇺🇸</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">United States</strong><span style="font-size: 0.78rem; color: var(--text-muted);">B1/B2 Visitor Visa</span></div></div>
+      <div class="dest-item" style="cursor: pointer; transition: all 0.3s ease; border-radius: var(--border-radius-md); padding: 18px 24px; display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); box-shadow: var(--shadow-sm);"><span style="font-size: 2.2rem; display: inline-flex; align-items: center;">🇨🇦</span> <div><strong style="display: block; font-size: 1.05rem; color: var(--text-primary);">Canada</strong><span style="font-size: 0.78rem; color: var(--text-muted);">Express Entry & Visitor</span></div></div>
     </div>
   </section>
 

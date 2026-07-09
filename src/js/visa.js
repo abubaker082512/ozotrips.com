@@ -27,21 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Visa Pricing Data List (PKR prices with ±200-500 PKR difference from Yugo.pk applied)
   const visaPrices = [
-    { country: "Azerbaijan", type: "Tourist e-Visa", price: 13300, category: "no-statement" },
-    { country: "Australia", type: "Visitor Visa Subclass 600", price: 94700, category: "other" },
-    { country: "Canada", type: "Temporary Resident Visa", price: 95350, category: "other" },
-    { country: "Egypt", type: "Tourist Sticker Visa", price: 74800, category: "sticker" },
-    { country: "Greece", type: "Schengen Tourist Visa", price: 75300, category: "other" },
-    { country: "Hong Kong", type: "Tourist Visa Support", price: 48700, category: "no-statement" },
-    { country: "Malaysia", type: "Tourist e-Visa", price: 16350, category: "no-statement" },
-    { country: "Singapore", type: "Tourist e-Visa", price: 24700, category: "no-statement" },
-    { country: "Thailand", type: "Tourist Sticker Visa", price: 20200, category: "sticker" },
-    { country: "Turkey", type: "Tourist Sticker Visa Support", price: 38300, category: "sticker" },
-    { country: "UAE (Dubai)", type: "30 Days Tourist e-Visa (Dubai ID)", price: 32300, category: "no-statement" },
-    { country: "United Kingdom (UK)", type: "Standard Visitor Visa Support", price: 94800, category: "other" },
-    { country: "United States (USA)", type: "B1/B2 Visa Prep & Advisory", price: 95250, category: "other" },
-    { country: "Saudi Arabia (Umrah)", type: "Umrah Visit Visa (With Insurance)", price: 44700, category: "no-statement" },
-    { country: "Schengen Support", type: "Visa File Preparation & Consultancy", price: 45300, category: "other" }
+    { country: "Azerbaijan", flag: "🇦🇿", type: "Tourist e-Visa", price: 13300, category: "no-statement" },
+    { country: "Australia", flag: "🇦🇺", type: "Visitor Visa Subclass 600", price: 94700, category: "other" },
+    { country: "Canada", flag: "🇨🇦", type: "Temporary Resident Visa", price: 95350, category: "other" },
+    { country: "Egypt", flag: "🇪🇬", type: "Tourist Sticker Visa", price: 74800, category: "sticker" },
+    { country: "Greece", flag: "🇬🇷", type: "Schengen Tourist Visa", price: 75300, category: "other" },
+    { country: "Hong Kong", flag: "🇭🇰", type: "Tourist Visa Support", price: 48700, category: "no-statement" },
+    { country: "Malaysia", flag: "🇲🇾", type: "Tourist e-Visa", price: 16350, category: "no-statement" },
+    { country: "Singapore", flag: "🇸🇬", type: "Tourist e-Visa", price: 24700, category: "no-statement" },
+    { country: "Thailand", flag: "🇹🇭", type: "Tourist Sticker Visa", price: 20200, category: "sticker" },
+    { country: "Turkey", flag: "🇹🇷", type: "Tourist Sticker Visa Support", price: 38300, category: "sticker" },
+    { country: "UAE (Dubai)", flag: "🇦🇪", type: "30 Days Tourist e-Visa (Dubai ID)", price: 32300, category: "no-statement" },
+    { country: "United Kingdom (UK)", flag: "🇬🇧", type: "Standard Visitor Visa Support", price: 94800, category: "other" },
+    { country: "United States (USA)", flag: "🇺🇸", type: "B1/B2 Visa Prep & Advisory", price: 95250, category: "other" },
+    { country: "Saudi Arabia (Umrah)", flag: "🇸🇦", type: "Umrah Visit Visa (With Insurance)", price: 44700, category: "no-statement" },
+    { country: "Schengen Support", flag: "🇪🇺", type: "Visa File Preparation & Consultancy", price: 45300, category: "other" }
   ];
 
   // Function to Render Table Rows
@@ -61,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tableBody.innerHTML = dataList.map(item => `
       <tr style="border-bottom: 1px solid var(--border-glass); transition: background var(--transition-fast);">
-        <td style="padding: 16px 24px; font-weight: 600; color: var(--text-primary);">${item.country}</td>
+        <td style="padding: 16px 24px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.35rem; display: inline-flex; align-items: center;">${item.flag || ''}</span>
+          <span>${item.country}</span>
+        </td>
         <td style="padding: 16px 24px; color: var(--text-secondary);">${item.type}</td>
         <td style="padding: 16px 24px; text-align: right; font-weight: 700; color: var(--color-primary);">${item.price.toLocaleString()} PKR</td>
       </tr>

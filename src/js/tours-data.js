@@ -6,6 +6,7 @@ import hunzaImg from '../assets/hunza.jpg';
 import nathiagaliImg from '../assets/nathiagali.jpg';
 import saudiarabiaImg from '../assets/saudiarabia.jpg';
 import scotlandImg from '../assets/scotland.jpg';
+import bakuImg from '../assets/baku.jpg';
 
 export const tours = [
   {
@@ -13,7 +14,7 @@ export const tours = [
     title: "Baku Group Tour Package",
     type: "international-group",
     category: "Cultural",
-    image: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=800&q=80",
+    image: bakuImg,
     duration: "5 Days",
     rating: 4.8,
     reviews: 115,

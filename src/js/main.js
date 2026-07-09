@@ -49,9 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.carousel-slide');
   const prevBtn = document.getElementById('prev-slide');
   const nextBtn = document.getElementById('next-slide');
-  const indicators = document.querySelectorAll('.indicator');
+  const indicatorsContainer = document.getElementById('carousel-indicators');
 
   if (slides.length > 0) {
+    // Generate indicators dynamically
+    if (indicatorsContainer) {
+      indicatorsContainer.innerHTML = '';
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('span');
+        dot.className = idx === 0 ? 'indicator active' : 'indicator';
+        dot.setAttribute('data-slide', idx);
+        indicatorsContainer.appendChild(dot);
+      });
+    }
+
+    const indicators = document.querySelectorAll('.indicator');
     let currentSlide = 0;
     let autoplayTimer;
     const slideTitle = document.querySelector('.slide-tour-title');
