@@ -206,13 +206,16 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="help-hero" style="background-image: linear-gradient(to bottom, rgba(20, 24, 33, 0.7), rgba(20, 24, 33, 0.85)), url('./src/assets/umrah-hero.png'); height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; background-size: cover; background-position: center;">
-    <div class="container">
-      <span style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 8px;">🕋 Sacred Journeys</span>
-      <h1 style="font-size: 3rem; font-weight: 800;">Hajj & Umrah Pilgrimage Services</h1>
-      <p style="max-width: 600px; margin: 16px auto 0; color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.6;">
-        Guided spiritual experiences crafted with premium hotels near Al-Haram, visa facilitation, private transfers, and dedicated concierge support.
-      </p>
+  <section class="help-hero" style="position: relative; background-image: url('./src/assets/umrah-hero.png'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; padding: 180px 0 120px;">
+    <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.92)); z-index: 1;"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="glass-panel" style="max-width: 800px; margin: 0 auto; padding: 48px 32px; border-radius: var(--border-radius-lg); background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: var(--shadow-lg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
+        <span style="color: var(--color-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 12px; font-size: 0.95rem;">🕋 Sacred Pilgrimages</span>
+        <h1 style="font-size: 3rem; font-weight: 800; line-height: 1.25; margin-bottom: 16px; background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Hajj & Umrah Pilgrimage Services</h1>
+        <p style="max-width: 640px; margin: 0 auto; color: rgba(255,255,255,0.9); font-size: 1.05rem; line-height: 1.7;">
+          Embark on a spiritual journey of a lifetime. We offer guided pilgrims fully personalized packages including visas, luxury accommodations near Al-Haram, private transport, and 24/7 on-ground assistance.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -430,7 +433,54 @@
 
   <!-- Footer Section -->
   <footer id="contact">
-    <!-- Footer structure synced globally -->
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="./index.html" class="logo" style="margin-bottom: 10px;">
+            <img src="./src/assets/logo-light.png" alt="OzoTrips" class="logo-img logo-light">
+            <img src="./src/assets/logo-dark.png" alt="OzoTrips" class="logo-img logo-dark">
+          </a>
+          <p>We build luxury travel experiences tailored to your desires. Offering private tours, local adventures, and international holiday escapes.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+            <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+            <a href="#" class="social-btn" aria-label="Twitter">TW</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="./tours.html">Browse Tours</a></li>
+            <li><a href="./flights.html">Book Flights</a></li>
+            <li><a href="./attractions.html">Attractions Map</a></li>
+            <li><a href="./visa-services.html">Visa Advisory</a></li>
+            <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
+            <li><a href="./custom-planner.html">Custom Planner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="./help-center.html">FAQs Help Center</a></li>
+            <li><a href="./about.html">About Our Company</a></li>
+            <li><a href="./offers.html">Special Promos</a></li>
+            <li><a href="./blog.html">Travel Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Subscribe to receive exclusive deals and custom travel guides weekly.</p>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+            <button class="btn btn-primary" style="padding: 12px 20px;">Join</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 OzoTrips Inc. All rights reserved. Designed for excellence.</p>
+        <p>Support: support@ozotrips.com | Tel: 0300-4634548 / 0321 1840777</p>
+      </div>
+    </div>
   </footer>
 
   <!-- Scripts -->
