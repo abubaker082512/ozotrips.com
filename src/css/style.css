@@ -947,6 +947,7 @@ footer {
   background: #ffffff; /* Solid White Background */
   color: var(--text-secondary);
   padding: 80px 0 30px;
+  margin-top: 80px;
   border-top: 1px solid rgba(0, 82, 204, 0.06);
 }
 
