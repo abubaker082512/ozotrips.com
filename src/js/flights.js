@@ -1,3 +1,5 @@
+import './auth.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const flightSearchForm = document.getElementById('flight-search-form');
   const manualInquiryForm = document.getElementById('manual-inquiry-form');
