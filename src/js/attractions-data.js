@@ -1,10 +1,13 @@
+import passuImg from '../assets/passu cones.webp';
+import attabadImg from '../assets/Attabad-Lake.webp';
+
 export const attractions = [
   {
     id: 1,
     name: "Passu Cones",
     location: "Hunza Valley, Pakistan",
     category: "Mountain",
-    image: "https://images.unsplash.com/photo-1627588147983-6cc33190df0e?auto=format&fit=crop&w=800&q=80",
+    image: passuImg,
     description: "Also known as Cathedral Ridge, these jagged, cone-shaped peaks rise over 6,000 meters above sea level along the Karakoram Highway, offering one of the most iconic mountain skylines in the world.",
     bestTime: "May to October",
     tourId: 1
@@ -14,7 +17,7 @@ export const attractions = [
     name: "Attabad Lake",
     location: "Hunza Valley, Pakistan",
     category: "Scenic",
-    image: "https://images.unsplash.com/photo-1618331835717-801e8284807d?auto=format&fit=crop&w=800&q=80",
+    image: attabadImg,
     description: "A stunning turquoise-colored lake formed in 2010 after a massive landslide. It offers boating, jet-skiing, and picturesque views framed by massive Karakoram peaks.",
     bestTime: "April to October",
     tourId: 1

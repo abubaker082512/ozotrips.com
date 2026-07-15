@@ -209,11 +209,11 @@ header.scrolled .logo-img {
 }
 
 .logo-light {
-  display: none !important;
+  display: block !important;
 }
 
 .logo-dark {
-  display: block !important;
+  display: none !important;
 }
 
 [data-theme="dark"] .logo-light {
