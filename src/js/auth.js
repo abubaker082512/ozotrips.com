@@ -516,6 +516,49 @@ function initAuth() {
   setupScrollAnimations();
   setupScrollTop();
   setupCustomCursor();
+  setupMobileNav();
+}
+
+function setupMobileNav() {
+  const mobileToggle = document.getElementById('mobile-nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  let overlay = document.getElementById('mobile-nav-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'mobile-nav-overlay';
+    overlay.className = 'mobile-nav-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  if (mobileToggle && navLinks) {
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.classList.toggle('no-scroll');
+    });
+
+    overlay.addEventListener('click', () => {
+      mobileToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    });
+
+    const dropdownToggles = navLinks.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const parent = toggle.closest('.nav-dropdown');
+          if (parent) {
+            parent.classList.toggle('open');
+          }
+        }
+      });
+    });
+  }
 }
 
 function setupCustomCursor() {

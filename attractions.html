@@ -17,7 +17,7 @@
   <style>
     .attractions-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 32px;
       margin-top: 40px;
     }
@@ -27,6 +27,17 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+    }
+    
+    @media (max-width: 480px) {
+      .attractions-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .attraction-card {
+        height: auto;
+        min-height: 420px;
+      }
     }
     
     .attraction-img-box {

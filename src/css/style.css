@@ -1156,13 +1156,22 @@ footer {
   .dropdown-menu {
     position: static !important;
     display: none; /* Hidden on mobile by default */
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid var(--border-glass) !important;
+    background: #f8fafc !important; /* Standout background in mobile drawer */
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
     box-shadow: none !important;
     margin-top: 8px;
     width: 100% !important;
     padding: 8px 12px !important;
     border-radius: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    left: 0 !important;
+  }
+
+  [data-theme="dark"] .dropdown-menu {
+    background: #1e293b !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
   }
 
   .nav-dropdown.open .dropdown-menu {
@@ -3399,5 +3408,60 @@ footer {
   .hajj-umrah-packages {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+}
+
+/* Global Form Controls & Select Box Responsiveness Fix */
+select, input, textarea {
+  max-width: 100% !important;
+}
+
+/* Glass-Panel & Booking Sidebar Padding Overrides on Mobile */
+@media (max-width: 768px) {
+  .glass-panel {
+    padding: 20px !important;
+  }
+  .booking-sidebar {
+    padding: 20px !important;
+  }
+}
+
+/* Hajj & Umrah Pilgrimage Ziyarat Gallery Layout */
+.ziyarat-layout-container {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .ziyarat-layout-container {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+
+/* About Us Story and Stats Responsive Layouts */
+.about-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .about-story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  .about-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
   }
 }
