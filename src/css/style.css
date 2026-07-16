@@ -384,37 +384,100 @@ body.no-scroll {
 
 .hero-tour-info {
   position: absolute;
-  bottom: 40px;
+  top: 50%;
   right: 5%;
-  max-width: 380px;
-  padding: 24px;
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--border-radius-md);
+  transform: translateY(-50%);
+  max-width: 400px;
+  width: 90%;
+  padding: 30px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--border-radius-lg);
   color: #fff;
   z-index: 10;
-  box-shadow: var(--shadow-lg), inset 0 0 20px rgba(255, 255, 255, 0.05);
-  text-align: right;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  box-shadow: var(--shadow-lg), inset 0 0 30px rgba(255, 255, 255, 0.05);
+  text-align: left;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   opacity: 1;
-  transform: translateY(0);
+}
+
+.tour-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(0, 82, 204, 0.3);
+  border: 1px solid rgba(0, 82, 204, 0.5);
+  color: #60a5fa;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
 .hero-tour-info h3 {
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   font-weight: 800;
-  color: var(--color-secondary);
-  margin-bottom: 8px;
+  color: #fff;
+  line-height: 1.25;
+  margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-tour-info p {
-  font-size: 0.88rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
+  margin: 0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-tour-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 0;
+  margin-top: 4px;
+}
+
+.price-label {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.price-val {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.duration-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-book-btn {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  justify-content: center;
+  margin-top: 4px;
 }
 
 .hero-subtitle {

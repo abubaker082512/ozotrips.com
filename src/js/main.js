@@ -88,19 +88,37 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tourInfoCard && slideTitle && slideDesc) {
         // Fade out
         tourInfoCard.style.opacity = '0';
-        tourInfoCard.style.transform = 'translateY(10px)';
+        tourInfoCard.style.transform = 'translateY(-40%)';
 
         setTimeout(() => {
           const activeSlide = slides[currentSlide];
           const title = activeSlide.getAttribute('data-title') || '';
           const desc = activeSlide.getAttribute('data-desc') || '';
+          const tourId = activeSlide.getAttribute('data-tour-id') || '3';
+          const tourPrice = activeSlide.getAttribute('data-tour-price') || '';
+          const tourDuration = activeSlide.getAttribute('data-tour-duration') || '';
+          const tourBadge = activeSlide.getAttribute('data-tour-badge') || '';
 
           slideTitle.textContent = title;
           slideDesc.textContent = desc;
 
+          const badgeEl = document.getElementById('hero-tour-badge');
+          if (badgeEl) badgeEl.textContent = tourBadge;
+
+          const priceEl = document.getElementById('hero-tour-price');
+          if (priceEl) priceEl.textContent = tourPrice;
+
+          const durationEl = document.getElementById('hero-tour-duration');
+          if (durationEl) durationEl.textContent = tourDuration;
+
+          const bookBtnEl = document.getElementById('hero-tour-book-btn');
+          if (bookBtnEl) {
+            bookBtnEl.setAttribute('onclick', `openBookingModal(${tourId})`);
+          }
+
           // Fade back in
           tourInfoCard.style.opacity = '1';
-          tourInfoCard.style.transform = 'translateY(0)';
+          tourInfoCard.style.transform = 'translateY(-50%)';
         }, 300);
       }
     };
