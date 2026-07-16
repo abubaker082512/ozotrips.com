@@ -406,18 +406,20 @@ body.no-scroll {
   opacity: 1;
 }
 
-.tour-badge {
+.hero-tour-badge {
   display: inline-block;
   align-self: flex-start;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  background: rgba(0, 82, 204, 0.3);
-  border: 1px solid rgba(0, 82, 204, 0.5);
-  color: #60a5fa;
-  padding: 4px 10px;
-  border-radius: 20px;
+  background: rgba(0, 82, 204, 0.3) !important;
+  border: 1px solid rgba(0, 82, 204, 0.5) !important;
+  color: #60a5fa !important;
+  padding: 4px 10px !important;
+  border-radius: 20px !important;
+  position: static !important;
+  z-index: 2;
 }
 
 .hero-tour-info h3 {
@@ -1297,12 +1299,18 @@ footer {
   }
   
   .hero-tour-info {
-    bottom: 20px !important;
+    position: absolute !important;
+    top: auto !important;
+    bottom: 65px !important;
     right: 16px !important;
     left: 16px !important;
+    transform: none !important;
     max-width: calc(100% - 32px) !important;
-    text-align: center !important;
-    padding: 16px !important;
+    text-align: left !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    z-index: 10 !important;
   }
   
   .hero-tour-info h3 {
@@ -1312,6 +1320,15 @@ footer {
   
   .hero-tour-info p {
     font-size: 0.8rem !important;
+  }
+
+  .hero-tour-info .price-val {
+    font-size: 1.2rem !important;
+  }
+
+  .hero-tour-info .hero-book-btn {
+    padding: 10px 0 !important;
+    font-size: 0.85rem !important;
   }
   
   .nav-actions {
