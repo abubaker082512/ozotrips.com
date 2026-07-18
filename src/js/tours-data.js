@@ -7,6 +7,8 @@ import nathiagaliImg from '../assets/nathiagali.jpg';
 import saudiarabiaImg from '../assets/saudiarabia.jpg';
 import scotlandImg from '../assets/scotland.jpg';
 import bakuImg from '../assets/baku.jpg';
+import dubaiImg from '../assets/dubai.jpg';
+import malamjabbaImg from '../assets/malamjabba.jpg';
 
 export const tours = [
   {
@@ -238,7 +240,7 @@ export const tours = [
     title: "Dubai Group Shopping Festival & City Tour",
     type: "international-group",
     category: "Adventure",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80",
+    image: dubaiImg,
     duration: "5 Days",
     rating: 4.8,
     reviews: 96,
@@ -252,7 +254,7 @@ export const tours = [
     title: "Malam Jabba Ski Resort Private Trip",
     type: "local-private",
     category: "Adventure",
-    image: "https://images.unsplash.com/photo-1605548230624-8d2d0419c517?auto=format&fit=crop&w=800&q=80",
+    image: malamjabbaImg,
     duration: "3 Days",
     rating: 4.6,
     reviews: 45,
