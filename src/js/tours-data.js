@@ -232,5 +232,33 @@ export const tours = [
     currency: "PKR",
     description: "Stay in a premium overwater villa with direct lagoon access. Enjoy sunset dolphin cruises, private dining on sandbanks, and world-class snorkeling.",
     highlights: ["Luxury overwater villa accommodation", "All-inclusive premium dining & drinks", "Private sandbank sunset dinner", "Guided snorkeling tour of banana reef"]
+  },
+  {
+    id: 17,
+    title: "Dubai Group Shopping Festival & City Tour",
+    type: "international-group",
+    category: "Adventure",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80",
+    duration: "5 Days",
+    rating: 4.8,
+    reviews: 96,
+    price: 185000,
+    currency: "PKR",
+    description: "Discover the glitz and glamour of Dubai. Shop at the world-famous Dubai Mall, experience a desert safari with dune bashing, and view the city from Burj Khalifa.",
+    highlights: ["Burj Khalifa 124th Floor entrance", "Desert Safari with dune bashing & BBQ", "Dubai Marina sunset dinner cruise", "Guided old Dubai souk shopping tour"]
+  },
+  {
+    id: 18,
+    title: "Malam Jabba Ski Resort Private Trip",
+    type: "local-private",
+    category: "Adventure",
+    image: "https://images.unsplash.com/photo-1605548230624-8d2d0419c517?auto=format&fit=crop&w=800&q=80",
+    duration: "3 Days",
+    rating: 4.6,
+    reviews: 45,
+    price: 34500,
+    currency: "PKR",
+    description: "Enjoy a private snow escape at Malam Jabba, Pakistan's premier ski resort. Perfect for skiing, chairlift rides, and scenic winter sightseeing.",
+    highlights: ["Skiing lessons with certified guide", "Ayubia chairlift sightseeing ticket", "Bonfire night at Malam Jabba hotel", "Private vehicle transfers from Islamabad"]
   }
 ];
