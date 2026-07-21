@@ -299,7 +299,7 @@ body.no-scroll {
   min-height: 80vh;
   display: flex;
   align-items: center;
-  padding-top: var(--header-height);
+  margin-top: var(--header-height);
   overflow: hidden;
   background: radial-gradient(circle at 70% 30%, rgba(0, 82, 204, 0.15) 0%, transparent 50%),
               radial-gradient(circle at 10% 80%, rgba(255, 153, 0, 0.1) 0%, transparent 50%);
