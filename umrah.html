@@ -256,6 +256,94 @@
         gap: 24px;
       }
     }
+
+    /* Sacred attractions section styles */
+    .attractions-grid-section {
+      padding: 80px 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-glass);
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .attractions-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .attraction-card-premium {
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .attraction-card-premium:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), 0 10px 30px rgba(0, 82, 204, 0.06);
+      border-color: var(--color-primary);
+    }
+    .attraction-card-img-wrapper {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .attraction-card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    .attraction-card-premium:hover .attraction-card-img-wrapper img {
+      transform: scale(1.06);
+    }
+    .attraction-card-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 6px 12px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 2;
+    }
+    .attraction-card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-grow: 1;
+    }
+    .attraction-card-body h3 {
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .attraction-card-body p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .attraction-card-meta {
+      font-size: 0.8rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
   </style>
 </head>
 <body>
@@ -427,37 +515,91 @@
     </div>
   </section>
 
-  <!-- Ziyarat Destinations Section -->
-  <section style="padding: 80px 0; background: rgba(0, 82, 204, 0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+  <!-- Ziyarat Attractions Showcase Section -->
+  <section class="attractions-grid-section">
     <div class="container">
-      <div class="ziyarat-layout-container">
-        <div>
-          <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 8px;">🕌 Pilgrimage Ziyarat Sites</span>
-          <h2 style="font-size: 2.4rem; line-height: 1.25;">Historical Ziyarat Excursions Included</h2>
-          <p style="color: var(--text-secondary); margin-top: 16px; line-height: 1.7; font-size: 1rem;">
-            All our packages include fully guided historical tours of sacred sites in Makkah Mukarramah and Madinah Munawwarah, with explanations from certified guides.
-          </p>
-          <ul class="excursions-grid">
-            <li style="margin-bottom: 8px;">⛰️ Jabal al-Nour (Hira Cave)</li>
-            <li style="margin-bottom: 8px;">⛺ Jabal Thawr (Thawr Cave)</li>
-            <li style="margin-bottom: 8px;">🕌 Masjid al-Quba (Madinah)</li>
-            <li style="margin-bottom: 8px;">🏔️ Mount Uhud & Cemetery</li>
-            <li style="margin-bottom: 8px;">🌾 Mina & Muzdalifah</li>
-            <li style="margin-bottom: 8px;">🕌 Masjid al-Qiblatayn</li>
-          </ul>
-        </div>
-        <div class="ziyarat-gallery">
-          <div class="ziyarat-card">
-            <img src="./src/assets/umrah-makkah.png" alt="Makkah Holy Kaaba">
-            <div class="ziyarat-overlay">
-              <h4 style="font-size: 1.15rem; font-weight: 700;">Masjid al-Haram, Makkah</h4>
-            </div>
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+        <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">🕌 Sacred Sightseeing</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Explore Holy Ziyarat Attractions</h2>
+        <p style="color: var(--text-secondary); margin-top: 12px; font-size: 0.95rem;">Guided excursions to the most important historical and spiritual sites in Makkah & Madinah are included in all packages.</p>
+      </div>
+
+      <div class="attractions-gallery-grid">
+        <!-- Card 1: Masjid al-Haram -->
+        <div class="attraction-card-premium">
+          <div class="attraction-card-img-wrapper">
+            <span class="attraction-card-tag">Makkah</span>
+            <img src="./src/assets/umrah-makkah.png" alt="Masjid al-Haram">
           </div>
-          <div class="ziyarat-card">
-            <img src="./src/assets/umrah-madinah.jpg" alt="Masjid Al-Nabawi Madinah">
-            <div class="ziyarat-overlay">
-              <h4 style="font-size: 1.15rem; font-weight: 700;">Masjid an-Nabawi, Madinah</h4>
-            </div>
+          <div class="attraction-card-body">
+            <h3>Masjid al-Haram & Holy Kaaba</h3>
+            <p>The largest and holiest mosque in the world, surrounding the sacred Kaaba. Pilgrims perform Tawaf and Sa'i here as core rituals of Hajj and Umrah.</p>
+            <div class="attraction-card-meta">📍 Center of Makkah</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Masjid an-Nabawi -->
+        <div class="attraction-card-premium">
+          <div class="attraction-card-img-wrapper">
+            <span class="attraction-card-tag">Madinah</span>
+            <img src="./src/assets/umrah-madinah.jpg" alt="Masjid an-Nabawi">
+          </div>
+          <div class="attraction-card-body">
+            <h3>Masjid an-Nabawi (The Prophet's Mosque)</h3>
+            <p>The second holiest mosque in Islam, built by the Prophet Muhammad (PBUH) himself. Features the iconic Green Dome and the sacred Rawdah block.</p>
+            <div class="attraction-card-meta">📍 Center of Madinah</div>
+          </div>
+        </div>
+
+        <!-- Card 3: Cave of Hira -->
+        <div class="attraction-card-premium">
+          <div class="attraction-card-img-wrapper">
+            <span class="attraction-card-tag">Makkah</span>
+            <img src="./src/assets/cave_of_hira.webp" alt="Cave of Hira">
+          </div>
+          <div class="attraction-card-body">
+            <h3>Ghar-e-Hira (Jabal al-Nour)</h3>
+            <p>The mountain cave where the Prophet Muhammad (PBUH) spent periods of reflection and received his very first Quranic revelations from Angel Jibreel.</p>
+            <div class="attraction-card-meta">📍 4km Northeast of Haram</div>
+          </div>
+        </div>
+
+        <!-- Card 4: Mount Arafat -->
+        <div class="attraction-card-premium">
+          <div class="attraction-card-img-wrapper">
+            <span class="attraction-card-tag">Makkah</span>
+            <img src="./src/assets/mount_arafat.webp" alt="Mount Arafat">
+          </div>
+          <div class="attraction-card-body">
+            <h3>Jabal al-Rahmah (Mount of Mercy)</h3>
+            <p>The granite hill in the plain of Arafat where the Prophet Muhammad (PBUH) delivered his historic Farewell Sermon to thousands of companions.</p>
+            <div class="attraction-card-meta">📍 20km Southeast of Makkah</div>
+          </div>
+        </div>
+
+        <!-- Card 5: Masjid al-Quba -->
+        <div class="attraction-card-premium">
+          <div class="attraction-card-img-wrapper">
+            <span class="attraction-card-tag">Madinah</span>
+            <img src="./src/assets/masjid_quba.webp" alt="Masjid al-Quba">
+          </div>
+          <div class="attraction-card-body">
+            <h3>Masjid al-Quba</h3>
+            <p>The first mosque built in Islamic history, founded by the Prophet Muhammad (PBUH) on his migration from Makkah. Offers the reward of one Umrah for praying here.</p>
+            <div class="attraction-card-meta">📍 Southern Madinah Outskirts</div>
+          </div>
+        </div>
+
+        <!-- Card 6: Mount Uhud Battlefield -->
+        <div class="attraction-card-premium">
+          <div class="attraction-card-img-wrapper">
+            <span class="attraction-card-tag">Madinah</span>
+            <img src="./src/assets/umrah-group.jpg" alt="Mount Uhud">
+          </div>
+          <div class="attraction-card-body">
+            <h3>Mount Uhud Battlefield & Martyrs Cemetery</h3>
+            <p>The historic battleground and final resting place of 70 noble martyrs of the early Muslim community, including the Prophet's uncle Hamza.</p>
+            <div class="attraction-card-meta">📍 5km North of Madinah</div>
           </div>
         </div>
       </div>

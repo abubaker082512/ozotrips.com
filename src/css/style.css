@@ -296,7 +296,7 @@ body.no-scroll {
 /* Hero Section */
 .hero {
   position: relative;
-  min-height: 65vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   padding-top: var(--header-height);
