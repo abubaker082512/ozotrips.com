@@ -37,7 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Populate Banner & Main Details
   const banner = document.getElementById('detail-banner');
   if (banner) {
-    banner.style.backgroundImage = `url('${tour.image}')`;
+    banner.style.backgroundImage = '';
+  }
+  const bannerImg = document.getElementById('detail-banner-img');
+  if (bannerImg) {
+    bannerImg.src = tour.image;
+    bannerImg.alt = tour.title;
   }
 
   const detailBadge = document.getElementById('detail-badge');
@@ -46,9 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
                              tour.type === 'local-private' ? '🏡 Local Private' : 
                              tour.type === 'international-group' ? '✈️ International Group' : '💎 International Private';
     if (tour.type.startsWith('international')) {
-      detailBadge.classList.add('international');
+      detailBadge.style.background = 'rgba(255, 153, 0, 0.08)';
+      detailBadge.style.borderColor = 'rgba(255, 153, 0, 0.15)';
+      detailBadge.style.color = 'var(--color-secondary)';
     } else {
-      detailBadge.classList.remove('international');
+      detailBadge.style.background = 'rgba(0, 82, 204, 0.08)';
+      detailBadge.style.borderColor = 'rgba(0, 82, 204, 0.15)';
+      detailBadge.style.color = 'var(--color-primary)';
     }
   }
   document.getElementById('detail-category').textContent = `${tour.category} Tour`;

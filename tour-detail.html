@@ -116,6 +116,23 @@
         top: 0;
       }
     }
+    
+    .detail-hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    @media (max-width: 768px) {
+      .detail-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .detail-hero-media {
+        height: 240px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -200,15 +217,26 @@
   </header>
 
   <!-- Big Hero Banner -->
-  <section id="detail-banner" class="hero" style="min-height: 60vh; display: flex; align-items: flex-end; padding-bottom: 60px; background-size: cover; background-position: center; position: relative;">
-    <div class="banner-overlay"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-        <span id="detail-badge" class="tour-badge" style="position: relative; top: 0; left: 0;">Loading...</span>
-        <span id="detail-category" class="tour-badge" style="position: relative; top: 0; left: 0; color: var(--color-secondary);">Category</span>
+  <section id="detail-banner" style="min-height: auto; padding: 60px 0; background: #ffffff; border-bottom: 1px solid rgba(0, 82, 204, 0.08); position: relative; margin-top: var(--header-height); display: block;">
+    <div class="container">
+      <div class="detail-hero-grid">
+        
+        <!-- Left Side: Text Details (Light Background) -->
+        <div class="detail-hero-text" style="display: flex; flex-direction: column; gap: 20px; text-align: left; justify-content: center;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <span id="detail-badge" style="background: rgba(0, 82, 204, 0.08); border: 1px solid rgba(0, 82, 204, 0.15); color: var(--color-primary); font-weight: 700; padding: 6px 14px; border-radius: 50px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">Loading...</span>
+            <span id="detail-category" style="background: rgba(255, 153, 0, 0.08); border: 1px solid rgba(255, 153, 0, 0.15); color: var(--color-secondary); font-weight: 700; padding: 6px 14px; border-radius: 50px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">Category</span>
+          </div>
+          <h1 id="detail-title" style="font-size: 2.8rem; font-weight: 800; color: var(--text-primary); margin: 0; line-height: 1.25;">Tour Title</h1>
+          <p id="detail-subtitle" style="font-size: 1.1rem; max-width: 100%; color: var(--text-secondary); line-height: 1.65; margin: 0;">Tour detailed description placeholder...</p>
+        </div>
+        
+        <!-- Right Side: Clean Framed Image -->
+        <div class="detail-hero-media" style="position: relative; width: 100%; height: 340px; overflow: hidden; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-lg); border: 1px solid rgba(0, 82, 204, 0.1);">
+          <img id="detail-banner-img" src="" alt="Tour Banner" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
       </div>
-      <h1 id="detail-title" style="font-size: 3.5rem; color: #ffffff; text-shadow: 0 4px 15px rgba(0,0,0,0.6); margin-bottom: 15px;">Tour Title</h1>
-      <p id="detail-subtitle" style="font-size: 1.2rem; max-width: 800px; color: rgba(255, 255, 255, 0.9); text-shadow: 0 2px 8px rgba(0,0,0,0.5);">Tour detailed description placeholder...</p>
     </div>
   </section>
 
