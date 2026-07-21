@@ -337,14 +337,14 @@
           <li class="nav-dropdown">
             <a href="./index.html" class="nav-link dropdown-toggle active">Home <span class="arrow">▼</span></a>
             <ul class="dropdown-menu">
-              <li><a href="./index.html" class="active">Classic Slider Home</a></li>
+              <li><a href="./index.html">Classic Slider Home</a></li>
               <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
               <li><a href="./index-split.html">Interactive Split Screen</a></li>
               <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
               <li><a href="./index-explorer.html">Region Map Explorer</a></li>
               <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
               <li><a href="./index-search.html">Search-First Dashboard</a></li>
-              <li><a href="./index-interactive-map.html">🗺️ Interactive World Map</a></li>
+              <li><a href="./index-interactive-map.html" class="active">🗺️ Interactive World Map</a></li>
             </ul>
           </li>
           <li><a href="./flights.html" class="nav-link">Flights</a></li>
@@ -366,13 +366,7 @@
               <li><a href="./tour-detail.html?id=4">Himmel Skardu Private</a></li>
             </ul>
           </li>
-          <li class="nav-dropdown">
-            <a href="#" class="nav-link dropdown-toggle">Destinations <span class="arrow">▼</span></a>
-            <ul class="dropdown-menu">
-              <li><a href="./attractions.html">Attractions Map</a></li>
-              <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
-            </ul>
-          </li>
+          <li><a href="./attractions.html" class="nav-link">Destinations</a></li>
           <li><a href="./visa-services.html" class="nav-link">Visa</a></li>
           <li><a href="./umrah.html" class="nav-link">Hajj & Umrah</a></li>
           <li><a href="./custom-planner.html" class="nav-link">Custom Planner</a></li>
@@ -431,6 +425,8 @@
       <div class="country-chip" data-country="unitedkingdom">🇬🇧 United Kingdom</div>
       <div class="country-chip" data-country="switzerland">🇨🇭 Switzerland</div>
       <div class="country-chip" data-country="maldives">🇲🇻 Maldives</div>
+      <div class="country-chip" data-country="france">🇫🇷 France</div>
+      <div class="country-chip" data-country="egypt">🇪🇬 Egypt</div>
     </div>
 
     <!-- Glassmorphic side panel -->
@@ -710,16 +706,6 @@
           <div class="recent-tour-card" style="flex: 0 0 calc(50% - 12px); max-width: calc(50% - 12px); box-sizing: border-box;">
             <div class="glass-panel" style="overflow: hidden; border-radius: var(--border-radius-md); border: 1px solid var(--border-glass); padding: 0; box-shadow: var(--shadow-sm);">
               <img src="./src/assets/recent_tours/WhatsApp%20Image%202026-07-21%20at%201.39.35%20PM%20%282%29.webp" alt="Recent Tour 7">
-            </div>
-          </div>
-          <div class="recent-tour-card" style="flex: 0 0 calc(50% - 12px); max-width: calc(50% - 12px); box-sizing: border-box;">
-            <div class="glass-panel" style="overflow: hidden; border-radius: var(--border-radius-md); border: 1px solid var(--border-glass); padding: 0; box-shadow: var(--shadow-sm);">
-              <img src="./src/assets/recent_tours/WhatsApp%20Image%202026-07-21%20at%201.39.35%20PM.webp" alt="Recent Tour 8">
-            </div>
-          </div>
-          <div class="recent-tour-card" style="flex: 0 0 calc(50% - 12px); max-width: calc(50% - 12px); box-sizing: border-box;">
-            <div class="glass-panel" style="overflow: hidden; border-radius: var(--border-radius-md); border: 1px solid var(--border-glass); padding: 0; box-shadow: var(--shadow-sm);">
-              <img src="./src/assets/recent_tours/WhatsApp%20Image%202026-07-21%20at%201.39.52%20PM.webp" alt="Recent Tour 9">
             </div>
           </div>
         </div>
@@ -1107,9 +1093,8 @@
           <ul class="footer-links">
             <li><a href="./tours.html">Browse Tours</a></li>
             <li><a href="./flights.html">Book Flights</a></li>
-            <li><a href="./attractions.html">Attractions Map</a></li>
+            <li><a href="./attractions.html">Destinations</a></li>
             <li><a href="./visa-services.html">Visa Advisory</a></li>
-            <li><a href="./virtual-tours.html">Virtual 360 Tours</a></li>
             <li><a href="./custom-planner.html">Custom Planner</a></li>
           </ul>
         </div>
@@ -1274,6 +1259,28 @@
         { name: "Banana Reef Snorkeling", lat: 4.2372, lng: 73.5350, img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=640&q=75", desc: "The Maldives' oldest diving site – incredible coral gardens, caves, and reef sharks.", tag: "Marine", link: "./tours.html?type=international-private" },
         { name: "Vaadhoo Island Sea of Stars", lat: 5.8672, lng: 72.9986, img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=640&q=75", desc: "Witness bioluminescent plankton lighting up the shoreline like a glowing blue starry sky.", tag: "Natural", link: "./tours.html?type=international-private" },
         { name: "Maafushi Beach", lat: 3.9431, lng: 73.4900, img: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?auto=format&fit=crop&w=640&q=75", desc: "A popular tropical island offering local culture, water sports, and beach activities.", tag: "Beach", link: "./tours.html?type=international-private" }
+      ]
+    },
+    france: {
+      name: "France", flag: "🇫🇷", tag: "Europe",
+      lat: 46.2276, lng: 2.2137, zoom: 6, color: "#002395",
+      desc: "Immerse yourself in world-class art, culinary heritage, romantic city escapes, and historic fairy-tale castles from Paris to the sun-soaked Mediterranean coast.",
+      attractions: [
+        { name: "Eiffel Tower, Paris", lat: 48.8584, lng: 2.2945, img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=640&q=75", desc: "The world's most iconic iron tower standing tall in the heart of Paris beside the Seine River.", tag: "Iconic", link: "./tours.html?type=international-group" },
+        { name: "Palace of Versailles", lat: 48.8049, lng: 2.1343, img: "https://images.unsplash.com/photo-1524008279394-3aed40fe2dd0?auto=format&fit=crop&w=640&q=75", desc: "The opulent former royal residence of King Louis XIV, renowned for the breathtaking Hall of Mirrors.", tag: "Heritage", link: "./tours.html?type=international-private" },
+        { name: "French Riviera, Nice", lat: 43.7102, lng: 7.2620, img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=640&q=75", desc: "Beautiful azure waters and coastal walks in the glamour capital of the south of France.", tag: "Beach", link: "./tours.html?type=international-private" },
+        { name: "Mont Saint-Michel", lat: 48.6360, lng: -1.5115, img: "https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?auto=format&fit=crop&w=640&q=75", desc: "A medieval abbey built on a tidal island, creating a surreal fairy-tale castle aesthetic.", tag: "Historic", link: "./tours.html?type=international-group" }
+      ]
+    },
+    egypt: {
+      name: "Egypt", flag: "🇪🇬", tag: "Africa & Middle East",
+      lat: 26.8206, lng: 30.8025, zoom: 6, color: "#c0930c",
+      desc: "Step back in time to the land of Pharaohs. Discover monumental pyramids, ancient tombs, the winding Nile River, and bustling historic bazaars.",
+      attractions: [
+        { name: "Pyramids of Giza, Cairo", lat: 29.9792, lng: 31.1342, img: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=640&q=75", desc: "The last surviving wonder of the ancient world – massive monumental tombs built for Pharaohs.", tag: "Ancient", link: "./tours.html?type=international-group" },
+        { name: "Valley of the Kings, Luxor", lat: 25.7402, lng: 32.6014, img: "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=640&q=75", desc: "The final resting place of Tutankhamun and rulers of Egypt's New Kingdom cut deep into desert rock.", tag: "Heritage", link: "./tours.html?type=international-private" },
+        { name: "Abu Simbel Temples", lat: 22.3372, lng: 31.6258, img: "https://images.unsplash.com/photo-1503177119275-0aa32b31d468?auto=format&fit=crop&w=640&q=75", desc: "Two massive rock temples carved out of a mountainside under Pharaoh Ramesses II.", tag: "Historic", link: "./tours.html?type=international-private" },
+        { name: "Khan el-Khalili Bazaar", lat: 30.0478, lng: 31.2622, img: "https://images.unsplash.com/photo-1553913861-c0fddf2619ee?auto=format&fit=crop&w=640&q=75", desc: "A vibrant, medieval open-air shopping market filled with spices, jewelry, and souvenir stalls.", tag: "Shopping", link: "./tours.html?type=international-group" }
       ]
     }
   };
