@@ -15,6 +15,32 @@
   <link rel="stylesheet" href="./src/css/style.css">
   
   <style>
+    /* Theme Studio Overrides from habibulhujjaj.com */
+    :root[data-umrah-theme="emerald"] {
+      --color-primary: #065f46;
+      --color-primary-rgb: 6, 95, 70;
+      --color-secondary: #059669;
+      --color-secondary-rgb: 5, 150, 105;
+      --accent-gradient: linear-gradient(135deg, #065f46 0%, #10b981 100%);
+      --glow-primary: 0 4px 20px rgba(6, 95, 70, 0.4);
+    }
+    :root[data-umrah-theme="sand"] {
+      --color-primary: #854d0e;
+      --color-primary-rgb: 133, 77, 14;
+      --color-secondary: #ca8a04;
+      --color-secondary-rgb: 202, 138, 4;
+      --accent-gradient: linear-gradient(135deg, #854d0e 0%, #eab308 100%);
+      --glow-primary: 0 4px 20px rgba(133, 77, 14, 0.4);
+    }
+    :root[data-umrah-theme="olive"] {
+      --color-primary: #3f6212;
+      --color-primary-rgb: 63, 98, 18;
+      --color-secondary: #65a30d;
+      --color-secondary-rgb: 101, 163, 13;
+      --accent-gradient: linear-gradient(135deg, #3f6212 0%, #84cc16 100%);
+      --glow-primary: 0 4px 20px rgba(63, 98, 18, 0.4);
+    }
+
     .umrah-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -357,19 +383,7 @@
       </a>
       <nav>
           <ul class="nav-links">
-          <li class="nav-dropdown">
-            <a href="./index.html" class="nav-link dropdown-toggle">Home <span class="arrow">▼</span></a>
-            <ul class="dropdown-menu">
-              <li><a href="./index.html">Classic Slider Home</a></li>
-              <li><a href="./index-minimalist.html">Luxury Minimalist Layout</a></li>
-              <li><a href="./index-split.html">Interactive Split Screen</a></li>
-              <li><a href="./index-masonry.html">Masonry Grid Collage</a></li>
-              <li><a href="./index-explorer.html">Region Map Explorer</a></li>
-              <li><a href="./index-grid-carousel.html">Multi-Card Grid Slider</a></li>
-              <li><a href="./index-search.html">Search-First Dashboard</a></li>
-              <li><a href="./index-interactive-map.html">🗺️ Interactive World Map</a></li>
-            </ul>
-          </li>
+          <li><a href="./index.html" class="nav-link">Home</a></li>
           <li><a href="./flights.html" class="nav-link">Flights</a></li>
           <li class="nav-dropdown">
             <a href="./tours.html" class="nav-link dropdown-toggle">Tours <span class="arrow">▼</span></a>
@@ -435,6 +449,17 @@
           <a href="#packages" class="btn btn-primary" style="height: 54px; line-height: 54px; padding: 0 35px; font-size: 1.05rem; font-weight: 700; border-radius: var(--border-radius-md); box-shadow: var(--glow-primary);">Explore Packages ➔</a>
           <a href="#inquiry" class="btn btn-secondary" style="height: 54px; line-height: 54px; padding: 0 35px; font-size: 1.05rem; font-weight: 700; border-radius: var(--border-radius-md); border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); color: #ffffff; transition: all var(--transition-fast);">Get Free Consultation 🕌</a>
         </div>
+        
+        <!-- Theme Studio (Inspiration from habibulhujjaj.com) -->
+        <div class="theme-studio-widget" style="margin-top: 30px; padding: 12px 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--border-radius-md); display: inline-flex; align-items: center; gap: 12px; justify-content: center; z-index: 5;">
+          <span style="font-size: 0.8rem; font-weight: 800; color: rgba(255,255,255,0.9); letter-spacing: 0.5px; text-transform: uppercase;">🎨 Theme Studio:</span>
+          <div style="display: flex; gap: 8px;">
+            <button onclick="setUmrahTheme('navy')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #0052cc; cursor: pointer; transition: transform 0.2s;" title="Legacy Navy"></button>
+            <button onclick="setUmrahTheme('emerald')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #065f46; cursor: pointer; transition: transform 0.2s;" title="Sacred Emerald"></button>
+            <button onclick="setUmrahTheme('sand')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #854d0e; cursor: pointer; transition: transform 0.2s;" title="Desert Sand"></button>
+            <button onclick="setUmrahTheme('olive')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #3f6212; cursor: pointer; transition: transform 0.2s;" title="Oasis Olive"></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -442,12 +467,19 @@
   <!-- Packages Section -->
   <section id="packages" style="padding: 80px 0;">
     <div class="container">
-      <div style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 30px;">
         <span style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Specially Curated Packages</span>
         <h2 style="font-size: 2.5rem; margin-top: 8px;">Find the Perfect Package for Your Spiritual Journey</h2>
       </div>
 
-      <div class="umrah-grid">
+      <!-- Package Switcher Tabs -->
+      <div class="package-tabs" style="display: flex; justify-content: center; gap: 16px; margin-bottom: 40px; flex-wrap: wrap;">
+        <button class="tab-btn active" id="tab-umrah" style="padding: 12px 30px; font-size: 1.05rem; font-weight: 700; border-radius: 50px; border: 1px solid var(--color-primary); background: var(--color-primary); color: #fff; cursor: pointer; transition: all 0.3s;" onclick="switchPackageTab('umrah')">🕌 Umrah Packages</button>
+        <button class="tab-btn" id="tab-hajj" style="padding: 12px 30px; font-size: 1.05rem; font-weight: 700; border-radius: 50px; border: 1px solid var(--border-glass); background: transparent; color: var(--text-primary); cursor: pointer; transition: all 0.3s;" onclick="switchPackageTab('hajj')">🕋 Hajj Pilgrimage</button>
+      </div>
+
+      <!-- Umrah Packages -->
+      <div class="umrah-grid" id="umrah-packages-grid">
         <!-- Economy Package -->
         <div class="umrah-card">
           <span style="background: rgba(0, 82, 204, 0.1); color: var(--color-primary); padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">15 Days Economy</span>
@@ -508,6 +540,51 @@
             <li>Daily Luxury Buffet Breakfast</li>
           </ul>
           <a href="#inquiry" class="btn btn-secondary" style="margin-top: auto; text-align: center; display: block;" onclick="setPackageField('Luxury VIP Umrah')">Inquire Now ➔</a>
+        </div>
+      </div>
+
+      <!-- Hajj Packages (Inspiration from habibulhujjaj.com) -->
+      <div class="umrah-grid" id="hajj-packages-grid" style="display: none;">
+        <!-- Executive Hajj Card -->
+        <div class="umrah-card vip-tier">
+          <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">15 Days Executive</span>
+          <h3>Executive VIP Hajj (Non-Shifting)</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Premium air-conditioned Mina tents near Jamarat, private catering, and 5-Star accommodations.</p>
+          <div class="umrah-price">
+            Rs. 1,650,000 <span>/ traveler</span>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <ul class="inclusion-list">
+            <li>Government Approved HGO License Services</li>
+            <li>Mina Air-Conditioned VIP Tents (near Jamarat)</li>
+            <li>Full Catering (Buffet) & 24/7 Hot/Cold Drinks</li>
+            <li>5-Star Pullman Zamzam Makkah Stay</li>
+            <li>5-Star Madinah Hilton Stay</li>
+            <li>Private GMC SUV Transfers (Holy Sites)</li>
+            <li>Certified Islamic Muallims & Guides</li>
+          </ul>
+          <a href="#inquiry" class="btn btn-secondary" style="margin-top: auto; text-align: center; display: block;" onclick="setPackageField('Executive Hajj')">Inquire Now ➔</a>
+        </div>
+
+        <!-- Standard Hajj Card -->
+        <div class="umrah-card premium-tier">
+          <span style="background: rgba(255, 153, 0, 0.15); color: var(--color-secondary); padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">21 Days Standard</span>
+          <h3>Standard Shifting Hajj Package</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Comfortable shifting Hajj with air-conditioned tents, hotel proximity, and group transportation.</p>
+          <div class="umrah-price">
+            Rs. 1,250,000 <span>/ traveler</span>
+          </div>
+          <hr style="border: 0; border-top: 1px solid var(--border-glass);">
+          <ul class="inclusion-list">
+            <li>Hajj Visa Processing & Insurance</li>
+            <li>Direct Group Flights from Lahore/Islamabad</li>
+            <li>Air-Conditioned Mina & Arafat Camps</li>
+            <li>Comfortable Azizia Building Stay</li>
+            <li>4-Star Makkah & Madinah Hotels</li>
+            <li>Guided group Ziyarats & Logistics</li>
+            <li>Standard Catering in Tents</li>
+          </ul>
+          <a href="#inquiry" class="btn btn-primary" style="margin-top: auto; text-align: center; display: block;" onclick="setPackageField('Standard Hajj')">Inquire Now ➔</a>
         </div>
       </div>
     </div>
@@ -760,12 +837,64 @@
 
   <!-- Inquiry submission controller -->
   <script>
+    function setUmrahTheme(theme) {
+      if (theme === 'navy') {
+        document.documentElement.removeAttribute('data-umrah-theme');
+      } else {
+        document.documentElement.setAttribute('data-umrah-theme', theme);
+      }
+      
+      // Update selected button style in Theme Studio
+      const buttons = document.querySelectorAll('.theme-studio-widget button');
+      buttons.forEach(btn => {
+        btn.style.borderColor = 'transparent';
+      });
+      // Highlight the clicked button
+      if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.style.borderColor = '#fff';
+      }
+    }
+
+    function switchPackageTab(tabType) {
+      const umrahGrid = document.getElementById('umrah-packages-grid');
+      const hajjGrid = document.getElementById('hajj-packages-grid');
+      const tabUmrah = document.getElementById('tab-umrah');
+      const tabHajj = document.getElementById('tab-hajj');
+      
+      if (!umrahGrid || !hajjGrid || !tabUmrah || !tabHajj) return;
+
+      if (tabType === 'hajj') {
+        umrahGrid.style.display = 'none';
+        hajjGrid.style.display = 'grid';
+        
+        tabUmrah.style.background = 'transparent';
+        tabUmrah.style.color = 'var(--text-primary)';
+        tabUmrah.style.borderColor = 'var(--border-glass)';
+        
+        tabHajj.style.background = 'var(--color-primary)';
+        tabHajj.style.color = '#fff';
+        tabHajj.style.borderColor = 'var(--color-primary)';
+      } else {
+        umrahGrid.style.display = 'grid';
+        hajjGrid.style.display = 'none';
+        
+        tabHajj.style.background = 'transparent';
+        tabHajj.style.color = 'var(--text-primary)';
+        tabHajj.style.borderColor = 'var(--border-glass)';
+        
+        tabUmrah.style.background = 'var(--color-primary)';
+        tabUmrah.style.color = '#fff';
+        tabUmrah.style.borderColor = 'var(--color-primary)';
+      }
+    }
+
     function setPackageField(packageName) {
       const packageSelect = document.getElementById("umrah-package");
       if (packageSelect) {
         if (packageName === 'Economy Umrah') packageSelect.value = 'economy';
         else if (packageName === 'Premium Umrah') packageSelect.value = 'premium';
         else if (packageName === 'Luxury VIP Umrah') packageSelect.value = 'luxury';
+        else if (packageName === 'Executive Hajj' || packageName === 'Standard Hajj') packageSelect.value = 'hajj';
       }
     }
 
