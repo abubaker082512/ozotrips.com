@@ -17,7 +17,7 @@
   <style>
     .umrah-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 32px;
       margin-top: 40px;
     }
@@ -29,10 +29,11 @@
       gap: 20px;
       border-radius: var(--border-radius-lg);
       border: 1px solid var(--border-glass);
-      background: var(--bg-glass);
-      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      background: var(--bg-card);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
     
     .umrah-card::before {
@@ -41,26 +42,47 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 5px;
+      background: var(--color-primary);
+    }
+
+    .umrah-card.premium-tier::before {
       background: var(--accent-gradient);
+    }
+    
+    .umrah-card.vip-tier::before {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     }
     
     .umrah-card:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-lg), var(--glow-secondary);
+      box-shadow: var(--shadow-lg), 0 10px 30px rgba(0, 82, 204, 0.08);
+      border-color: var(--color-primary);
+    }
+
+    .umrah-card.premium-tier:hover {
+      box-shadow: var(--shadow-lg), 0 10px 30px rgba(255, 153, 0, 0.12);
+      border-color: var(--color-secondary);
+    }
+    
+    .umrah-card.vip-tier:hover {
+      box-shadow: var(--shadow-lg), 0 10px 30px rgba(16, 185, 129, 0.12);
+      border-color: #10b981;
     }
     
     .umrah-price {
       font-size: 2.2rem;
       font-weight: 800;
-      color: var(--color-primary);
+      color: var(--text-primary);
       margin: 12px 0;
+      letter-spacing: -1px;
     }
     
     .umrah-price span {
       font-size: 0.9rem;
       color: var(--text-secondary);
       font-weight: 400;
+      letter-spacing: 0;
     }
     
     .inclusion-list {
@@ -82,23 +104,39 @@
     
     .inclusion-list li::before {
       content: '✓';
-      color: var(--color-secondary);
+      color: var(--color-primary);
       font-weight: 700;
     }
+
+    .umrah-card.premium-tier .inclusion-list li::before {
+      color: var(--color-secondary);
+    }
+
+    .umrah-card.vip-tier .inclusion-list li::before {
+      color: #10b981;
+    }
     
+    .ziyarat-layout-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
     .ziyarat-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      margin-top: 40px;
+      margin-top: 20px;
     }
     
     .ziyarat-card {
       border-radius: var(--border-radius-md);
       overflow: hidden;
       position: relative;
-      height: 240px;
+      height: 260px;
       box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-glass);
     }
     
     .ziyarat-card img {
@@ -115,12 +153,108 @@
     .ziyarat-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 65%);
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, transparent 65%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 20px;
       color: #fff;
+    }
+
+    /* Excursions grid layout */
+    .excursions-grid {
+      margin-top: 24px;
+      padding-left: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Inquiry form layout */
+    .inquiry-panel {
+      padding: 50px; 
+      border-radius: var(--border-radius-xl); 
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .form-group input, 
+    .form-group select,
+    .form-group textarea {
+      height: 50px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--border-glass);
+      background: var(--bg-secondary);
+      padding: 0 16px;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      height: auto;
+      padding: 16px;
+      resize: vertical;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.12);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (max-width: 991px) {
+      .ziyarat-layout-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .inquiry-panel {
+        padding: 30px 20px;
+      }
+      .excursions-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .umrah-grid {
+        gap: 24px;
+      }
     }
   </style>
 </head>
@@ -249,7 +383,7 @@
         </div>
 
         <!-- Premium Package -->
-        <div class="umrah-card" style="border-color: var(--color-secondary);">
+        <div class="umrah-card premium-tier">
           <span style="background: rgba(255, 153, 0, 0.15); color: var(--color-secondary); padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">10 Days Premium</span>
           <h3>Comfort Umrah Package</h3>
           <p style="color: var(--text-secondary); font-size: 0.9rem;">Excellent compromise of hotel proximity to the Holy Mosques and convenient private transport.</p>
@@ -270,7 +404,7 @@
         </div>
 
         <!-- Luxury VIP Package -->
-        <div class="umrah-card">
+        <div class="umrah-card vip-tier">
           <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; align-self: flex-start; text-transform: uppercase;">7 Days VIP Luxury</span>
           <h3>Elite Luxury VIP Package</h3>
           <p style="color: var(--text-secondary); font-size: 0.9rem;">Stay in front-row 5-Star luxury hotels directly overlooking the holy courtyards.</p>
@@ -303,7 +437,7 @@
           <p style="color: var(--text-secondary); margin-top: 16px; line-height: 1.7; font-size: 1rem;">
             All our packages include fully guided historical tours of sacred sites in Makkah Mukarramah and Madinah Munawwarah, with explanations from certified guides.
           </p>
-          <ul style="margin-top: 24px; padding-left: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; color: var(--text-secondary); font-size: 0.95rem;">
+          <ul class="excursions-grid">
             <li style="margin-bottom: 8px;">⛰️ Jabal al-Nour (Hira Cave)</li>
             <li style="margin-bottom: 8px;">⛺ Jabal Thawr (Thawr Cave)</li>
             <li style="margin-bottom: 8px;">🕌 Masjid al-Quba (Madinah)</li>
@@ -333,7 +467,7 @@
   <!-- Inquiry Form & Advisor Contact -->
   <section id="inquiry" style="padding: 100px 0;">
     <div class="container" style="max-width: 900px;">
-      <div class="glass-panel" style="padding: 50px; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-lg);">
+      <div class="glass-panel inquiry-panel">
         <div style="text-align: center; margin-bottom: 40px;">
           <span style="font-size: 2.5rem;">🕋</span>
           <h2 style="font-size: 2.2rem; margin-top: 10px;">Pilgrimage Booking Inquiry</h2>
@@ -341,21 +475,21 @@
         </div>
 
         <form id="umrah-inquiry-form" style="display: flex; flex-direction: column; gap: 24px;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <label for="umrah-name" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Full Name</label>
-              <input type="text" id="umrah-name" placeholder="Enter your full name" required style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="umrah-name">Full Name</label>
+              <input type="text" id="umrah-name" placeholder="Enter your full name" required>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <label for="umrah-phone" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">WhatsApp / Phone Number</label>
-              <input type="tel" id="umrah-phone" placeholder="e.g. +92 300 1234567" required style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+            <div class="form-group">
+              <label for="umrah-phone">WhatsApp / Phone Number</label>
+              <input type="tel" id="umrah-phone" placeholder="e.g. +92 300 1234567" required>
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <label for="umrah-package" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Umrah Package Option</label>
-              <select id="umrah-package" style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="umrah-package">Umrah Package Option</label>
+              <select id="umrah-package">
                 <option value="economy">15 Days Economy Umrah (Rs. 260K)</option>
                 <option value="premium" selected>10 Days Premium Umrah (Rs. 380K)</option>
                 <option value="luxury">7 Days Luxury VIP Umrah (Rs. 550K)</option>
@@ -363,9 +497,9 @@
                 <option value="custom">Custom Tailored Umrah (Private Groups)</option>
               </select>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <label for="umrah-travelers" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Number of Pilgrims</label>
-              <select id="umrah-travelers" style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+            <div class="form-group">
+              <label for="umrah-travelers">Number of Pilgrims</label>
+              <select id="umrah-travelers">
                 <option value="1">1 Person</option>
                 <option value="2">2 Persons (Double sharing)</option>
                 <option value="3">3 Persons (Triple sharing)</option>
@@ -375,14 +509,14 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <label for="umrah-date" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Tentative Departure Date</label>
-              <input type="date" id="umrah-date" required style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="umrah-date">Tentative Departure Date</label>
+              <input type="date" id="umrah-date" required>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <label for="umrah-city" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Departure City</label>
-              <select id="umrah-city" style="height: 50px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 0 16px; font-family: var(--font-sans);">
+            <div class="form-group">
+              <label for="umrah-city">Departure City</label>
+              <select id="umrah-city">
                 <option value="ISB">Islamabad (ISB)</option>
                 <option value="LHE">Lahore (LHE)</option>
                 <option value="KHI">Karachi (KHI)</option>
@@ -392,9 +526,9 @@
             </div>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label for="umrah-requests" style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">Special Requirements & Custom Requests</label>
-            <textarea id="umrah-requests" rows="4" placeholder="Enter special meal requirements, wheelchair accessibility needs, specific flight requests, or child/infant details..." style="border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-secondary); padding: 16px; font-family: var(--font-sans); outline: none; transition: border-color var(--transition-fast); resize: vertical;"></textarea>
+          <div class="form-group">
+            <label for="umrah-requests">Special Requirements & Custom Requests</label>
+            <textarea id="umrah-requests" rows="4" placeholder="Enter special meal requirements, wheelchair accessibility needs, specific flight requests, or child/infant details..."></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary" style="height: 55px; font-size: 1.1rem; font-weight: 700; margin-top: 10px; box-shadow: var(--shadow-md);">
@@ -414,7 +548,7 @@
     <div class="container" style="max-width: 800px;">
       <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 40px;">Frequently Asked Questions</h2>
       
-      <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div class="faq-list">
         <div class="glass-panel" style="padding: 24px;">
           <h4 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--color-primary);">What documents are required to process an Umrah visa?</h4>
           <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">You need a Pakistani passport valid for at least 6 months, a computerized CNIC/NICOP, passport-sized photographs with white backgrounds, and vaccination certificates (Meningitis/Polio).</p>
