@@ -90,12 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     container.innerHTML = filtered.map((item, idx) => `
       <div class="faq-item glass-panel fade-in" style="overflow: hidden; transition: transform var(--transition-fast);">
-        <button class="faq-trigger" style="display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; padding: 20px 24px; background: none; border: none; cursor: pointer; color: var(--text-primary); font-family: var(--font-sans); font-weight: 600; font-size: 1.05rem;">
+        <button class="faq-trigger" style="display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; padding: 20px 24px; background: none; border: none; cursor: pointer; color: var(--text-primary); font-family: var(--font-sans); font-weight: 600; font-size: 1.25rem;">
           <span>${item.q}</span>
-          <span class="faq-arrow" style="transition: transform var(--transition-normal); font-size: 1.1rem; color: var(--color-primary);">▼</span>
+          <span class="faq-arrow" style="transition: transform var(--transition-normal); font-size: 1.2rem; color: var(--color-primary);">▼</span>
         </button>
         <div class="faq-content" style="max-height: 0px; overflow: hidden; transition: max-height var(--transition-normal);">
-          <p style="padding: 0 24px 20px 24px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">
+          <p style="padding: 0 24px 20px 24px; color: var(--text-secondary); font-size: 1.08rem; line-height: 1.6;">
             ${item.a}
           </p>
         </div>

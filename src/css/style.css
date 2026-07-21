@@ -586,6 +586,7 @@ body.no-scroll {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 1.15rem;
 }
 
 .category-btn:hover {
@@ -1020,6 +1021,13 @@ footer {
   border-top: 1px solid rgba(0, 82, 204, 0.06);
 }
 
+footer p, 
+footer a, 
+footer ul, 
+footer li {
+  font-size: 1.1rem !important;
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
@@ -1034,14 +1042,14 @@ footer {
 }
 
 .footer-col h4 {
-  font-size: 1.1rem;
+  font-size: 1.3rem !important;
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--color-primary); /* Royal Blue Brand Headings */
 }
 
 .footer-col p {
-  font-size: 0.95rem;
+  font-size: 1.1rem !important;
   color: var(--text-secondary);
 }
 
@@ -1054,7 +1062,7 @@ footer {
 
 .footer-links a {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 1.1rem !important;
 }
 
 .footer-links a:hover {
@@ -2235,7 +2243,7 @@ footer {
   color: white;
   padding: 4px 12px;
   border-radius: 12px;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
   box-shadow: var(--shadow-sm);
 }
@@ -2250,13 +2258,13 @@ footer {
 .blog-card-meta {
   display: flex;
   gap: 15px;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
   margin-bottom: 12px;
 }
 
 .blog-card-title {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   margin-bottom: 10px;
   line-height: 1.4;
   color: white;
@@ -2268,7 +2276,7 @@ footer {
 }
 
 .blog-card-summary {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   color: var(--text-secondary);
   line-height: 1.6;
   flex: 1;
