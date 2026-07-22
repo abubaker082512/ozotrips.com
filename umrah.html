@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="./src/css/style.css">
@@ -23,44 +23,9 @@
       --color-secondary-rgb: 202, 138, 4;
       --accent-gradient: linear-gradient(135deg, #064e3b 0%, #ca8a04 100%);
       --glow-primary: 0 4px 25px rgba(6, 78, 59, 0.45);
-      --font-serif: 'Noto Serif', serif;
-      --font-sans: 'Manrope', sans-serif;
     }
 
-    /* Headings Typography */
-    h1, h2, h3, h4, .slide-title, .help-hero h1 {
-      font-family: var(--font-serif) !important;
-    }
 
-    body {
-      font-family: var(--font-sans), sans-serif !important;
-    }
-
-    /* Theme Studio Overrides from habibulhujjaj.com */
-    :root[data-umrah-theme="emerald"] {
-      --color-primary: #065f46;
-      --color-primary-rgb: 6, 95, 70;
-      --color-secondary: #059669;
-      --color-secondary-rgb: 5, 150, 105;
-      --accent-gradient: linear-gradient(135deg, #065f46 0%, #10b981 100%);
-      --glow-primary: 0 4px 20px rgba(6, 95, 70, 0.4);
-    }
-    :root[data-umrah-theme="sand"] {
-      --color-primary: #854d0e;
-      --color-primary-rgb: 133, 77, 14;
-      --color-secondary: #ca8a04;
-      --color-secondary-rgb: 202, 138, 4;
-      --accent-gradient: linear-gradient(135deg, #854d0e 0%, #eab308 100%);
-      --glow-primary: 0 4px 20px rgba(133, 77, 14, 0.4);
-    }
-    :root[data-umrah-theme="olive"] {
-      --color-primary: #3f6212;
-      --color-primary-rgb: 63, 98, 18;
-      --color-secondary: #65a30d;
-      --color-secondary-rgb: 101, 163, 13;
-      --accent-gradient: linear-gradient(135deg, #3f6212 0%, #84cc16 100%);
-      --glow-primary: 0 4px 20px rgba(63, 98, 18, 0.4);
-    }
 
     .umrah-grid {
       display: grid;
@@ -453,34 +418,35 @@
         </button>
         <a href="#inquiry" class="btn btn-primary">Book Now</a>
       </div>
+   <!-- Hero Section -->
+  <section class="hero" id="home" style="height: 75vh; min-height: 550px; margin-top: var(--header-height);">
+    <div class="hero-carousel">
+      <div class="carousel-slide active" style="background-image: url('./src/assets/umrah-hero.png');"></div>
+      <div class="carousel-slide" style="background-image: url('./src/assets/umrah-makkah.png');"></div>
+      <div class="carousel-slide" style="background-image: url('./src/assets/umrah-madinah.jpg');"></div>
+      <div class="carousel-slide" style="background-image: url('./src/assets/umrah-group.jpg');"></div>
     </div>
-  </header>
+    
+    <!-- Slide Nav Controls -->
+    <button class="carousel-control prev" id="prev-slide" aria-label="Previous Slide">❮</button>
+    <button class="carousel-control next" id="next-slide" aria-label="Next Slide">❯</button>
 
-  <!-- Hero Section -->
-  <section class="help-hero" style="position: relative; background-image: url('./src/assets/umrah-hero.png'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; padding: 200px 0 140px;">
-    <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.88)); z-index: 1;"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <div class="glass-panel" style="max-width: 850px; margin: 0 auto; padding: 60px 40px; border-radius: var(--border-radius-xl); background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255, 153, 0, 0.25); box-shadow: var(--shadow-xl), 0 20px 50px rgba(0, 82, 204, 0.15); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);">
+    <!-- Slide Indicators -->
+    <div class="carousel-indicators" id="carousel-indicators"></div>
+
+    <div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; width: 100%; max-width: 850px; text-align: center; box-sizing: border-box; padding: 0 20px;">
+      <div class="glass-panel" style="padding: 50px 40px; border-radius: var(--border-radius-xl); background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 153, 0, 0.25); box-shadow: var(--shadow-xl); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
         <span style="color: var(--color-secondary); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.95rem; background: rgba(255, 153, 0, 0.12); padding: 6px 16px; border-radius: 50px; border: 1px solid rgba(255, 153, 0, 0.2);">✨ VIP CONCIERGE & GUIDED TRAVEL</span>
-        <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(135deg, #ffffff 30%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Hajj & Umrah Pilgrimage Services</h1>
-        <p style="max-width: 680px; margin: 0 auto 30px; color: rgba(255, 255, 255, 0.95); font-size: 1.15rem; line-height: 1.75; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
+        <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; color: #ffffff; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">Hajj & Umrah Pilgrimage Services</h1>
+        <p style="max-width: 680px; margin: 0 auto 30px; color: rgba(255, 255, 255, 0.95); font-size: 1.1rem; line-height: 1.75; text-shadow: 0 2px 8px rgba(0,0,0,0.4);">
           Embark on a spiritual journey of a lifetime. We offer guided pilgrims fully personalized packages including fast-track visas, luxury accommodations near the Holy Courtyards, private SUV transport, and 24/7 on-ground assistance.
         </p>
         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
           <a href="#packages" class="btn btn-primary" style="height: 54px; line-height: 54px; padding: 0 35px; font-size: 1.05rem; font-weight: 700; border-radius: var(--border-radius-md); box-shadow: var(--glow-primary);">Explore Packages ➔</a>
           <a href="#inquiry" class="btn btn-secondary" style="height: 54px; line-height: 54px; padding: 0 35px; font-size: 1.05rem; font-weight: 700; border-radius: var(--border-radius-md); border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); color: #ffffff; transition: all var(--transition-fast);">Get Free Consultation 🕌</a>
         </div>
-        
-        <!-- Theme Studio (Inspiration from habibulhujjaj.com) -->
-        <div class="theme-studio-widget" style="margin-top: 30px; padding: 12px 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--border-radius-md); display: inline-flex; align-items: center; gap: 12px; justify-content: center; z-index: 5;">
-          <span style="font-size: 0.8rem; font-weight: 800; color: rgba(255,255,255,0.9); letter-spacing: 0.5px; text-transform: uppercase;">🎨 Theme Studio:</span>
-          <div style="display: flex; gap: 8px;">
-            <button onclick="setUmrahTheme('navy')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #0052cc; cursor: pointer; transition: transform 0.2s;" title="Legacy Navy"></button>
-            <button onclick="setUmrahTheme('emerald')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #065f46; cursor: pointer; transition: transform 0.2s;" title="Sacred Emerald"></button>
-            <button onclick="setUmrahTheme('sand')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #854d0e; cursor: pointer; transition: transform 0.2s;" title="Desert Sand"></button>
-            <button onclick="setUmrahTheme('olive')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #3f6212; cursor: pointer; transition: transform 0.2s;" title="Oasis Olive"></button>
-          </div>
-        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Trust & Accreditations Banner (Inspiration update) -->
@@ -985,25 +951,86 @@
   <!-- Scripts -->
   <script type="module" src="./src/js/main.js"></script>
 
-  <!-- Inquiry submission controller -->
+  <!-- Inquiry submission controller and Hero Carousel controller -->
   <script>
-    function setUmrahTheme(theme) {
-      if (theme === 'navy') {
-        document.documentElement.removeAttribute('data-umrah-theme');
-      } else {
-        document.documentElement.setAttribute('data-umrah-theme', theme);
+    // Hero Carousel Logic for Hajj & Umrah
+    document.addEventListener("DOMContentLoaded", () => {
+      const slides = document.querySelectorAll(".hero-carousel .carousel-slide");
+      const prevBtn = document.getElementById("prev-slide");
+      const nextBtn = document.getElementById("next-slide");
+      const indicatorsContainer = document.getElementById("carousel-indicators");
+
+      if (slides.length > 0) {
+        // Generate indicators dynamically
+        if (indicatorsContainer) {
+          indicatorsContainer.innerHTML = '';
+          slides.forEach((_, idx) => {
+            const dot = document.createElement("span");
+            dot.className = idx === 0 ? "indicator active" : "indicator";
+            dot.setAttribute("data-slide", idx);
+            indicatorsContainer.appendChild(dot);
+          });
+        }
+
+        const indicators = document.querySelectorAll(".hero-carousel + .carousel-control + .carousel-control + .carousel-indicators .indicator, #carousel-indicators .indicator");
+        let currentSlide = 0;
+        let autoplayTimer;
+
+        const showSlide = (index) => {
+          slides[currentSlide].classList.remove("active");
+          if (indicators[currentSlide]) {
+            indicators[currentSlide].classList.remove("active");
+          }
+
+          currentSlide = index;
+          slides[currentSlide].classList.add("active");
+          if (indicators[currentSlide]) {
+            indicators[currentSlide].classList.add("active");
+          }
+        };
+
+        const nextSlide = () => {
+          const nextIdx = (currentSlide + 1) % slides.length;
+          showSlide(nextIdx);
+        };
+
+        const prevSlide = () => {
+          const prevIdx = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(prevIdx);
+        };
+
+        const startAutoplay = () => {
+          clearInterval(autoplayTimer);
+          autoplayTimer = setInterval(nextSlide, 5000);
+        };
+
+        startAutoplay();
+
+        if (prevBtn) {
+          prevBtn.addEventListener("click", () => {
+            prevSlide();
+            startAutoplay();
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener("click", () => {
+            nextSlide();
+            startAutoplay();
+          });
+        }
+
+        if (indicatorsContainer) {
+          indicatorsContainer.addEventListener("click", (e) => {
+            if (e.target.classList.contains("indicator")) {
+              const targetIdx = parseInt(e.target.getAttribute("data-slide"));
+              showSlide(targetIdx);
+              startAutoplay();
+            }
+          });
+        }
       }
-      
-      // Update selected button style in Theme Studio
-      const buttons = document.querySelectorAll('.theme-studio-widget button');
-      buttons.forEach(btn => {
-        btn.style.borderColor = 'transparent';
-      });
-      // Highlight the clicked button
-      if (window.event && window.event.currentTarget) {
-        window.event.currentTarget.style.borderColor = '#fff';
-      }
-    }
+    });
 
     function switchPackageTab(tabType) {
       const umrahGrid = document.getElementById('umrah-packages-grid');
