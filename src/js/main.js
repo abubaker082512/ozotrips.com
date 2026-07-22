@@ -659,4 +659,66 @@ document.addEventListener('DOMContentLoaded', () => {
     stats.forEach(stat => statsObserver.observe(stat));
   }
 
+  // Dynamic Marquee Loader
+  const marqueeTextEl = document.getElementById('marquee-text-content');
+  if (marqueeTextEl) {
+    const savedMarquee = localStorage.getItem('customMarquee');
+    if (savedMarquee) {
+      marqueeTextEl.innerHTML = savedMarquee;
+    }
+  }
+
+  // Dynamic Homepage Blogs Loader
+  const homeBlogGrid = document.getElementById('home-blog-grid');
+  if (homeBlogGrid) {
+    const defaultBlogPosts = [
+      {
+        id: "b1",
+        title: "The Ultimate Packing List for Hunza Valley Expedition",
+        category: "Guides & Tips",
+        summary: "Preparing for a trip to the northern valleys of Pakistan? Here is a comprehensive packing checklist detailing gear, apparel, and documents.",
+        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "b2",
+        title: "How to Secure Your Schengen Travel Visa: Step-by-Step",
+        category: "Visa Guides",
+        summary: "An expert walkthrough on gathering visa documents, bank statements, itinerary drafts, and embassy interviews for a successful Schengen application.",
+        image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: "b3",
+        title: "Top 5 Luxury Resorts in Santorini for a Perfect Honeymoon",
+        category: "Luxury Travel",
+        summary: "From infinity pools overlooking the caldera to private cave suites in Oia, discover the most spectacular hotels for a dream escape.",
+        image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    const customBlogsJSON = localStorage.getItem('customBlogs');
+    const customBlogPosts = customBlogsJSON ? JSON.parse(customBlogsJSON) : [];
+    const allBlogs = [...customBlogPosts, ...defaultBlogPosts];
+
+    // Take top 3 blogs
+    const topThree = allBlogs.slice(0, 3);
+    homeBlogGrid.innerHTML = '';
+    topThree.forEach(blog => {
+      const blogCard = document.createElement('div');
+      blogCard.className = 'glass-panel fade-in';
+      blogCard.style.cssText = 'border-radius: var(--border-radius-lg); overflow: hidden; display: flex; flex-direction: column;';
+      blogCard.innerHTML = `
+        <div style="height: 200px; overflow: hidden;">
+          <img src="${blog.image || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80'}" alt="${blog.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow);">
+        </div>
+        <div style="padding: 30px; display: flex; flex-direction: column; gap: 12px; flex: 1;">
+          <span style="color: var(--color-secondary); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">${blog.category || 'Travel'}</span>
+          <h3 style="font-size: 1.25rem; font-weight: 700; line-height: 1.4;">${blog.title}</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">${blog.summary || (blog.content ? blog.content.substring(0, 100) + '...' : '')}</p>
+          <a href="./blog.html" style="font-weight: 700; color: var(--color-primary); margin-top: auto; font-size: 0.9rem;">Read Story ➔</a>
+        </div>
+      `;
+      homeBlogGrid.appendChild(blogCard);
+    });
+  }
+
 });

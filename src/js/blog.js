@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Blog data
-  const blogPosts = [
+  const defaultBlogPosts = [
     {
       id: "b1",
       title: "The Ultimate Packing List for Hunza Valley Expedition",
@@ -133,6 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
       image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=800&q=80"
     }
   ];
+
+  const customBlogsJSON = localStorage.getItem('customBlogs');
+  const customBlogPosts = customBlogsJSON ? JSON.parse(customBlogsJSON) : [];
+  const blogPosts = [...customBlogPosts, ...defaultBlogPosts];
 
   // DOM Elements
   const blogGrid = document.getElementById('blog-grid');

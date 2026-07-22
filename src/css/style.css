@@ -3815,3 +3815,42 @@ select, input, textarea {
     font-size: 0.85rem;
   }
 }
+
+/* Announcement Marquee Styles */
+.announcement-marquee {
+  margin-top: var(--header-height);
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 12px 0;
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-secondary);
+  z-index: 10;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-scroll 35s linear infinite;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding-left: 100%;
+  letter-spacing: 0.5px;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}

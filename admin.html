@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | OzoTrips</title>
+  
+  <!-- Outfit Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Imports -->
+  <link rel="stylesheet" href="./src/css/tokens.css">
+  <link rel="stylesheet" href="./src/css/style.css">
+  
+  <style>
+    body {
+      background: var(--bg-surface);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      color: var(--text-primary);
+    }
+    
+    .admin-container {
+      max-width: 1100px;
+      margin: 140px auto 80px;
+      padding: 0 24px;
+      box-sizing: border-box;
+    }
+
+    .login-card {
+      max-width: 450px;
+      margin: 180px auto;
+      padding: 40px;
+      background: #ffffff;
+      border-radius: var(--border-radius-xl);
+      border: 1px solid rgba(0, 82, 204, 0.15);
+      box-shadow: 0 15px 45px rgba(0, 82, 204, 0.1);
+      text-align: center;
+    }
+
+    .login-card h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 30px;
+    }
+
+    .admin-form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .admin-form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .admin-form-group input, 
+    .admin-form-group textarea, 
+    .admin-form-group select {
+      width: 100%;
+      height: 50px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 0 16px;
+      box-sizing: border-box;
+      outline: none;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .admin-form-group textarea {
+      height: 120px;
+      padding: 12px 16px;
+      resize: vertical;
+    }
+
+    .admin-form-group input:focus, 
+    .admin-form-group textarea:focus, 
+    .admin-form-group select:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+      background: #ffffff;
+    }
+
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 850px) {
+      .dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .admin-sidebar {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid rgba(0, 82, 204, 0.08);
+      box-shadow: var(--shadow-sm);
+      height: fit-content;
+    }
+
+    .admin-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      background: transparent;
+      border-radius: var(--border-radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .admin-nav-item.active {
+      background: rgba(0, 82, 204, 0.06);
+      color: var(--color-primary);
+    }
+
+    .admin-nav-item:hover:not(.active) {
+      background: #f8fafc;
+      color: var(--text-primary);
+    }
+
+    .admin-panel-card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid rgba(0, 82, 204, 0.08);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .panel-header h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .admin-table th {
+      font-weight: 700;
+      color: #475569;
+      background: #f8fafc;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    .admin-table td {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+
+    .action-btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      padding: 6px 12px;
+      border-radius: var(--border-radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-edit {
+      background: rgba(0, 82, 204, 0.08);
+      color: var(--color-primary);
+    }
+
+    .btn-edit:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .btn-delete {
+      background: rgba(220, 38, 38, 0.08);
+      color: #dc2626;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+      color: #fff;
+    }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0f172a;
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-lg);
+      font-weight: 600;
+      font-size: 0.95rem;
+      z-index: 1000;
+      display: none;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="scrolled">
+    <div class="container nav-container">
+      <a href="./index.html" class="logo">
+        <img src="./src/assets/logo-light.png" alt="OzoTrips Logo" class="logo-img logo-light">
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./flights.html">Flights</a></li>
+          <li><a href="./tours.html">Tours</a></li>
+          <li><a href="./attractions.html">Destinations</a></li>
+          <li><a href="./visa-services.html">Visa</a></li>
+          <li><a href="./umrah.html">Hajj & Umrah</a></li>
+          <li><a href="./custom-planner.html">Custom Planner</a></li>
+          <li><a href="./offers.html">Offers</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="./index.html" class="btn btn-secondary">Exit Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- 1. LOGIN PANEL -->
+    <div id="login-panel" class="login-card">
+      <h2>Admin Login</h2>
+      <p>Log in using administrative credentials to manage OzoTrips announcements and journal articles.</p>
+      
+      <form id="login-form">
+        <div class="admin-form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" required value="admin">
+        </div>
+        <div class="admin-form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required value="admin">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px; margin-top: 10px;">Authenticate Securely 🔑</button>
+      </form>
+      <div id="login-error" style="color: #dc2626; font-size: 0.9rem; font-weight: 600; margin-top: 15px; display: none;">Invalid credentials. Please try again.</div>
+    </div>
+
+    <!-- 2. DASHBOARD PANEL -->
+    <div id="dashboard-panel" class="dashboard-layout" style="display: none;">
+      <!-- Sidebar navigation -->
+      <aside class="admin-sidebar">
+        <div style="text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0;">
+          <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--color-primary);">Habib Ullah Sajid</h4>
+          <span style="font-size: 0.78rem; text-transform: uppercase; font-weight: 700; color: #64748b; letter-spacing: 1px;">Senior Administrator</span>
+        </div>
+        <nav style="display: flex; flex-direction: column; gap: 8px;">
+          <button class="admin-nav-item active" onclick="switchPanel('marquee')">📢 Edit Announcement</button>
+          <button class="admin-nav-item" onclick="switchPanel('blogs')">📝 Manage Blogs</button>
+          <button class="admin-nav-item" onclick="logoutAdmin()" style="color: #dc2626; margin-top: 40px; border-top: 1px solid #e2e8f0; border-radius: 0; padding-top: 20px;">🚪 Sign Out</button>
+        </nav>
+      </aside>
+
+      <!-- Panel Content area -->
+      <main style="display: flex; flex-direction: column; gap: 40px; min-width: 0;">
+        
+        <!-- Marquee panel -->
+        <div id="panel-marquee" class="admin-panel-card">
+          <div class="panel-header">
+            <h2>Homepage Marquee Banner</h2>
+            <span class="badge" style="background: rgba(255, 153, 0, 0.12); color: var(--color-secondary);">LIVE PREVIEW</span>
+          </div>
+          
+          <form id="marquee-form">
+            <div class="admin-form-group">
+              <label for="marquee-text-input">Marquee Scroll Text</label>
+              <textarea id="marquee-text-input" placeholder="Type hot announcement, sales, or notifications scrolling text..." required></textarea>
+              <small style="color: #64748b; font-size: 0.82rem; margin-top: 6px; display: block;">Use a pipe symbol ( | ) to separate announcements.</small>
+            </div>
+            <button type="submit" class="btn btn-primary" style="height: 52px; padding: 0 30px;">Save Marquee Announcements</button>
+          </form>
+        </div>
+
+        <!-- Blogs list panel -->
+        <div id="panel-blogs" class="admin-panel-card" style="display: none;">
+          <div class="panel-header">
+            <h2>Travel Magazine & Guides</h2>
+            <button class="btn btn-primary" onclick="showAddBlogForm()">➕ Add New Post</button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Date Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="blog-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Blog Form panel (Hidden by default) -->
+        <div id="panel-blog-form" class="admin-panel-card" style="display: none;">
+          <div class="panel-header">
+            <h2 id="blog-form-title">Create Blog Post</h2>
+            <button class="btn btn-secondary" onclick="switchPanel('blogs')">Back to List</button>
+          </div>
+
+          <form id="blog-editor-form">
+            <input type="hidden" id="blog-edit-id">
+            
+            <div class="admin-form-group">
+              <label for="blog-title">Article Title</label>
+              <input type="text" id="blog-title" placeholder="e.g., Discovering the secrets of Shigar Fort" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="admin-form-group">
+                <label for="blog-category">Category</label>
+                <select id="blog-category" required>
+                  <option value="adventure">🧗 Adventure</option>
+                  <option value="visas">🗺️ Visa Guides</option>
+                  <option value="luxury">💎 Luxury Travel</option>
+                  <option value="guides">📚 Guides & Tips</option>
+                </select>
+              </div>
+              <div class="admin-form-group">
+                <label for="blog-image">Image URL</label>
+                <input type="url" id="blog-image" placeholder="https://images.unsplash.com/photo-..." required>
+              </div>
+            </div>
+
+            <div class="admin-form-group">
+              <label for="blog-summary">Brief Excerpt/Summary</label>
+              <input type="text" id="blog-summary" placeholder="A one-line description shown on lists..." required>
+            </div>
+
+            <div class="admin-form-group">
+              <label for="blog-content">Full Article Content (HTML tags supported)</label>
+              <textarea id="blog-content" placeholder="Write full article here. Use <h3> for headings, <p> for paragraphs." required style="height: 250px;"></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 10px;">
+              <button type="submit" class="btn btn-primary" style="height: 52px; padding: 0 35px;">Save Article</button>
+              <button type="button" class="btn btn-secondary" onclick="switchPanel('blogs')" style="height: 52px; padding: 0 25px;">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-msg">Settings saved successfully! ✔️</div>
+
+  <!-- Footer -->
+  <footer style="margin-top: 140px; background: #ffffff; border-top: 1px solid var(--border-glass); padding: 40px 0; text-align: center;">
+    <p style="color: var(--text-secondary); font-size: 0.9rem;">&copy; 2026 OzoTrips Admin Control Panel. Authorized Use Only.</p>
+  </footer>
+
+  <script>
+    // Constants
+    const DEFAULT_MARQUEE = "🔥 Special Offer: Book your Skardu & Swat packages now and get 10% off! | ✈️ Flights Booking Module is now Live - Search popular routes | 🕌 VIP Hajj & Umrah 2026 Concierge Bookings are now Open!";
+    
+    // Auth controllers
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      if (u === 'admin' && p === 'admin') {
+        sessionStorage.setItem('isAdminLoggedIn', 'true');
+        showDashboard();
+      } else {
+        const err = document.getElementById('login-error');
+        err.style.display = 'block';
+        setTimeout(() => err.style.display = 'none', 3000);
+      }
+    });
+
+    function showDashboard() {
+      document.getElementById('login-panel').style.display = 'none';
+      document.getElementById('dashboard-panel').style.display = 'grid';
+      loadMarqueeSetting();
+      loadBlogsTable();
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('isAdminLoggedIn');
+      document.getElementById('dashboard-panel').style.display = 'none';
+      document.getElementById('login-panel').style.display = 'block';
+    }
+
+    // Tab Switching
+    function switchPanel(panelName) {
+      document.querySelectorAll('.admin-nav-item').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.admin-nav-item')).find(b => b.textContent.toLowerCase().includes(panelName));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('panel-marquee').style.display = panelName === 'marquee' ? 'block' : 'none';
+      document.getElementById('panel-blogs').style.display = panelName === 'blogs' ? 'block' : 'none';
+      document.getElementById('panel-blog-form').style.display = panelName === 'form' ? 'block' : 'none';
+    }
+
+    // Marquee logic
+    function loadMarqueeSetting() {
+      const saved = localStorage.getItem('customMarquee') || DEFAULT_MARQUEE;
+      document.getElementById('marquee-text-input').value = saved;
+    }
+
+    document.getElementById('marquee-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = document.getElementById('marquee-text-input').value;
+      localStorage.setItem('customMarquee', text);
+      showToast("Marquee text updated successfully! 📢");
+    });
+
+    // Blogs logic
+    function getCustomBlogs() {
+      const data = localStorage.getItem('customBlogs');
+      return data ? JSON.parse(data) : [];
+    }
+
+    function saveCustomBlogs(blogs) {
+      localStorage.setItem('customBlogs', JSON.stringify(blogs));
+    }
+
+    function loadBlogsTable() {
+      const custom = getCustomBlogs();
+      const tbody = document.getElementById('blog-table-body');
+      tbody.innerHTML = '';
+
+      if (custom.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #64748b; padding: 30px;">No custom blogs created yet. Add your first post!</td></tr>`;
+        return;
+      }
+
+      custom.forEach(post => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight: 600;">${post.title}</td>
+          <td><span class="badge" style="text-transform: capitalize; background: #e2e8f0; color: #0f172a; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">${post.category}</span></td>
+          <td>${post.date}</td>
+          <td>
+            <div class="action-btn-group">
+              <button class="action-btn btn-edit" onclick="editBlogPost('${post.id}')">Edit</button>
+              <button class="action-btn btn-delete" onclick="deleteBlogPost('${post.id}')">Delete</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function showAddBlogForm() {
+      document.getElementById('blog-editor-form').reset();
+      document.getElementById('blog-edit-id').value = '';
+      document.getElementById('blog-form-title').textContent = 'Create Blog Post';
+      switchPanel('form');
+    }
+
+    function editBlogPost(id) {
+      const blogs = getCustomBlogs();
+      const post = blogs.find(b => b.id === id);
+      if (!post) return;
+
+      document.getElementById('blog-edit-id').value = post.id;
+      document.getElementById('blog-title').value = post.title;
+      document.getElementById('blog-category').value = post.category;
+      document.getElementById('blog-image').value = post.image;
+      document.getElementById('blog-summary').value = post.summary;
+      document.getElementById('blog-content').value = post.content;
+
+      document.getElementById('blog-form-title').textContent = 'Edit Blog Post';
+      switchPanel('form');
+    }
+
+    function deleteBlogPost(id) {
+      if (confirm("Are you sure you want to delete this blog post?")) {
+        let blogs = getCustomBlogs();
+        blogs = blogs.filter(b => b.id !== id);
+        saveCustomBlogs(blogs);
+        loadBlogsTable();
+        showToast("Blog post deleted successfully! 🗑️");
+      }
+    }
+
+    document.getElementById('blog-editor-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('blog-edit-id').value;
+      const title = document.getElementById('blog-title').value;
+      const category = document.getElementById('blog-category').value;
+      const image = document.getElementById('blog-image').value;
+      const summary = document.getElementById('blog-summary').value;
+      const content = document.getElementById('blog-content').value;
+
+      let blogs = getCustomBlogs();
+
+      if (id) {
+        // Edit mode
+        const index = blogs.findIndex(b => b.id === id);
+        if (index !== -1) {
+          blogs[index] = {
+            ...blogs[index],
+            title,
+            category,
+            image,
+            summary,
+            content
+          };
+        }
+      } else {
+        // Create mode
+        const newPost = {
+          id: 'custom_' + Date.now(),
+          title,
+          category,
+          tag: category === 'visas' ? 'Visa Guides' : 'Travel Guide',
+          readTime: Math.ceil(content.split(' ').length / 200) + ' min read',
+          date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          summary,
+          content,
+          image
+        };
+        blogs.unshift(newPost); // Add at the start
+      }
+
+      saveCustomBlogs(blogs);
+      loadBlogsTable();
+      switchPanel('blogs');
+      showToast("Blog post saved successfully! 📝");
+    });
+
+    // Toast message trigger
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    // Auto login check
+    document.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
+        showDashboard();
+      }
+    });
+  </script>
+</body>
+</html>
