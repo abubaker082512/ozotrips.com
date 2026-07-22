@@ -3737,3 +3737,66 @@ select, input, textarea {
     height: 180px;
   }
 }
+
+/* Hero Carousel Caption Card Styles */
+.hero-caption-card {
+  position: absolute;
+  bottom: 80px;
+  left: 60px;
+  max-width: 500px;
+  padding: 30px;
+  background: rgba(15, 23, 42, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: var(--border-radius-lg) !important;
+  color: #ffffff !important;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: var(--shadow-xl), 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.slide-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-secondary) !important;
+  margin-bottom: 12px;
+  background: rgba(255, 153, 0, 0.15) !important;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 153, 0, 0.25) !important;
+}
+
+.slide-title {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.25;
+  color: #ffffff !important;
+}
+
+.slide-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+@media (max-width: 768px) {
+  .hero-caption-card {
+    bottom: 90px;
+    left: 20px;
+    right: 20px;
+    max-width: none;
+    padding: 20px;
+  }
+  .slide-title {
+    font-size: 1.5rem;
+  }
+  .slide-description {
+    font-size: 0.85rem;
+  }
+}

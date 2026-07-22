@@ -275,6 +275,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') applyFilters();
   });
 
+  // Search Portal card search logic
+  const portalSearchBtn = document.getElementById("portal-search-btn");
+  const portalDestInput = document.getElementById("portal-dest");
+  const portalBudgetSelect = document.getElementById("portal-budget");
+  const portalThemeSelect = document.getElementById("portal-theme");
+
+  if (portalSearchBtn) {
+    portalSearchBtn.addEventListener("click", () => {
+      let url = "./tours.html?";
+      if (portalDestInput && portalDestInput.value) {
+        url += "search=" + encodeURIComponent(portalDestInput.value) + "&";
+      }
+      if (portalBudgetSelect && portalBudgetSelect.value) {
+        url += "budget=" + portalBudgetSelect.value + "&";
+      }
+      if (portalThemeSelect && portalThemeSelect.value) {
+        url += "category=" + portalThemeSelect.value + "&";
+      }
+      window.location.href = url;
+    });
+  }
+
   // Favorites Toggling
   window.toggleFavorite = (id) => {
     const tourId = parseInt(id);

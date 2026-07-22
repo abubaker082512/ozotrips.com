@@ -9,12 +9,33 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="./src/css/style.css">
   
   <style>
+    :root {
+      /* Default Sacred Emerald & Gold branding inspired by habibulhujjaj.com */
+      --color-primary: #064e3b;
+      --color-primary-rgb: 6, 78, 59;
+      --color-secondary: #ca8a04;
+      --color-secondary-rgb: 202, 138, 4;
+      --accent-gradient: linear-gradient(135deg, #064e3b 0%, #ca8a04 100%);
+      --glow-primary: 0 4px 25px rgba(6, 78, 59, 0.45);
+      --font-serif: 'Noto Serif', serif;
+      --font-sans: 'Manrope', sans-serif;
+    }
+
+    /* Headings Typography */
+    h1, h2, h3, h4, .slide-title, .help-hero h1 {
+      font-family: var(--font-serif) !important;
+    }
+
+    body {
+      font-family: var(--font-sans), sans-serif !important;
+    }
+
     /* Theme Studio Overrides from habibulhujjaj.com */
     :root[data-umrah-theme="emerald"] {
       --color-primary: #065f46;
@@ -460,6 +481,78 @@
             <button onclick="setUmrahTheme('olive')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; background: #3f6212; cursor: pointer; transition: transform 0.2s;" title="Oasis Olive"></button>
           </div>
         </div>
+  </section>
+
+  <!-- Trust & Accreditations Banner (Inspiration update) -->
+  <section class="trust-banner" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-glass); padding: 30px 0; position: relative; z-index: 10;">
+    <div class="container" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 24px; text-align: center;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 8px rgba(197, 160, 89, 0.3));">🇸🇦</span>
+        <div style="text-align: left;">
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.5px;">Ministry Approved</h4>
+          <p style="margin: 0; font-size: 0.82rem; color: var(--text-secondary);">Direct Ministry of Hajj & Umrah Access</p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 8px rgba(197, 160, 89, 0.3));">🇵🇰</span>
+        <div style="text-align: left;">
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.5px;">MORA Licensed</h4>
+          <p style="margin: 0; font-size: 0.82rem; color: var(--text-secondary);">Govt HGO License No. 4085 / 3192</p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 8px rgba(197, 160, 89, 0.3));">✈️</span>
+        <div style="text-align: left;">
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.5px;">IATA Accredited</h4>
+          <p style="margin: 0; font-size: 0.82rem; color: var(--text-secondary);">Certified International Flight Bookings</p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 2.2rem; filter: drop-shadow(0 2px 8px rgba(197, 160, 89, 0.3));">🕋</span>
+        <div style="text-align: left;">
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.5px;">Haramain Booking</h4>
+          <p style="margin: 0; font-size: 0.82rem; color: var(--text-secondary);">Verified Proximity Stays near Holy Mosques</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spiritual Features Section (Inspiration update) -->
+  <section class="spiritual-features-section" style="padding: 80px 0; background: var(--bg-surface);">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Designed for Devotion, Crafted for Comfort</span>
+        <h2 style="font-size: 2.5rem; margin-top: 8px;">Spiritual Excellence, Executive Comfort</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;">
+        <!-- Feature 1 -->
+        <div class="feature-box" style="padding: 30px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.3s, border-color 0.3s;" onmouseover="this.style.borderColor='var(--color-secondary)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
+          <div style="width: 70px; height: 70px; background: rgba(202, 138, 4, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--color-secondary);">🏨</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--text-primary);">Haram Proximity Hotels</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">Premium 5-Star and 4-Star front-row hotel choices situated right on the courtyards of Masjid al-Haram and Masjid an-Nabawi.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-box" style="padding: 30px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.3s, border-color 0.3s;" onmouseover="this.style.borderColor='var(--color-secondary)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
+          <div style="width: 70px; height: 70px; background: rgba(6, 78, 59, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--color-primary);">🕌</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--text-primary);">Scholarly Guidance</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">Comprehensive pre-departure orientation, instructional reading materials, and scholars (Muallims) accompanying every group.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-box" style="padding: 30px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.3s, border-color 0.3s;" onmouseover="this.style.borderColor='var(--color-secondary)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
+          <div style="width: 70px; height: 70px; background: rgba(202, 138, 4, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--color-secondary);">🚄</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--text-primary);">High-Speed Rail & SUV</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">Private GMC SUV transfers between cities and Haramain High-Speed Train tickets for rapid, luxurious pilgrimage transfers.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-box" style="padding: 30px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--border-radius-lg); text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.3s, border-color 0.3s;" onmouseover="this.style.borderColor='var(--color-secondary)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
+          <div style="width: 70px; height: 70px; background: rgba(6, 78, 59, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; color: var(--color-primary);">⛺</div>
+          <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: var(--text-primary);">VIP Mina AC Tents</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">Premium air-conditioned tents located in close proximity to Jamarat (holy pillars), featuring private toilets and 24/7 catering.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -755,6 +848,63 @@
 
         <div id="umrah-success-msg" style="display: none; text-align: center; padding: 20px; border: 1px solid var(--color-primary); border-radius: var(--border-radius-md); background: rgba(0, 82, 204, 0.05); margin-top: 24px; color: var(--color-primary); font-weight: 600;">
           🕋 JazakAllah! Your inquiry was successfully submitted. Our Umrah experts will call you shortly.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pilgrim Testimonials Section (Inspiration update) -->
+  <section style="padding: 80px 0; background: var(--bg-secondary); border-top: 1px solid var(--border-glass);">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+        <span style="color: var(--color-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.9rem;">Voices of Devotion</span>
+        <h2 style="font-size: 2.2rem; margin-top: 8px;">Blessed Experiences of Our Pilgrims</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        <!-- Testimonial 1 -->
+        <div class="glass-panel" style="padding: 30px; border-radius: var(--border-radius-lg); position: relative; border-color: rgba(202, 138, 4, 0.25);">
+          <span style="font-size: 3rem; color: rgba(202, 138, 4, 0.2); position: absolute; top: 10px; right: 20px; font-family: Georgia, serif;">“</span>
+          <p style="font-style: italic; color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; margin-bottom: 20px;">
+            "The scholarly guidance was outstanding. Our Muallim explained the rituals at Mount Arafat so beautifully. The VIP tents in Mina were extremely comfortable and close to Jamarat."
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">MI</div>
+            <div>
+              <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">Muhammad Ibrahim</h4>
+              <span style="font-size: 0.8rem; color: var(--color-secondary);">Executive Hajj - Lahore</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="glass-panel" style="padding: 30px; border-radius: var(--border-radius-lg); position: relative; border-color: rgba(202, 138, 4, 0.25);">
+          <span style="font-size: 3rem; color: rgba(202, 138, 4, 0.2); position: absolute; top: 10px; right: 20px; font-family: Georgia, serif;">“</span>
+          <p style="font-style: italic; color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; margin-bottom: 20px;">
+            "We booked the VIP Package for my elderly parents. The GMC SUV transfers and hotel proximity to the Haram courtyards made it so smooth and stress-free for them to perform their Umrah."
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">AS</div>
+            <div>
+              <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">Aisha Siddiqua</h4>
+              <span style="font-size: 0.8rem; color: var(--color-secondary);">VIP Umrah - Islamabad</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="glass-panel" style="padding: 30px; border-radius: var(--border-radius-lg); position: relative; border-color: rgba(202, 138, 4, 0.25);">
+          <span style="font-size: 3rem; color: rgba(202, 138, 4, 0.2); position: absolute; top: 10px; right: 20px; font-family: Georgia, serif;">“</span>
+          <p style="font-style: italic; color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; margin-bottom: 20px;">
+            "Everything from visa processing to high-speed Haramain rail bookings was handled flawlessly. Our stay at the Pullman Zamzam was absolutely breathtaking. Highly recommended."
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">TM</div>
+            <div>
+              <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">Dr. Tariq Mahmood</h4>
+              <span style="font-size: 0.8rem; color: var(--color-secondary);">Premium Umrah - Karachi</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
