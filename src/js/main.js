@@ -696,8 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const customBlogsJSON = localStorage.getItem('customBlogs');
-    const customBlogPosts = customBlogsJSON ? JSON.parse(customBlogsJSON) : [];
-    const allBlogs = [...customBlogPosts, ...defaultBlogPosts];
+    const allBlogs = customBlogsJSON ? JSON.parse(customBlogsJSON) : defaultBlogPosts;
 
     // Take top 3 blogs
     const topThree = allBlogs.slice(0, 3);

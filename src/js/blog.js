@@ -135,8 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const customBlogsJSON = localStorage.getItem('customBlogs');
-  const customBlogPosts = customBlogsJSON ? JSON.parse(customBlogsJSON) : [];
-  const blogPosts = [...customBlogPosts, ...defaultBlogPosts];
+  const blogPosts = customBlogsJSON ? JSON.parse(customBlogsJSON) : defaultBlogPosts;
 
   // DOM Elements
   const blogGrid = document.getElementById('blog-grid');

@@ -98,6 +98,35 @@
       background: #ffffff;
     }
 
+    .formatting-toolbar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid #cbd5e1;
+      flex-wrap: wrap;
+    }
+
+    .formatting-btn {
+      padding: 6px 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #0f172a;
+      transition: all 0.15s;
+    }
+
+    .formatting-btn:hover {
+      background: var(--color-primary);
+      color: #ffffff;
+      border-color: var(--color-primary);
+    }
+
     .dashboard-layout {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -382,10 +411,22 @@
                   <option value="guides">📚 Guides & Tips</option>
                 </select>
               </div>
+              
               <div class="admin-form-group">
-                <label for="blog-image">Image URL</label>
-                <input type="url" id="blog-image" placeholder="https://images.unsplash.com/photo-..." required>
+                <label>Article Cover Image</label>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                  <input type="file" id="blog-image-file" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                  <button type="button" class="formatting-btn" onclick="document.getElementById('blog-image-file').click()" style="height: 50px; font-weight: 700; width: 100%; border-radius: var(--border-radius-sm);">Upload Image 📷</button>
+                </div>
+                <input type="hidden" id="blog-image-url">
+                <span id="upload-status" style="font-size: 0.8rem; color: #64748b; display: block; margin-top: 6px;">No file selected</span>
               </div>
+            </div>
+
+            <!-- Image Preview -->
+            <div id="image-preview-container" style="margin-bottom: 20px; display: none;">
+              <label>Image Preview</label>
+              <img id="image-preview" src="" alt="Preview" style="max-width: 260px; max-height: 150px; border-radius: var(--border-radius-sm); border: 1px solid #cbd5e1; object-fit: cover; display: block;">
             </div>
 
             <div class="admin-form-group">
@@ -394,8 +435,16 @@
             </div>
 
             <div class="admin-form-group">
-              <label for="blog-content">Full Article Content (HTML tags supported)</label>
-              <textarea id="blog-content" placeholder="Write full article here. Use <h3> for headings, <p> for paragraphs." required style="height: 250px;"></textarea>
+              <label for="blog-content">Article Body Content</label>
+              <div class="formatting-toolbar">
+                <button type="button" class="formatting-btn" onclick="formatContent('bold')">B</button>
+                <button type="button" class="formatting-btn" onclick="formatContent('italic')">I</button>
+                <button type="button" class="formatting-btn" onclick="formatContent('underline')">U</button>
+                <button type="button" class="formatting-btn" onclick="formatContent('heading')">Heading H3</button>
+                <button type="button" class="formatting-btn" onclick="formatContent('paragraph')">Paragraph P</button>
+                <button type="button" class="formatting-btn" onclick="formatContent('link')">Link 🔗</button>
+              </div>
+              <textarea id="blog-content" placeholder="Write full article here. Use the formatting toolbar buttons above to insert styling tags." required style="height: 250px;"></textarea>
             </div>
 
             <div style="display: flex; gap: 12px; margin-top: 10px;">
@@ -421,6 +470,113 @@
     // Constants
     const DEFAULT_MARQUEE = "🔥 Special Offer: Book your Skardu & Swat packages now and get 10% off! | ✈️ Flights Booking Module is now Live - Search popular routes | 🕌 VIP Hajj & Umrah 2026 Concierge Bookings are now Open!";
     
+    const DEFAULT_BLOGS = [
+      {
+        id: "b1",
+        title: "The Ultimate Packing List for Hunza Valley Expedition",
+        category: "adventure",
+        tag: "Pakistan",
+        readTime: "5 min read",
+        date: "June 15, 2026",
+        summary: "Preparing for a trip to the northern valleys of Pakistan? Here is a comprehensive packing checklist detailing gear, apparel, and documents.",
+        content: `Planning a journey to the legendary Hunza Valley requires careful preparation, as weather conditions in the Karakoram range can shift rapidly. Here is your definitive gear checklist:
+        
+        <h3>1. Technical Apparel</h3>
+        - Layered clothing: moisture-wicking base layers, fleece mid-layers, and a windproof, waterproof outer shell.
+        - Sturdy, broken-in trekking boots with excellent ankle support.
+        - Thermal socks and gloves.
+        
+        <h3>2. Essential Equipment</h3>
+        - A lightweight, durable 40L backpack.
+        - UV-protection polarized sunglasses and high SPF sunscreen.
+        - Refillable water purification bottles or filtration tablets.
+        
+        <h3>3. Crucial Documents</h3>
+        - Multiple physical copies of your Pakistani Visa/e-Visa.
+        - Government issued ID and NOC permits if venturing to restricted border zones.
+        
+        Always prioritize traveling light, but do not compromise on warm gear. A quality sleeping bag and down jacket are non-negotiable if planning overnight stays in altitude tents.`,
+        image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "b2",
+        title: "How to Secure Your Schengen Travel Visa: Step-by-Step",
+        category: "visas",
+        tag: "Visa Guides",
+        readTime: "8 min read",
+        date: "May 28, 2026",
+        summary: "An expert walkthrough on gathering visa documents, bank statements, itinerary drafts, and embassy interviews for a successful Schengen application.",
+        content: `Applying for a Schengen Visa can be daunting, but following a structured approach ensures embassy approval. Follow these steps:
+        
+        <h3>1. Choose the Correct Consulate</h3>
+        Apply to the embassy of the country where you will spend the most nights. If spending equal nights in multiple countries, apply to the country of your first entry.
+        
+        <h3>2. Build Your Document Dossier</h3>
+        Your application checklist must include:
+        - A fully completed and signed application form.
+        - Passport valid for at least 3 months beyond your planned departure.
+        - Round-trip flight reservations and confirmed hotel bookings (OzoTrips provides embassy-ready flight and lodging itineraries).
+        - Comprehensive travel health insurance covering up to €30,000.
+        
+        <h3>3. Prove Financial Sufficiency</h3>
+        Provide stamped bank statements showing sufficient funds for your entire duration. Embassies look for steady income balances rather than sudden large cash deposits.
+        
+        <h3>4. The Interview Prep</h3>
+        Arrive on time, dress professionally, and answer questions truthfully. Be ready to explain your exact travel itinerary, your ties to your home country, and your commitment to return.`,
+        image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "b3",
+        title: "Top 5 Luxury Resorts in Santorini for a Perfect Honeymoon",
+        category: "luxury",
+        tag: "Luxury Travel",
+        readTime: "4 min read",
+        date: "April 12, 2026",
+        summary: "From infinity pools overlooking the caldera to private cave suites in Oia, discover the most spectacular hotels for a dream escape.",
+        content: `Santorini is the ultimate romantic escape. For couples seeking privacy and world-class service, these resorts offer unparalleled luxury:
+        
+        <h3>1. Grace Hotel Santorini (Imerovigli)</h3>
+        Carved into the volcanic cliffs, Grace features a breathtaking infinity pool that merges seamlessly with the caldera horizon. Enjoy champagne breakfasts and private terraces.
+        
+        <h3>2. Katikies Hotel (Oia)</h3>
+        An iconic cluster of classic white cave suites linked by arched bridges and sparkling pools. Katikies is perfect for capturing dramatic caldera sunsets in total privacy.
+        
+        <h3>3. Canaves Oia Epitome (Oia)</h3>
+        Located slightly away from the crowded paths, Epitome offers massive villas with private pools, combining volcanic stone architecture with modern, minimalist luxury.
+        
+        <h3>4. Mystique, a Luxury Collection Hotel</h3>
+        Featuring soft, hand-sculpted curves and natural cave designs, Mystique offers cliffside dining, deep wine cellars, and panoramic views of the Aegean Sea.
+        
+        Book these locations at least six months in advance to secure the best caldera-facing suites for your honeymoon.`,
+        image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: "b4",
+        title: "Traveling Solo: Crucial Safety Tips for Mountain Trekking",
+        category: "adventure",
+        tag: "Safety",
+        readTime: "6 min read",
+        date: "March 3, 2026",
+        summary: "Essential advice on altitude sickness prep, hiring local certified guides, GPS tracking, and safety protocols for high altitude trails.",
+        content: `Solo trekking offers ultimate freedom, but mountains demand respect. Follow these crucial safety rules on your next wilderness adventure:
+        
+        <h3>1. Share Your Route Itinerary</h3>
+        Never start a trail without informing someone. Leave a detailed day-by-day plan with your hotel, local rangers, or OzoTrips support representatives.
+        
+        <h3>2. Understand Altitude Sickness</h3>
+        Acute Mountain Sickness (AMS) can affect anyone, regardless of fitness. Acclimatize slowly, drink plenty of water, and descend immediately if you experience dizziness, nausea, or severe headaches.
+        
+        <h3>3. Hire a Certified Local Guide</h3>
+        While you may hike solo, having a local guide for complex routes (like Concordia or K2 Base Camp) is highly recommended. They understand weather patterns and local languages.
+        
+        <h3>4. Pack Emergency Navigation</h3>
+        Carry a physical topographic map, a compass, and a satellite GPS communicator (such as Garmin InReach) for areas without cellular network coverage.
+        
+        Respect the weather forecasts, keep an emergency kit handy, and know when to turn back.`,
+        image: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
     // Auth controllers
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -473,7 +629,90 @@
       showToast("Marquee text updated successfully! 📢");
     });
 
-    // Blogs logic
+    // Image Upload & Compression helper
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      document.getElementById('upload-status').textContent = "Processing image...";
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          // Limit max size to 800px width/height for localstorage limits
+          const maxSize = 800;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > maxSize) {
+              height = Math.round((height * maxSize) / width);
+              width = maxSize;
+            }
+          } else {
+            if (height > maxSize) {
+              width = Math.round((width * maxSize) / height);
+              height = maxSize;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Convert to highly compressed jpeg data URL (0.7 quality)
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+          document.getElementById('blog-image-url').value = compressedDataUrl;
+
+          // Render Preview
+          const preview = document.getElementById('image-preview');
+          preview.src = compressedDataUrl;
+          document.getElementById('image-preview-container').style.display = 'block';
+          document.getElementById('upload-status').textContent = `Loaded: ${file.name} (~${Math.round(compressedDataUrl.length / 1024)} KB)`;
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Rich Text Editor Formatter helper
+    function formatContent(style) {
+      const textarea = document.getElementById('blog-content');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      const selected = text.substring(start, end);
+
+      let tag = '';
+      if (style === 'bold') {
+        tag = `<strong>${selected || 'bold text'}</strong>`;
+      } else if (style === 'italic') {
+        tag = `<em>${selected || 'italic text'}</em>`;
+      } else if (style === 'underline') {
+        tag = `<u>${selected || 'underlined text'}</u>`;
+      } else if (style === 'heading') {
+        tag = `<h3>${selected || 'Heading'}</h3>`;
+      } else if (style === 'paragraph') {
+        tag = `<p>${selected || 'Paragraph text'}</p>`;
+      } else if (style === 'link') {
+        const url = prompt("Enter link URL:", "https://");
+        if (url) {
+          tag = `<a href="${url}">${selected || 'link text'}</a>`;
+        } else {
+          return;
+        }
+      }
+
+      textarea.value = text.substring(0, start) + tag + text.substring(end);
+      textarea.focus();
+      textarea.setSelectionRange(start, start + tag.length);
+    }
+
+    // Local Storage Blog actions
     function getCustomBlogs() {
       const data = localStorage.getItem('customBlogs');
       return data ? JSON.parse(data) : [];
@@ -484,16 +723,16 @@
     }
 
     function loadBlogsTable() {
-      const custom = getCustomBlogs();
+      const allBlogs = getCustomBlogs();
       const tbody = document.getElementById('blog-table-body');
       tbody.innerHTML = '';
 
-      if (custom.length === 0) {
+      if (allBlogs.length === 0) {
         tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #64748b; padding: 30px;">No custom blogs created yet. Add your first post!</td></tr>`;
         return;
       }
 
-      custom.forEach(post => {
+      allBlogs.forEach(post => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td style="font-weight: 600;">${post.title}</td>
@@ -513,6 +752,9 @@
     function showAddBlogForm() {
       document.getElementById('blog-editor-form').reset();
       document.getElementById('blog-edit-id').value = '';
+      document.getElementById('blog-image-url').value = '';
+      document.getElementById('upload-status').textContent = 'No file selected';
+      document.getElementById('image-preview-container').style.display = 'none';
       document.getElementById('blog-form-title').textContent = 'Create Blog Post';
       switchPanel('form');
     }
@@ -525,9 +767,19 @@
       document.getElementById('blog-edit-id').value = post.id;
       document.getElementById('blog-title').value = post.title;
       document.getElementById('blog-category').value = post.category;
-      document.getElementById('blog-image').value = post.image;
       document.getElementById('blog-summary').value = post.summary;
       document.getElementById('blog-content').value = post.content;
+      document.getElementById('blog-image-url').value = post.image || '';
+
+      const preview = document.getElementById('image-preview');
+      if (post.image) {
+        preview.src = post.image;
+        document.getElementById('image-preview-container').style.display = 'block';
+        document.getElementById('upload-status').textContent = 'Loaded current cover photo';
+      } else {
+        document.getElementById('image-preview-container').style.display = 'none';
+        document.getElementById('upload-status').textContent = 'No image selected';
+      }
 
       document.getElementById('blog-form-title').textContent = 'Edit Blog Post';
       switchPanel('form');
@@ -548,7 +800,7 @@
       const id = document.getElementById('blog-edit-id').value;
       const title = document.getElementById('blog-title').value;
       const category = document.getElementById('blog-category').value;
-      const image = document.getElementById('blog-image').value;
+      const image = document.getElementById('blog-image-url').value;
       const summary = document.getElementById('blog-summary').value;
       const content = document.getElementById('blog-content').value;
 
@@ -562,7 +814,7 @@
             ...blogs[index],
             title,
             category,
-            image,
+            image: image || blogs[index].image, // keep existing or use new uploaded Base64
             summary,
             content
           };
@@ -578,7 +830,7 @@
           date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
           summary,
           content,
-          image
+          image: image || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80' // default unsplash cover if empty
         };
         blogs.unshift(newPost); // Add at the start
       }
@@ -589,7 +841,7 @@
       showToast("Blog post saved successfully! 📝");
     });
 
-    // Toast message trigger
+    // Toast helper
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.textContent = msg;
@@ -599,8 +851,13 @@
       }, 3000);
     }
 
-    // Auto login check
+    // Auto login & db initialization
     document.addEventListener("DOMContentLoaded", () => {
+      // Initialize blogs database in localStorage with default articles if empty
+      if (!localStorage.getItem('customBlogs')) {
+        localStorage.setItem('customBlogs', JSON.stringify(DEFAULT_BLOGS));
+      }
+
       if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
         showDashboard();
       }
