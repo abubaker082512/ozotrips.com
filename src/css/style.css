@@ -335,7 +335,7 @@ body.no-scroll {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -343,22 +343,6 @@ body.no-scroll {
   z-index: -2;
   background-color: #0c1020;
   overflow: hidden;
-}
-
-.carousel-slide::before {
-  content: "";
-  position: absolute;
-  top: -30px;
-  left: -30px;
-  right: -30px;
-  bottom: -30px;
-  background-image: inherit;
-  background-size: cover;
-  background-position: center;
-  filter: blur(25px);
-  opacity: 0.35;
-  z-index: -1;
-  pointer-events: none;
 }
 
 .carousel-slide.active {
@@ -3170,12 +3154,10 @@ footer li {
 
 .search-portal-card {
   border-radius: var(--border-radius-xl);
-  border: 1px solid var(--border-glass);
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid var(--color-primary);
+  background: #ffffff !important;
   padding: 40px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 15px 45px rgba(0, 82, 204, 0.18) !important;
   margin-top: 30px;
 }
 
@@ -3195,7 +3177,7 @@ footer li {
 .search-portal-field label {
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--text-secondary);
+  color: #475569 !important; /* Fixed slate gray label */
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -3203,16 +3185,19 @@ footer li {
 .search-portal-field input, .search-portal-field select {
   height: 50px;
   border-radius: var(--border-radius-sm);
-  border: 1px solid var(--border-glass);
-  background: var(--bg-secondary);
+  border: 1px solid #cbd5e1 !important;
+  background: #f8fafc !important; /* Fixed light slate background */
+  color: #0f172a !important; /* Fixed dark text color */
   padding: 0 16px;
   outline: none;
   font-family: var(--font-sans);
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .search-portal-field input:focus, .search-portal-field select:focus {
-  border-color: var(--color-primary);
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1) !important;
+  background: #ffffff !important;
 }
 
 .trending-routes {
@@ -3224,13 +3209,13 @@ footer li {
 }
 
 .trending-route-tag {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-glass);
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
   padding: 8px 16px;
   border-radius: 50px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-primary) !important;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -3238,9 +3223,9 @@ footer li {
 }
 
 .trending-route-tag:hover {
-  background: var(--color-primary);
-  color: #fff;
-  border-color: var(--color-primary);
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border-color: var(--color-primary) !important;
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
